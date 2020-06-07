@@ -99,7 +99,17 @@
 // }
 // console.log(addEnding(["clever", "meek", "hurried", "nice"], "ly"));
 
-function getFillings(sandwich) {
-  return sandwich.filter(() => sandwich.pop());
+// function getFillings(sandwich) {
+//   return sandwich.filter(() => sandwich.pop());
+// }
+// console.log(getFillings(["bread", "ham", "cheese", "ham", "bread"]));
+
+// function additiveInverse(arr) {
+//   return arr.map((n) => -n);
+// }
+// console.log(additiveInverse([5, -7, 8, 3]));
+
+function repetition(txt, n) {
+  return txt.repeat(n);
 }
-console.log(getFillings(["bread", "ham", "cheese", "ham", "bread"]));
+console.log(repetition("ab", 3));
