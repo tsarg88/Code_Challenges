@@ -109,7 +109,12 @@
 // }
 // console.log(additiveInverse([5, -7, 8, 3]));
 
-function repetition(txt, n) {
-  return txt.repeat(n);
+// function repetition(txt, n) {
+//   return txt.repeat(n);
+// }
+// console.log(repetition("ab", 3));
+
+function filterArray(arr) {
+  return arr.filter((n) => typeof n == "number");
 }
-console.log(repetition("ab", 3));
+console.log(filterArray([1, 2, "a", "b"]));
