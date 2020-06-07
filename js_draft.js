@@ -88,3 +88,18 @@
 //   return Math.min(...arr);
 // }
 // console.log(findSmallestNum([34, 15, 88, 2]));
+
+// function firstLast(arr) {
+//   return [arr.shift(), arr.pop()];
+// }
+// console.log(firstLast([5, 10, 15, 20, 25]));
+
+// function addEnding(arr, ending) {
+//   return arr.map((n) => n + ending);
+// }
+// console.log(addEnding(["clever", "meek", "hurried", "nice"], "ly"));
+
+function getFillings(sandwich) {
+  return sandwich.filter(() => sandwich.pop());
+}
+console.log(getFillings(["bread", "ham", "cheese", "ham", "bread"]));
