@@ -114,7 +114,23 @@
 // }
 // console.log(repetition("ab", 3));
 
-function filterArray(arr) {
-  return arr.filter((n) => typeof n == "number");
+// function filterArray(arr) {
+//   return arr.filter((n) => typeof n == "number");
+// }
+// console.log(filterArray([1, 2, "a", "b"]));
+
+// function factorial(z) {
+// 	for(i=0; i < z; i++){
+
+//     }
+// }
+
+// function flip(y) {
+//   return "dsad" ? y == 0 : "0";
+// }
+// console.log(flip(0));
+
+function charCount(myChar, str) {
+  return str.split("").filter((n) => n == myChar).length;
 }
-console.log(filterArray([1, 2, "a", "b"]));
+console.log(charCount("b", "big fat bubble"));
