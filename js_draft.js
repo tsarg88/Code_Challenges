@@ -130,7 +130,16 @@
 // }
 // console.log(flip(0));
 
-function charCount(myChar, str) {
-  return str.split("").filter((n) => n == myChar).length;
+// function charCount(myChar, str) {
+//   return str.split("").filter((n) => n == myChar).length;
+// }
+// console.log(charCount("b", "big fat bubble"));
+
+const animal = "cat";
+
+for (let i = 0; i < animal.length; i++) {
+  console.log(animal[i]);
+  for (let j = 1; j < 8; j++) {
+    console.log(j);
+  }
 }
-console.log(charCount("b", "big fat bubble"));
