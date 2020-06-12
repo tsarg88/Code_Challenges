@@ -135,11 +135,46 @@
 // }
 // console.log(charCount("b", "big fat bubble"));
 
-const animal = "cat";
+// const animal = "cat";
 
-for (let i = 0; i < animal.length; i++) {
-  console.log(animal[i]);
-  for (let j = 1; j < 8; j++) {
-    console.log(j);
-  }
-}
+// for (let i = 0; i < animal.length; i++) {
+//   console.log(animal[i]);
+//   for (let j = 1; j < 8; j++) {
+//     console.log(j);
+//   }
+// }
+
+const team = {
+  _players: [
+    {
+      firstName: "Luffy",
+      lastName: "Monkey",
+      age: 19,
+    },
+  ],
+  _games: [
+    {
+      opponent: "Crocodile",
+      teamPoints: 3,
+      opponentPoints: 2,
+    },
+  ],
+  get players() {
+    return this._players;
+  },
+  get games() {
+    return this._games;
+  },
+  addPlayer(firstName, lastName, age) {
+    const player = {
+      firstName,
+      lastName,
+      age,
+    };
+    this.players.push(player);
+  },
+};
+
+team.addPlayer("John", "Doe", 13);
+team.addPlayer("Jane", "Doe", 37);
+console.log(team.players);
