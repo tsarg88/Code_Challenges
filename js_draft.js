@@ -144,37 +144,47 @@
 //   }
 // }
 
-const team = {
-  _players: [
-    {
-      firstName: "Luffy",
-      lastName: "Monkey",
-      age: 19,
-    },
-  ],
-  _games: [
-    {
-      opponent: "Crocodile",
-      teamPoints: 3,
-      opponentPoints: 2,
-    },
-  ],
-  get players() {
-    return this._players;
-  },
-  get games() {
-    return this._games;
-  },
-  addPlayer(firstName, lastName, age) {
-    const player = {
-      firstName,
-      lastName,
-      age,
-    };
-    this.players.push(player);
-  },
-};
+// const team = {
+//   _players: [
+//     {
+//       firstName: "Luffy",
+//       lastName: "Monkey",
+//       age: 19,
+//     },
+//   ],
+//   _games: [
+//     {
+//       opponent: "Crocodile",
+//       teamPoints: 3,
+//       opponentPoints: 2,
+//     },
+//   ],
+//   get players() {
+//     return this._players;
+//   },
+//   get games() {
+//     return this._games;
+//   },
+//   addPlayer(firstName, lastName, age) {
+//     const player = {
+//       firstName,
+//       lastName,
+//       age,
+//     };
+//     this.players.push(player);
+//   },
+// };
 
-team.addPlayer("John", "Doe", 13);
-team.addPlayer("Jane", "Doe", 37);
-console.log(team.players);
+// team.addPlayer("John", "Doe", 13);
+// team.addPlayer("Jane", "Doe", 37);
+// console.log(team.players);
+
+function factorial(int) {
+  let result = int;
+  while (int > 1) {
+    int--;
+    result = result * int;
+  }
+  return result;
+}
+console.log(factorial(3));
