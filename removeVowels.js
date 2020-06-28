@@ -12,10 +12,10 @@ function removeVowels(str) {
   //   let test2 = str.split("");
   //   console.log(typeof test2);
   let regex = /[aeiouAEIOU]/gi;
-  //   console.log(str.replace("/^e+/i", "-"));
+  console.log(str.replace("/[aeiouAEIOU]/gi", "-"));
   //   console.log("test");
   //   for (let i = 0; i < str.length; i++) {
-  //     test.push(str[i].replace(/aeiouAEIOU/gi, "-"));
+  //     test.push(str[i].replace(/[aeiouAEIOU]/gi, "-"));
   //   }
   //   return test;
   return str.replace(regex, "");
