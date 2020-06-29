@@ -7,13 +7,23 @@
 // isAvgWhole([1, 1, 1]) ➞ true
 // isAvgWhole([9, 2, 2, 5]) ➞ false
 
-function isAvgWhole(arr) {
-  return Number.isInteger(arr.reduce((accum, val) => accum + val) / arr.length);
-}
-console.log(isAvgWhole([1, 3]));
-console.log(isAvgWhole([1, 2, 3, 4]));
+// function isAvgWhole(arr) {
+//   return Number.isInteger(arr.reduce((accum, val) => accum + val) / arr.length);
+// }
+// console.log(isAvgWhole([1, 3]));
+// console.log(isAvgWhole([1, 2, 3, 4]));
 
 // Method 2
+function isAvgWhole(arr) {
+  return !(
+    arr.reduce(function (a, b) {
+      return a + b;
+    }) % arr.length
+  );
+}
+console.log(isAvgWhole([1, 3.1]));
+
+// Method 3
 // function isAvgWhole(arr) {
 // 	var total = 0;
 // 	for(var i =0; i< arr.length; i++){
