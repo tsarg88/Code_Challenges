@@ -179,12 +179,29 @@
 // team.addPlayer("Jane", "Doe", 37);
 // console.log(team.players);
 
-function factorial(int) {
-  let result = int;
-  while (int > 1) {
-    int--;
-    result = result * int;
-  }
-  return result;
+// function factorial(int) {
+//   let result = int;
+//   while (int > 1) {
+//     int--;
+//     result = result * int;
+//   }
+//   return result;
+// }
+// console.log(factorial(3));
+
+function setTest(s) {
+  // let test = {
+  //   a: 1,
+  //   b: 2,
+  //   b: 2,
+  // };
+  // console.log(test);
+  // test = new Set();
+  let mySet = new Set();
+
+  mySet.add(1); // Set [ 1 ]
+  mySet.add(5); // Set [ 1, 5 ]
+  mySet.add(5); // Set [ 1, 5 ]
+  console.log(typeof mySet);
 }
-console.log(factorial(3));
+console.log(setTest());
