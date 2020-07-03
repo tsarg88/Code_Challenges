@@ -189,19 +189,31 @@
 // }
 // console.log(factorial(3));
 
-function setTest(s) {
-  // let test = {
-  //   a: 1,
-  //   b: 2,
-  //   b: 2,
-  // };
-  // console.log(test);
-  // test = new Set();
-  let mySet = new Set();
+// function setTest(s) {
+//   // let test = {
+//   //   a: 1,
+//   //   b: 2,
+//   //   b: 2,
+//   // };
+//   // console.log(test);
+//   // test = new Set();
+//   let mySet = new Set();
 
-  mySet.add(1); // Set [ 1 ]
-  mySet.add(5); // Set [ 1, 5 ]
-  mySet.add(5); // Set [ 1, 5 ]
-  console.log(typeof mySet);
+//   mySet.add(1); // Set [ 1 ]
+//   mySet.add(5); // Set [ 1, 5 ]
+//   mySet.add(5); // Set [ 1, 5 ]
+//   console.log(typeof mySet);
+// }
+// console.log(setTest());
+
+function countUnique(s1, s2) {
+  let number = 0;
+  const x = s1.split("");
+  const y = s2.split("");
+  const all = x.concat(y);
+  const unique = [];
+  for (let i = 0; i < all.length; i++) {
+    unique.includes(all[i]) ? i : unique.push(all[i]);
+  }
+  return unique.length;
 }
-console.log(setTest());

@@ -15,12 +15,12 @@
 //   let test = [];
 //   test.push(s1);
 //   test.push(s2);
-//   //   console.log(test);
+//   console.log(test);
 //   return test
 //     .join("")
 //     .split("")
-//     .filter(function (item, i, ar) {
-//       return ar.indexOf(item) === i;
+//     .filter(function (item, i, arg) {
+//       return arg.indexOf(item) === i;
 //     }).length;
 
 //   for (i = 0; i < s1.length; i++) {
@@ -42,15 +42,30 @@
 // console.log(countUnique("apple", "play"));
 
 // Method 3 clean/thoughtful approach
+// function countUnique(s1, s2) {
+//   var mySet = [];
+//   sum = s1 + s2;
+//   //   console.log(typeof sum);
+//   for (var i = 0; i < sum.length; ++i) {
+//     if (mySet.indexOf(sum[i]) < 0) {
+//       mySet.push(sum[i]);
+//     }
+//   }
+//   return mySet.length;
+// }
+// console.log(countUnique("apple", "play"));
+
+// Method 3 using includes() with ternary operator
+
 function countUnique(s1, s2) {
-  var mySet = [];
-  sum = s1 + s2;
-  //   console.log(typeof sum);
-  for (var i = 0; i < sum.length; ++i) {
-    if (mySet.indexOf(sum[i]) < 0) {
-      mySet.push(sum[i]);
-    }
+  let number = 0;
+  const x = s1.split("");
+  const y = s2.split("");
+  const all = x.concat(y);
+  const unique = [];
+  for (let i = 0; i < all.length; i++) {
+    unique.includes(all[i]) ? i : unique.push(all[i]);
   }
-  return mySet.length;
+  return unique.length;
 }
 console.log(countUnique("apple", "play"));
