@@ -206,14 +206,22 @@
 // }
 // console.log(setTest());
 
-function countUnique(s1, s2) {
-  let number = 0;
-  const x = s1.split("");
-  const y = s2.split("");
-  const all = x.concat(y);
-  const unique = [];
-  for (let i = 0; i < all.length; i++) {
-    unique.includes(all[i]) ? i : unique.push(all[i]);
-  }
-  return unique.length;
-}
+// function countUnique(s1, s2) {
+//   let number = 0;
+//   const x = s1.split("");
+//   const y = s2.split("");
+//   const all = x.concat(y);
+//   const unique = [];
+//   for (let i = 0; i < all.length; i++) {
+//     unique.includes(all[i]) ? i : unique.push(all[i]);
+//   }
+//   return unique.length;
+// }
+
+const countUnique = (s1, s2) => {
+  let chars = s1.split("").concat(...s2);
+  return [...new Set(chars)].length;
+};
+console.log(countUnique("apple", "play"));
+
+const REGEXP = /(?:red|blue) flag/g;
