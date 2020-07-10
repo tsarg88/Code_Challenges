@@ -34,4 +34,4 @@ function hashPlusCount(str) {
   // console.log(test4);
   return [test3, test4];
 }
-console.log(hashPlusCount("###+"));
+console.log(hashPlusCount("##+++#"));
