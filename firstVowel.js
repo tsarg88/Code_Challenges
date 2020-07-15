@@ -20,3 +20,4 @@ console.log(firstVowel("apple"));
 console.log(firstVowel("hello"));
 console.log(firstVowel("STRAWBERRY"));
 console.log(firstVowel("pInEaPPLe"));
+console.log(firstVowel("apple"));
