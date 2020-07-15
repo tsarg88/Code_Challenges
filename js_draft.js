@@ -218,10 +218,18 @@
 //   return unique.length;
 // }
 
-const countUnique = (s1, s2) => {
-  let chars = s1.split("").concat(...s2);
-  return [...new Set(chars)].length;
-};
-console.log(countUnique("apple", "play"));
+// const countUnique = (s1, s2) => {
+//   let chars = s1.split("").concat(...s2);
+//   return [...new Set(chars)].length;
+// };
+// console.log(countUnique("apple", "play"));
 
-const REGEXP = /(?:red|blue) flag/g;
+// const REGEXP = /(?:red|blue) flag/g;
+
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("edabit");
+  }, 1000);
+});
+let test = promise();
+console.log(test);
