@@ -234,7 +234,21 @@
 // let test = promise();
 // console.log(test);
 
-function isSymmetrical(num) {
-  return num.toString().split("").reverse().join("") === num.toString();
+// function isSymmetrical(num) {
+//   return num.toString().split("").reverse().join("") === num.toString();
+// }
+// console.log(isSymmetrical(7224));
+
+function sortDescending(num) {
+  let test = num.toString();
+  // console.log(Number(test));
+  return Number(
+    test
+      .split("")
+      .sort(function (a, b) {
+        return b - a;
+      })
+      .join("")
+  );
 }
-console.log(isSymmetrical(7224));
+console.log(sortDescending(123));
