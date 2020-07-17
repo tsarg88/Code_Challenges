@@ -226,10 +226,15 @@
 
 // const REGEXP = /(?:red|blue) flag/g;
 
-let promise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("edabit");
-  }, 1000);
-});
-let test = promise();
-console.log(test);
+// let promise = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve("edabit");
+//   }, 1000);
+// });
+// let test = promise();
+// console.log(test);
+
+function isSymmetrical(num) {
+  return num.toString().split("").reverse().join("") === num.toString();
+}
+console.log(isSymmetrical(7224));
