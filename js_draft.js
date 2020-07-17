@@ -239,16 +239,32 @@
 // }
 // console.log(isSymmetrical(7224));
 
-function sortDescending(num) {
-  let test = num.toString();
-  // console.log(Number(test));
-  return Number(
-    test
-      .split("")
-      .sort(function (a, b) {
-        return b - a;
-      })
-      .join("")
-  );
-}
-console.log(sortDescending(123));
+// function sortDescending(num) {
+//   let test = num.toString();
+//   // console.log(Number(test));
+//   return Number(
+//     test
+//       .split("")
+//       .sort(function (a, b) {
+//         return b - a;
+//       })
+//       .join("")
+//   );
+// }
+// console.log(sortDescending(123));
+
+// function toArray(num) {
+//   // console.log([...num.toString()]);
+//   return [...num.toString()].map((s) => Number(s));
+// }
+// console.log(toArray(235));
+
+// function toNumber(arr) {
+//   return Number(arr.join(""));
+// }
+// console.log(toNumber([2, 3, 5]));
+
+// function num_of_digits(num) {
+//   return Math.abs(num.toString().length);
+// }
+// console.log(num_of_digits(-123));

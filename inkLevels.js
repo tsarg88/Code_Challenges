@@ -20,8 +20,7 @@
 
 function inkLevels(inks) {
   let total = Object.values(inks);
-  console
-  .log(total)
+
   return Math.min(...total);
   //   console.log(...total);
 }
