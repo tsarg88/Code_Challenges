@@ -268,3 +268,14 @@
 //   return Math.abs(num.toString().length);
 // }
 // console.log(num_of_digits(-123));
+
+function arrayOperation(x, y, n) {
+  let test = [];
+  for (let i = x; i <= y; i++) {
+    if (i % n === 0) {
+      test.push(i);
+    }
+  }
+  return test;
+}
+console.log(arrayOperation(1, 10, 3));
