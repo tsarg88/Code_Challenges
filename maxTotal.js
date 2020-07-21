@@ -18,3 +18,4 @@ function maxTotal(nums) {
   //   }
 }
 console.log(maxTotal([1, 1, 0, 1, 3, 10, 10, 10, 10, 1]));
+
