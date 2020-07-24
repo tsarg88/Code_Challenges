@@ -17,7 +17,7 @@
 function isVowelSandwich(str) {
   let vowels = /[aeiou]/gi;
   let consonant = /[bcdfghjklmnpqrstvwxysz]/gi;
-  //   console.log([...str][0]);
+    console.log(str][0]);
   //   return str[-1].match(vowels) && str[2].match(consonant) ? true : false;
   //   return [...str][2].match(consonant);
   return [...str].length < 4 &&
