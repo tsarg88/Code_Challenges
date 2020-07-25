@@ -11,8 +11,11 @@
 // isValid("393939") ➞ false
 
 function isValid(zip) {
-  let num = Number(zip);
-  //   console.log(zip.length);
-  return /\s/.test(zip) || zip.length > 5 || !num ? false : true;
+  //   let num = Number(zip);
+  //   //   console.log(zip.length);
+  //   return /\s/.test(zip) || zip.length > 5 || !num ? false : true;
+  console.log(!isNaN(zip));
+
+  //   return zip.length == 5 && !isNaN(zip);
 }
 console.log(isValid("59220"));
