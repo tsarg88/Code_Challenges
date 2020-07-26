@@ -23,17 +23,17 @@
 // }
 
 // Solution 3:
-function dnaToRna(dna) {
-  return dna.replace(/[ATGC]/g, (match) =>
-    match === "A"
-      ? "U"
-      : match === "T"
-      ? "A"
-      : match === "G"
-      ? "C"
-      : match === "C"
-      ? "G"
-      : ""
-  );
-}
-console.log(dnaToRna("ATTAGCGCGATATACGCGTAC"));
+// function dnaToRna(dna) {
+//   return dna.replace(/[ATGC]/g, (match) =>
+//     match === "A"
+//       ? "U"
+//       : match === "T"
+//       ? "A"
+//       : match === "G"
+//       ? "C"
+//       : match === "C"
+//       ? "G"
+//       : ""
+//   );
+// }
+// console.log(dnaToRna("ATTAGCGCGATATACGCGTAC"));
