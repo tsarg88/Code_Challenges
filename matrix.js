@@ -18,14 +18,31 @@
 // }
 
 // Solution 2:
+// function matrix(x, y, z) {
+//   let array = [];
+//   for (let i = 0; i < x; i++) {
+//     array.push([]);
+//     for (let j = 0; j < y; j++) {
+//       array[i].push(z);
+//     }
+//   }
+//   return array;
+// }
+
+// Solution 3:
 function matrix(x, y, z) {
-  let array = [];
-  for (let i = 0; i < x; i++) {
-    array.push([]);
-    for (let j = 0; j < y; j++) {
-      array[i].push(z);
-    }
+  var final = [];
+  var tab = [];
+
+  for (var i = 0; i < y; i++) {
+    tab.push(z);
+    //   console.log(tab);
   }
-  return array;
+
+  for (var i = 0; i < x; i++) {
+    final.push(tab);
+  }
+
+  return final;
 }
 console.log(matrix(3, 2, 3));

@@ -297,14 +297,31 @@
 // var result = findMissingNumbers(someArr);
 // console.log(result);
 
-const miss = (arr) => {
-  let missArr = [];
-  let l = Math.max(...arr);
-  for (i = 1; i < l; i++) {
-    if (arr.indexOf(i) < 0) {
-      missArr.push(i);
-    }
+// const miss = (arr) => {
+//   let missArr = [];
+//   let l = Math.max(...arr);
+//   for (i = 1; i < l; i++) {
+//     if (arr.indexOf(i) < 0) {
+//       missArr.push(i);
+//     }
+//   }
+//   return missArr;
+// };
+// console.log(miss([7, 2, 3, 6, 5, 9, 1, 4, 8, 11]));
+
+function matrix(x, y, z) {
+  var final = [];
+  var tab = [];
+
+  for (var i = 0; i < y; i++) {
+    tab.push(z);
+    console.log(tab);
   }
-  return missArr;
-};
-console.log(miss([7, 2, 3, 6, 5, 9, 1, 4, 8, 11]));
+
+  for (var i = 0; i < x; i++) {
+    final.push(tab);
+  }
+
+  return final;
+}
+console.log(matrix(3, 2, 3));
