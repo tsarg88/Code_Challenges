@@ -309,19 +309,22 @@
 // };
 // console.log(miss([7, 2, 3, 6, 5, 9, 1, 4, 8, 11]));
 
-function matrix(x, y, z) {
-  var final = [];
-  var tab = [];
+// function matrix(x, y, z) {
+//   var final = [];
+//   var tab = [];
 
-  for (var i = 0; i < y; i++) {
-    tab.push(z);
-    console.log(tab);
-  }
+//   for (var i = 0; i < y; i++) {
+//     tab.push(z);
+//     console.log(tab);
+//   }
 
-  for (var i = 0; i < x; i++) {
-    final.push(tab);
-  }
+//   for (var i = 0; i < x; i++) {
+//     final.push(tab);
+//   }
 
-  return final;
-}
-console.log(matrix(3, 2, 3));
+//   return final;
+// }
+// console.log(matrix(3, 2, 3));
+
+string = "Go ahead, make my day.";
+console.log(string.split("a"));
