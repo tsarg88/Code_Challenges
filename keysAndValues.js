@@ -13,7 +13,8 @@
 
 function keysAndValues(obj) {
   const keys = Object.keys(obj);
-  const values = keys.map((k) => obj[k]);
+  //   const values = keys.map((k) => obj[k]);
+  const values = Object.values(obj);
   return [keys, values];
 }
 console.log(keysAndValues({ a: 1, b: 2, c: 3 }));
