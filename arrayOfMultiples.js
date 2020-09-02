@@ -9,7 +9,7 @@
 
 function arrayOfMultiples(num, length) {
   let result = [];
-  for (i = 0; i <= length; i++) {
+  for (i = 1; i <= length; i++) {
     result.push(num * i);
   }
   return result;
