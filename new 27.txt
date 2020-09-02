@@ -1,0 +1,19 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+driver=webdriver.Chrome(executable_path="C:\Drivers\chromedriver.exe")
+
+driver.get("http://test.com")
+
+print(driver.title)
+
+driver.close() 
+
+//*[@id='location-field-leg1-origin-menu']/div[1]/button
+
+
+Hello, I would like to complain about our plan's data: we pay $145 and only get 15GB for 4 lines, in the mean time, i.e., Verizon offers UNLIMITED data for $35 per line(for 4 lines) and T-Mobile offers UNLIMITED data for only $25 per line(for 4 lines). That is not fair at all from AT&T side!!!
+Can you at least add some more Gigabytes to our plan?
+
+@Kkarim88
+

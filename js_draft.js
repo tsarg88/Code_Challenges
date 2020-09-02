@@ -326,5 +326,21 @@
 // }
 // console.log(matrix(3, 2, 3));
 
-string = "Go ahead, make my day.";
-console.log(string.split("a"));
+// string = "Go ahead, make my day.";
+// console.log(string.split("a"));
+
+// function pifagore(arr) {
+//   return arr[0] ** 2 + arr[1] ** 2 === arr[2] ** 2 ? true : false;
+// }
+// console.log(pifagore([3, 4, 5]));
+
+function add_suffix(suffix) {
+  if (suffix.endsWith("s") || suffix.endsWith("l")) {
+    return suffix + "ly";
+  } else if (suffix.endsWith("r") || suffix.endsWith("h")) {
+    return suffix + "less";
+  } else {
+    return suffix + "ing";
+  }
+}
+console.log(add_suffix("hopeless"));
