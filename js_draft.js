@@ -334,13 +334,30 @@
 // }
 // console.log(pifagore([3, 4, 5]));
 
-function add_suffix(suffix) {
-  if (suffix.endsWith("s") || suffix.endsWith("l")) {
-    return suffix + "ly";
-  } else if (suffix.endsWith("r") || suffix.endsWith("h")) {
-    return suffix + "less";
-  } else {
-    return suffix + "ing";
-  }
+// function add_suffix(suffix) {
+//   if (suffix.endsWith("s") || suffix.endsWith("l")) {
+//     return suffix + "ly";
+//   } else if (suffix.endsWith("r") || suffix.endsWith("h")) {
+//     return suffix + "less";
+//   } else {
+//     return suffix + "ing";
+//   }
+// }
+// console.log(add_suffix("hopeless"));
+
+// function FizzBuzz(num) {
+//   return num % 3 === 0 && num % 5 === 0
+//     ? "FizzBuzz"
+//     : num % 3 === 0
+//     ? "Fizz"
+//     : num % 5 === 0
+//     ? "Buzz"
+//     : String(num);
+// }
+// console.log(FizzBuzz(9));
+
+function reverse(bool) {
+  return typeof bool === "boolean" ? !bool : "aghandz";
 }
-console.log(add_suffix("hopeless"));
+console.log(reverse("ds"));
+return typeof bool === "boolean" ? !bool : "aghandz";
