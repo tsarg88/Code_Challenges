@@ -368,16 +368,23 @@
 // }
 // smallerNum("21", "44");
 
-function gradePercentage(userScore, passScore) {
-  let s = "";
-  userScore = parseInt(userScore.substring(0, userScore.length - 1));
-  passScore = parseInt(passScore.substring(0, passScore.length - 1));
-  if (userScore >= passScore) {
-    s = "PASSED";
-  } else if (userScore < passScore) {
-    s = "FAILED";
-  }
+// function gradePercentage(userScore, passScore) {
+//   let s = "";
+//   userScore = parseInt(userScore.substring(0, userScore.length - 1));
+//   passScore = parseInt(passScore.substring(0, passScore.length - 1));
+//   if (userScore >= passScore) {
+//     s = "PASSED";
+//   } else if (userScore < passScore) {
+//     s = "FAILED";
+//   }
 
-  return `You ${s} the Exam `;
-}
-console.log(gradePercentage("85%", "85%"));
+//   return `You ${s} the Exam `;
+// }
+// console.log(gradePercentage("85%", "85%"));
+
+const nextElement = (arr) => {
+  const [secondLast, last] = arr.slice(-3);
+  console.log(last);
+  // return last + (last - secondLast);
+};
+console.log(nextElement([3, 5, 7, 9]));
