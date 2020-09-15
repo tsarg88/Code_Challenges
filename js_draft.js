@@ -356,8 +356,28 @@
 // }
 // console.log(FizzBuzz(9));
 
-function reverse(bool) {
-  return typeof bool === "boolean" ? !bool : "aghandz";
+// function reverse(bool) {
+//   return typeof bool === "boolean" ? !bool : "aghandz";
+// }
+// console.log(reverse("ds"));
+// return typeof bool === "boolean" ? !bool : "aghandz";
+
+// function smallerNum(n1, n2) {
+//   let result = Math.min(parseInt(n1), parseInt(n2));
+//   return String(result);
+// }
+// smallerNum("21", "44");
+
+function gradePercentage(userScore, passScore) {
+  let s = "";
+  userScore = parseInt(userScore.substring(0, userScore.length - 1));
+  passScore = parseInt(passScore.substring(0, passScore.length - 1));
+  if (userScore >= passScore) {
+    s = "PASSED";
+  } else if (userScore < passScore) {
+    s = "FAILED";
+  }
+
+  return `You ${s} the Exam `;
 }
-console.log(reverse("ds"));
-return typeof bool === "boolean" ? !bool : "aghandz";
+console.log(gradePercentage("85%", "85%"));
