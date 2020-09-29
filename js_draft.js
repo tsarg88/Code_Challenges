@@ -382,9 +382,14 @@
 // }
 // console.log(gradePercentage("85%", "85%"));
 
-const nextElement = (arr) => {
-  const [secondLast, last] = arr.slice(-3);
-  console.log(last);
-  // return last + (last - secondLast);
-};
-console.log(nextElement([3, 5, 7, 9]));
+// const nextElement = (arr) => {
+//   const [secondLast, last] = arr.slice(-3);
+//   console.log(last);
+//   // return last + (last - secondLast);
+// };
+// console.log(nextElement([3, 5, 7, 9]));
+
+function addName(obj, name, value) {
+  return { ...obj, [name]: value };
+}
+console.log(addName({ piano: 500, stereo: 300 }, "Caligula", 440));
