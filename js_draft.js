@@ -389,7 +389,115 @@
 // };
 // console.log(nextElement([3, 5, 7, 9]));
 
-function addName(obj, name, value) {
-  return { ...obj, [name]: value };
+// function addName(obj, name, value) {
+//   return { ...obj, [name]: value };
+// }
+// console.log(addName({ piano: 500, stereo: 300 }, "Caligula", 440));
+
+// function countCharacters(arr) {
+//   return arr.join("").length;
+// }
+// console.log(countCharacters(["###", "###", "###"]));
+
+// function isStrangePair(str1, str2) {
+//   // let test = ["a", "b"];
+//   // // test.push(["a", "b"]);
+//   // let test0 = test[0];
+//   // console.log(test0);
+// let last2 = str2[str2.length - 1];
+//   let last1 = str1[str1.length - 1];
+//   if (str1[0] === last2 && last1 === str2[0]) {
+//     return true;
+//   }
+//   false;
+// }
+// console.log(isStrangePair("ratio", "orator"));
+
+// function howManyTimes(num) {
+//   return `Ed${"a".repeat(num)}bit`;
+// }
+// console.log(howManyTimes(5));
+
+// function removeFirstLast(str) {
+//   // let last = str[str.length - 1];
+//   let strtoarr = str.split("");
+//   let beforelast = strtoarr.length - 1;
+//   let length = strtoarr.length;
+//   return length > 2 ? `${str.slice(1, beforelast)}` : str;
+// }
+// console.log(removeFirstLast("hello"));
+
+// function mysteryFunc(arr, num) {
+// let a = x / num if a - a === 0 return 0 else a -
+// }
+// console.log(mysteryFunc([5, 7, 8, 2, 1], 2));
+
+// function asd(num){
+
+// }
+// console.log()
+
+// console.log(3 % 2);
+// console.log(4 % 2);
+// console.log(5 % 2);
+// console.log(6 % 2);
+// console.log(7 % 2);
+// console.log(8 % 2);
+// console.log(9 % 2);
+// console.log(11 % 2);
+// console.log(13 % 2);
+// console.log(5 % 3);
+// console.log(7 % 3);
+
+//function modulo(num1, num2) {
+// var sign = num1 < 0 ? -1 : 1;
+// var dividend = Math.abs(num1);
+// var divisor = Math.abs(num2);
+
+// if (dividend === 0) {
+//   return 0;
+// }
+// if (dividend === 0 || isNaN(dividend) || isNaN(divisor)) {
+//   return NaN;
+// }
+// if (dividend < divisor) {
+//   return sign * dividend;
+// }
+
+//   var counter = num1;
+//   while (counter >= num2) {
+//     counter = counter - num2;
+//   }
+//   return counter;
+// }
+
+//console.log(modulo(237, 4));
+
+// function mysteryFunc(arr, num) {
+//   var counter = arr;
+//   let result = [];
+// for (let i = 0; i < counter.length; i++)
+// while (let i = 0; i < counter.length; i++) {
+//   console.log(counter[i]);
+// counter = counter[i] - num
+// }
+//  }
+//result.push(counter)
+//return result;
+// }
+// console.log(mysteryFunc([5, 7, 8, 2, 1], 2));
+
+function replaceVowels(str, ch) {
+  let result = [];
+  // let regex = /aiou/g;
+  // console.log(str.includes("a"));
+  for (let i = 0; i <= str.length; i++) {
+    if (str[i] === "a" || str[i] === "e" || str[i] === "o" || str[i] === "i") {
+      result.push(ch);
+    } else {
+      result.push(str[i]);
+    }
+  }
+  return result.join("");
 }
-console.log(addName({ piano: 500, stereo: 300 }, "Caligula", 440));
+console.log(replaceVowels("the aardvark", "#"));
