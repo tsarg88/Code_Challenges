@@ -492,7 +492,13 @@ function replaceVowels(str, ch) {
   // let regex = /aiou/g;
   // console.log(str.includes("a"));
   for (let i = 0; i <= str.length; i++) {
-    if (str[i] === "a" || str[i] === "e" || str[i] === "o" || str[i] === "i") {
+    if (
+      str[i] === "a" ||
+      str[i] === "e" ||
+      str[i] === "o" ||
+      str[i] === "i" ||
+      str[i] === "u"
+    ) {
       result.push(ch);
     } else {
       result.push(str[i]);
@@ -500,4 +506,3 @@ function replaceVowels(str, ch) {
   }
   return result.join("");
 }
-console.log(replaceVowels("the aardvark", "#"));
