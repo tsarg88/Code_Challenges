@@ -487,22 +487,33 @@
 // }
 // console.log(mysteryFunc([5, 7, 8, 2, 1], 2));
 
-function replaceVowels(str, ch) {
-  let result = [];
-  // let regex = /aiou/g;
-  // console.log(str.includes("a"));
-  for (let i = 0; i <= str.length; i++) {
-    if (
-      str[i] === "a" ||
-      str[i] === "e" ||
-      str[i] === "o" ||
-      str[i] === "i" ||
-      str[i] === "u"
-    ) {
-      result.push(ch);
-    } else {
-      result.push(str[i]);
+// function replaceVowels(str, ch) {
+//   let result = [];
+//   // let regex = /aiou/g;
+//   // console.log(str.includes("a"));
+//   for (let i = 0; i <= str.length; i++) {
+//     if (
+//       str[i] === "a" ||
+//       str[i] === "e" ||
+//       str[i] === "o" ||
+//       str[i] === "i" ||
+//       str[i] === "u"
+//     ) {
+//       result.push(ch);
+//     } else {
+//       result.push(str[i]);
+//     }
+//   }
+//   return result.join("");
+// }
+
+function removeKFromList(l, k) {
+  let output = [];
+  for (let i in l) {
+    if (l[i] !== k) {
+      output.push(l[i]);
     }
   }
-  return result.join("");
+  return output;
 }
+console.log(removeKFromList([3, 1, 2, 3, 4, 5], 3));
