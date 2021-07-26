@@ -507,13 +507,21 @@
 //   return result.join("");
 // }
 
-function removeKFromList(l, k) {
-  let output = [];
-  for (let i in l) {
-    if (l[i] !== k) {
-      output.push(l[i]);
-    }
-  }
-  return output;
+// function removeKFromList(l, k) {
+//   let output = [];
+//   for (let i in l) {
+//     if (l[i] !== k) {
+//       output.push(l[i]);
+//     }
+//   }
+//   return output;
+// }
+// console.log(removeKFromList([3, 1, 2, 3, 4, 5], 3));
+
+// This Triangular Number Sequence is generated from a pattern of dots that form a triangle.
+// The first 5 numbers of the sequence, or dots, are:
+// 1, 3, 6, 10, 15
+function triangle(n) {
+  return (n * (n + 1)) / 2;
 }
-console.log(removeKFromList([3, 1, 2, 3, 4, 5], 3));
+console.log(triangle(3));
