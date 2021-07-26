@@ -521,7 +521,20 @@
 // This Triangular Number Sequence is generated from a pattern of dots that form a triangle.
 // The first 5 numbers of the sequence, or dots, are:
 // 1, 3, 6, 10, 15
-function triangle(n) {
-  return (n * (n + 1)) / 2;
+// function triangle(n) {
+//   return (n * (n + 1)) / 2;
+// }
+// console.log(triangle(3));
+
+// This challenges in about factorial
+// paths(4) ➞ 24
+// paths(1) ➞ 1
+// paths(9) ➞ 362880
+function paths(n) {
+  if (n === 1) {
+    return 1;
+  } else {
+    return n * paths(n - 1);
+  }
 }
-console.log(triangle(3));
+console.log(paths(4));
