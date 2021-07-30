@@ -539,9 +539,24 @@
 // }
 // console.log(paths(4));
 // Create a function that squares every digit of a number.
-function squareDigits(n) {
-  // return n.map(x => x**2)
-  const result = Array.from(String(n), Number);
-  return parseInt(result.map((n) => n ** 2).join(""));
+// function squareDigits(n) {
+//   // return n.map(x => x**2)
+//   const result = Array.from(String(n), Number);
+//   return parseInt(result.map((n) => n ** 2).join(""));
+// }
+// console.log(squareDigits(9119));
+
+// Create a function that takes a number (step) as an argument and returns the amount of boxes in that step of the sequence.
+// Step 0: Start with 0
+// Step 1: Add 3
+// Step 2: Subtract 1
+// Repeat Step 1 & 2 ...
+function boxSeq(step) {
+  var r = 0;
+  for (var i = 0; i < step; i++) {
+    if (i % 2 == 0) r += 3;
+    else r -= 1;
+  }
+  return r;
 }
-console.log(squareDigits(9119));
+console.log(boxSeq(2));
