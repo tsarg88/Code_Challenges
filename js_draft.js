@@ -530,11 +530,18 @@
 // paths(4) ➞ 24
 // paths(1) ➞ 1
 // paths(9) ➞ 362880
-function paths(n) {
-  if (n === 1) {
-    return 1;
-  } else {
-    return n * paths(n - 1);
-  }
+// function paths(n) {
+//   if (n === 1) {
+//     return 1;
+//   } else {
+//     return n * paths(n - 1);
+//   }
+// }
+// console.log(paths(4));
+// Create a function that squares every digit of a number.
+function squareDigits(n) {
+  // return n.map(x => x**2)
+  const result = Array.from(String(n), Number);
+  return parseInt(result.map((n) => n ** 2).join(""));
 }
-console.log(paths(4));
+console.log(squareDigits(9119));
