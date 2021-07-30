@@ -551,12 +551,23 @@
 // Step 1: Add 3
 // Step 2: Subtract 1
 // Repeat Step 1 & 2 ...
-function boxSeq(step) {
-  var r = 0;
-  for (var i = 0; i < step; i++) {
-    if (i % 2 == 0) r += 3;
-    else r -= 1;
+// function boxSeq(step) {
+//   var r = 0;
+//   for (var i = 0; i < step; i++) {
+//     if (i % 2 == 0) r += 3;
+//     else r -= 1;
+//   }
+//   return r;
+// }
+// console.log(boxSeq(2));
+
+// Create a function that returns the mean of all digits.
+function mean(num) {
+  let str = Array.from(String(num), Number);
+  let total = 0;
+  for (let i = 0; i < str.length; i++) {
+    total += str[i];
   }
-  return r;
+  return Math.floor(total / str.length);
 }
-console.log(boxSeq(2));
+console.log(mean(512));
