@@ -562,12 +562,37 @@
 // console.log(boxSeq(2));
 
 // Create a function that returns the mean of all digits.
-function mean(num) {
-  let str = Array.from(String(num), Number);
-  let total = 0;
-  for (let i = 0; i < str.length; i++) {
-    total += str[i];
+// function mean(num) {
+//   let str = Array.from(String(num), Number);
+//   let total = 0;
+//   for (let i = 0; i < str.length; i++) {
+//     total += str[i];
+//   }
+//   return Math.floor(total / str.length);
+// }
+// console.log(mean(512));
+
+// Given a positive integer n, implement a function that returns true if n is a Sastry number, or false if it's not.
+// function isSastry(number) {
+//   let conNum = "" + number + (number + 1);
+//   // console.log(conNum);
+//   // console.log(conNum % 1 == 0);
+//   if (Math.sqrt(conNum) % 1 == 0) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
+// console.log(isSastry(184));
+
+// Create a function that takes his current age and returns the given age 20 (or 21) years,
+// with number base in the format specified in the below examples.
+function happyBirthday(age) {
+  let base = age / 2;
+  if (age % 2 == 0) {
+    return `Mubashir is just 20, in base ${base}!`;
+  } else {
+    return `Mubashir is just 21, in base ${Math.floor(base)}!`;
   }
-  return Math.floor(total / str.length);
 }
-console.log(mean(512));
+console.log(happyBirthday(65));
