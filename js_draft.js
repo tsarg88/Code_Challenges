@@ -587,12 +587,53 @@
 
 // Create a function that takes his current age and returns the given age 20 (or 21) years,
 // with number base in the format specified in the below examples.
-function happyBirthday(age) {
-  let base = age / 2;
-  if (age % 2 == 0) {
-    return `Mubashir is just 20, in base ${base}!`;
-  } else {
-    return `Mubashir is just 21, in base ${Math.floor(base)}!`;
+// function happyBirthday(age) {
+//   let base = age / 2;
+//   if (age % 2 == 0) {
+//     return `Mubashir is just 20, in base ${base}!`;
+//   } else {
+//     return `Mubashir is just 21, in base ${Math.floor(base)}!`;
+//   }
+// }
+// console.log(happyBirthday(65));
+
+// Create a function that takes a number a and finds the missing exponent x so that a when raised to the power of x is equal to b.
+// function getBaseLog(x, y) {
+//   return Math.log(y) / Math.log(x);
+// }
+// function solveForExp(a, b) {
+//   return getBaseLog(a, b);
+// }
+// console.log(solveForExp(4, 1024));
+
+// Let's say the string word is an occurrence of the string sequence if sequence contains word as a substring.
+// Let's say the string word is a k-occurrence of the string sequence if sequence contains word repeated k times as a substring. Note that if word is an occurrence of sequence, it is a 1-occurrence as well.
+// For example, if word = "ab" and sequence = "dabcacab", then word is a 1-occurrence of sequence but not a 2-occurrence, because sequence doesn't contain "abab" as a substring. On the other hand, the string "ca" is a 2-occurrence of sequence, since it contains "caca" as a substring.
+// Given a string sequence and an array of strings words, your task is to find the maximal value of k for each element, such that words[i] is a k-occurrence of sequence. Return the k-values as an array of integers of length words.length.
+// Example
+// For sequence = "ababcbabc" and words = ["ab", "babc", "bca"], the output should be maxKOccurrences(sequence, words) = [2, 2, 0].
+// words[0] = "ab" is a 2-occurrence of sequence, because sequence[0..4] = "abab";
+// words[0] = "ab" is not a 3-occurence of sequence, because there is no substring "ababab" in sequence;
+// words[1] = "babc" is a 2-occurrence of sequence, because sequence[1..8] = "babcbabc";
+// words[1] = "babc" is not a 3-occurence of sequence, because there is no substring "babcbabcbabc" in sequence;
+// words[2] = "bca" is a 0-occurrence of sequence, because there is no substring "bca" in sequence.L
+
+function maxKOccurences(str, arr) {
+  let output = [];
+
+  for (let word of arr) {
+    // console.log(word);
+    let curStr = word;
+    let count = 0;
+
+    while (str.includes(curStr)) {
+      count++;
+      curStr += word;
+    }
+
+    output.push(count);
   }
+
+  return output;
 }
-console.log(happyBirthday(65));
+console.log(maxKOccurences("ababcbabc", ["ab", "babc", "bca"]));
