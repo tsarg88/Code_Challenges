@@ -640,15 +640,136 @@
 
 // Given a positive integer represented as a string number. The task is to count the number of its substrings that form an integer divisible by 3.
 
-const threeDivisibleSubsequences = (input) => {
-  let count = 0;
-  for (let i = 0; i < input.length; i++) {
-    for (let j = i; j < input.length; j++) {
-      if (Number(input.slice(i, j + 1)) % 3 === 0) {
-        count++;
-      }
-    }
-  }
-  return count;
+// const threeDivisibleSubsequences = (input) => {
+//   let count = 0;
+//   for (let i = 0; i < input.length; i++) {
+//     for (let j = i; j < input.length; j++) {
+//       if (Number(input.slice(i, j + 1)) % 3 === 0) {
+//         count++;
+//       }
+//     }
+//   }
+//   return count;
+// };
+// console.log(threeDivisibleSubsequences("456"));
+
+// Given an integer n, your task is to create a square frame of size n, represented
+// as an array of strings. The frame should consists of empty space, enclosed by lines made of
+// "*" characters on all the edges, like this:
+// Example:
+// For n = 8, the output should be:
+/* ["********",
+   "*      *",
+   "*      *",
+   "*      *",
+   "*      *",
+   "*      *",
+   "*      *",
+   "********"]
+*/
+// For n = 5, the output should be :
+/* 
+[
+  "*****",
+  "*    *",
+  "*    *",
+  "*    *", 
+  "*****"
+]
+*/
+
+// function frameGenerator(n) {
+//   // let main = [];
+//   // for (i = 0; i < n; i++) {
+//   //   main.push("*");
+//   // }
+//   // return main.join().repeat(4).split();
+
+//   // first/last row, all filled, nothing fancy
+//   const fullRow = "*".repeat(n);
+//   // a star + (n-2) spaces and another star at the end
+//   // there are n - 2 spaces because if you look at columns,
+//   // you have 1st and last row filled and n - 2 columns w/ spaces
+//   const headTailRow = "*" + " ".repeat(n - 2) + "*";
+//   const res = [];
+//   res.push(fullRow);
+//   for (let i = 0; i < n - 2; i++) res.push(headTailRow);
+//   res.push(fullRow);
+//   return res;
+// }
+// console.log(frameGenerator(5));
+
+// function makeSquare(num) {
+//   const arr = [];
+
+//   // our nested array loops over y coord and then x
+//   for (let y = 0; y < num; y++) {
+//     // if we're on the first or last row then
+//     // we just fill with stars and continue
+//     if (y === 0 || y === num - 1) {
+//       arr[y] = Array(num).fill("*");
+//       continue;
+//     }
+
+//     // we dont have an array for this row assigned so we make one
+//     if (!arr[y]) {
+//       arr[y] = [];
+//     }
+
+//     // now we loop over the columns in this row
+//     for (let x = 0; x < num; x++) {
+//       // if its the first or last column we add a star
+//       if (x === 0 || x == num - 1) {
+//         arr[y][x] = "*";
+//         // otherwise we add blank space
+//       } else {
+//         arr[y][x] = "";
+//       }
+//     }
+//   }
+//   return arr;
+// }
+
+// console.log(makeSquare(4));
+
+// function frameGenerator(num) {
+//   const arr = [];
+
+//   // our nested array loops over y coord
+//   for (let y = 0; y < num; y++) {
+//     // if we're on the first or last row then
+//     // we just fill with stars
+//     if (y === 0 || y === num - 1) {
+//       arr[y] = "*".repeat(num);
+
+//       // otherwise.. one star at the beginning and end,
+//       // and fill the middle with space
+//     } else {
+//       arr[y] = "*" + " ".repeat(num - 2) + "*";
+//     }
+//   }
+//   return arr;
+// }
+
+// console.log(frameGenerator(5));
+
+// frameGenerator() solution that i most liked:
+const frameGenerator = (n) => {
+  // we know the easy cases
+  if (n === 1) return ["*"];
+  if (n === 2) return ["**", "**"];
+  // first/last row, all filled, nothing fancy
+  const fullRow = "*".repeat(n);
+  // a star + (n-2) spaces + another star at the end
+  // there are n - 2 spaces because if you look at columns,
+  // you have 1st and last row filled and n - 2 columns w/ spaces
+  const headTailRow = "*" + " ".repeat(n - 2) + "*";
+  const res = [];
+  res.push(fullRow);
+  for (let i = 0; i < n - 2; i++) res.push(headTailRow);
+  res.push(fullRow);
+  return res;
 };
-console.log(threeDivisibleSubsequences("456"));
+
+const n = prompt("N = ?");
+console.log(frameGenerator(n));
