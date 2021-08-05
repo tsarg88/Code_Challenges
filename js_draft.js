@@ -618,22 +618,37 @@
 // words[1] = "babc" is not a 3-occurence of sequence, because there is no substring "babcbabcbabc" in sequence;
 // words[2] = "bca" is a 0-occurrence of sequence, because there is no substring "bca" in sequence.L
 
-function maxKOccurences(str, arr) {
-  let output = [];
+// function maxKOccurences(str, arr) {
+//   let output = [];
 
-  for (let word of arr) {
-    // console.log(word);
-    let curStr = word;
-    let count = 0;
+//   for (let word of arr) {
+//     // console.log(word);
+//     let curStr = word;
+//     let count = 0;
 
-    while (str.includes(curStr)) {
-      count++;
-      curStr += word;
+//     while (str.includes(curStr)) {
+//       count++;
+//       curStr += word;
+//     }
+
+//     output.push(count);
+//   }
+
+//   return output;
+// }
+// console.log(maxKOccurences("ababcbabc", ["ab", "babc", "bca"]));
+
+// Given a positive integer represented as a string number. The task is to count the number of its substrings that form an integer divisible by 3.
+
+const threeDivisibleSubsequences = (input) => {
+  let count = 0;
+  for (let i = 0; i < input.length; i++) {
+    for (let j = i; j < input.length; j++) {
+      if (Number(input.slice(i, j + 1)) % 3 === 0) {
+        count++;
+      }
     }
-
-    output.push(count);
   }
-
-  return output;
-}
-console.log(maxKOccurences("ababcbabc", ["ab", "babc", "bca"]));
+  return count;
+};
+console.log(threeDivisibleSubsequences("456"));
