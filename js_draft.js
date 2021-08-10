@@ -753,23 +753,180 @@
 
 // console.log(frameGenerator(5));
 
-// frameGenerator() solution that i most liked:
-const frameGenerator = (n) => {
-  // we know the easy cases
-  if (n === 1) return ["*"];
-  if (n === 2) return ["**", "**"];
-  // first/last row, all filled, nothing fancy
-  const fullRow = "*".repeat(n);
-  // a star + (n-2) spaces + another star at the end
-  // there are n - 2 spaces because if you look at columns,
-  // you have 1st and last row filled and n - 2 columns w/ spaces
-  const headTailRow = "*" + " ".repeat(n - 2) + "*";
-  const res = [];
-  res.push(fullRow);
-  for (let i = 0; i < n - 2; i++) res.push(headTailRow);
-  res.push(fullRow);
-  return res;
-};
+// // frameGenerator() solution that i most liked:
+// const frameGenerator = (n) => {
+//   // we know the easy cases
+//   if (n === 1) return ["*"];
+//   if (n === 2) return ["**", "**"];
+//   // first/last row, all filled, nothing fancy
+//   const fullRow = "*".repeat(n);
+//   // a star + (n-2) spaces + another star at the end
+//   // there are n - 2 spaces because if you look at columns,
+//   // you have 1st and last row filled and n - 2 columns w/ spaces
+//   const headTailRow = "*" + " ".repeat(n - 2) + "*";
+//   const res = [];
+//   res.push(fullRow);
+//   for (let i = 0; i < n - 2; i++) res.push(headTailRow);
+//   res.push(fullRow);
+//   return res;
+// };
 
-const n = prompt("N = ?");
-console.log(frameGenerator(n));
+// const n = prompt("N = ?");
+// console.log(frameGenerator(3));
+
+// function threeDivisibleSubsequences(number) {
+//   let count = 0;
+//   for (let i = 0; i < number.length; i++) {
+//     for (let j = i; j < number.length; j++) {
+//       if (Number(number.slice(i, j + 1) % 3 == 0)) {
+//         count++;
+//       }
+//     }
+//   }
+//   return count;
+// }
+
+// console.log(threeDivisibleSubsequences("456"));
+
+// function frameGenerator(n) {
+//   let main = [];
+//   for (i = 0; i < n; i++) {
+//     if (i == 0 || i == n - 1) {
+//       main[i] = "*".repeat(n);
+//     } else {
+//       main[i] = "*" + " ".repeat(n - 2) + "*";
+//     }
+//   }
+//   return main;
+// }
+// console.log(frameGenerator(5));
+
+// Implement an algorithm that will check whether the given grid of numbers represents a valid Sudoku
+// puzzle according to the layout rules described above. Note that the puzzle represented by
+// grid does not have to be solvable.
+
+// function sudoku2(grid) {
+//   const valid = (cb) => {
+//     for (let i = 0; i < 9; i++) {
+//       // console.log("i@", i);
+//       const set = new Set();
+//       for (let j = 0; j < 9; j++) {
+//         // console.log("j@", i);
+//         const item = cb(i, j);
+//         if (item !== ".") {
+//           if (set.has(item)) {
+//             return false;
+//           } else {
+//             set.add(item);
+//           }
+//         }
+//       }
+//     }
+//     return true;
+//   };
+
+//   return (
+//     valid((i, j) => grid[i][j]) &&
+//     valid((i, j) => grid[j][i]) &&
+//     valid(
+//       (i, j) =>
+//         grid[Math.floor(i / 3) * 3 + Math.floor(j / 3)][(i % 3) * 3 + (j % 3)]
+//     )
+//   );
+// }
+// console.log(
+//   sudoku2([
+//     [".", ".", ".", "1", "4", ".", ".", "2", "."],
+//     [".", ".", "6", ".", ".", ".", ".", ".", "."],
+//     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+//     [".", ".", "1", ".", ".", ".", ".", ".", "."],
+//     [".", "6", "7", ".", ".", ".", ".", ".", "9"],
+//     [".", ".", ".", ".", ".", ".", "8", "1", "."],
+//     [".", "3", "6", ".", ".", ".", ".", ".", "6"],
+//     [".", ".", ".", ".", ".", "7", ".", ".", "."],
+//     [".", ".", ".", "5", ".", ".", ".", "7", "."],
+//   ])
+// );
+
+// set = new Set();
+// set.add("1");
+// set.add("2");
+// console.log(set);
+
+// function sudoku2(grid) {
+//   for (let i = 0; i < 9; i++) {
+//     for (let j = 0; j < 9; j++) {
+//       var c = grid[i][j];
+//       console.log("tiyer!", grid[1][3]);
+//       if (c !== ".") {
+//         // check row
+//         for (let z = 0; z < 9; z++) {
+//           if (j !== z && grid[i][z] === c) return false;
+//         }
+//         // check column
+//         for (let z = 0; z < 9; z++) {
+//           console.log("steghum!", grid[z][j]);
+//           if (i !== z && grid[z][j] === c) return false;
+//         }
+//         // check square
+//         var a = i - (i % 3),
+//           b = j - (j % 3);
+//         for (let x = a; x < a + 3; x++) {
+//           for (let y = b; y < b + 3; y++) {
+//             if (x !== i && y !== j && grid[x][y] === c) return false;
+//           }
+//         }
+//       }
+//     }
+//   }
+//   return true;
+// }
+// console.log(
+//   sudoku2([
+//     [".", ".", ".", "1", "4", ".", ".", "2", "."],
+//     [".", ".", "4", ".", ".", ".", ".", ".", "."],
+//     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+//     [".", ".", "1", ".", ".", ".", ".", ".", "."],
+//     [".", "6", "7", ".", ".", ".", ".", ".", "9"],
+//     [".", ".", ".", ".", ".", ".", "8", "1", "."],
+//     [".", "3", "5", ".", ".", ".", ".", ".", "6"],
+//     [".", ".", ".", ".", ".", "7", ".", ".", "."],
+//     [".", ".", ".", "5", ".", ".", ".", "7", "."],
+//   ])
+// );
+
+// function threeDivisibleSubsequences(number) {
+//   let count = 0;
+//   for (i = 0; i < number.length; i++) {
+//     console.log("i == ", i);
+//     for (j = 0; j < number.length; j++) {
+//       console.log("j == ", j);
+//       if (Number(number.slice(i, j + 1) % 3 == 0)) {
+//         count++;
+//       }
+//     }
+//     // return count;
+//   }
+// }
+// console.log(threeDivisibleSubsequences("456"));
+
+function bubbleSort(items) {
+  var swap = function (firstIndex, secondIndex) {
+    const temp = items[firstIndex];
+    items[firstIndex] = items[secondIndex];
+    items[secondIndex] = temp;
+  };
+
+  const len = items.length;
+
+  for (i = 0; i < len; i++) {
+    for (j = 0; j < len; j++) {
+      if (items[j] > items[j + 1]) {
+        swap(j, j + 1);
+      }
+    }
+  }
+
+  return items;
+}
+console.log(bubbleSort([2, 4, 1, 5, 0, 7]));
