@@ -911,22 +911,22 @@
 // console.log(threeDivisibleSubsequences("456"));
 
 function bubbleSort(items) {
-  var swap = function (firstIndex, secondIndex) {
-    const temp = items[firstIndex];
-    items[firstIndex] = items[secondIndex];
-    items[secondIndex] = temp;
+  const swap = (firstIndex, secondIndex) => {
+    const temp = items[secondIndex];
+    items[secondIndex] = items[firstIndex];
+    items[firstIndex] = temp;
   };
 
-  const len = items.length;
+  // const len = items.length;
 
-  for (i = 0; i < len; i++) {
-    for (j = 0; j < len; j++) {
+  for (let i = 0; i < items.length; i++) {
+    for (let j = 0; j < items.length; j++) {
+      // console.log(j);
       if (items[j] > items[j + 1]) {
         swap(j, j + 1);
       }
     }
   }
-
   return items;
 }
-console.log(bubbleSort([2, 4, 1, 5, 0, 7]));
+console.log(bubbleSort([8, 2, 5, 1, 4]));
