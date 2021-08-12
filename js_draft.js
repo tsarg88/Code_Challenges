@@ -910,23 +910,130 @@
 // }
 // console.log(threeDivisibleSubsequences("456"));
 
-function bubbleSort(items) {
+// function firstNotRepeatingCharacter(s) {
+//   for (var i = 0; i < s.length; i++) {
+//     // console.log(s.indexOf(s[i]));
+//     if (s.indexOf(s[i]) == s.lastIndexOf(s[i])) {
+//       return s[i];
+//     }
+//   }
+
+//   return "_";
+// }
+
+// console.log(firstNotRepeatingCharacter("aibacabad"));
+
+// function firstNotRepeatingCharacter(s) {
+//   var arr = new Array(1).fill(0);
+//   for (var i in s) {
+//     // console.log(i);
+//     var val = s.charCodeAt(i);
+//     arr[val] = arr[val] ? "Infinity" : +i + 1;
+//   }
+
+//   //Return the character at the minimum index.
+//   //If there is no such character, return '_'.
+//   return s[Math.min(...arr.filter((x) => x)) - 1] || "_";
+// }
+
+// console.log(firstNotRepeatingCharacter("aibacabadt"));
+
+// Math.min(parseInt(test.join()))
+
+// Basic idea:
+// - 26 is O(1), so make an array with length 26,
+//    one entry for each character.
+// - First time we see a value, remember the index.
+// - After that, set the index to Infinity.
+
+// function firstNotRepeatingCharacter(s) {
+//   var map = new Array(26).fill(0);
+//   for (var i in s) {
+//     var val = s.charCodeAt(i);
+//     map[val] = map[val] ? Infinity : +i + 1;
+//   }
+
+//   //Return the character at the minimum index.
+//   //If there is no such character, return '_'.
+//   // return s[Math.min(...map.filter((val) => val)) - 1] || "_";
+//   console.log(3 =+ 1);
+// }
+// console.log(
+//   firstNotRepeatingCharacter("abcdefghijklmnopqrstuvwxyziflskecznslkjfabe")
+// );
+
+// function firstNotRepeatingCharacter(s) {
+//   const arr = new Array(26).fill(0);
+//   for (let i in s) {
+//     // console.log(i);
+//     let val = s.charCodeAt(i);
+//     arr[val] = arr[val] ? "Exist" : +i + 1;
+//   }
+
+//   //Return the character at the minimum index.
+//   //If there is no such character, return '_'.
+//   // const withoutInfinity = (arr) => {
+//   //   return arr;
+//   // };
+//   const str = arr.join();
+//   const regex = /[1-9]/g;
+//   const main = str.match(regex);
+//   // console.log(...main);
+//   if (main == null) {
+//     return "_";
+//   } else {
+//     return s[Math.min(...main.filter((x) => x)) - 1];
+//   }
+//   // return s[Math.min(...main.filter((x) => x)) - 1] || "_";
+// }
+// console.log(
+//   firstNotRepeatingCharacter("abcdefghijklmnopqrstuvwxyziflskecznslkjfabe")
+// );
+
+// function firstNotRepeatingCharacter(s) {
+//   for (let i in s) {
+//     if (s.indexOf(s[i]) == s.lastIndexOf(s[i])) {
+//       return s[i];
+//     }
+//   }
+//   return "_";
+// }
+// console.log(firstNotRepeatingCharacter("aibacabad"));
+
+// function firstNotRepeatingCharacter(s) {
+//   // console.log(s.indexOf("i") == "6");
+//   for (var i = 0; i < s.length; i++) {
+//     // console.log(i);
+//     // var c = s.charAt(i);
+//     if (s.indexOf(s[i]) == i && s.indexOf(s[i], i + 1) == -1) {
+//       return s[i];
+//     }
+//   }
+//   return "_";
+// }
+// console.log(firstNotRepeatingCharacter("abacabaabacaba"));
+
+// function testLoop(s) {
+//   for (let i in s) {
+//     console.log(typeof i);
+//   }
+// }
+// console.log(testLoop("abacabiad"));
+
+function bubbleSort(arr) {
   const swap = (firstIndex, secondIndex) => {
-    const temp = items[secondIndex];
-    items[secondIndex] = items[firstIndex];
-    items[firstIndex] = temp;
+    let temp = arr[firstIndex];
+    arr[firstIndex] = arr[secondIndex];
+    arr[secondIndex] = temp;
   };
 
-  // const len = items.length;
-
-  for (let i = 0; i < items.length; i++) {
-    for (let j = 0; j < items.length; j++) {
-      // console.log(j);
-      if (items[j] > items[j + 1]) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[j] > arr[j + 1]) {
         swap(j, j + 1);
       }
     }
   }
-  return items;
+  return arr;
 }
-console.log(bubbleSort([8, 2, 5, 1, 4]));
+console.log(bubbleSort([8, 1, 5, 7, 4]));
