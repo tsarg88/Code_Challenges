@@ -1020,20 +1020,69 @@
 // }
 // console.log(testLoop("abacabiad"));
 
-function bubbleSort(arr) {
-  const swap = (firstIndex, secondIndex) => {
-    let temp = arr[firstIndex];
-    arr[firstIndex] = arr[secondIndex];
-    arr[secondIndex] = temp;
-  };
+// function bubbleSort(arr) {
+//   const swap = (firstIndex, secondIndex) => {
+//     let temp = arr[firstIndex];
+//     arr[firstIndex] = arr[secondIndex];
+//     arr[secondIndex] = temp;
+//   };
 
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length; j++) {
-      if (arr[j] > arr[j + 1]) {
-        swap(j, j + 1);
-      }
-    }
+//   for (let i = 0; i < arr.length; i++) {
+//     for (let j = 0; j < arr.length; j++) {
+//       if (arr[j] > arr[j + 1]) {
+//         swap(j, j + 1);
+//       }
+//     }
+//   }
+//   return arr;
+// }
+// console.log(bubbleSort([8, 1, 5, 7, 4]));
+
+// Given an array a that contains only numbers in the range from 1 to a.length, find the first duplicate number for which the
+// second occurrence has the minimal index. In other words, if there are more than 1 duplicated numbers, return the number
+// for which the second occurrence has a smaller index than the second occurrence of the other number does. If there are no such elements, return -1.
+// Example
+// For a = [2, 1, 3, 5, 3, 2], the output should be firstDuplicate(a) = 3.
+// my solution:
+// function firstDuplicate(a) {
+//   const main = [];
+//   for (let i = 0; i < a.length; i++) {
+//     // console.log("i =", i);
+//     for (let j = i; j < a.length; j++) {
+//       // console.log("j =", j);
+//       // find duplicate value and push its index to the main array
+//       if (a[i] == a[j + 1]) {
+//         main.push(j + 1);
+//       }
+//     }
+//   }
+//   // return smallest index's value
+//   let minIndex = Math.min(...main);
+//   // console.log(main);
+//   const solution = a[minIndex];
+//   // console.log(solution);
+//   return main.length > 0 ? solution : -1;
+// }
+// console.log(firstDuplicate([2, 2]));
+
+// agha's solution with better fuckin time/space complexity:
+
+function firstDuplicate(a) {
+  var obj = {};
+
+  for (var i = 0; i < a.length; i++) {
+    if (obj[a[i]] !== undefined) return a[i];
+    else obj[a[i]] = i;
   }
-  return arr;
+  return -1;
 }
-console.log(bubbleSort([8, 1, 5, 7, 4]));
+console.log(firstDuplicate([2, 1, 3, 5, 3, 2]));
+
+// function objTest() {
+//   let arr = [1, 2, 3];
+//   let obj = {};
+//   obj[arr[0]] = 0;
+//   obj[arr[1]] = 1;
+//   return obj[1];
+// }
+// console.log(objTest());
