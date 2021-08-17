@@ -1045,38 +1045,38 @@
 // For a = [2, 1, 3, 5, 3, 2], the output should be firstDuplicate(a) = 3.
 // my solution:
 // function firstDuplicate(a) {
-//   const main = [];
+//   const mainIndex = [];
 //   for (let i = 0; i < a.length; i++) {
-//     // console.log("i =", i);
 //     for (let j = i; j < a.length; j++) {
-//       // console.log("j =", j);
-//       // find duplicate value and push its index to the main array
 //       if (a[i] == a[j + 1]) {
-//         main.push(j + 1);
+//         mainIndex.push(j + 1);
 //       }
 //     }
 //   }
-//   // return smallest index's value
-//   let minIndex = Math.min(...main);
-//   // console.log(main);
-//   const solution = a[minIndex];
-//   // console.log(solution);
-//   return main.length > 0 ? solution : -1;
+
+//   const solution = Math.min(...mainIndex);
+
+//   return mainIndex.length > 0 ? a[solution] : -1;
 // }
+// console.log(firstDuplicate([2, 1, 3, 5, 3, 2]));
+
 // console.log(firstDuplicate([2, 2]));
 
 // agha's solution with better fuckin time/space complexity:
 
-function firstDuplicate(a) {
-  var obj = {};
+// function firstDuplicate(a) {
+//   var obj = {};
 
-  for (var i = 0; i < a.length; i++) {
-    if (obj[a[i]] !== undefined) return a[i];
-    else obj[a[i]] = i;
-  }
-  return -1;
-}
-console.log(firstDuplicate([2, 1, 3, 5, 3, 2]));
+//   for (let i = 0; i < a.length; i++) {
+//     if (obj[a[i]] !== undefined) {
+//       return a[i];
+//     } else {
+//       obj[a[i]] = i;
+//     }
+//   }
+//   return -1;
+// }
+// console.log(firstDuplicate([2, 1, 3, 5, 3, 2]));
 
 // function objTest() {
 //   let arr = [1, 2, 3];
@@ -1086,3 +1086,29 @@ console.log(firstDuplicate([2, 1, 3, 5, 3, 2]));
 //   return obj[1];
 // }
 // console.log(objTest());
+
+// the solution that looks cool
+function rotateImage(a) {
+  return a.map((row, rowIndex) => a.map((val) => val[rowIndex]).reverse());
+}
+console.log(
+  rotateImage([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+  ])
+);
+
+// the solution with for loops
+// function rotateImage(a) {
+//   let n = a.length;
+
+//   for (let row = n - 1; row >= 0; row--) {
+//     for (let col = 0; col < n; col++) {
+//       let item = a[row].shift();
+//       a[col].push(item);
+//     }
+//   }
+
+//   return a;
+// }
