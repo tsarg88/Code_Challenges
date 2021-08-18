@@ -1088,20 +1088,21 @@
 // console.log(objTest());
 
 // the solution that looks cool
-function rotateImage(a) {
-  return a.map((row, rowIndex) => a.map((val) => val[rowIndex]).reverse());
-}
-console.log(
-  rotateImage([
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-  ])
-);
+// function rotateImage(a) {
+//   return a.map((row, rowIndex) => a.map((val) => val[rowIndex]).reverse());
+// }
+// console.log(
+//   rotateImage([
+//     [1, 2, 3],
+//     [4, 5, 6],
+//     [7, 8, 9],
+//   ])
+// );
 
 // the solution with for loops
 // function rotateImage(a) {
 //   let n = a.length;
+//   console.log(n);
 
 //   for (let row = n - 1; row >= 0; row--) {
 //     for (let col = 0; col < n; col++) {
@@ -1112,3 +1113,52 @@ console.log(
 
 //   return a;
 // }
+// console.log(
+//   rotateImage([
+//     [1, 2, 3],
+//     [4, 5, 6],
+//     [7, 8, 9],
+//   ])
+// );
+
+// function isCryptSolution(crypt, solution) {
+//   // console.log(solution[0]);
+//   var map = {};
+//   for (let i = 0; i < solution.length; i++) {
+//     // map[solution[i[0]]] = map[solution[i[1]]];
+//     map[solution[i][0]] = solution[i][1];
+//     // map[m[0]] = m[1];
+//   }
+//   return map;
+// }
+function isCryptSolution(crypt, solution) {
+  let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let hash = {};
+  for (let i = 0; i < abc.length; i++) {
+    hash[abc[i]] = -1;
+  }
+
+  for (let i = 0; i < solution.length; i++) {
+    hash[solution[i][0]] = solution[i][1];
+  }
+  crypt = crypt.map((value) =>
+    value
+      .split("")
+      .map((v) => hash[v])
+      .join("")
+  );
+  // console.log(crypt[0].length);
+
+  let isValid = function (word) {
+    console.log(word);
+    return !(word.length > 1 && word[0] == "0");
+  };
+
+  return (
+    isValid(crypt[0]) &&
+    isValid(crypt[1]) &&
+    isValid(crypt[2]) &&
+    parseInt(crypt[0]) + parseInt(crypt[1]) == parseInt(crypt[2])
+  );
+}
+console.log(isCryptSolution(["A", "A", "A"], [["A", "0"]]));
