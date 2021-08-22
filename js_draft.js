@@ -1131,34 +1131,102 @@
 //   }
 //   return map;
 // }
-function isCryptSolution(crypt, solution) {
-  let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let hash = {};
-  for (let i = 0; i < abc.length; i++) {
-    hash[abc[i]] = -1;
+// function isCryptSolution(crypt, solution) {
+//   let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//   let hash = {};
+//   for (let i = 0; i < abc.length; i++) {
+//     hash[abc[i]] = -1;
+//   }
+
+//   for (let i = 0; i < solution.length; i++) {
+//     hash[solution[i][0]] = solution[i][1];
+//   }
+//   console.log(hash);
+//   crypt = crypt.map((value) =>
+//     value
+//       .split("")
+//       .map((v) => hash[v])
+//       .join("")
+//   );
+//   // console.log(crypt);
+
+//   let isValid = function (word) {
+//     // console.log(word);
+//     return !(word.length > 1 && word[0] == "0");
+//   };
+
+//   return (
+//     isValid(crypt[0]) &&
+//     isValid(crypt[1]) &&
+//     isValid(crypt[2]) &&
+//     parseInt(crypt[0]) + parseInt(crypt[1]) == parseInt(crypt[2])
+//   );
+// }
+// console.log(isCryptSolution(["B", "A", "A"], [["B", "6", "A", "0"]]));
+
+// brute force approach
+function prefixSums(arr, k) {
+  let count = 0;
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum = arr[i];
+    if (sum == k) {
+      count++;
+    }
+    for (let j = i + 1; j < arr.length; j++) {
+      sum = sum + arr[j];
+      if (sum == k) {
+        count++;
+      }
+    }
   }
-
-  for (let i = 0; i < solution.length; i++) {
-    hash[solution[i][0]] = solution[i][1];
-  }
-  crypt = crypt.map((value) =>
-    value
-      .split("")
-      .map((v) => hash[v])
-      .join("")
-  );
-  // console.log(crypt[0].length);
-
-  let isValid = function (word) {
-    console.log(word);
-    return !(word.length > 1 && word[0] == "0");
-  };
-
-  return (
-    isValid(crypt[0]) &&
-    isValid(crypt[1]) &&
-    isValid(crypt[2]) &&
-    parseInt(crypt[0]) + parseInt(crypt[1]) == parseInt(crypt[2])
-  );
+  return count;
 }
-console.log(isCryptSolution(["A", "A", "A"], [["A", "0"]]));
+console.log(prefixSums([1, 1, 1], 2));
+
+// map approach
+// var prefixSums = function (nums, k) {
+//   var map = new Map();
+//   map.set(0, 1);
+//   var sum = 0;
+//   var cnt = 0;
+//   for (var num of nums) {
+//     sum += num;
+//     if (map.has(sum - k)) {
+//       cnt += map.get(sum - k);
+//     }
+//     map.set(sum, map.has(sum) ? map.get(sum) + 1 : 1);
+//   }
+//   return cnt;
+// };
+// console.log(prefixSums([1, 1, 1], 2));
+
+// solution with subarrays
+// function prefixSums(arr, k) {
+//   let subarrays = 0;
+
+//   const seen = {};
+//   const sums = [];
+//   let currentSum = 0;
+
+//   // let test = arr[0] + 2;
+//   // console.log(test);
+
+//   for (let i = 0; i < arr.length; i++) {
+//     currentSum += arr[i];
+//     const diffWithK = currentSum - k;
+//     if (diffWithK in seen) {
+//       subarrays += seen[diffWithK];
+//     }
+//     if (currentSum == k) {
+//       subarrays++;
+//     }
+//     if (currentSum in seen) {
+//       seen[currentSum]++;
+//     } else {
+//       seen[currentSum] = 1;
+//     }
+//   }
+//   return subarrays;
+// }
+// console.log(prefixSums([1, 1, 1], 2));
