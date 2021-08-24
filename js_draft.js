@@ -786,7 +786,7 @@
 //   return count;
 // }
 
-// console.log(threeDivisibleSubsequences("456"));
+// console.log(threeDivisibleSubsequences("999"));
 
 // function frameGenerator(n) {
 //   let main = [];
@@ -894,21 +894,6 @@
 //     [".", ".", ".", "5", ".", ".", ".", "7", "."],
 //   ])
 // );
-
-// function threeDivisibleSubsequences(number) {
-//   let count = 0;
-//   for (i = 0; i < number.length; i++) {
-//     console.log("i == ", i);
-//     for (j = 0; j < number.length; j++) {
-//       console.log("j == ", j);
-//       if (Number(number.slice(i, j + 1) % 3 == 0)) {
-//         count++;
-//       }
-//     }
-//     // return count;
-//   }
-// }
-// console.log(threeDivisibleSubsequences("456"));
 
 // function firstNotRepeatingCharacter(s) {
 //   for (var i = 0; i < s.length; i++) {
@@ -1122,67 +1107,67 @@
 // );
 
 // function isCryptSolution(crypt, solution) {
-//   // console.log(solution[0]);
-//   var map = {};
-//   for (let i = 0; i < solution.length; i++) {
-//     // map[solution[i[0]]] = map[solution[i[1]]];
-//     map[solution[i][0]] = solution[i][1];
-//     // map[m[0]] = m[1];
-//   }
-//   return map;
-// }
-// function isCryptSolution(crypt, solution) {
 //   let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//   let hash = {};
+//   let obj = {};
+
 //   for (let i = 0; i < abc.length; i++) {
-//     hash[abc[i]] = -1;
+//     obj[abc[i]] = -1;
 //   }
 
 //   for (let i = 0; i < solution.length; i++) {
-//     hash[solution[i][0]] = solution[i][1];
+//     obj[solution[i][0]] = solution[i][1];
 //   }
-//   console.log(hash);
-//   crypt = crypt.map((value) =>
-//     value
+
+//   crypt = crypt.map((vString) =>
+//     vString
 //       .split("")
-//       .map((v) => hash[v])
+//       .map((v) => obj[v])
 //       .join("")
 //   );
-//   // console.log(crypt);
 
-//   let isValid = function (word) {
-//     // console.log(word);
-//     return !(word.length > 1 && word[0] == "0");
+//   const isValid = (str) => {
+//     return !(str[0] == "0" && str.length > 1);
 //   };
 
-//   return (
-//     isValid(crypt[0]) &&
-//     isValid(crypt[1]) &&
-//     isValid(crypt[2]) &&
-//     parseInt(crypt[0]) + parseInt(crypt[1]) == parseInt(crypt[2])
-//   );
+//   return isValid(crypt[0]) && isValid(crypt[1]) && isValid(crypt[2]) && true
+//     ? Number(crypt[0]) + Number(crypt[1]) == Number(crypt[2])
+//     : false;
 // }
-// console.log(isCryptSolution(["B", "A", "A"], [["B", "6", "A", "0"]]));
+// console.log(
+//   isCryptSolution(
+//     ["SEND", "MORE", "MONEY"],
+//     [
+//       ["O", "0"],
+//       ["M", "1"],
+//       ["Y", "2"],
+//       ["E", "5"],
+//       ["N", "6"],
+//       ["D", "7"],
+//       ["R", "8"],
+//       ["S", "9"],
+//     ]
+//   )
+// );
 
 // brute force approach
-function prefixSums(arr, k) {
-  let count = 0;
-  let sum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    sum = arr[i];
-    if (sum == k) {
-      count++;
-    }
-    for (let j = i + 1; j < arr.length; j++) {
-      sum = sum + arr[j];
-      if (sum == k) {
-        count++;
-      }
-    }
-  }
-  return count;
-}
-console.log(prefixSums([1, 1, 1], 2));
+// function prefixSums(arr, k) {
+//   let count = 0;
+//   let sum = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     sum = arr[i];
+//     if (sum == k) {
+//       count++;
+//     }
+//     for (let j = i + 1; j < arr.length; j++) {
+//       sum = sum + arr[j];
+//       if (sum == k) {
+//         count++;
+//       }
+//     }
+//   }
+//   return count;
+// }
+// console.log(prefixSums([1, 1, 1], 2));
 
 // map approach
 // var prefixSums = function (nums, k) {
@@ -1230,3 +1215,111 @@ console.log(prefixSums([1, 1, 1], 2));
 //   return subarrays;
 // }
 // console.log(prefixSums([1, 1, 1], 2));
+
+// ------- Linked Lists -----------
+
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+
+// function removeKFromList(l, k) {
+//   if (l === null) return null;
+//   else {
+//     l.next = removeKFromList(l.next, k);
+//     return l.value === k ? l.next : l;
+//   }
+// }
+
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+
+// const removeKFromList = (l, k) => {
+//   let dummy = new ListNode();
+//   dummy.next = l;
+//   let current = dummy;
+//   while (current.next) {
+//     if (current.next.value === k) {
+//       current.next = current.next.next;
+//     } else {
+//       current = current.next;
+//     }
+//   }
+//   return dummy.next;
+// };
+
+// the full solution
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+
+// function removeKFromList(l, k) {
+//   // create node
+//   let node = new ListNode();
+//   // assign node.next to the beginning of the given linked list.
+//   node.next = l;
+
+//   // start iterating through the linked list
+//   let current = node;
+//   // while there is still a node
+//   while (current.next) {
+//     // if the value of the node equals to given K
+//     if (current.next.value === k) {
+//       // remove it from the list by hopping from the one node to the next node
+//       current.next = current.next.next;
+//     } else {
+//       // move from one node to the next.
+//       current = current.next;
+//     }
+//   }
+//   //return the linked list
+//   return node.next;
+// }
+
+// // All changes are in the part below:
+
+// function arrayToList(arr) {
+//   return arr.reduceRight(
+//     (next, val) => Object.assign(new ListNode(val), { next }),
+//     null
+//   );
+// }
+
+// function listToArray(list) {
+//   const arr = [];
+//   for (let node = list; node; node = node.next) {
+//     arr.push(node.value);
+//   }
+//   return arr;
+// }
+
+// const list = arrayToList([3, 1, 2, 3, 4, 5]);
+// const shorter = removeKFromList(list, 3);
+// const result = listToArray(shorter);
+// console.log(result);
+
+// function prefixSums(arr, k) {
+//   let subArr = 0;
+//   const seen = {};
+//   let currentSum = 0;
+
+//   for (let i = 0; i < arr.length; i++) {
+//     currentSum += arr[i];
+
+//     if (currentSum == k) {
+//       subArr++;
+//     }
+
+//     const diffWithK = currentSum - k;
+//     if (diffWithK in seen) {
+//       subArr += seen[diffWithK];
+//     }
+
+//     seen[currentSum] = 1;
+//   }
+//   return subArr;
+// }
+// console.log(prefixSums([1, 1, 1, 1], 2));
