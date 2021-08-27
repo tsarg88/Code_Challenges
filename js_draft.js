@@ -1332,28 +1332,50 @@
 // console.log(isListPalindrome([0, 1, 9]));
 
 // the hard solution using more "pure" LinkedList approach
-function isListPalindrome(list) {
-  var slow = null,
-    fast = list,
-    temp;
-  // Find center point and reverse the first half of the list
-  while (fast && fast.next) {
-    fast = fast.next.next;
-    temp = list.next;
-    list.next = slow;
-    slow = list;
-    list = temp;
-  }
-  // If fast not null, list length is odd, ignore the center value
-  if (fast) {
-    list = list.next;
-  }
-  // Find the first difference
-  while (list) {
-    if (slow.value != list.value) return false;
-    slow = slow.next;
-    list = list.next;
-  }
-  // Return true, if no diff
-  return true;
+function ListNode(x) {
+  this.value = x;
+  this.next = null;
 }
+//
+function isListPalindrome(l) {
+  // let list = new ListNode();
+  list.next = l;
+  let node = list.next;
+  console.log("node@:", node);
+  let values = [];
+  while (node) {
+    values.push(node.value);
+    node = node.next;
+  }
+  // console.log("" + values);
+  return "" + values == values.reverse();
+}
+
+function arrayToList(arr) {
+  return arr.reduceRight(
+    (next, val) => Object.assign(new ListNode(val), { next }),
+    null
+  );
+}
+
+function listToArray(list) {
+  const arr = [];
+  for (let node = list; node; node = node.next) {
+    arr.push(node.value);
+  }
+}
+
+const list = arrayToList([1, 1, 2]);
+const mainFun = isListPalindrome(list);
+listToArray(mainFun);
+console.log(mainFun);
+
+// function WhileTest(arr) {
+//   let n = 0;
+
+//   do {
+//     n = n + 1;
+//   } while (n < 3);
+//   return n;
+// }
+// console.log(WhileTest([1, 2, 3, 4]));
