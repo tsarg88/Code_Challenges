@@ -1231,25 +1231,6 @@
 //   }
 // }
 
-// function ListNode(x) {
-//   this.value = x;
-//   this.next = null;
-// }
-
-// const removeKFromList = (l, k) => {
-//   let dummy = new ListNode();
-//   dummy.next = l;
-//   let current = dummy;
-//   while (current.next) {
-//     if (current.next.value === k) {
-//       current.next = current.next.next;
-//     } else {
-//       current = current.next;
-//     }
-//   }
-//   return dummy.next;
-// };
-
 // the full solution, which includes how to convert arr to list to pass it to ListNode and then covert it back to array
 // function ListNode(x) {
 //   this.value = x;
@@ -1257,29 +1238,29 @@
 // }
 
 // function removeKFromList(l, k) {
-//   // create node
-//   let node = new ListNode();
-//   // assign node.next to the beginning of the given linked list.
-//   node.next = l;
+//   // create new list node
+//   let list = new ListNode();
+//   // assign list.next to the beginning of the given linked list
+//   list.next = l;
+//   // create new node(list) to use it to iterate and modify the main node list
+//   let node = list;
 
-//   // start iterating through the linked list
-//   let current = node;
-//   // while there is still a node
-//   while (current.next) {
-//     // if the value of the node equals to given K
-//     if (current.next.value === k) {
-//       // remove it from the list by hopping from the one node to the next node
-//       current.next = current.next.next;
+//   // use while loop to loop while node.next is true(there is/are value)
+//   while (node.next) {
+//     // if the node.next.value is k
+//     if (node.next.value == k) {
+//       // assign/overwrite node.next to the next node
+//       node.next = node.next.next;
 //     } else {
-//       // move from one node to the next.
-//       current = current.next;
+//       // just move to the next node
+//       node = node.next;
 //     }
 //   }
-//   //return the linked list
-//   return node.next;
+//   // return the modified list
+//   return list.next;
 // }
 
-// All changes are in the part below:
+// // All changes are in the part below:
 
 // function arrayToList(arr) {
 //   return arr.reduceRight(
@@ -1297,8 +1278,8 @@
 // }
 
 // const list = arrayToList([3, 1, 2, 3, 4, 5]);
-// const shorter = removeKFromList(list, 3);
-// const result = listToArray(shorter);
+// const mainFun = removeKFromList(list, 3);
+// const result = listToArray(mainFun);
 // console.log(result);
 
 // function prefixSums(arr, k) {
@@ -1332,23 +1313,265 @@
 // console.log(isListPalindrome([0, 1, 9]));
 
 // the hard solution using more "pure" LinkedList approach
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+// //
+// function isListPalindrome(l) {
+//   // let list = new ListNode();
+//   list.next = l;
+//   let node = list.next;
+//   console.log("node@:", node);
+//   let values = [];
+//   while (node) {
+//     values.push(node.value);
+//     node = node.next;
+//   }
+//   // console.log("" + values);
+//   return "" + values == values.reverse();
+// }
+
+// function arrayToList(arr) {
+//   return arr.reduceRight(
+//     (next, val) => Object.assign(new ListNode(val), { next }),
+//     null
+//   );
+// }
+
+// function listToArray(list) {
+//   const arr = [];
+//   for (let node = list; node; node = node.next) {
+//     arr.push(node.value);
+//   }
+// }
+
+// const list = arrayToList([1, 1, 2]);
+// const mainFun = isListPalindrome(list);
+// listToArray(mainFun);
+// console.log(mainFun);
+
+// function WhileTest(arr) {
+//   let n = 0;
+
+//   do {
+//     n = n + 1;
+//   } while (n < 3);
+//   return n;
+// }
+// console.log(WhileTest([1, 2, 3, 4]));
+
+// brute force i payav
+// function pairWithGivenDifference(list, diff) {
+//   for (let i = 0; i < list.length; i++) {
+//     for (let j = i; j < list.length; j++) {
+//       if (list[i] - list[j + 1] == diff) {
+//         return list[i] + "-" + list[j + 1];
+//       }
+//     }
+//   }
+//   for (let a = list.length - 1; a >= 0; a--) {
+//     for (let b = a; b >= 0; b--) {
+//       if (list[a] - list[b - 1] == diff) {
+//         return list[a] + "-" + list[b - 1];
+//       }
+//     }
+//   }
+// }
+// console.log(pairWithGivenDifference([5, 20, 3, 2, 50, 80], 17));
+
+// function setTest() {
+//   let mySet = new Set();
+//   let obj = { a };
+//   mySet.add(obj);
+//   // mySet.add(2);
+//   return mySet;
+// }
+// console.log(setTest());
+
+// solution with set
+// function pairWithGivenDifference(list, diff) {
+//   let set = new Set();
+
+//   for (let i = 0; i < list.length; i++) {
+//     let val = list[i];
+//     if (set.has(diff + val)) {
+//       return [diff + val, val];
+//     }
+//     if (set.has(list[i] - diff)) {
+//       return [val, val - diff];
+//     }
+//     set.add(val);
+//   }
+//   return false;
+// }
+// console.log(pairWithGivenDifference([5, 20, 3, 2, 50, 80], 1));
+
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+
+// function addTwoHugeNumbers(a, b) {
+//   let la = new ListNode();
+//   let lb = new ListNode();
+//   la = a;
+//   lb = b;
+// }
+
+// function arrayToList(arr) {
+//   return arr.reduceRight(
+//     (next, val) => Object.assign(new ListNode(val), { next }),
+//     null
+//   );
+// }
+
+// function listToArray(list) {
+//   const arr = [];
+//   for (let node = list; node; node = node.next) {
+//     arr.push(node.value);
+//   }
+// }
+
+// const list = arrayToList([9876, 5432, 1999]);
+// const list2 = arrayToList([1, 8001]);
+// const mainFun = addTwoHugeNumbers(list, list2);
+// listToArray(mainFun);
+// console.log(mainFun);
+
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+
+// function addTwoHugeNumbers(a, b) {
+//   let la = new ListNode();
+//   let lb = new ListNode();
+//   la.next = a;
+//   lb.next = b;
+//   let res = [];
+
+//   let nodeA = la;
+//   let arrA = [];
+//   while (nodeA.next) {
+//     arrA.push(nodeA.next.value);
+//     nodeA = nodeA.next;
+//   }
+
+//   let nodeB = lb;
+//   let arrB = [];
+//   while (nodeB.next) {
+//     arrB.push(nodeB.next.value);
+//     nodeB = nodeB.next;
+//   }
+
+//   // for(let i=0; i<arrA.length; i++){
+//   if (arrA.length == 3 && arrB.length == 3) {
+//     res.push(arrA[0] + arrB[0]);
+//     res.push(arrA[1] + arrB[1]);
+//     res.push(arrA[2] + arrB[2]);
+//   }
+//   // }
+
+//   if (arrA.length !== arrB.length) {
+//     let first = arrA;
+//     let strFirst = first.join("");
+
+//     let second = arrB;
+//     let strSecond = second.join("");
+
+//     let len = [];
+//     let lenDiv = 0;
+//     if (first.length >= second.length) {
+//       len.push(first);
+//       lenDiv += first.length;
+//     } else {
+//       len.push(second);
+//       lenDiv += second.length;
+//     }
+
+//     // len.map((v) => v.map((val) => console.log(typeof val)));
+//     strLen = len.join();
+
+//     let arrLen = strLen.split("");
+//     let filter = arrLen.filter((v) => v !== ",");
+//     lenNum = filter.length;
+
+//     let num = Number(strFirst) + Number(strSecond);
+//     // console.log(lenDiv);
+
+//     let numArr = Array.from(num);
+//     let asd = String(num);
+//     let asdArr = asd.split("");
+//     // console.log(lenDiv);
+
+//     let chunk = lenDiv + 1;
+//     let test = [];
+//     for (i = 0; i < asdArr.length; i += chunk) {
+//       test.push(asdArr.slice(i, i + chunk));
+//       // do whatever
+//     }
+//     let mainArr = [];
+//     test = test.map((v) => {
+//       mainArr.push(Number(v.join("")));
+//     });
+//     // console.log(mainArr);
+//   }
+// }
+
+// function arrayToList(arr) {
+//   return arr.reduceRight(
+//     (next, val) => Object.assign(new ListNode(val), { next }),
+//     null
+//   );
+// }
+
+// function listToArray(list) {
+//   const arr = [];
+//   for (let node = list; node; node = node.next) {
+//     arr.push(node.value);
+//   }
+// }
+
+// const list = arrayToList([9876, 5432, 1999]);
+// const list2 = arrayToList([1, 8001]);
+// const mainFun = addTwoHugeNumbers(list, list2);
+// listToArray(mainFun);
+// console.log(mainFun);
+
 function ListNode(x) {
   this.value = x;
   this.next = null;
 }
-//
-function isListPalindrome(l) {
-  // let list = new ListNode();
-  list.next = l;
-  let node = list.next;
-  console.log("node@:", node);
-  let values = [];
-  while (node) {
-    values.push(node.value);
-    node = node.next;
+
+function mergeTwoLinkedLists(l1, l2) {
+  let list1 = new ListNode();
+  let list2 = new ListNode();
+
+  list1.next = l1;
+  list2.next = l2;
+
+  let res = [];
+
+  let node1 = list1;
+  while (node1.next) {
+    res.push(node1.next.value);
+    node1 = node1.next;
   }
-  // console.log("" + values);
-  return "" + values == values.reverse();
+
+  let node2 = list2;
+  while (node2.next) {
+    res.push(node2.next.value);
+    node2 = node2.next;
+  }
+
+  res.sort(function (a, b) {
+    console.log("a", a);
+    console.log("b", b);
+    return a - b;
+  });
+
+  return res;
 }
 
 function arrayToList(arr) {
@@ -1365,17 +1588,8 @@ function listToArray(list) {
   }
 }
 
-const list = arrayToList([1, 1, 2]);
-const mainFun = isListPalindrome(list);
+const list = arrayToList([5, 10, 15, 40]);
+const list2 = arrayToList([2, 3, 20]);
+const mainFun = mergeTwoLinkedLists(list, list2);
 listToArray(mainFun);
 console.log(mainFun);
-
-// function WhileTest(arr) {
-//   let n = 0;
-
-//   do {
-//     n = n + 1;
-//   } while (n < 3);
-//   return n;
-// }
-// console.log(WhileTest([1, 2, 3, 4]));
