@@ -1314,22 +1314,21 @@
 
 // the hard solution using more "pure" LinkedList approach
 // function ListNode(x) {
-//   this.value = x;
+//   this.value = this.value;
 //   this.next = null;
 // }
-// //
+
 // function isListPalindrome(l) {
-//   // let list = new ListNode();
+//   let list = new ListNode();
 //   list.next = l;
-//   let node = list.next;
-//   console.log("node@:", node);
-//   let values = [];
-//   while (node) {
-//     values.push(node.value);
-//     node = node.next;
+
+//   let res = [];
+//   //   let node = list.next
+//   while (list.next) {
+//     res.push(list.next.value);
+//     list.next = list.next.next;
 //   }
-//   // console.log("" + values);
-//   return "" + values == values.reverse();
+//   return "" + res == res.reverse();
 // }
 
 // function arrayToList(arr) {
@@ -1539,39 +1538,90 @@
 // listToArray(mainFun);
 // console.log(mainFun);
 
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+
+// function mergeTwoLinkedLists(l1, l2) {
+//   let list1 = new ListNode();
+//   let list2 = new ListNode();
+
+//   list1.next = l1;
+//   list2.next = l2;
+
+//   let res = [];
+
+//   let node1 = list1;
+//   while (node1.next) {
+//     res.push(node1.next.value);
+//     node1 = node1.next;
+//   }
+
+//   let node2 = list2;
+//   while (node2.next) {
+//     res.push(node2.next.value);
+//     node2 = node2.next;
+//   }
+
+//   res.sort(function (a, b) {
+//     console.log("a", a);
+//     console.log("b", b);
+//     return a - b;
+//   });
+
+//   return res;
+// }
+
+// function arrayToList(arr) {
+//   return arr.reduceRight(
+//     (next, val) => Object.assign(new ListNode(val), { next }),
+//     null
+//   );
+// }
+
+// function listToArray(list) {
+//   const arr = [];
+//   for (let node = list; node; node = node.next) {
+//     arr.push(node.value);
+//   }
+// }
+
+// const list = arrayToList([5, 10, 15, 40]);
+// const list2 = arrayToList([2, 3, 20]);
+// const mainFun = mergeTwoLinkedLists(list, list2);
+// listToArray(mainFun);
+// console.log(mainFun);
+
 function ListNode(x) {
   this.value = x;
   this.next = null;
 }
 
-function mergeTwoLinkedLists(l1, l2) {
-  let list1 = new ListNode();
-  let list2 = new ListNode();
-
-  list1.next = l1;
-  list2.next = l2;
+function reverseNodesInKGroups(l, k) {
+  let list = new ListNode();
+  list.next = l;
 
   let res = [];
+  let mainRes = [];
+  while (list.next) {
+    res.push(list.next.value);
+    list.next = list.next.next;
+  }
+  let main = [];
+  let chunk = k;
 
-  let node1 = list1;
-  while (node1.next) {
-    res.push(node1.next.value);
-    node1 = node1.next;
+  for (let i = 0; i < res.length; i += chunk) {
+    if (res.length >= i + chunk) {
+      mainRes.push(res.slice(i, i + chunk).reverse());
+    } else {
+      mainRes.push(res.slice(i, i + chunk));
+    }
   }
 
-  let node2 = list2;
-  while (node2.next) {
-    res.push(node2.next.value);
-    node2 = node2.next;
-  }
+  mainRes.map((v) => v.map((val) => main.push(val)));
 
-  res.sort(function (a, b) {
-    console.log("a", a);
-    console.log("b", b);
-    return a - b;
-  });
-
-  return res;
+  return main;
 }
 
 function arrayToList(arr) {
@@ -1588,8 +1638,7 @@ function listToArray(list) {
   }
 }
 
-const list = arrayToList([5, 10, 15, 40]);
-const list2 = arrayToList([2, 3, 20]);
-const mainFun = mergeTwoLinkedLists(list, list2);
+const list = arrayToList([1, 2, 3, 4, 5, 6, 7, 8]);
+const mainFun = reverseNodesInKGroups(list, 3);
 listToArray(mainFun);
 console.log(mainFun);
