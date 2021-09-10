@@ -1593,35 +1593,76 @@
 // listToArray(mainFun);
 // console.log(mainFun);
 
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+
+// function reverseNodesInKGroups(l, k) {
+//   let list = new ListNode();
+//   list.next = l;
+
+//   let res = [];
+//   let mainRes = [];
+//   while (list.next) {
+//     res.push(list.next.value);
+//     list.next = list.next.next;
+//   }
+//   let main = [];
+//   let chunk = k;
+
+//   for (let i = 0; i < res.length; i += chunk) {
+//     if (res.length >= i + chunk) {
+//       mainRes.push(res.slice(i, i + chunk).reverse());
+//     } else {
+//       mainRes.push(res.slice(i, i + chunk));
+//     }
+//   }
+
+//   mainRes.map((v) => v.map((val) => main.push(val)));
+
+//   return main;
+// }
+
+// function arrayToList(arr) {
+//   return arr.reduceRight(
+//     (next, val) => Object.assign(new ListNode(val), { next }),
+//     null
+//   );
+// }
+
+// function listToArray(list) {
+//   const arr = [];
+//   for (let node = list; node; node = node.next) {
+//     arr.push(node.value);
+//   }
+// }
+
+// const list = arrayToList([1, 2, 3, 4, 5, 6, 7, 8]);
+// const mainFun = reverseNodesInKGroups(list, 3);
+// listToArray(mainFun);
+// console.log(mainFun);
+
 function ListNode(x) {
   this.value = x;
   this.next = null;
 }
 
-function reverseNodesInKGroups(l, k) {
+function rearrangeLastN(l, n) {
+  if (!n) return l;
+
   let list = new ListNode();
   list.next = l;
 
   let res = [];
-  let mainRes = [];
   while (list.next) {
     res.push(list.next.value);
     list.next = list.next.next;
   }
-  let main = [];
-  let chunk = k;
 
-  for (let i = 0; i < res.length; i += chunk) {
-    if (res.length >= i + chunk) {
-      mainRes.push(res.slice(i, i + chunk).reverse());
-    } else {
-      mainRes.push(res.slice(i, i + chunk));
-    }
-  }
-
-  mainRes.map((v) => v.map((val) => main.push(val)));
-
-  return main;
+  var cut = res.splice(res.length - n, n);
+  res = cut.concat(res);
+  return res;
 }
 
 function arrayToList(arr) {
@@ -1639,6 +1680,6 @@ function listToArray(list) {
 }
 
 const list = arrayToList([1, 2, 3, 4, 5, 6, 7, 8]);
-const mainFun = reverseNodesInKGroups(list, 3);
-listToArray(mainFun);
+let mainFun = rearrangeLastN(list, 3);
+const res = listToArray(mainFun);
 console.log(mainFun);
