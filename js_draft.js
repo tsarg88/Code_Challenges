@@ -1803,7 +1803,7 @@
 // );
 
 const getColumn = (matrix, column) => {
-  console.log("tesnanq", [...matrix]);
+  // console.log("tesnanq", [...matrix]);
   return [...Array(3).keys()].map((i) => {
     return matrix[i][column];
     // console.log(matrix[i][column]);
@@ -1827,14 +1827,14 @@ const isSubMatrixFull = (matrix) => {
   const n = matrix[0].length;
   const answer = new Array(n - 2).fill(false);
   let kernel = computeKernel(matrix);
-  [...Array(n - 3).keys()].forEach((i) => {
+  for (let i = 0; i < n - 3; i++) {
     if (new Set(kernel).size === 9) {
       answer[i] = true;
     }
     if (i < n - 3) {
       kernel = [...kernel.slice(3), ...getColumn(matrix, i + 3)];
     }
-  });
+  }
   return answer;
 };
 
