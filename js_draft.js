@@ -1643,43 +1643,204 @@
 // listToArray(mainFun);
 // console.log(mainFun);
 
-function ListNode(x) {
-  this.value = x;
-  this.next = null;
-}
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
 
-function rearrangeLastN(l, n) {
-  if (!n) return l;
+// function rearrangeLastN(l, n) {
+//   if (!n) return l;
 
-  let list = new ListNode();
-  list.next = l;
+//   let list = new ListNode();
+//   list.next = l;
 
-  let res = [];
-  while (list.next) {
-    res.push(list.next.value);
-    list.next = list.next.next;
-  }
+//   let res = [];
+//   while (list.next) {
+//     res.push(list.next.value);
+//     list.next = list.next.next;
+//   }
 
-  var cut = res.splice(res.length - n, n);
-  res = cut.concat(res);
-  return res;
-}
+//   var cut = res.splice(res.length - n, n);
+//   res = cut.concat(res);
+//   return res;
+// }
 
-function arrayToList(arr) {
-  return arr.reduceRight(
-    (next, val) => Object.assign(new ListNode(val), { next }),
-    null
-  );
-}
+// function arrayToList(arr) {
+//   return arr.reduceRight(
+//     (next, val) => Object.assign(new ListNode(val), { next }),
+//     null
+//   );
+// }
 
-function listToArray(list) {
-  const arr = [];
-  for (let node = list; node; node = node.next) {
-    arr.push(node.value);
-  }
-}
+// function listToArray(list) {
+//   const arr = [];
+//   for (let node = list; node; node = node.next) {
+//     arr.push(node.value);
+//   }
+// }
 
-const list = arrayToList([1, 2, 3, 4, 5, 6, 7, 8]);
-let mainFun = rearrangeLastN(list, 3);
-const res = listToArray(mainFun);
-console.log(mainFun);
+// const list = arrayToList([1, 2, 3, 4, 5, 6, 7, 8]);
+// let mainFun = rearrangeLastN(list, 3);
+// const res = listToArray(mainFun);
+// console.log(mainFun);
+
+// function groupingDishes(dishes) {
+//   // let test = new Array(127);
+//   // console.log(test.length);
+//   var ingredients = {};
+//   dishes.forEach((dish) => {
+//     var ingIndex;
+//     var ingredient;
+//     for (ingIndex = 1; ingIndex < dish.length; ingIndex++) {
+//       ingredient = dish[ingIndex];
+//       if (!ingredients[ingredient]) {
+//         ingredients[ingredient] = [dish[0]];
+//       } else {
+//         ingredients[ingredient].push(dish[0]);
+//       }
+//     }
+//   });
+
+//   var res = [];
+//   // let test = Object.keys(ingredients);
+
+//   Object.keys(ingredients)
+//     .sort()
+//     .forEach(function (key) {
+//       console.log(ingredients["Tomato"]);
+//       if (ingredients[key].length > 1) {
+//         res.push([key].concat(ingredients[key].sort()));
+//       }
+//     });
+
+//   // return res;
+// }
+// console.log(
+//   groupingDishes([
+//     ["Salad", "Tomato", "Cucumber", "Salad", "Sauce"],
+//     ["Pizza", "Tomato", "Sausage", "Sauce", "Dough"],
+//     ["Quesadilla", "Chicken", "Cheese", "Sauce"],
+//     ["Sandwich", "Salad", "Bread", "Tomato", "Cheese"],
+//   ])
+// );
+
+// class HashTable {
+//   constructor() {
+//     this.table = new Array(127);
+//     this.size = 0;
+//   }
+
+//   _hash(key) {
+//     let hash = 0;
+//     for (let i = 0; i < key.length; i++) {
+//       hash += key.charCodeAt(i);
+//     }
+//     return hash % this.table.length;
+//   }
+
+//   set(key, value, val) {
+//     const index = this._hash(key);
+//     this.table[index] = [key, value, val];
+//     this.size++;
+//   }
+
+//   get(key) {
+//     const target = this._hash(key);
+//     return this.table[target];
+//   }
+
+//   remove(key) {
+//     const index = this._hash(key);
+
+//     if (this.table[index] && this.table[index].length) {
+//       this.table[index] = [];
+//       this.size--;
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   }
+// }
+
+// const ht = new HashTable();
+// ht.set("Canada", 300, 700);
+// ht.set("France", 100);
+// ht.set("Spain", 110);
+// console.log(ht.get("Canada"));
+
+// function groupingDishes(dishes) {
+//   let ingredients = {};
+
+//   let ingIndex;
+//   let ingValue;
+//   dishes.forEach((dish) => {
+//     for (ingIndex = 1; ingIndex < dish.length; ingIndex++) {
+//       ingValue = dish[ingIndex];
+//       if (!ingredients[ingValue]) {
+//         ingredients[ingValue] = [dish[0]];
+//       } else {
+//         ingredients[ingValue].push(dish[0]);
+//       }
+//     }
+//   });
+//   let res = [];
+//   Object.keys(ingredients)
+//     .sort()
+//     .forEach((key) => {
+//       if (ingredients[key].length > 1) {
+//         res.push([key].concat(ingredients[key].sort()));
+//       }
+//     });
+//   console.log(res);
+// }
+// console.log(
+//   groupingDishes([
+//     ["Salad", "Tomato", "Cucumber", "Salad", "Sauce"],
+//     ["Pizza", "Tomato", "Sausage", "Sauce", "Dough"],
+//     ["Quesadilla", "Chicken", "Cheese", "Sauce"],
+//     ["Sandwich", "Salad", "Bread", "Tomato", "Cheese"],
+//   ])
+// );
+
+const getColumn = (matrix, column) => {
+  console.log("tesnanq", [...matrix]);
+  return [...Array(3).keys()].map((i) => {
+    return matrix[i][column];
+    // console.log(matrix[i][column]);
+  });
+};
+
+// let test = [...Array(3).keys()];
+// console.log(test);
+
+// console.log(test[0][0]);
+// console.log("suaba", ...test[0]);
+const computeKernel = (matrix) => {
+  return [
+    ...getColumn(matrix, 0),
+    ...getColumn(matrix, 1),
+    ...getColumn(matrix, 2),
+  ];
+};
+
+const isSubMatrixFull = (matrix) => {
+  const n = matrix[0].length;
+  const answer = new Array(n - 2).fill(false);
+  let kernel = computeKernel(matrix);
+  [...Array(n - 3).keys()].forEach((i) => {
+    if (new Set(kernel).size === 9) {
+      answer[i] = true;
+    }
+    if (i < n - 3) {
+      kernel = [...kernel.slice(3), ...getColumn(matrix, i + 3)];
+    }
+  });
+  return answer;
+};
+
+const numbers = [
+  [1, 2, 3, 2, 5, 7],
+  [4, 5, 6, 1, 7, 6],
+  [7, 8, 9, 4, 8, 3],
+];
+console.log(isSubMatrixFull(numbers));
