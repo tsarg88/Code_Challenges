@@ -1802,45 +1802,98 @@
 //   ])
 // );
 
-const getColumn = (matrix, column) => {
-  // console.log("tesnanq", [...matrix]);
-  return [...Array(3).keys()].map((i) => {
-    return matrix[i][column];
-    // console.log(matrix[i][column]);
-  });
-};
+// const getColumn = (matrix, column) => {
+//   // console.log("tesnanq", [...matrix]);
+//   return [...Array(3).keys()].map((i) => {
+//     return matrix[i][column];
+//     // console.log(matrix[i][column]);
+//   });
+// };
 
 // let test = [...Array(3).keys()];
 // console.log(test);
 
 // console.log(test[0][0]);
-// console.log("suaba", ...test[0]);
-const computeKernel = (matrix) => {
-  return [
-    ...getColumn(matrix, 0),
-    ...getColumn(matrix, 1),
-    ...getColumn(matrix, 2),
-  ];
-};
+// // console.log("suaba", ...test[0]);
+// const computeKernel = (matrix) => {
+//   return [
+//     ...getColumn(matrix, 0),
+//     ...getColumn(matrix, 1),
+//     ...getColumn(matrix, 2),
+//   ];
+// };
 
-const isSubMatrixFull = (matrix) => {
-  const n = matrix[0].length;
-  const answer = new Array(n - 2).fill(false);
-  let kernel = computeKernel(matrix);
-  for (let i = 0; i < n - 3; i++) {
-    if (new Set(kernel).size === 9) {
-      answer[i] = true;
-    }
-    if (i < n - 3) {
-      kernel = [...kernel.slice(3), ...getColumn(matrix, i + 3)];
-    }
+// const isSubMatrixFull = (matrix) => {
+//   const n = matrix[0].length;
+//   const answer = new Array(n - 2).fill(false);
+//   let kernel = computeKernel(matrix);
+//   for (let i = 0; i < n - 3; i++) {
+//     if (new Set(kernel).size === 9) {
+//       answer[i] = true;
+//     }
+//     if (i < n - 3) {
+//       kernel = [...kernel.slice(3), ...getColumn(matrix, i + 3)];
+//     }
+//   }
+//   return answer;
+// };
+
+// const numbers = [
+//   [1, 2, 3, 2, 5, 7],
+//   [4, 5, 6, 1, 7, 6],
+//   [7, 8, 9, 4, 8, 3],
+// ];
+// console.log(isSubMatrixFull(numbers));
+
+// function addTwoDigits(n) {
+//   let arr = [n];
+//   let res = arr
+//     .join("")
+//     .split("")
+//     .map((v) => Number(v));
+//   // console.log(res.length);
+//   for (let i = 0; i < res.length; i++) {
+//     let test = res[i];
+//     const reducer = (previousValue, currentValue) =>
+//       previousValue + currentValue;
+//     return res.reduce(reducer);
+//   }
+
+//   // let test = [1, 2, 3];
+//   // console.log(test.join());
+// }
+// console.log(addTwoDigits(12));
+
+// function largestNumber(n) {
+//   let res = `${9}`.repeat(n);
+//   return Number(res);
+// }
+// console.log(largestNumber(4));
+
+// function largestNumber(n) {
+//   return Math.pow(10, n) - 1;
+//   // let test = Math.pow(2, 3);
+//   // console.log(test);
+// }
+// console.log(largestNumber(2));
+
+// function candies(n, m) {
+//   let res = m / n;
+//   return Math.floor(res) * n;
+// }
+// console.log(candies(3, 10));
+
+function seatsInTheater(nCols, nRows, col, row) {
+  let res = [];
+  for (let i = 0; i < nRows; i++) {
+    res.push("*".repeat(nCols));
   }
-  return answer;
-};
 
-const numbers = [
-  [1, 2, 3, 2, 5, 7],
-  [4, 5, 6, 1, 7, 6],
-  [7, 8, 9, 4, 8, 3],
-];
-console.log(isSubMatrixFull(numbers));
+  res = res.map((v, i) => v.split("").slice(col - 1));
+  res = res.splice(row);
+  res = [].concat.apply([], res);
+  res = res.filter((v) => v == "*").length;
+  return res;
+}
+
+console.log(seatsInTheater(16, 11, 5, 3));
