@@ -1883,17 +1883,189 @@
 // }
 // console.log(candies(3, 10));
 
-function seatsInTheater(nCols, nRows, col, row) {
-  let res = [];
-  for (let i = 0; i < nRows; i++) {
-    res.push("*".repeat(nCols));
-  }
+// kind of visual but long solution
+// function seatsInTheater(nCols, nRows, col, row) {
+//   let res = [];
+//   for (let i = 0; i < nRows; i++) {
+//     res.push("*".repeat(nCols));
+//   }
 
-  res = res.map((v, i) => v.split("").slice(col - 1));
-  res = res.splice(row);
-  res = [].concat.apply([], res);
-  res = res.filter((v) => v == "*").length;
-  return res;
-}
+//   res = res.map((v, i) => v.split("").slice(col - 1));
+//   res = res.splice(row);
+//   res = [].concat.apply([], res);
+//   res = res.filter((v) => v == "*").length;
+//   return res;
+// }
 
-console.log(seatsInTheater(16, 11, 5, 3));
+// console.log(seatsInTheater(16, 11, 5, 3));
+
+// clear way:
+// function seatsInTheater(nCols, nRows, col, row) {
+//   return (nCols - (col - 1)) * (nRows - row);
+// }
+
+// function arrayShift(elements) {
+//   let original = elements;
+//   let compare = [];
+//   compare = compare.push(original);
+//   for (let i = elements.length - 1; i >= 0; i--) {
+//     compare[0] = original[i];
+//     if (JSON.stringify(compare) == JSON.stringify(elements)) {
+//       // return true;
+//     } else {
+//       // return false;
+//     }
+//   }
+//   let arr = [1, 2, 3];
+//   let arr2 = [1, 2, 1];
+//   return JSON.stringify(arr) == JSON.stringify(arr2);
+// }
+// console.log(arrayShift([3, 4, 1, 2]));
+
+// blyat' hisht dev@:
+// var rotate = function (nums, k) {
+//   for (let i = 0; i < k; i++) {
+//     nums.unshift(nums.pop());
+//   }
+// };
+// console.log(rotate([3, 4, 1, 2], 3));
+
+// time/space av qunogh solution, tipa bubble sorta brazni siqisha anum vmseto
+// built in method neri!!, naxuy!!
+// const reverse = (nums, from, to) => {
+//   for (let i = from, j = to; i < j; i++, j--) {
+//     let t = nums[i];
+//     nums[i] = nums[j];
+//     nums[j] = t;
+//   }
+// };
+
+// const rotate = (nums, k) => {
+//   k %= nums.length;
+//   reverse(nums, 0, nums.length - 1);
+//   reverse(nums, 0, k - 1);
+//   reverse(nums, k, nums.length - 1);
+//   return nums;
+// };
+// console.log(rotate([3, 4, 1, 2], 3));
+
+// function maxMultiple(divisor, bound) {
+//   // for(let i=0; i<bound; i++)
+//   for (let i = bound; i > 0; i--) {
+//     if (i % 3 == 0) {
+//       return bound[i];
+//     }
+//   }
+// }
+// console.log(maxMultiple(10, 50));
+
+// function circleOfNumbers(n, firstNumber) {
+
+// }
+// console.log(circleOfNumbers(10, 2))
+
+// function callTest(arg, arg2) {
+//   console.log(arg + arg2);
+// }
+
+// function callTestBack(cb) {
+//   // let test = "OOOSSSDSD";
+//   cb(1, 332);
+// }
+// console.log(callTestBack(callTest));
+
+// function circleOfNumbers(n, firstNumber) {
+//   let diff = n / 2;
+//   // let res =  diff - firstNumber
+//   // return Math.abs(res)
+
+//   if (firstNumber < diff) {
+//     return Math.abs(diff + firstNumber);
+//   } else if (n == firstNumber) {
+//     return 0;
+//   } else {
+//     return Math.abs(diff - firstNumber);
+//   }
+// }
+
+// function circleOfNumbers(n, firstNumber) {
+//   console.log("moduloin res@", 10 % 15);
+//   return (firstNumber + n / 2) % n;
+// }
+// console.log(circleOfNumbers(12, 4));
+
+// // console.log("dsadsa", 10 % 3);
+
+// function lateRide(n) {
+//   // n = 808
+//   // 13 hr == 780
+//   //  28 min remaining
+//   let hr = Math.floor(n / 60);
+//   // console.log(hr);
+//   let min = n % 60;
+//   conc = "" + hr + min;
+//   conc = conc.split("").map((v) => Number(v));
+//   res = conc.reduce((acc, cur) => acc + cur);
+//   return res;
+// }
+// console.log(lateRide(808));
+
+// function phoneCall(min1, min2_10, min11, s) {
+//   let totalMin = 0;
+
+//   s = s - min1;
+//   totalMin++;
+
+//   if (s != 0) {
+//     for (let i = 0; i < 9; i++) {
+//       if (s == 0) {
+//         return totalMin;
+//       } else {
+//         s = s - min2_10;
+//         totalMin++;
+//       }
+//     }
+//     while (s != 0) {
+//       s = s - min11;
+//       totalMin++;
+//     }
+//   }
+
+//   return totalMin;
+// }
+
+// function phoneCall(min1, min2_10, min11, s) {
+//   let totalMin = 0;
+
+//   if (s < min1) {
+//     return 0;
+//   }
+
+//   s = s - min1;
+//   totalMin++;
+
+//   for (let i = 0; i < 9; i++) {
+//     if (s <= min2_10) {
+//       return totalMin;
+//     } else {
+//       s = s - min2_10;
+//       totalMin++;
+//     }
+//   }
+
+//   while (s >= min11) {
+//     if (s >= min11) {
+//       s = s - min11;
+//       totalMin++;
+//     }
+//   }
+
+//   // if (s > 0) {
+//   //   s = s - min11;
+//   //   totalMin++;
+//   // }
+
+//   return totalMin;
+// }
+
+// console.log(phoneCall(10, 10, 10, 8));
