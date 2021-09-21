@@ -2069,3 +2069,45 @@
 // }
 
 // console.log(phoneCall(10, 10, 10, 8));
+
+function coolFeature(a, b, queries) {
+  let res = [];
+  let count = 0;
+  let count2 = 0;
+  let firstCompValue = queries[0][1];
+  let secondCompValue = queries[2][1];
+
+  // for(let i=0; i<)
+  let arrLong = a.length > b.length ? a : b;
+
+  for (let i = 0; i < arrLong.length; i++) {
+    for (let j = 0; j < arrLong.length; j++) {
+      if (a[i] + b[j] == firstCompValue) {
+        count2++;
+      }
+    }
+  }
+  changeValue = queries[2];
+  b.splice(0, 1, queries[1][2]);
+
+  for (let i = 0; i < arrLong.length; i++) {
+    for (let j = 0; j < arrLong.length; j++) {
+      if (a[i] + b[j] == secondCompValue) {
+        count++;
+      }
+    }
+  }
+  res.push(count, count2);
+  return res;
+}
+console.log(
+  coolFeature(
+    [1, 2, 3],
+    [3, 4],
+    [
+      [1, 5],
+      [0, 0, 1],
+      [1, 5],
+    ]
+  )
+);
