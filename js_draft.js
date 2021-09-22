@@ -2070,44 +2070,174 @@
 
 // console.log(phoneCall(10, 10, 10, 8));
 
-function coolFeature(a, b, queries) {
-  let res = [];
-  let count = 0;
-  let count2 = 0;
-  let firstCompValue = queries[0][1];
-  let secondCompValue = queries[2][1];
+// function coolFeature(a, b, queries) {
+//   let res = [];
+//   let count = 0;
+//   let count2 = 0;
+//   let firstCompValue = queries[0][1];
+//   let secondCompValue = queries[2][1];
 
-  // for(let i=0; i<)
-  let arrLong = a.length > b.length ? a : b;
+//   // for(let i=0; i<)
+//   let arrLong = a.length > b.length ? a : b;
 
-  for (let i = 0; i < arrLong.length; i++) {
-    for (let j = 0; j < arrLong.length; j++) {
-      if (a[i] + b[j] == firstCompValue) {
-        count2++;
-      }
-    }
+//   for (let i = 0; i < arrLong.length; i++) {
+//     for (let j = 0; j < arrLong.length; j++) {
+//       if (a[i] + b[j] == firstCompValue) {
+//         count2++;
+//       }
+//     }
+//   }
+//   changeValue = queries[2];
+//   b.splice(0, 1, queries[1][2]);
+
+//   for (let i = 0; i < arrLong.length; i++) {
+//     for (let j = 0; j < arrLong.length; j++) {
+//       if (a[i] + b[j] == secondCompValue) {
+//         count++;
+//       }
+//     }
+//   }
+//   res.push(count, count2);
+//   return res;
+// }
+// console.log(
+//   coolFeature(
+//     [1, 2, 3],
+//     [3, 4],
+//     [
+//       [1, 5],
+//       [0, 0, 1],
+//       [1, 5],
+//     ]
+//   )
+// );
+
+// var triangleNumber = function (nums) {
+//   let count = 0;
+//   for (let i = 0; i < nums.length - 2; i++) {
+//     for (let j = i + 1; j < nums.length - 1; j++) {
+//       for (let k = j + 1; k < nums.length; k++) {
+//         if (
+//           nums[i] + nums[j] > nums[k] &&
+//           nums[i] + nums[k] > nums[j] &&
+//           nums[j] + nums[k] > nums[i]
+//         )
+//           count++;
+//       }
+//     }
+//   }
+//   return count;
+// };
+// console.log(triangleNumber([2, 2, 3, 4]));
+
+function knapsackLight(value1, weight1, value2, weight2, maxW) {
+  let weighVar = maxW;
+  let res = 0;
+  // if (weight1 > maxW || weight2 > maxW) {
+  //   return 0;
+  // }
+  let maxW1 = maxW;
+  let If1 = maxW1 - Math.min(weight1, weight2);
+  let If11 = If1 - Math.max(weight1, weight2);
+  if (Math.sign(If1) == -1 && Math.sign(If11) == -1) {
+    return 0;
   }
-  changeValue = queries[2];
-  b.splice(0, 1, queries[1][2]);
+  // at this time we know that we can subtract
+  // to at least min wight
+  // but we would like to know if we can also subtract to
+  // the min weight then which value is bigger
+  // min value or max value?
 
-  for (let i = 0; i < arrLong.length; i++) {
-    for (let j = 0; j < arrLong.length; j++) {
-      if (a[i] + b[j] == secondCompValue) {
-        count++;
-      }
-    }
+  // maxW should be compared without modification
+  // to the values of weight
+
+  let checkValue = Math.max(value1, value2);
+  // if(maxW >= Math.max(weight1, weight2)){
+  //   checkValue =
+  // }
+
+  let maxW2 = maxW;
+  let If2 = maxW2 - Math.min(weight1, weight2);
+  let If22 = If2 - Math.max(weight1, weight2);
+  if (Math.sign(If2) == -1 && Math.sign(If22) == 1) {
+    return (res += Math.min(value1, value2));
   }
-  res.push(count, count2);
+
+  let maxW3 = maxW;
+  let If3;
+  if (maxW3 - Math.min(weight1, weight2) == 0) {
+    If3 = 1;
+  } else {
+    If3 = maxW3 - Math.min(weight1, weight2);
+  }
+  console.log("ss", If3);
+  let If33 = If3 - Math.max(weight1, weight2);
+  if (Math.sign(If3) == 1 && Math.sign(If3) == 1) {
+    if (If3 >= Math.max(weight1, weight2)) {
+      return (res += value1 + value2);
+    }
+    if (maxW >= Math.max(weight1, weight2)) {
+      return (res += Math.max(value1, value2));
+    }
+    if (If3 == 1) {
+      if (maxW >= weight1) {
+        return (res += value1);
+      }
+      if (maxW <= weight1) {
+        return (res += value2);
+      }
+      if ((res += Math.min(value1, value2))) {
+        return (res += Math.min(value1, value2));
+      }
+      return (res += Math.min(value1, value2));
+    }
+    if ((res += Math.max(value1, value2))) {
+      return (res += Math.max(value1, value2));
+    }
+  } else {
+    return (res += Math.max(value1, value2));
+  }
+
+  let maxW4 = maxW;
+  let If4 = maxW4 - Math.max(weight1, weight2);
+  let If44;
+
+  if (If4 - Math.min(weight1, weight2) == 0) {
+    If44 = 1;
+  } else {
+    If44 = If4 - Math.min(weight1, weight2);
+  }
+
+  if (Math.sign(If4) == 1 && Math.sign(If44) == 1) {
+    return res + (value1 + value2);
+  }
   return res;
 }
-console.log(
-  coolFeature(
-    [1, 2, 3],
-    [3, 4],
-    [
-      [1, 5],
-      [0, 0, 1],
-      [1, 5],
-    ]
-  )
-);
+//   if (Math.sign(1 == 1)) {
+//     return "pod";
+//   } else {
+//     return false;
+//   }
+// }
+
+// console.log(knapsackLight(10, 5, 6, 4, 9));
+
+// aveli mmoshni variant@:
+// function knapsackLight(value1, weight1, value2, weight2, maxW) {
+//   if (weight1 + weight2 <= maxW) return value1 + value2;
+//   if (value1 > value2 && weight1 <= maxW) return value1;
+//   if (weight2 <= maxW) return value2;
+//   if (weight1 <= maxW) return value1;
+//   return 0;
+// }
+// console.log(knapsackLight(10, 5, 6, 4, 9));
+
+// pizdec! amena lav@!:
+function knapsackLight(value1, weight1, value2, weight2, maxW) {
+  return Math.max(
+    maxW >= weight1 && value1,
+    maxW >= weight2 && value2,
+    maxW >= weight1 + weight2 && value1 + value2
+  );
+}
+console.log(knapsackLight(4, 3, 6, 1, 8));
