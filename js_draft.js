@@ -2380,3 +2380,90 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 //   return inputArray.filter((elem) => elem.length === maxLng);
 // }
 // console.log(allLongestStrings(["aba", "aa", "ad", "vcd", "aba"]));
+
+// function commonCharacterCount(s1, s2) {
+//   var s1Array = s1.split("");
+//   var s2Array = s2.split("");
+//   var count = 0;
+//   let index = 0;
+
+//   s1Array.filter((s1) => {
+//     index = s2Array.findIndex((s2) => s2 == s1);
+//     console.log(index);
+//     if (index >= 0) {
+//       count++;
+//       s2Array.splice(index, 1);
+//     }
+//   });
+//   // return count;
+// }
+// console.log(commonCharacterCount("aabcc", "adcaa"));
+
+// function isLucky(n) {
+//   let str = "" + n;
+//   let half = str.length / 2;
+//   com1 = [];
+//   com2 = [];
+//   com1.push(str.slice(0, half));
+//   com2.push(str.slice(half));
+//   com1 = com1.join("").split("");
+//   com2 = com2.join("").split("");
+//   const reducer = (previousValue, currentValue) =>
+//     parseInt(previousValue) + parseInt(currentValue);
+//   let res1 = com1.reduce(reducer);
+//   let res2 = com2.reduce(reducer);
+//   return res1 == res2 ? true : false;
+// }
+// console.log(isLucky(1230));
+
+// function sortByHeight(a) {
+//   let filtered = a.filter((v) => v !== -1);
+//   let sorted = filtered.sort((a, b) => a - b);
+//   return a.map((v) => (v == -1 ? -1 : sorted.shift()));
+// }
+
+// console.log(sortByHeight([-1, 150, 190, 170, -1, -1, 160, 180]));
+
+// function whileTest(N) {
+//   let a = 0;
+//   for (i = 0; i < N; i++) {
+//     for (j = N; j > i; j--) {
+//       a = a + i + j;
+//     }
+//   }
+//   return a;
+// }
+// console.log(whileTest(2));
+
+function reverseInParentheses(s) {
+  while (true) {
+    let c = s.indexOf(")");
+
+    if (c === -1) {
+      break;
+    }
+
+    let o = s.substring(0, c).lastIndexOf("(");
+    console.log("stegh", s.substring(0, c).lastIndexOf("("));
+    let start = s.substring(0, o);
+    let middle = s
+      .substring(o + 1, c)
+      .split("")
+      .reverse()
+      .join("");
+    let end = s.substring(c + 1, s.length);
+
+    s = start + middle + end;
+  }
+
+  return s;
+}
+
+console.log(reverseInParentheses("foo(bar)baz(blim)"));
+
+// function letVar() {
+//   let me = "me";
+//   let me = "me1";
+//   console.log(me);
+// }
+// console.log(letVar());
