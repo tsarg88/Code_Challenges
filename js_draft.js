@@ -2435,31 +2435,31 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(whileTest(2));
 
-function reverseInParentheses(s) {
-  while (true) {
-    let c = s.indexOf(")");
+// function reverseInParentheses(s) {
+//   while (true) {
+//     let c = s.indexOf(")");
 
-    if (c === -1) {
-      break;
-    }
+//     if (c === -1) {
+//       break;
+//     }
 
-    let o = s.substring(0, c).lastIndexOf("(");
-    console.log("stegh", s.substring(0, c).lastIndexOf("("));
-    let start = s.substring(0, o);
-    let middle = s
-      .substring(o + 1, c)
-      .split("")
-      .reverse()
-      .join("");
-    let end = s.substring(c + 1, s.length);
+//     let o = s.substring(0, c).lastIndexOf("(");
+//     console.log("stegh", s.substring(0, c).lastIndexOf("("));
+//     let start = s.substring(0, o);
+//     let middle = s
+//       .substring(o + 1, c)
+//       .split("")
+//       .reverse()
+//       .join("");
+//     let end = s.substring(c + 1, s.length);
 
-    s = start + middle + end;
-  }
+//     s = start + middle + end;
+//   }
 
-  return s;
-}
+//   return s;
+// }
 
-console.log(reverseInParentheses("foo(bar)baz(blim)"));
+// console.log(reverseInParentheses("foo(bar)baz(blim)"));
 
 // function letVar() {
 //   let me = "me";
@@ -2467,3 +2467,20 @@ console.log(reverseInParentheses("foo(bar)baz(blim)"));
 //   console.log(me);
 // }
 // console.log(letVar());
+
+function alternatingSums(a) {
+  let res = [];
+  let even = 0;
+  let odd = 0;
+
+  for (let i = 0; i < a.length; i++)
+    if (i % 2 !== 0) {
+      odd += a[i];
+    } else {
+      even += a[i];
+    }
+  res.push(even);
+  res.push(odd);
+  return res;
+}
+console.log(alternatingSums([50, 60, 60, 45, 70]));
