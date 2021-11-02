@@ -2468,19 +2468,28 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(letVar());
 
-function alternatingSums(a) {
-  let res = [];
-  let even = 0;
-  let odd = 0;
+// function alternatingSums(a) {
+//   let res = [];
+//   let even = 0;
+//   let odd = 0;
 
-  for (let i = 0; i < a.length; i++)
-    if (i % 2 !== 0) {
-      odd += a[i];
-    } else {
-      even += a[i];
-    }
-  res.push(even);
-  res.push(odd);
-  return res;
+//   for (let i = 0; i < a.length; i++)
+//     if (i % 2 !== 0) {
+//       odd += a[i];
+//     } else {
+//       even += a[i];
+//     }
+//   res.push(even);
+//   res.push(odd);
+//   return res;
+// }
+// console.log(alternatingSums([50, 60, 60, 45, 70]));
+
+function addBorder(picture) {
+  return [
+    "*".repeat(picture[0].length + 2),
+    ...picture.map((v) => `*${v}*`),
+    "*".repeat(picture[0].length + 2),
+  ];
 }
-console.log(alternatingSums([50, 60, 60, 45, 70]));
+console.log(addBorder(["abc", "ded"]));
