@@ -2485,11 +2485,83 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(alternatingSums([50, 60, 60, 45, 70]));
 
-function addBorder(picture) {
-  return [
-    "*".repeat(picture[0].length + 2),
-    ...picture.map((v) => `*${v}*`),
-    "*".repeat(picture[0].length + 2),
-  ];
+// function addBorder(picture) {
+//   return [
+//     "*".repeat(picture[0].length + 2),
+//     ...picture.map((v) => `*${v}*`),
+//     "*".repeat(picture[0].length + 2),
+//   ];
+// }
+// console.log(addBorder(["abc", "ded"]));
+
+// function areSimilar(a, b) {
+//   var notEqual = {
+//     first: [],
+//     second: [],
+//   };
+
+//   for (var i = 0; i < a.length; i++)
+//     if (a[i] !== b[i]) {
+//       notEqual.first.push(a[i]);
+//       notEqual.second.push(b[i]);
+//     }
+
+//   if (notEqual.first.length >= 3) return false;
+
+//   if (
+//     notEqual.first[0] === notEqual.second[1] &&
+//     notEqual.first[1] === notEqual.second[0]
+//   )
+//     return true;
+
+//   return false;
+// }
+
+// console.log(areSimilar([1, 2, 2], [2, 1, 1]));
+
+// function countdown(n) {
+//   if (n < 1) {
+//     return [];
+//   } else {
+//     const countArray = countdown(n - 1);
+//     countArray.push(n);
+//     return countArray;
+//   }
+// }
+// console.log(countdown(9));
+
+// function solution(yourLeft, yourRight, friendsLeft, friendsRight) {
+//   if (
+//     Math.max(yourLeft, yourRight) == Math.max(friendsLeft, friendsRight) &&
+//     Math.min(yourLeft, yourRight) == Math.min(friendsLeft, friendsRight)
+//   ) {
+//     return true;
+//   }
+//   return false;
+// }
+// console.log(solution(10, 15, 15, 10));
+
+function solution(inputArray) {
+  let res = [];
+  for (let i = 0; i < inputArray.length; i++) {
+    if (inputArray[i] > inputArray[i + 1]) {
+      let temp = inputArray[i] - inputArray[i + 1];
+      res.push(temp);
+    }
+  }
+
+  for (let i = inputArray.length; i >= 0; i--) {
+    if (inputArray[i] > inputArray[i - 1]) {
+      let temp = inputArray[i] - inputArray[i - 1];
+      res.push(temp);
+    }
+  }
+
+  let final = Math.max(...res);
+  if (final > 0) {
+    return final;
+  } else {
+    return 0;
+  }
 }
-console.log(addBorder(["abc", "ded"]));
+console.log(solution([10, 11, 13]));
