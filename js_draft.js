@@ -2541,27 +2541,50 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(solution(10, 15, 15, 10));
 
-function solution(inputArray) {
-  let res = [];
-  for (let i = 0; i < inputArray.length; i++) {
-    if (inputArray[i] > inputArray[i + 1]) {
-      let temp = inputArray[i] - inputArray[i + 1];
-      res.push(temp);
-    }
-  }
+// function solution(inputArray) {
+//   let res = [];
+//   for (let i = 0; i < inputArray.length; i++) {
+//     if (inputArray[i] > inputArray[i + 1]) {
+//       let temp = inputArray[i] - inputArray[i + 1];
+//       res.push(temp);
+//     }
+//   }
 
-  for (let i = inputArray.length; i >= 0; i--) {
-    if (inputArray[i] > inputArray[i - 1]) {
-      let temp = inputArray[i] - inputArray[i - 1];
-      res.push(temp);
-    }
-  }
+//   for (let i = inputArray.length; i >= 0; i--) {
+//     if (inputArray[i] > inputArray[i - 1]) {
+//       let temp = inputArray[i] - inputArray[i - 1];
+//       res.push(temp);
+//     }
+//   }
 
-  let final = Math.max(...res);
-  if (final > 0) {
-    return final;
-  } else {
-    return 0;
+//   let final = Math.max(...res);
+//   if (final > 0) {
+//     return final;
+//   } else {
+//     return 0;
+//   }
+// }
+// console.log(solution([10, 11, 13]));
+
+// function solution(arr) {
+//   // return Math.max(...arr.slice(1).map((x,i)=>Math.abs(x-arr[i])))
+//   return Math.max(...arr.slice(0));
+// }
+// console.log(solution([10, 11, 13]));
+
+// IsInfiniteProcess = (a, b) => (a + b) % 2 || a > b;
+// console.log(IsInfiniteProcess(10, 10));
+
+function arithExpression(a, b, c) {
+  if (a + b == c) {
+    return true;
+  } else if (a - b == c) {
+    return true;
+  } else if (a * b == c) {
+    return true;
+  } else if (a / b == c) {
+    return true;
   }
+  return false;
 }
-console.log(solution([10, 11, 13]));
+console.log(arithExpression(3, 2, 5));
