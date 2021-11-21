@@ -2575,16 +2575,33 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // IsInfiniteProcess = (a, b) => (a + b) % 2 || a > b;
 // console.log(IsInfiniteProcess(10, 10));
 
-function arithExpression(a, b, c) {
-  if (a + b == c) {
+// function arithExpression(a, b, c) {
+//   if (a + b == c) {
+//     return true;
+//   } else if (a - b == c) {
+//     return true;
+//   } else if (a * b == c) {
+//     return true;
+//   } else if (a / b == c) {
+//     return true;
+//   }
+//   return false;
+// }
+// console.log(arithExpression(3, 2, 5));
+
+function tennisSet(score1, score2) {
+  if (score1 == 6 && score2 < 5) {
     return true;
-  } else if (a - b == c) {
+  }
+  if (score1 < 5 && score2 == 6) {
     return true;
-  } else if (a * b == c) {
-    return true;
-  } else if (a / b == c) {
+  }
+  if (
+    (score1 == 7 && score2 >= 5 && score2 < 7) ||
+    (score1 >= 5 && score1 < 7 && score2 == 7)
+  ) {
     return true;
   }
   return false;
 }
-console.log(arithExpression(3, 2, 5));
+console.log(tennisSet(3, 6));
