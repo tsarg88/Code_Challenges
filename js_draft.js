@@ -2606,14 +2606,21 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(tennisSet(3, 6));
 
-function rangeBitCount(a, b) {
-  var res = "";
-  while (a <= b) {
-    res += a.toString(2);
-    a++;
-  }
-  return res.split("").filter((i) => i == 1).length;
+// function rangeBitCount(a, b) {
+//   // var res = "";
+//   // while (a <= b) {
+//   //   res += a.toString(2);
+//   //   a++;
+//   // }
+//   // return res.split("").filter((i) => i == 1).length;
 
-  // return res.split('1').length-1;
+//   // // return res.split('1').length-1;
+// }
+// console.log(rangeBitCount(2, 7));
+
+function mirrorBits(a) {
+  let bin = a.toString(2) + "";
+  let rev = Number(bin.split("").reverse().join(""));
+  return parseInt(rev, 2);
 }
-console.log(rangeBitCount(2, 7));
+console.log(mirrorBits(97));
