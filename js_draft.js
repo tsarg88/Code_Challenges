@@ -2589,19 +2589,31 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(arithExpression(3, 2, 5));
 
-function tennisSet(score1, score2) {
-  if (score1 == 6 && score2 < 5) {
-    return true;
+// function tennisSet(score1, score2) {
+//   if (score1 == 6 && score2 < 5) {
+//     return true;
+//   }
+//   if (score1 < 5 && score2 == 6) {
+//     return true;
+//   }
+//   if (
+//     (score1 == 7 && score2 >= 5 && score2 < 7) ||
+//     (score1 >= 5 && score1 < 7 && score2 == 7)
+//   ) {
+//     return true;
+//   }
+//   return false;
+// }
+// console.log(tennisSet(3, 6));
+
+function rangeBitCount(a, b) {
+  var res = "";
+  while (a <= b) {
+    res += a.toString(2);
+    a++;
   }
-  if (score1 < 5 && score2 == 6) {
-    return true;
-  }
-  if (
-    (score1 == 7 && score2 >= 5 && score2 < 7) ||
-    (score1 >= 5 && score1 < 7 && score2 == 7)
-  ) {
-    return true;
-  }
-  return false;
+  return res.split("").filter((i) => i == 1).length;
+
+  // return res.split('1').length-1;
 }
-console.log(tennisSet(3, 6));
+console.log(rangeBitCount(2, 7));
