@@ -2618,9 +2618,25 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(rangeBitCount(2, 7));
 
-function mirrorBits(a) {
-  let bin = a.toString(2) + "";
-  let rev = Number(bin.split("").reverse().join(""));
-  return parseInt(rev, 2);
+// function mirrorBits(a) {
+//   let bin = a.toString(2) + "";
+//   let rev = Number(bin.split("").reverse().join(""));
+//   return parseInt(rev, 2);
+// }
+// console.log(mirrorBits(97));
+
+// function secondRightZeroBit(n) {
+//   // return Math.pow(2,n.toString(2).split('').reverse().join("").split("0", 2).join("0").length);
+
+//   return n.toString(2).split("").reverse().join("").split("0", 2);
+// }
+// console.log(secondRightZeroBit(37));
+
+function leastFactorial(n) {
+  let res = 1;
+  for (let i = 0; res < n; i++) {
+    res *= i;
+  }
+  return res;
 }
-console.log(mirrorBits(97));
+console.log(17);
