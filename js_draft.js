@@ -2632,11 +2632,92 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(secondRightZeroBit(37));
 
-function leastFactorial(n) {
-  let res = 1;
-  for (let i = 0; res < n; i++) {
-    res *= i;
-  }
-  return res;
+// function leastFactorial(n) {
+//   let res = 1;
+//   for (let i = 0; res < n; i++) {
+//     res *= i;
+//   }
+//   return res;
+// }
+// console.log(17);
+
+// function magicalWell(a, b, n) {
+//   let res = 0;
+//   for (let i = 0; i < n; i++) {
+//     res += a * b;
+//     a++;
+//     b++;
+//   }
+//   return res;
+// }
+// console.log(magicalWell(1, 2, 2));
+
+// Binary Search approach
+// function search(nums, target) {
+//   let left = 0;
+//   let right = nums.length - 1;
+
+//   while (left <= right) {
+//     const middle = Math.floor((left + right) / 2);
+//     const current = nums[middle];
+
+//     if (current > target) {
+//       // ignore the right part from the array and the current index
+//       right = middle - 1;
+//     } else if (current < target) {
+//       // ignore the left part from the array and the current index
+//       left = middle + 1;
+//     } else {
+//       return middle;
+//     }
+//   }
+//   // return -1 if middle did never equal the target
+//   return -1;
+// }
+// console.log(search([-1, 0, 3, 5, 9, 12], 9));
+
+// function binarySearch(arr, target) {
+//   let left = 0;
+//   let right = arr.length - 1;
+
+//   while (left <= right) {
+//     let mid = Math.floor((left + right) / 2);
+//     let current = arr[mid];
+
+//     if (current > target) {
+//       right = mid - 1;
+//     } else if (current < target) {
+//       left = mid + 1;
+//     } else {
+//       return mid;
+//     }
+//   }
+//   return -1;
+// }
+// console.log(binarySearch([1, 2, 3, 4, 5, 6], 5));
+
+// var searchInsert = function (nums, target) {
+//   for (let i = 0; i < nums.length; i++) {
+//     if (nums[i] == target) {
+//       return i;
+//     } else if (nums[i] > target) {
+//       return i;
+//     }
+//   }
+// };
+// console.log(searchInsert([1, 3, 5, 6], 5));
+
+// function arrReplace(inputArray, elemToReplace, substitutionElem) {
+//   let str = inputArray.join(",");
+//   for (let i = 0; i < inputArray.length; i++) {
+//     str = str.replace(elemToReplace, substitutionElem);
+//   }
+//   return str.split(",").map(Number);
+// }
+// console.log(arrReplace([1, 2, 1], 1, 3));
+
+function arrReverse(arr) {
+  [arr[0], arr[arr.length - 1]] = [arr[arr.length - 1], arr[0]];
+  return arr;
 }
-console.log(17);
+console.log(arrReverse([1, 2, 3, 4, 5]));
