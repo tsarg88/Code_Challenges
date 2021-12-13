@@ -2716,8 +2716,40 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(arrReplace([1, 2, 1], 1, 3));
 
-function arrReverse(arr) {
-  [arr[0], arr[arr.length - 1]] = [arr[arr.length - 1], arr[0]];
-  return arr;
+// function arrReverse(arr) {
+//   arr.length > 0 ? [arr[0], arr[arr.length - 1]] = [arr[arr.length - 1], arr[0]]: []
+//   return arr
+// }
+// console.log(arrReverse([1, 2, 3, 4, 5]));
+
+// function conArray(a, b) {
+//   return a.concat(b);
+// }
+// console.log(conArray([2, 2, 1], [5, 6, 7]));
+
+// function remArrPart(inputArray, l, r) {
+//   return inputArray.slice(0, l).concat(inputArray.slice(r + 1));
+// }
+// console.log(remArrPart([2, 4, 10, 9, 7], 1, 2));
+
+// function remArrPart(inputArray, l, r) {
+//   var toRemove = r - l + 1;
+//   // console.log(toRemove);
+//   inputArray.splice(0, 2);
+//   return inputArray;
+// }
+// console.log(remArrPart([2, 3, 20, 3, 4, 5], 2, 4));
+
+function solution578665(arr) {
+  let half = arr.length / 2;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[0] == arr[arr.length - 1]) {
+      if (arr.length % 2 == 0) {
+        if (arr[half] + arr[half - 1] == arr[0]) {
+          return true;
+        }
+      }
+    }
+  }
 }
-console.log(arrReverse([1, 2, 3, 4, 5]));
+console.log(solution([7, 2, 2, 5, 10, 7]));
