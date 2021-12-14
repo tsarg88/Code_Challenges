@@ -2740,16 +2740,70 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(remArrPart([2, 3, 20, 3, 4, 5], 2, 4));
 
-function solution578665(arr) {
-  let half = arr.length / 2;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[0] == arr[arr.length - 1]) {
-      if (arr.length % 2 == 0) {
-        if (arr[half] + arr[half - 1] == arr[0]) {
-          return true;
-        }
-      }
-    }
+// function solution578665(arr) {
+//   let half = arr.length / 2;
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[0] == arr[arr.length - 1]) {
+//       if (arr.length % 2 == 0) {
+//         if (arr[half] + arr[half - 1] == arr[0]) {
+//           return true;
+//         }
+//       }
+//     }
+//   }
+// }
+// console.log(solution578665([7, 2, 2, 5, 10, 7]));
+
+// function replaceMiddle(arr) {
+//   let middle = arr.length / 2;
+//   // console.log(arr.length);
+//   if (arr.length == 2) {
+//     let temp = arr[0] + arr[1];
+//     // console.log("stegh", temp);
+//     arr.splice(0, 2);
+//     arr.push(temp);
+//     return arr;
+//   } else if (arr.length % 2 == 0) {
+//     let temp = arr[middle - 1] + arr[middle];
+//     arr.splice(middle - 1, 2);
+//     console.log("asd", arr);
+//     let newMiddle = arr.length / 2;
+//     arr.splice(newMiddle, 0, temp);
+//     console.log(temp);
+//   }
+//   return arr;
+// }
+// console.log(replaceMiddle([7, 2, 2, 5, 10, 7]));
+
+// function makeArrayConsecutive(statues) {
+//   let sort = statues.sort(function (a, b) {
+//     return a - b;
+//   });
+//   // let max = statues.join(",");
+//   // statues = statues.map((x) => Number(x));
+//   // let max = Math.max(...statues);
+//   // let temp = statues[sort.length - 2];
+//   // let res = max - temp;
+//   // return res;
+//   let res = 0;
+//   for (let i = 0; i < sort.length; i++) {
+//     if (Number.isInteger(sort[i + 1])) {
+//       if (sort[i] + 1 !== sort[i + 1]) {
+//         let temp = sort[i + 1] - sort[i];
+//         res += temp - 1;
+//       }
+//     }
+
+//   }
+//   return res;
+// }
+// console.log(makeArrayConsecutive([6, 2, 3, 8]));
+
+function isPower(n) {
+  if (n == 1) return true;
+  for (i = 2; i <= Math.sqrt(n); i++) {
+    for (j = 2; Math.pow(i, j) < n; j++);
+    if (Math.pow(i, j) == n) return true;
   }
+  return false;
 }
-console.log(solution([7, 2, 2, 5, 10, 7]));
