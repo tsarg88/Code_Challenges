@@ -2799,11 +2799,125 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(makeArrayConsecutive([6, 2, 3, 8]));
 
-function isPower(n) {
-  if (n == 1) return true;
-  for (i = 2; i <= Math.sqrt(n); i++) {
-    for (j = 2; Math.pow(i, j) < n; j++);
-    if (Math.pow(i, j) == n) return true;
-  }
-  return false;
+// function isPower(n) {
+//   if (n == 1) return true;
+//   for (i = 2; i <= Math.sqrt(n); i++) {
+//     for (j = 2; Math.pow(i, j) < n; j++);
+//     if (Math.pow(i, j) == n) return true;
+//   }
+//   return false;
+// }
+
+// function isSumConsecutive(n) {
+//   let i = 1;
+//   let j = 1;
+//   let count = 0;
+//   let sum = 1;
+
+//   while (j < n) {
+//     if (sum == n) {
+//       count++;
+//       sum -= i;
+//       i++;
+//       j++;
+//       sum += j;
+//     } else if (sum < n) {
+//       j++;
+//       sum += j;
+//     } else {
+//       sum -= i;
+//       i++;
+//     }
+//   }
+//   return count;
+// }
+// console.log(isSumConsecutive(15));
+
+// function solution(n) {
+
+//   c=0 //counter
+//   l=1 //smallest number to be added ('left')
+//   r=2 //biggest number to be added ('right')
+//   s=3 //sum of all numbers in range [l,r] (including l and r)
+
+//   while(1) {
+
+//       if(l==r) return c // rangesize < 2 -> no more fitting ranges can be found -> return counter
+
+//       if(s==n) c++ // found a fitting range
+
+//       if(s<=n) s += ++r // sum is too small: grow to right side
+
+//       if(s>n) s -= l++ // sum is too big: shrink from left side
+
+//   }
+// }
+
+// function pageNumbering(current, numberOfDigits) {
+//   // store and count number of characters of current in a var
+//   // pending: store value of current in a var as a res
+//   // make a res var as an empty array
+//   // make a for loop
+//   // pending: increment res
+//   // push the increment value of current to res
+//   // store and count number of characters of res in a var as res_len
+//   // compare res_len to numberOfDigits
+//   // if number of characters of res_len is bigger than numberOfDigits
+//   // return current
+
+//   let cur_len = String(current).length;
+//   let res = [];
+//   for (let i = 0; i < numberOfDigits; i++) {
+//     res.push(current + i);
+//     let test = "1234";
+//     let res_len = res.join("");
+//     // res_len = res_len.split("").join("---");
+//     console.log("stegh", res_len.length);
+//     if (res_len.length === numberOfDigits) {
+//       return res[res.length - 1];
+//     } else if (res_len.length > numberOfDigits) {
+//       return res[res.length - 2];
+//     }
+//   }
+
+//   // let res = [];
+//   // let cur_len = String(current);
+//   // for (let i = 0; i < numberOfDigits; i++) {
+//   //   if (cur_len.length == 2) {
+//   //     // let cur = current;
+//   //     // let cur_plus = cur + 1;
+//   //     res.push(current + i);
+//   //     let join = res.join("");
+//   //   } else if (res.push(current + i) && res.join("").length < numberOfDigits) {
+//   //     res.push(current + i);
+//   //     return res[res.length - 1];
+//   //   } else if (join.length == numberOfDigits - 1) {
+//   //     return res[res.length - 1];
+//   //   } else {
+//   //     res.push(current++);
+//   //     let len = res.join("").length;
+//   //     if (len == numberOfDigits) {
+//   //       return res[res.length - 1];
+//   //     }
+//   //   }
+//   // }
+// }
+// console.log(pageNumbering(21, 6));
+
+// function pageNumbering(current, numberOfDigits) {
+//   while (numberOfDigits >= current.toString().length) {
+//     numberOfDigits -= current.toString().length;
+//     current++;
+//   }
+//   return current - 1;
+// }
+// console.log(pageNumbering(21, 6));
+
+function LateRide(n) {
+  return (Math.floor(n / 60) + "" + (n % 60))
+    .split("")
+    .map((v) => Number(v))
+    .reduce((acc, curr) => acc + curr);
 }
+
+console.log(LateRide(808));
