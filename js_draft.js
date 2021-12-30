@@ -2575,6 +2575,29 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // IsInfiniteProcess = (a, b) => (a + b) % 2 || a > b;
 // console.log(IsInfiniteProcess(10, 10));
 
+// more forthcoming approach
+// function IsInfiniteProcess(a, b) {
+
+//     if(a > b){
+//         return true
+//     }
+
+//     if(a == b){
+//       return false
+//     }
+
+//     else if(a<b){
+//         if((b + a) % 2 == 1){
+//             return true
+//         } else {
+//             return false
+//         }
+//     }
+
+//     return false
+
+// }
+
 // function arithExpression(a, b, c) {
 //   if (a + b == c) {
 //     return true;
@@ -2913,11 +2936,143 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(pageNumbering(21, 6));
 
-function LateRide(n) {
-  return (Math.floor(n / 60) + "" + (n % 60))
-    .split("")
-    .map((v) => Number(v))
-    .reduce((acc, curr) => acc + curr);
-}
+// function LateRide(n) {
+//   return (Math.floor(n / 60) + "" + (n % 60))
+//     .split("")
+//     .map((v) => Number(v))
+//     .reduce((acc, curr) => acc + curr);
+// }
 
-console.log(LateRide(808));
+// console.log(LateRide(808));
+
+// function mathMaxTest() {
+//   return Math.max(1 + 1, 1 + 2, false);
+// }
+// console.log(mathMaxTest());
+
+// function solution(s) {
+//   let res = []
+//   let dup = s.split("").reverse().join("");
+
+//   // compare dup to s
+//     // if palindrome return empty string
+//   // if not, remove last character s and store to res
+//     // compare dup to s
+// }
+// console.log(solution("abbab"))
+
+// function checkPalindrome(inputString) {
+//   let arr = inputString.split("").reverse().join("");
+//   // console.log(arr);
+//   // console.log("abs" == "ahs");
+//   return true ? inputString == arr : false;
+// }
+
+// function solution(arr) {
+//   let total = 0;
+
+//   // let test = ["a", "b", "c"];
+//   // console.log(arr.join().split(",").reverse());
+//   function rev(num) {
+//     test = String(num).split("").reverse().join("").replace("0", "");
+//     return Number(test);
+//   }
+//   // console.log(rev(arr));
+//   for (let i = 0; i < arr.length; i++) {
+//     for (let j = i; j < arr.length; j++) {
+//       if (
+//         arr[i] + rev(arr[j]) == arr[j] + rev(arr[i])
+//       ) {
+//         total += 1;
+//       }
+//     }
+//   }
+//   return total;
+// }
+
+// console.log(solution([1, 20, 2, 11]));
+
+// function solution(numbers) {
+//   let total = [];
+//   for (let a = 0; a < numbers.length; a++) {
+//     let b = a + 1;
+//     let c = a + 2;
+//     if (c === numbers.length) {
+//       return total;
+//     } else if (
+//       (numbers[a] < numbers[b] && numbers[b] > numbers[c]) ||
+//       (numbers[a] > numbers[b] && numbers[b] < numbers[c])
+//     ) {
+//       total.push(1);
+//     } else {
+//       total.push(0);
+//     }
+//     // for (let b = 1; b < numbers.length; b++) {
+//     //   for (let c = 2; c < numbers.length; c++) {
+//     //     if (numbers[a] < numbers[b] > numbers[c]) {
+//     //       total.push(1);
+//     //     }
+//     //   }
+//     // }
+//   }
+
+//   return total;
+// }
+// console.log(solution([1, 2, 1, 3, 4]));
+
+// function solution(numbers) {
+//   const swap = (firstIndex, secondIndex) => {
+//     let temp = numbers[firstIndex];
+//     numbers[firstIndex] = numbers[secondIndex];
+//     numbers[secondIndex] = temp;
+//   };
+//   for (let a = 0; a < numbers.length; a++) {
+//     let b = a + 1;
+//     if (numbers[a] > numbers[b]) {
+//       swap(a, b);
+//     }
+//   }
+
+//   if (
+//     numbers.every(function (x, i) {
+//       return i === 0 || x >= numbers[i - 1];
+//     })
+//   ) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
+// console.log(solution([1, 3, 900, 10]));
+
+let solution = (n) => {
+  let count = 0;
+  let m = {};
+  let arr = [];
+
+  // Find divisiors
+  for (let i = 1; i <= n; i++) {
+    m[i] = 0;
+    for (let j = 1; j <= i; j++) {
+      if (i % j === 0) m[i]++;
+    }
+  }
+
+  // Find Weakness
+  // back loop with one less object's key value
+  while (n > 0) {
+    for (let l = n - 1; l > 0; l--) {
+      if (m[n] < m[l]) count++;
+    }
+    arr.push(count);
+    count = 0;
+    n--;
+  }
+
+  // Find weakest and its quantity
+  let weakness = Math.max(...arr);
+  for (let k in arr) {
+    if (weakness === arr[k]) count++;
+  }
+  return [weakness, count];
+};
