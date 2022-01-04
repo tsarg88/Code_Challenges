@@ -3045,34 +3045,105 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(solution([1, 3, 900, 10]));
 
-let solution = (n) => {
-  let count = 0;
-  let m = {};
-  let arr = [];
+// solution = (n) => {
+//   let count = 0;
+//   let m = {};
+//   let arr = [];
 
-  // Find divisiors
-  for (let i = 1; i <= n; i++) {
-    m[i] = 0;
-    for (let j = 1; j <= i; j++) {
-      if (i % j === 0) m[i]++;
+//   // Find divisiors
+//   //starting for 2 loops, starting from 1 to n and fincding divisors; saving them to m object
+//   for (let i = 1; i <= n; i++) {
+//     m[i] = 0;
+//     for (let j = 1; j <= i; j++) {
+//       if (i % j === 0) m[i]++;
+//     }
+//   }
+
+//   // Find Weakness
+//   // starting back loop of n, if divisors(values of m object) is less than n,
+//   // increase count
+//   while (n > 0) {
+//     for (let l = n - 1; l > 0; l--) {
+//       if (m[n] < m[l]) count++;
+//     }
+//     arr.push(count);
+//     count = 0;
+//     n--;
+//   }
+
+//   // Find weakest and its quantity, finds max value of saved values in arr,
+//   // saves them in weakness, returns weakness and count as number of same values as weakness
+//   let weakness = Math.max(...arr);
+//   for (let k in arr) {
+//     if (weakness === arr[k]) count++;
+//   }
+//   return [weakness, count];
+// };
+
+// function solution(a) {
+//   // if (
+//   //   a.sort(function (a, b) {
+//   //     return b + a;
+//   //   })
+//   // ) {
+//   //   return false;
+//   // }
+//   let sort = a.sort(function (a, b) {
+//     return a - b;
+//   });
+//   let res = [];
+//   // let sort = a.sort((a, b) => a - b);
+//   // console.log(sort);
+//   let len = sort.length - 1;
+//   for (len; len > 0; len--) {
+//     // console.log(sort[len], sort[len - 1], sort[0]);
+//     if (sort[len] - sort[len - 1] === sort[0]) {
+//       res.push(true);
+//     }
+//   }
+//   let test = [true, true, true];
+//   return test.every((val) => val === res[0]);
+// }
+// console.log(solution([1, 3, 5, 6, 4, 2]));
+
+function solution(arr, m) {
+  let res = [];
+  let total = [];
+  for (let i = 0; i < arr.length - (m - 1); i++) {
+    let index = m + i;
+    for (let j = i; j < index; j++) {
+      console.log("res", res);
+      res.push(arr[j]);
+      console.log("length of res", res.length, res);
+      if (res.length === m) {
+        console.log("hateee");
+
+        var counts = {};
+        res.forEach(function (n) {
+          // if property counts[n] doesn't exist, create it
+          counts[n] = counts[n] || 0;
+          // now increment it
+          counts[n]++;
+        });
+
+        // iterate counts object and remove any that aren't dups
+        for (var key in counts) {
+          if (counts[key] < 2) {
+            delete counts[key];
+          }
+        }
+
+        let test;
+        var vals = Object.keys(counts).map(function (key) {
+          test = counts[key];
+        });
+        // console.log('test', test)
+
+        res = [];
+        test > 0 ? total.push(test) : total.push(1);
+      }
     }
   }
-
-  // Find Weakness
-  // back loop with one less object's key value
-  while (n > 0) {
-    for (let l = n - 1; l > 0; l--) {
-      if (m[n] < m[l]) count++;
-    }
-    arr.push(count);
-    count = 0;
-    n--;
-  }
-
-  // Find weakest and its quantity
-  let weakness = Math.max(...arr);
-  for (let k in arr) {
-    if (weakness === arr[k]) count++;
-  }
-  return [weakness, count];
-};
+  return total;
+}
+console.log(solution([2, 1, 2, 3, 3, 2, 2, 2, 2, 1], 3));
