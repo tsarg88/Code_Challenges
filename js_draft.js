@@ -3188,11 +3188,45 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // Higher Order Functions RECEIVE a callback function as an argument
 // example:
 // Higher order function
-function calc(num1, num2, operator) {
-  return operator(num1, num2);
+// function calc(num1, num2, operator) {
+//   return operator(num1, num2);
+// }
+// // Call back function
+// function add(num1, num2) {
+//   return num1 + num2;
+// }
+// console.log(calc(2, 4, add));
+
+// function solution(a, k) {
+//   let res = 0;
+//   for (let i = 0; i < a.length; i++) {
+//     for (let j = i + 1; j < a.length; j++) {
+//       if ((a[i] + a[j]) % 3 == 0) {
+//         res += 1;
+//       }
+//     }
+//   }
+//   return res;
+// }
+// console.log(solution([1, 2, 3, 4, 5], 3));
+
+function solution(n, a) {
+  let res = [];
+  if (a.length == 1) {
+    return a;
+  }
+  for (let i = 0; i < 1; i++) {
+    for (let j = i + 1; j < a.length; j++) {
+      let c = j - 1;
+      let temp = a[c] + a[j] + a[j + 1];
+      if (!isNaN(temp)) {
+        res.push(a[c] + a[j] + a[j + 1]);
+      } else {
+        res.push(a[c] + a[j]);
+      }
+    }
+  }
+  let test = a[0] + a[1];
+  res.unshift(test);
+  return res;
 }
-// Call back function
-function add(num1, num2) {
-  return num1 + num2;
-}
-console.log(calc(2, 4, add));
