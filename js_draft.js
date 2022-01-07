@@ -3106,44 +3106,93 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(solution([1, 3, 5, 6, 4, 2]));
 
-function solution(arr, m) {
-  let res = [];
-  let total = [];
-  for (let i = 0; i < arr.length - (m - 1); i++) {
-    let index = m + i;
-    for (let j = i; j < index; j++) {
-      console.log("res", res);
-      res.push(arr[j]);
-      console.log("length of res", res.length, res);
-      if (res.length === m) {
-        console.log("hateee");
+// function solution(arr, m) {
+//   let res = [];
+//   let total = [];
+//   for (let i = 0; i < arr.length - (m - 1); i++) {
+//     let index = m + i;
+//     for (let j = i; j < index; j++) {
+//       console.log("res", res);
+//       res.push(arr[j]);
+//       console.log("length of res", res.length, res);
+//       if (res.length === m) {
+//         console.log("hateee");
 
-        var counts = {};
-        res.forEach(function (n) {
-          // if property counts[n] doesn't exist, create it
-          counts[n] = counts[n] || 0;
-          // now increment it
-          counts[n]++;
-        });
+//         var counts = {};
+//         res.forEach(function (n) {
+//           // if property counts[n] doesn't exist, create it
+//           counts[n] = counts[n] || 0;
+//           // now increment it
+//           counts[n]++;
+//         });
 
-        // iterate counts object and remove any that aren't dups
-        for (var key in counts) {
-          if (counts[key] < 2) {
-            delete counts[key];
-          }
-        }
+//         // iterate counts object and remove any that aren't dups
+//         for (var key in counts) {
+//           if (counts[key] < 2) {
+//             delete counts[key];
+//           }
+//         }
 
-        let test;
-        var vals = Object.keys(counts).map(function (key) {
-          test = counts[key];
-        });
-        // console.log('test', test)
+//         let test;
+//         var vals = Object.keys(counts).map(function (key) {
+//           test = counts[key];
+//         });
+//         // console.log('test', test)
 
-        res = [];
-        test > 0 ? total.push(test) : total.push(1);
-      }
-    }
-  }
-  return total;
+//         res = [];
+//         test > 0 ? total.push(test) : total.push(1);
+//       }
+//     }
+//   }
+//   return total;
+// }
+// console.log(solution([2, 1, 2, 3, 3, 2, 2, 2, 2, 1], 3));
+
+// function solution(ride_time, ride_distance, cost_per_minute, cost_per_mile) {
+//   // let first_car =  ride_time * cost_per_minute[0] + ride_distance * cost_per_mile[0]
+//   // first_car = Number(first_car.toFixed(1))
+//   // let second_car = ride_time * cost_per_minute[1] + ride_distance * cost_per_mile[1]
+//   // let third_car = ride_time * cost_per_minute[2] + ride_distance * cost_per_mile[2]
+//   // let fourth_car = ride_time * cost_per_minute[3] + ride_distance * cost_per_mile[3]
+//   // let res = []
+//   // res.push(first_car, second_car, third_car, fourth_car)
+//   // return res
+//   let res = [];
+//   for (let i = 0; i < cost_per_minute.length; i++) {
+//     res.push(Math.ceil(ride_time * cost_per_minute[i] + ride_distance * cost_per_mile[i]))
+//   }
+//   return res;
+// }
+// console.log(solution(30, 7, [0.2, 0.35, 0.4, 0.45], [1.1, 1.8, 2.3, 3.5]));
+
+// function solution(departure, destination) {
+//   // return (destination[0] - departure[0]) + (destination[1] - departure[1])
+//   console.log(Math.ceil(departure[0]));
+//   if (departure[0] % 1 !== 0) {
+//     departure[0] = 1 - departure[0];
+//   }
+//   if (departure[1] % 1 !== 0) {
+//     departure[1] = 1 - departure[1];
+//   }
+//   if (destination[0] % 1 !== 0) {
+//     destination[0] = 1 - destination[0];
+//   }
+//   if (destination[1] % 1 !== 0) {
+//     destination[1] = 1 - destination[1];
+//   }
+//   // return destination[0] - departure[0] + (destination[1] - departure[1]);
+// }
+// console.log(solution([0.4, 1], [0.9, 3]));
+
+// Call back functions are PASSED IN to higher order functions as an argument
+// Higher Order Functions RECEIVE a callback function as an argument
+// example:
+// Higher order function
+function calc(num1, num2, operator) {
+  return operator(num1, num2);
 }
-console.log(solution([2, 1, 2, 3, 3, 2, 2, 2, 2, 1], 3));
+// Call back function
+function add(num1, num2) {
+  return num1 + num2;
+}
+console.log(calc(2, 4, add));
