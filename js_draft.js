@@ -3210,23 +3210,40 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(solution([1, 2, 3, 4, 5], 3));
 
-function solution(n, a) {
+// function solution(n, a) {
+//   let res = [];
+//   if (a.length == 1) {
+//     return a;
+//   }
+//   for (let i = 0; i < 1; i++) {
+//     for (let j = i + 1; j < a.length; j++) {
+//       let c = j - 1;
+//       let temp = a[c] + a[j] + a[j + 1];
+//       if (!isNaN(temp)) {
+//         res.push(a[c] + a[j] + a[j + 1]);
+//       } else {
+//         res.push(a[c] + a[j]);
+//       }
+//     }
+//   }
+//   let test = a[0] + a[1];
+//   res.unshift(test);
+//   return res;
+// }
+
+function solution(trainingData) {
+  let div = 0;
   let res = [];
-  if (a.length == 1) {
-    return a;
-  }
-  for (let i = 0; i < 1; i++) {
-    for (let j = i + 1; j < a.length; j++) {
-      let c = j - 1;
-      let temp = a[c] + a[j] + a[j + 1];
-      if (!isNaN(temp)) {
-        res.push(a[c] + a[j] + a[j + 1]);
-      } else {
-        res.push(a[c] + a[j]);
-      }
+  for (let i = 0; i < trainingData.length; i++) {
+    if (Math.sign(trainingData[i][1]) == 1 && trainingData[i][1] === 1) {
+      res.push(trainingData[i][0]);
+      div += 1;
     }
   }
-  let test = a[0] + a[1];
-  res.unshift(test);
-  return res;
+  let total = res.reduce((acc, curr) => acc + curr, 0) / div;
+  if (total === "null" || total === undefined || isNaN(total)) {
+    return 0;
+  } else {
+    return total;
+  }
 }
