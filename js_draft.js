@@ -3231,19 +3231,50 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 //   return res;
 // }
 
-function solution(trainingData) {
-  let div = 0;
-  let res = [];
-  for (let i = 0; i < trainingData.length; i++) {
-    if (Math.sign(trainingData[i][1]) == 1 && trainingData[i][1] === 1) {
-      res.push(trainingData[i][0]);
-      div += 1;
-    }
-  }
-  let total = res.reduce((acc, curr) => acc + curr, 0) / div;
-  if (total === "null" || total === undefined || isNaN(total)) {
-    return 0;
-  } else {
-    return total;
-  }
+// function solution(trainingData) {
+//   let div = 0;
+//   let res = [];
+//   for (let i = 0; i < trainingData.length; i++) {
+//     if (Math.sign(trainingData[i][1]) == 1 && trainingData[i][1] === 1) {
+//       res.push(trainingData[i][0]);
+//       div += 1;
+//     }
+//   }
+//   let total = res.reduce((acc, curr) => acc + curr, 0) / div;
+//   if (total === "null" || total === undefined || isNaN(total)) {
+//     return 0;
+//   } else {
+//     return total;
+//   }
+// }
+
+function solution(domains) {
+  return domains.map(
+    (v) =>
+      ({ m: "commercial", g: "organization", t: "network", o: "information" }[
+        v.slice(-1)
+      ])
+  );
+  // let test = domains[0].slice(2);
+  // console.log(test);
+  // let res = [];
+  // //domains = domains[0].split(".");
+  // // console.log(domains[domains.length - 1]);
+  // for (let i = 0; i < domains.length; i++) {
+  //   let finder = domains[i].split(".");
+  //   // console.log(finder);
+  //   if (finder[finder.length - 1].includes("org")) {
+  //     res.push("organization");
+  //   } else if (finder[finder.length - 1].includes("com")) {
+  //     res.push("commercial");
+  //   } else if (finder[finder.length - 1].includes("net")) {
+  //     res.push("network");
+  //   } else if (finder[finder.length - 1].includes("info")) {
+  //     res.push("information");
+  //   }
+  // }
+  // return res;
 }
+console.log(
+  solution(["en.wiki.org", "codesignal.com", "happy.net", "code.info"])
+);
