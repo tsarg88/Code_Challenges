@@ -3248,33 +3248,53 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 //   }
 // }
 
-function solution(domains) {
-  return domains.map(
-    (v) =>
-      ({ m: "commercial", g: "organization", t: "network", o: "information" }[
-        v.slice(-1)
-      ])
-  );
-  // let test = domains[0].slice(2);
-  // console.log(test);
+// function solution(domains) {
+//   return domains.map(
+//     (v) =>
+//       ({ m: "commercial", g: "organization", t: "network", o: "information" }[
+//         v.slice(-1)
+//       ])
+//   );
+//   // let test = domains[0].slice(2);
+//   // console.log(test);
+//   // let res = [];
+//   // //domains = domains[0].split(".");
+//   // // console.log(domains[domains.length - 1]);
+//   // for (let i = 0; i < domains.length; i++) {
+//   //   let finder = domains[i].split(".");
+//   //   // console.log(finder);
+//   //   if (finder[finder.length - 1].includes("org")) {
+//   //     res.push("organization");
+//   //   } else if (finder[finder.length - 1].includes("com")) {
+//   //     res.push("commercial");
+//   //   } else if (finder[finder.length - 1].includes("net")) {
+//   //     res.push("network");
+//   //   } else if (finder[finder.length - 1].includes("info")) {
+//   //     res.push("information");
+//   //   }
+//   // }
+//   // return res;
+// }
+// console.log(
+//   solution(["en.wiki.org", "codesignal.com", "happy.net", "code.info"])
+// );
+
+function solution(l, fares) {
+  // quick method with filter
+  let cat = ["UberX", "UberXL", "UberPlus", "UberBlack", "UberSUV"];
+  let i = fares.filter((v) => v * l <= 20).length - 1;
+  return cat[i];
+  // more easy to understand but long solution
   // let res = [];
-  // //domains = domains[0].split(".");
-  // // console.log(domains[domains.length - 1]);
-  // for (let i = 0; i < domains.length; i++) {
-  //   let finder = domains[i].split(".");
-  //   // console.log(finder);
-  //   if (finder[finder.length - 1].includes("org")) {
-  //     res.push("organization");
-  //   } else if (finder[finder.length - 1].includes("com")) {
-  //     res.push("commercial");
-  //   } else if (finder[finder.length - 1].includes("net")) {
-  //     res.push("network");
-  //   } else if (finder[finder.length - 1].includes("info")) {
-  //     res.push("information");
+  // for (let i = 0; i < fares.length; i++) {
+  //   res.push(fares[i] * l);
+  // }
+  // for (let i = 0; i < res.length; i++) {
+  //   if (20 === res[i]) {
+  //     return cat[i];
+  //   } else if (20 < res[i]) {
+  //     return cat[i - 1];
   //   }
   // }
-  // return res;
 }
-console.log(
-  solution(["en.wiki.org", "codesignal.com", "happy.net", "code.info"])
-);
+console.log(solution(30, [0.3, 0.5, 0.7, 1, 1.3]));
