@@ -3279,22 +3279,35 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 //   solution(["en.wiki.org", "codesignal.com", "happy.net", "code.info"])
 // );
 
-function solution(l, fares) {
-  // quick method with filter
-  let cat = ["UberX", "UberXL", "UberPlus", "UberBlack", "UberSUV"];
-  let i = fares.filter((v) => v * l <= 20).length - 1;
-  return cat[i];
-  // more easy to understand but long solution
-  // let res = [];
-  // for (let i = 0; i < fares.length; i++) {
-  //   res.push(fares[i] * l);
-  // }
-  // for (let i = 0; i < res.length; i++) {
-  //   if (20 === res[i]) {
-  //     return cat[i];
-  //   } else if (20 < res[i]) {
-  //     return cat[i - 1];
-  //   }
-  // }
+// function solution(l, fares) {
+//   // quick method with filter
+//   let cat = ["UberX", "UberXL", "UberPlus", "UberBlack", "UberSUV"];
+//   let i = fares.filter((v) => v * l <= 20).length - 1;
+//   return cat[i];
+//   // more easy to understand but long solution
+//   // let res = [];
+//   // for (let i = 0; i < fares.length; i++) {
+//   //   res.push(fares[i] * l);
+//   // }
+//   // for (let i = 0; i < res.length; i++) {
+//   //   if (20 === res[i]) {
+//   //     return cat[i];
+//   //   } else if (20 < res[i]) {
+//   //     return cat[i - 1];
+//   //   }
+//   // }
+// }
+// console.log(solution(30, [0.3, 0.5, 0.7, 1, 1.3]));
+
+function solution(threshold, ratings) {
+  const res = [];
+  const reducer = (previousValue, currentValue) => previousValue + currentValue;
+  for (let i = 0; i < ratings.length; i++) {
+    // console.log('reducer', ratings[i].reduce(reducer) )
+    let sum = ratings[i].reduce(reducer);
+    if (sum / ratings[i].length < threshold) {
+      res.push(i);
+    }
+  }
+  return res;
 }
-console.log(solution(30, [0.3, 0.5, 0.7, 1, 1.3]));
