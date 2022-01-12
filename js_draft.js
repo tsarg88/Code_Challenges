@@ -3299,15 +3299,117 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(solution(30, [0.3, 0.5, 0.7, 1, 1.3]));
 
-function solution(threshold, ratings) {
-  const res = [];
-  const reducer = (previousValue, currentValue) => previousValue + currentValue;
-  for (let i = 0; i < ratings.length; i++) {
-    // console.log('reducer', ratings[i].reduce(reducer) )
-    let sum = ratings[i].reduce(reducer);
-    if (sum / ratings[i].length < threshold) {
-      res.push(i);
-    }
-  }
-  return res;
+// function solution(threshold, ratings) {
+//   const res = [];
+//   const reducer = (previousValue, currentValue) => previousValue + currentValue;
+//   for (let i = 0; i < ratings.length; i++) {
+//     // console.log('reducer', ratings[i].reduce(reducer) )
+//     let sum = ratings[i].reduce(reducer);
+//     if (sum / ratings[i].length < threshold) {
+//       res.push(i);
+//     }
+//   }
+//   return res;
+// }
+
+// function solution(systemNames, stepNumbers) {
+//   let res = [];
+//   const stage1 = [];
+//   const stage2 = [];
+//   const dragon = [];
+//   const Falcon_9 = [];
+//   const CrewDragon = [];
+//   for (let i = 0; i < systemNames.length; i++) {
+//     if (systemNames[i] === "stage_1") {
+//       stage1.push(stepNumbers[i]);
+//     }
+//   }
+//   for (let i = 0; i < systemNames.length; i++) {
+//     if (systemNames[i] === "stage_2") {
+//       stage2.push(stepNumbers[i]);
+//     }
+//   }
+
+//   for (let i = 0; i < systemNames.length; i++) {
+//     if (systemNames[i] === "dragon") {
+//       dragon.push(stepNumbers[i]);
+//     }
+//   }
+
+//   for (let i = 0; i < systemNames.length; i++) {
+//     if (systemNames[i] === "Falcon 9") {
+//       Falcon_9.push(stepNumbers[i]);
+//     }
+//   }
+
+//   for (let i = 0; i < systemNames.length; i++) {
+//     if (systemNames[i] === "CrewDragon") {
+//       CrewDragon.push(stepNumbers[i]);
+//     }
+//   }
+
+//   function checkDuplicate(arr) {
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr.indexOf(arr[i]) !== arr.lastIndexOf(arr[i])) {
+//         return false;
+//       }
+//     }
+//   }
+
+//   if (
+//     checkDuplicate(stage1) === false ||
+//     checkDuplicate(stage2) === false ||
+//     checkDuplicate(dragon) === false ||
+//     checkDuplicate(Falcon_9) === false ||
+//     checkDuplicate(CrewDragon) === false
+//   ) {
+//     return false;
+//   }
+
+//   function isAscending(arr) {
+//     return arr.every(function (x, i) {
+//       return i === 0 || x >= arr[i - 1];
+//     });
+//   }
+//   res.push(isAscending(stage1));
+//   res.push(isAscending(stage2));
+//   res.push(isAscending(dragon));
+//   res.push(isAscending(Falcon_9));
+//   res.push(isAscending(CrewDragon));
+//   const answer = (val) => val === true;
+
+//   return res.every(answer) === true ? true : false;
+// }
+
+// function isAscending(arr) {
+//   return arr.every(function (x, i) {
+//     return i === 0 || x >= arr[i - 1];
+//   });
+// }
+// console.log(isAscending([2, 1]));
+
+// function checkDuplicate(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr.indexOf(arr[i]) !== arr.lastIndexOf(arr[i])) {
+//       return false;
+//     }
+//   }
+// }
+// console.log(checkDuplicate([1, 1, 2]));
+
+// function solution(n, s) {
+//   r = {}
+//   x = 1
+//   n.forEach((v, i) => {
+//       if(r[v] >= s[i]) return x = 0
+//       r[v] = s[i]
+//   })
+//   return !!x
+// }
+
+function test() {
+  let n = 1;
+  return !!n;
+  // return n === true ? true : false;
 }
+console.log(test());
