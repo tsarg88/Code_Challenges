@@ -3397,19 +3397,98 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(checkDuplicate([1, 1, 2]));
 
-// function solution(n, s) {
-//   r = {}
-//   x = 1
-//   n.forEach((v, i) => {
-//       if(r[v] >= s[i]) return x = 0
-//       r[v] = s[i]
-//   })
-//   return !!x
+// let solution = (systemNames, stepNumbers) => {
+//   let obj = {};
+//   for(let i=0; i<stepNumbers.length;i++){
+//       if(obj[systemNames[i]] >= stepNumbers[i]){
+//           return false;
+//       }
+//       obj[systemNames[i]] = stepNumbers[i];
+//   }
+//   return true;
 // }
 
-function test() {
-  let n = 1;
-  return !!n;
-  // return n === true ? true : false;
+// console.log(
+// solution(
+// ["stage_1",
+// "stage_2",
+// "dragon",
+// "stage_1",
+// "stage_2",
+// "dragon"],
+//   [1, 10, 11, 2, 12, 111]
+// )
+// );
+
+// function solution(time) {
+//   let res = [];
+
+//   // let compare = ["12"];
+//   let split = time.split(":");
+//   let zero_based = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09"];
+//   // console.log(typeof Number(split[0]));
+
+//   if(time.length === 0){
+//       return false
+//   }
+
+//   for (let i = 0; i <= 9; i++) {
+//     console.log('zero_based[i]', zero_based[i])
+//       if (Number(split[0]) === Number(zero_based[i])) {
+//         res.push(Number(split[i]));
+//     }
+//   }
+
+//   for (let i = 12; i <= 23; i++) {
+//     console.log('zero_based[i]', zero_based[i])
+//     if (Number(split[0]) === i) {
+//       res.push(i);
+//     } else if (Number(split[0]) === Number(zero_based[i])) {
+//       res.push(Number(split[i]));
+//     }
+//   }
+//   for (let i = 0; i <= 60; i++) {
+//     if (Number(split[1]) === Number(zero_based[i])) {
+//       res.push(Number(split[i]));
+//     } else if (Number(split[1]) === i) {
+//       res.push(Number(split[1]));
+//     }
+//   }
+
+//   // res.splice(1, 0, ":");
+
+//   return res.length === 2 ? true : false;
+//   // console.log(res);
+//   // let test = Number(res.join(""));
+// }
+
+// function solution(time) {
+//   // let h, m;
+//   let res;
+//   // [h, m] = time.split(":");
+//   time = time.split(":");
+//   console.log(time);
+//   // return Number(res[0]) < 24 && Number(res[1]) < 60 ? true : false;
+// }
+// console.log(solution("09:56"));
+
+// function solution(l) {
+//   let fast = l;
+//   let slow = l;
+//   while (fast && fast.next) {
+//     slow = slow.next;
+//     fast = fast.next.next;
+//   }
+//   return slow.value;
+// }
+// console.log(solution([5, 4, 3, 2, 1]));
+
+function solution(a) {
+  let bin = a.toString(2);
+  bin = bin.split("");
+  bin = bin.reverse();
+  bin = Number(bin.join(""));
+  res = parseInt(bin, 2);
+  return res;
 }
-console.log(test());
+console.log(solution(97));
