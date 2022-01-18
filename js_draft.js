@@ -3483,12 +3483,65 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(solution([5, 4, 3, 2, 1]));
 
-function solution(a) {
-  let bin = a.toString(2);
-  bin = bin.split("");
-  bin = bin.reverse();
-  bin = Number(bin.join(""));
-  res = parseInt(bin, 2);
-  return res;
+// function solution(a) {
+//   let bin = a.toString(2);
+//   bin = bin.split("");
+//   bin = bin.reverse();
+//   bin = Number(bin.join(""));
+//   res = parseInt(bin, 2);
+//   return res;
+// }
+// console.log(solution(97));
+
+// function solution(l) {
+//   l = JSON.stringify(l).slice(1, -1);
+//   // .split(",");
+//   //   test = l.join();
+//   console.log(l);
+//   // return l + "" == l.reverse();
+// }
+// console.log(solution([0, 1, 1]));
+
+// function solution(inputArray, l, r) {
+//   return inputArray.slice(0, l).concat(inputArray.slice(r + 1));
+// }
+// console.log(solution([2, 3, 2, 3, 4, 5], 2, 4));
+
+// function solution(
+//   marathonLength,
+//   maxScore,
+//   submissions,
+//   successfulSubmissionTime
+// ) {
+//   let attempt = submissions === 1 ? 1 : submissions - 1;
+//   let attemptScore = attempt * 10;
+//   let formula =
+//     successfulSubmissionTime * (maxScore / 2) * (1 / marathonLength);
+//   let res = maxScore - attemptScore - formula;
+//   console.log(res);
+//   if(0 <= res && res <= 200){
+//     return res
+//   } else if(res > 200){
+
+//   }
+//   // return res <= 200 ? 200 : res == 0 ? 0 : res
+// }
+// console.log(solution(100, 400, 95, -1));
+
+function solution(a, b) {
+  let res = [];
+  let bin = [];
+  let reducer = (previousValue, currentValue) => previousValue + currentValue;
+  for (let i = a; i <= b; i++) {
+    bin.push(i.toString(2));
+  }
+  for (let i = 0; i < bin.length; i++) {
+    res.push(bin[i].split("").map(Number).reduce(reducer));
+  }
+  return res.reduce(reducer);
+  // let test = [1, 2, 3, 4];
+  // return test.reduce((acc, curr) => acc + curr, 10);
+
+  // console.log(test);
 }
-console.log(solution(97));
+console.log(solution(2, 7));
