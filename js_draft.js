@@ -2130,209 +2130,209 @@
 // };
 // console.log(triangleNumber([2, 2, 3, 4]));
 
-function knapsackLight(value1, weight1, value2, weight2, maxW) {
-  let weighVar = maxW;
-  let res = 0;
-  // if (weight1 > maxW || weight2 > maxW) {
-  //   return 0;
-  // }
-  let maxW1 = maxW;
-  let If1 = maxW1 - Math.min(weight1, weight2);
-  let If11 = If1 - Math.max(weight1, weight2);
-  if (Math.sign(If1) == -1 && Math.sign(If11) == -1) {
-    return 0;
-  }
-  // at this time we know that we can subtract
-  // to at least min wight
-  // but we would like to know if we can also subtract to
-  // the min weight then which value is bigger
-  // min value or max value?
+// function knapsackLight(value1, weight1, value2, weight2, maxW) {
+//   let weighVar = maxW;
+//   let res = 0;
+//   // if (weight1 > maxW || weight2 > maxW) {
+//   //   return 0;
+//   // }
+//   let maxW1 = maxW;
+//   let If1 = maxW1 - Math.min(weight1, weight2);
+//   let If11 = If1 - Math.max(weight1, weight2);
+//   if (Math.sign(If1) == -1 && Math.sign(If11) == -1) {
+//     return 0;
+//   }
+// at this time we know that we can subtract
+// to at least min wight
+// but we would like to know if we can also subtract to
+// the min weight then which value is bigger
+// min value or max value?
 
-  // maxW should be compared without modification
-  // to the values of weight
+// maxW should be compared without modification
+// to the values of weight
 
-  //   let checkValue = Math.max(value1, value2);
-  //   // if(maxW >= Math.max(weight1, weight2)){
-  //   //   checkValue =
-  //   // }
+//   let checkValue = Math.max(value1, value2);
+//   // if(maxW >= Math.max(weight1, weight2)){
+//   //   checkValue =
+//   // }
 
-  //   let maxW2 = maxW;
-  //   let If2 = maxW2 - Math.min(weight1, weight2);
-  //   let If22 = If2 - Math.max(weight1, weight2);
-  //   if (Math.sign(If2) == -1 && Math.sign(If22) == 1) {
-  //     return (res += Math.min(value1, value2));
-  //   }
+//   let maxW2 = maxW;
+//   let If2 = maxW2 - Math.min(weight1, weight2);
+//   let If22 = If2 - Math.max(weight1, weight2);
+//   if (Math.sign(If2) == -1 && Math.sign(If22) == 1) {
+//     return (res += Math.min(value1, value2));
+//   }
 
-  //   let maxW3 = maxW;
-  //   let If3;
-  //   if (maxW3 - Math.min(weight1, weight2) == 0) {
-  //     If3 = 1;
-  //   } else {
-  //     If3 = maxW3 - Math.min(weight1, weight2);
-  //   }
-  //   console.log("ss", If3);
-  //   let If33 = If3 - Math.max(weight1, weight2);
-  //   if (Math.sign(If3) == 1 && Math.sign(If3) == 1) {
-  //     if (If3 >= Math.max(weight1, weight2)) {
-  //       return (res += value1 + value2);
-  //     }
-  //     if (maxW >= Math.max(weight1, weight2)) {
-  //       return (res += Math.max(value1, value2));
-  //     }
-  //     if (If3 == 1) {
-  //       if (maxW >= weight1) {
-  //         return (res += value1);
-  //       }
-  //       if (maxW <= weight1) {
-  //         return (res += value2);
-  //       }
-  //       if ((res += Math.min(value1, value2))) {
-  //         return (res += Math.min(value1, value2));
-  //       }
-  //       return (res += Math.min(value1, value2));
-  //     }
-  //     if ((res += Math.max(value1, value2))) {
-  //       return (res += Math.max(value1, value2));
-  //     }
-  //   } else {
-  //     return (res += Math.max(value1, value2));
-  //   }
+//   let maxW3 = maxW;
+//   let If3;
+//   if (maxW3 - Math.min(weight1, weight2) == 0) {
+//     If3 = 1;
+//   } else {
+//     If3 = maxW3 - Math.min(weight1, weight2);
+//   }
+//   console.log("ss", If3);
+//   let If33 = If3 - Math.max(weight1, weight2);
+//   if (Math.sign(If3) == 1 && Math.sign(If3) == 1) {
+//     if (If3 >= Math.max(weight1, weight2)) {
+//       return (res += value1 + value2);
+//     }
+//     if (maxW >= Math.max(weight1, weight2)) {
+//       return (res += Math.max(value1, value2));
+//     }
+//     if (If3 == 1) {
+//       if (maxW >= weight1) {
+//         return (res += value1);
+//       }
+//       if (maxW <= weight1) {
+//         return (res += value2);
+//       }
+//       if ((res += Math.min(value1, value2))) {
+//         return (res += Math.min(value1, value2));
+//       }
+//       return (res += Math.min(value1, value2));
+//     }
+//     if ((res += Math.max(value1, value2))) {
+//       return (res += Math.max(value1, value2));
+//     }
+//   } else {
+//     return (res += Math.max(value1, value2));
+//   }
 
-  //   let maxW4 = maxW;
-  //   let If4 = maxW4 - Math.max(weight1, weight2);
-  //   let If44;
+//   let maxW4 = maxW;
+//   let If4 = maxW4 - Math.max(weight1, weight2);
+//   let If44;
 
-  //   if (If4 - Math.min(weight1, weight2) == 0) {
-  //     If44 = 1;
-  //   } else {
-  //     If44 = If4 - Math.min(weight1, weight2);
-  //   }
+//   if (If4 - Math.min(weight1, weight2) == 0) {
+//     If44 = 1;
+//   } else {
+//     If44 = If4 - Math.min(weight1, weight2);
+//   }
 
-  //   if (Math.sign(If4) == 1 && Math.sign(If44) == 1) {
-  //     return res + (value1 + value2);
-  //   }
-  //   return res;
-  // }
-  //   if (Math.sign(1 == 1)) {
-  //     return "pod";
-  //   } else {
-  //     return false;
-  //   }
-  // }
+//   if (Math.sign(If4) == 1 && Math.sign(If44) == 1) {
+//     return res + (value1 + value2);
+//   }
+//   return res;
+// }
+//   if (Math.sign(1 == 1)) {
+//     return "pod";
+//   } else {
+//     return false;
+//   }
+// }
 
-  // console.log(knapsackLight(10, 5, 6, 4, 9));
+// console.log(knapsackLight(10, 5, 6, 4, 9));
 
-  // aveli mmoshni variant@:
-  // function knapsackLight(value1, weight1, value2, weight2, maxW) {
-  //   if (weight1 + weight2 <= maxW) return value1 + value2;
-  //   if (value1 > value2 && weight1 <= maxW) return value1;
-  //   if (weight2 <= maxW) return value2;
-  //   if (weight1 <= maxW) return value1;
-  //   return 0;
-  // }
-  // console.log(knapsackLight(10, 5, 6, 4, 9));
+// aveli mmoshni variant@:
+// function knapsackLight(value1, weight1, value2, weight2, maxW) {
+//   if (weight1 + weight2 <= maxW) return value1 + value2;
+//   if (value1 > value2 && weight1 <= maxW) return value1;
+//   if (weight2 <= maxW) return value2;
+//   if (weight1 <= maxW) return value1;
+//   return 0;
+// }
+// console.log(knapsackLight(10, 5, 6, 4, 9));
 
-  // pizdec! amena lav@!:
-  // function knapsackLight(value1, weight1, value2, weight2, maxW) {
-  //   // return Math.max(
-  //   //   maxW >= weight1 && value1,
-  //   //   maxW >= weight2 && value2,
-  //   //   maxW >= weight1 + weight2 && value1 + value2
-  //   // );
-  //   let test = Math.max(1999, 2, 3);
-  //   console.log(test);
-  // }
-  // console.log(knapsackLight(4, 3, 6, 1, 8));
+// pizdec! amena lav@!:
+// function knapsackLight(value1, weight1, value2, weight2, maxW) {
+//   // return Math.max(
+//   //   maxW >= weight1 && value1,
+//   //   maxW >= weight2 && value2,
+//   //   maxW >= weight1 + weight2 && value1 + value2
+//   // );
+//   let test = Math.max(1999, 2, 3);
+//   console.log(test);
+// }
+// console.log(knapsackLight(4, 3, 6, 1, 8));
 
-  // function checkPalindrome(inputString) {
-  //   let arr = inputString.split("").reverse().join("");
-  //   // console.log(arr);
-  //   // console.log("abs" == "ahs");
-  //   return true ? inputString == arr : false;
-  // }
-  // console.log(checkPalindrome("aabaa"));
+// function checkPalindrome(inputString) {
+//   let arr = inputString.split("").reverse().join("");
+//   // console.log(arr);
+//   // console.log("abs" == "ahs");
+//   return true ? inputString == arr : false;
+// }
+// console.log(checkPalindrome("aabaa"));
 
-  // function makeArrayConsecutive2(statues) {
-  //   let count = 0;
-  //   let sort = statues.sort(function (a, b) {
-  //     return a - b;
-  //   });
+// function makeArrayConsecutive2(statues) {
+//   let count = 0;
+//   let sort = statues.sort(function (a, b) {
+//     return a - b;
+//   });
 
-  //   for (let i = 0; i < sort.length - 1; i++) {
-  //     if (sort[i + 1] - sort[i] > 0) {
-  //       let res = sort[i + 1] - sort[i];
-  //       count += res - 1;
-  //     }
-  //   }
-  //   return count;
-  // }
-  // function makeArrayConsecutive2(sequence) {
-  //   return Math.max(...sequence) - Math.min(...sequence) + 1 - sequence.length;
-  // }
+//   for (let i = 0; i < sort.length - 1; i++) {
+//     if (sort[i + 1] - sort[i] > 0) {
+//       let res = sort[i + 1] - sort[i];
+//       count += res - 1;
+//     }
+//   }
+//   return count;
+// }
+// function makeArrayConsecutive2(sequence) {
+//   return Math.max(...sequence) - Math.min(...sequence) + 1 - sequence.length;
+// }
 
-  // console.log(makeArrayConsecutive2([6, 2, 3, 8]));
+// console.log(makeArrayConsecutive2([6, 2, 3, 8]));
 
-  // function almostIncreasingSequence(sequence) {
-  //   let res = [];
-  //   for (let i = 0; i < sequence.length; i++) {
-  //     if (sequence.length > 2) {
-  //       sequence.pop(sequence[i]);
-  //     } else {
-  //       continue;
-  //     }
+// function almostIncreasingSequence(sequence) {
+//   let res = [];
+//   for (let i = 0; i < sequence.length; i++) {
+//     if (sequence.length > 2) {
+//       sequence.pop(sequence[i]);
+//     } else {
+//       continue;
+//     }
 
-  //     if (sequence[i] < sequence[i + 1]) {
-  //       res.push(1);
-  //     } else if (sequence[i] > sequence[i + 1]) {
-  //       res.push(0);
-  //     }
-  //   }
-  //   if (res.includes(0)) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-  // console.log(almostIncreasingSequence([1, 3, 2]));
+//     if (sequence[i] < sequence[i + 1]) {
+//       res.push(1);
+//     } else if (sequence[i] > sequence[i + 1]) {
+//       res.push(0);
+//     }
+//   }
+//   if (res.includes(0)) {
+//     return false;
+//   } else {
+//     return true;
+//   }
+// }
+// console.log(almostIncreasingSequence([1, 3, 2]));
 
-  function almostIncreasingSequence(sequence) {
-    var res = [];
-    if (sequence.length == 2) {
-      return true;
-    }
+// function almostIncreasingSequence(sequence) {
+//   var res = [];
+//   if (sequence.length == 2) {
+//     return true;
+//   }
 
-    // if (sequence.some((val, i) => sequence.indexOf(val) !== i)) {
-    //   return false;
-    // }
+// if (sequence.some((val, i) => sequence.indexOf(val) !== i)) {
+//   return false;
+// }
 
-    // for (let i = 0; i < sequence.length; i++) {
-    //   if (sequence[i] >= sequence[i + 1]) {
-    //     // after comparison is true take out sequence[i]
-    //     // continue
+// for (let i = 0; i < sequence.length; i++) {
+//   if (sequence[i] >= sequence[i + 1]) {
+//     // after comparison is true take out sequence[i]
+//     // continue
 
-    //     res.push(sequence[i]);
-    //     sequence.splice(i, 1);
+//     res.push(sequence[i]);
+//     sequence.splice(i, 1);
 
-    //     for (let j = 0; j < sequence.length; j++) {
-    //       if (sequence[j] > sequence[j + 1]) {
-    //         res.push(sequence[i]);
-    //       }
-    //     }
-    // count = count + 1;
-    // if (count > 1) {
-    //   return false;
-    // }
-    // if (
-    // sequence[i] >= sequence[i + 2] &&
-    // sequence[i - 1] >= sequence[i + 1]
-    // sequence.some((val, i) => sequence.indexOf(val) !== i)
-    // ) {
-    //   return false;
-    // }
-  }
+//     for (let j = 0; j < sequence.length; j++) {
+//       if (sequence[j] > sequence[j + 1]) {
+//         res.push(sequence[i]);
+//       }
+//     }
+// count = count + 1;
+// if (count > 1) {
+//   return false;
+// }
+// if (
+// sequence[i] >= sequence[i + 2] &&
+// sequence[i - 1] >= sequence[i + 1]
+// sequence.some((val, i) => sequence.indexOf(val) !== i)
+// ) {
+//   return false;
+//     // }
+//   }
 
-  // true ? res.length >  1 : false
-}
+//   // true ? res.length >  1 : false
+// }
 
 // if (res.length > 1) {
 //   return false;
@@ -3528,20 +3528,89 @@ function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // }
 // console.log(solution(100, 400, 95, -1));
 
-function solution(a, b) {
-  let res = [];
-  let bin = [];
-  let reducer = (previousValue, currentValue) => previousValue + currentValue;
-  for (let i = a; i <= b; i++) {
-    bin.push(i.toString(2));
-  }
-  for (let i = 0; i < bin.length; i++) {
-    res.push(bin[i].split("").map(Number).reduce(reducer));
-  }
-  return res.reduce(reducer);
-  // let test = [1, 2, 3, 4];
-  // return test.reduce((acc, curr) => acc + curr, 10);
+// function solution(a, b) {
+//   let res = [];
+//   let bin = [];
+//   let reducer = (previousValue, currentValue) => previousValue + currentValue;
+//   for (let i = a; i <= b; i++) {
+//     bin.push(i.toString(2));
+//   }
+//   for (let i = 0; i < bin.length; i++) {
+//     res.push(bin[i].split("").map(Number).reduce(reducer));
+//   }
+//   return res.reduce(reducer);
+//   // let test = [1, 2, 3, 4];
+//   // return test.reduce((acc, curr) => acc + curr, 10);
 
-  // console.log(test);
+//   // console.log(test);
+// }
+// console.log(solution(2, 7));
+
+// function solution(param1, param2) {
+//   // loop by lengthiest number's length
+//   // take rightmost digit of param1 add to rightmost digit
+//   // of param2; if the result is 2 digits then take
+//   // rightmost digit and push to res(array)
+//   // ... then reverse array ...
+
+//   // edge case:
+//   if (param1 === 0) {
+//     return param2;
+//   } else if (param2 === 0) {
+//     return param1;
+//   }
+
+//   let temp = [];
+//   let res = [];
+//   let p1_convert = "" + param1;
+//   p1_convert = p1_convert.split("");
+//   let p2_convert = "" + param2;
+//   p2_convert = p2_convert.split("");
+//   let mLen = Math.max(p1_convert.length, p2_convert.length);
+
+//   for (let i = 0; i < mLen; i++) {
+//     // let reducer = (previousValue, currentValue) => previousValue + currentValue;
+//     temp.push(p1_convert.pop());
+//     if (temp.some((item) => item === undefined) === true) {
+//       temp = [];
+//     }
+//     temp.push(p2_convert.pop());
+//     temp = temp.map(Number).reduce((acc, curr) => acc + curr, 0);
+//     temp = temp + "";
+//     temp = temp.split("");
+//     if (temp.length > 1) {
+//       let num = temp.map(Number).pop();
+//       res.push(num);
+//       temp = [];
+//     } else {
+//       let num = temp.map(Number).pop();
+//       res.push(num);
+//       temp = [];
+//     }
+//   }
+//   res.reverse();
+//   return Number(res.join(""));
+//   // console.log(res);
+//   // let reducer = (previousValue, currentValue) => previousValue + currentValue;
+//   // let test = ["1", "2", "3"];
+//   // test.map(Number).reduce(reducer);
+//   // console.log(test);
+// }
+// console.log(solution(456, 1734));
+
+function bubbleSort(arr) {
+  const swap = (firstIndex, secondIndex) => {
+    let temp = arr[firstIndex];
+    arr[firstIndex] = arr[secondIndex];
+    arr[secondIndex] = temp;
+  };
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i; j < arr.length; j++) {
+      if (arr[i] > arr[j + 1]) {
+        swap(i, j + 1);
+      }
+    }
+  }
+  return arr;
 }
-console.log(solution(2, 7));
+console.log(bubbleSort([1, 5, 3, 2, 4]));
