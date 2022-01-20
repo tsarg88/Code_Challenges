@@ -3615,29 +3615,61 @@
 // }
 // console.log(bubbleSort([1, 5, 3, 2, 4]));
 
-function solution(dishes) {
-  var ingredients = {};
+// function solution(dishes) {
+//   var ingredients = {};
 
+//   dishes.forEach(function (dish) {
+//     var ingIndex;
+//     var ingredient;
+//     for (ingIndex = 1; ingIndex < dish.length; ingIndex++) {
+//       ingredient = dish[ingIndex];
+//       if (!ingredients[ingredient]) {
+//         ingredients[ingredient] = [dish[0]];
+//       } else {
+//         ingredients[ingredient].push(dish[0]);
+//       }
+//     }
+//   });
+
+//   var res = [];
+//   Object.keys(ingredients)
+//     .sort()
+//     .forEach(function (key) {
+//       if (ingredients[key].length > 1) {
+//         res.push([key].concat(ingredients[key].sort()));
+//       }
+//     });
+//   return res;
+// }
+
+function solution(dishes) {
+  let obj = {};
+  let res = [];
   dishes.forEach(function (dish) {
-    var ingIndex;
-    var ingredient;
-    for (ingIndex = 1; ingIndex < dish.length; ingIndex++) {
-      ingredient = dish[ingIndex];
-      if (!ingredients[ingredient]) {
-        ingredients[ingredient] = [dish[0]];
+    for (let i = 1; i < dish.length; i++) {
+      let ingredient = dish[i];
+      if (!obj[ingredient]) {
+        obj[ingredient] = [dish[0]];
       } else {
-        ingredients[ingredient].push(dish[0]);
+        obj[ingredient].push(dish[0]);
       }
     }
   });
 
-  var res = [];
-  Object.keys(ingredients)
+  Object.keys(obj)
     .sort()
     .forEach(function (key) {
-      if (ingredients[key].length > 1) {
-        res.push([key].concat(ingredients[key].sort()));
+      if (obj[key].length > 1) {
+        res.push([key].concat(obj[key].sort()));
       }
     });
   return res;
 }
+console.log(
+  solution([
+    ["Salad", "Tomato", "Cucumber", "Salad", "Sauce"],
+    ["Pizza", "Tomato", "Sausage", "Sauce", "Dough"],
+    ["Quesadilla", "Chicken", "Cheese", "Sauce"],
+    ["Sandwich", "Salad", "Bread", "Tomato", "Cheese"],
+  ])
+);
