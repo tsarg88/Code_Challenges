@@ -3642,34 +3642,53 @@
 //   return res;
 // }
 
-function solution(dishes) {
-  let obj = {};
-  let res = [];
-  dishes.forEach(function (dish) {
-    for (let i = 1; i < dish.length; i++) {
-      let ingredient = dish[i];
-      if (!obj[ingredient]) {
-        obj[ingredient] = [dish[0]];
-      } else {
-        obj[ingredient].push(dish[0]);
-      }
-    }
-  });
+// function solution(dishes) {
+//   let obj = {};
+//   let res = [];
+//   dishes.forEach(function (dish) {
+//     for (let i = 1; i < dish.length; i++) {
+//       let ingredient = dish[i];
+//       if (!obj[ingredient]) {
+//         obj[ingredient] = [dish[0]];
+//       } else {
+//         obj[ingredient].push(dish[0]);
+//       }
+//     }
+//   });
 
-  Object.keys(obj)
-    .sort()
-    .forEach(function (key) {
-      if (obj[key].length > 1) {
-        res.push([key].concat(obj[key].sort()));
-      }
-    });
-  return res;
+//   Object.keys(obj)
+//     .sort()
+//     .forEach(function (key) {
+//       if (obj[key].length > 1) {
+//         res.push([key].concat(obj[key].sort()));
+//       }
+//     });
+//   return res;
+// }
+// console.log(
+//   solution([
+//     ["Salad", "Tomato", "Cucumber", "Salad", "Sauce"],
+//     ["Pizza", "Tomato", "Sausage", "Sauce", "Dough"],
+//     ["Quesadilla", "Chicken", "Cheese", "Sauce"],
+//     ["Sandwich", "Salad", "Bread", "Tomato", "Cheese"],
+//   ])
+// );
+
+function solution(arr) {
+  // edge case
+  if (arr.length == 1 && arr[0] === 0) {
+    return 1;
+  } else if (!arr.includes(0)) {
+    return 0;
+  }
+
+  arr.sort((a, b) => (a < b ? -1 : ""));
+  console.log(arr);
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] + 1 !== arr[i + 1]) {
+      return arr[i] + 1;
+    }
+  }
 }
-console.log(
-  solution([
-    ["Salad", "Tomato", "Cucumber", "Salad", "Sauce"],
-    ["Pizza", "Tomato", "Sausage", "Sauce", "Dough"],
-    ["Quesadilla", "Chicken", "Cheese", "Sauce"],
-    ["Sandwich", "Salad", "Bread", "Tomato", "Cheese"],
-  ])
-);
+console.log(solution([3, 1, 0]));
