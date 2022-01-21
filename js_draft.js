@@ -3693,13 +3693,28 @@
 // }
 // console.log(solution([3, 1, 0]));
 
-function solution(sentence) {
-  // convert string to arr
-  sentence = sentence.split(" ");
-  // use reverse() method
-  sentence = sentence.reverse();
+// function solution(sentence) {
+//   // convert string to arr
+//   sentence = sentence.split(" ");
+//   // use reverse() method
+//   sentence = sentence.reverse();
 
-  // convert back to string and return
-  return sentence.join(" ");
+//   // convert back to string and return
+//   return sentence.join(" ");
+// }
+// console.log(solution("Man bites dog"));
+
+function solution(s) {
+  let res = 0;
+  let vowels = ["a", "e", "i", "o", "u", "y"];
+
+  for (let i = 0; i < s.length; i++) {
+    if (vowels.includes(s[i])) {
+      res += 1;
+    } else {
+      res += 2;
+    }
+  }
+  return res;
 }
-console.log(solution("Man bites dog"));
+console.log(solution("abcde"));
