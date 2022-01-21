@@ -3674,21 +3674,32 @@
 //   ])
 // );
 
-function solution(arr) {
-  // edge case
-  if (arr.length == 1 && arr[0] === 0) {
-    return 1;
-  } else if (!arr.includes(0)) {
-    return 0;
-  }
+// function solution(arr) {
+//   // edge case
+//   if (arr.length == 1 && arr[0] === 0) {
+//     return 1;
+//   } else if (!arr.includes(0)) {
+//     return 0;
+//   }
 
-  arr.sort((a, b) => (a < b ? -1 : ""));
-  console.log(arr);
+//   arr.sort((a, b) => (a < b ? -1 : ""));
+//   console.log(arr);
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] + 1 !== arr[i + 1]) {
-      return arr[i] + 1;
-    }
-  }
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] + 1 !== arr[i + 1]) {
+//       return arr[i] + 1;
+//     }
+//   }
+// }
+// console.log(solution([3, 1, 0]));
+
+function solution(sentence) {
+  // convert string to arr
+  sentence = sentence.split(" ");
+  // use reverse() method
+  sentence = sentence.reverse();
+
+  // convert back to string and return
+  return sentence.join(" ");
 }
-console.log(solution([3, 1, 0]));
+console.log(solution("Man bites dog"));
