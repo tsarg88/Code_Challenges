@@ -3704,17 +3704,46 @@
 // }
 // console.log(solution("Man bites dog"));
 
-function solution(s) {
-  let res = 0;
-  let vowels = ["a", "e", "i", "o", "u", "y"];
+// function solution(s) {
+//   let res = 0;
+//   let vowels = ["a", "e", "i", "o", "u", "y"];
 
-  for (let i = 0; i < s.length; i++) {
-    if (vowels.includes(s[i])) {
-      res += 1;
-    } else {
-      res += 2;
+//   for (let i = 0; i < s.length; i++) {
+//     if (vowels.includes(s[i])) {
+//       res += 1;
+//     } else {
+//       res += 2;
+//     }
+//   }
+//   return res;
+// }
+// console.log(solution("abcde"));
+
+function solution(a) {
+  let copy = JSON.parse(JSON.stringify(a));
+  a.sort((a, b) => (a < b ? -1 : ""));
+  // console.log(a);
+
+  function removeItemAll(a, value) {
+    var i = 0;
+    while (i < a.length) {
+      if (a[i] === value) {
+        a.splice(i, 1);
+      } else {
+        i++;
+      }
+    }
+    return a;
+  }
+
+  removeItemAll(a, -1);
+
+  for (let i = 0; i < copy.length; i++) {
+    if (copy[i] === -1) {
+      a.splice(i, 0, -1);
+      //console.log(a);
     }
   }
-  return res;
+  return a;
 }
-console.log(solution("abcde"));
+console.log(solution([-1, 150, 190, 170, -1, -1, 160, 180]));
