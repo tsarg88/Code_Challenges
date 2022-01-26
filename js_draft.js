@@ -3719,31 +3719,81 @@
 // }
 // console.log(solution("abcde"));
 
-function solution(a) {
-  let copy = JSON.parse(JSON.stringify(a));
-  a.sort((a, b) => (a < b ? -1 : ""));
-  // console.log(a);
+// function solution(a) {
+//   let copy = JSON.parse(JSON.stringify(a));
+//   a.sort((a, b) => (a < b ? -1 : ""));
+//   // console.log(a);
 
-  function removeItemAll(a, value) {
-    var i = 0;
-    while (i < a.length) {
-      if (a[i] === value) {
-        a.splice(i, 1);
-      } else {
-        i++;
-      }
-    }
-    return a;
+//   function removeItemAll(a, value) {
+//     var i = 0;
+//     while (i < a.length) {
+//       if (a[i] === value) {
+//         a.splice(i, 1);
+//       } else {
+//         i++;
+//       }
+//     }
+//     return a;
+//   }
+
+//   removeItemAll(a, -1);
+
+//   for (let i = 0; i < copy.length; i++) {
+//     if (copy[i] === -1) {
+//       a.splice(i, 0, -1);
+//       //console.log(a);
+//     }
+//   }
+//   return a;
+// }
+// console.log(solution([-1, 150, 190, 170, -1, -1, 160, 180]));
+
+// function solution(pattern, test) {
+//   if (pattern[pattern.length - 1] === "$") {
+//     return true;
+//   }
+//   function removeItemAll(a, value) {
+//     var i = 0;
+//     while (i < a.length) {
+//       if (a[i] === value) {
+//         a.splice(i, 1);
+//       } else {
+//         i++;
+//       }
+//     }
+//     return a;
+//   }
+//   pattern = pattern.split("");
+//   console.log(pattern);
+//   removeItemAll(pattern, "^");
+//   pattern = pattern.join("");
+//   return test.includes(pattern);
+// }
+
+// function replaceTest(str) {
+//   return str.replace("a", "");
+// }
+// console.log(replaceTest("abcd"));
+
+// function solution(n) {
+//   n = "" + n;
+//   n = n.split("");
+//   return Number(n[0]) + Number(n[1]);
+// }
+// console.log(solution(29));
+
+function solution(x) {
+  x = x + "";
+  x = x.split("");
+  if (x[0] === "-") {
+    x.shift();
+    x.reverse();
+    x.map((v) => Number(v));
+    x.splice(0, 0, "-");
+    return Number(x.join(""));
+  } else {
+    x.reverse();
+    return Number(x.join(""));
   }
-
-  removeItemAll(a, -1);
-
-  for (let i = 0; i < copy.length; i++) {
-    if (copy[i] === -1) {
-      a.splice(i, 0, -1);
-      //console.log(a);
-    }
-  }
-  return a;
 }
-console.log(solution([-1, 150, 190, 170, -1, -1, 160, 180]));
+console.log(solution(4243));
