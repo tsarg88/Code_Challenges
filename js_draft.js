@@ -3782,18 +3782,52 @@
 // }
 // console.log(solution(29));
 
-function solution(x) {
-  x = x + "";
-  x = x.split("");
-  if (x[0] === "-") {
-    x.shift();
-    x.reverse();
-    x.map((v) => Number(v));
-    x.splice(0, 0, "-");
-    return Number(x.join(""));
+// function solution(x) {
+//   x = x + "";
+//   x = x.split("");
+//   if (x[0] === "-") {
+//     x.shift();
+//     x.reverse();
+//     x.map((v) => Number(v));
+//     x.splice(0, 0, "-");
+//     return Number(x.join(""));
+//   } else {
+//     x.reverse();
+//     return Number(x.join(""));
+//   }
+// }
+// console.log(solution(4243));
+
+function palindrome(str) {
+  const isUpperCase = (string) => string.toLowerCase() != string;
+
+  str = str.split(" ");
+  str = str.join("");
+  if (isUpperCase(str) === true) {
+    str = str.toLowerCase();
+    str = str.split(".");
+    str = str.join("");
+    str = str.split(",");
+    str = str.join("");
+    let rev = str.split("");
+    rev = rev.reverse();
+    rev = rev.join("");
+    return rev === str ? true : false;
+  } else if (str[0] === "_") {
+    str = str.split("");
+    str.shift();
+    str = str.join("");
+    let rev = str.split("");
+    rev = rev.reverse();
+    rev = rev.join("");
+    return rev === str ? true : false;
   } else {
-    x.reverse();
-    return Number(x.join(""));
+    let rev = str.split("");
+    rev = rev.reverse();
+    rev = rev.join("");
+    return rev === str ? true : false;
   }
+
+  //
 }
-console.log(solution(4243));
+console.log(palindrome("A man, a plan, a canal. Panama"));
