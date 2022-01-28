@@ -3798,36 +3798,104 @@
 // }
 // console.log(solution(4243));
 
-function palindrome(str) {
-  const isUpperCase = (string) => string.toLowerCase() != string;
+// function palindrome(str) {
+//   const isUpperCase = (string) => string.toLowerCase() != string;
 
-  str = str.split(" ");
-  str = str.join("");
-  if (isUpperCase(str) === true) {
-    str = str.toLowerCase();
-    str = str.split(".");
-    str = str.join("");
-    str = str.split(",");
-    str = str.join("");
-    let rev = str.split("");
-    rev = rev.reverse();
-    rev = rev.join("");
-    return rev === str ? true : false;
-  } else if (str[0] === "_") {
-    str = str.split("");
-    str.shift();
-    str = str.join("");
-    let rev = str.split("");
-    rev = rev.reverse();
-    rev = rev.join("");
-    return rev === str ? true : false;
-  } else {
-    let rev = str.split("");
-    rev = rev.reverse();
-    rev = rev.join("");
-    return rev === str ? true : false;
-  }
+//   str = str.split(" ");
+//   str = str.join("");
+//   if (isUpperCase(str) === true) {
+//     str = str.toLowerCase();
+//     str = str.split(".");
+//     str = str.join("");
+//     str = str.split(",");
+//     str = str.join("");
+//     let rev = str.split("");
+//     rev = rev.reverse();
+//     rev = rev.join("");
+//     return rev === str ? true : false;
+//   } else if (str[0] === "_") {
+//     str = str.split("");
+//     str.shift();
+//     str = str.join("");
+//     let rev = str.split("");
+//     rev = rev.reverse();
+//     rev = rev.join("");
+//     return rev === str ? true : false;
+//   } else {
+//     let rev = str.split("");
+//     rev = rev.reverse();
+//     rev = rev.join("");
+//     return rev === str ? true : false;
+//   }
 
-  //
-}
-console.log(palindrome("A man, a plan, a canal. Panama"));
+//   //
+// }
+// console.log(palindrome("A man, a plan, a canal. Panama"));
+
+// function sym(arg, arg2) {
+//   let dif = [];
+//   // getting rid of duplicate value in an array
+//   arg = [...new Set(arg)];
+//   arg2 = [...new Set(arg2)];
+
+//   for (let i = 0; i < arg.length; i++) {
+//     if (arg2.includes(arg[i]) === false) {
+//       dif.push(arg[i]);
+//     }
+//   }
+//   for (let i = 0; i < arg2.length; i++) {
+//     if (arg.includes(arg2[i]) === false) {
+//       dif.push(arg2[i]);
+//     }
+//   }
+//   return dif;
+// }
+// console.log(sym([1, 2, 3, 3], [5, 2, 1, 4]));
+
+// function updateInventory(arr1, arr2) {
+//   let res = [];
+//   for (let i = 0; i < arr1.length; i++) {
+//     for (let j = 0; j < arr1.length; j++) {
+//       if (arr1[i][1] === arr2[j][1]) {
+//         arr1[i][0] = arr1[i][0] + arr2[j][0];
+//         res.push(arr1[i][0], arr2[j][1]);
+//       }
+//     }
+//   }
+//   for (let i = 0; i < arr1.length; i++) {
+//     if (arr2.includes(arr1[i][1] === false)) {
+//       res.push(arr1[i][0], arr1[i][1]);
+//     }
+//   }
+//   return res;
+
+// function payout(paid) {
+//   let sorted = paid.sort((a, b) => a - b);
+//   let total = 0;
+
+//   // for (let amt of sorted) {
+//   //   total += amt;
+//   // }
+//   total = sorted.reduce((acc, curr) => acc + curr, 0);
+//   let avg = total / sorted.length;
+//   let payer = 0;
+//   let recipient = sorted.length - 1;
+//   let carry = 0;
+
+//   while (sorted[payer] !== sorted[recipient]) {
+//     let amtToPay = avg - sorted[payer];
+//     sorted[payer] += amtToPay;
+//     sorted[recipient] -= amtToPay;
+
+//     if (sorted[recipient] === avg) {
+//       // carry = avg - sorted[recipient];
+//       // sorted[recipient] = avg;
+//       recipient -= 1;
+//     }
+
+//     payer += 1;
+//   }
+//   return payer;
+// }
+// let payments = [20, 5, 5, 5, 10, 15];
+// console.log(payout(payments));
