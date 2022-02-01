@@ -3899,3 +3899,106 @@
 // }
 // let payments = [20, 5, 5, 5, 10, 15];
 // console.log(payout(payments));
+
+// Javascript implementation of QuickSort
+
+// // A utility function to swap two elements
+// function swap(arr, i, j) {
+//   let temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// }
+
+// /* This function takes last element as pivot, places
+//  the pivot element at its correct position in sorted
+//  array, and places all smaller (smaller than pivot)
+//  to left of pivot and all greater elements to right
+//  of pivot */
+// function partition(arr, low, high) {
+//   // pivot
+//   let pivot = arr[high];
+
+//   // Index of smaller element and
+//   // indicates the right position
+//   // of pivot found so far
+//   let i = low - 1;
+
+//   for (let j = low; j <= high - 1; j++) {
+//     // If current element is smaller
+//     // than the pivot
+//     if (arr[j] < pivot) {
+//       // Increment index of
+//       // smaller element
+//       i++;
+//       swap(arr, i, j);
+//     }
+//   }
+//   swap(arr, i + 1, high);
+//   return i + 1;
+// }
+
+// /* The main function that implements QuickSort
+//         arr[] --> Array to be sorted,
+//         low --> Starting index,
+//         high --> Ending index
+// */
+// function quickSort(arr, low, high) {
+//   if (low < high) {
+//     // pi is partitioning index, arr[p]
+//     // is now at right place
+//     let pi = partition(arr, low, high);
+
+//     // Separately sort elements before
+//     // partition and after partition
+//     quickSort(arr, low, pi - 1);
+//     quickSort(arr, pi + 1, high);
+//   }
+//   return arr;
+// }
+// let arr = [10, 7, 8, 9, 1, 5];
+// let n = arr.length;
+// console.log(quickSort(arr, 0, n - 1));
+
+// utility function to swap elements
+function swap(arr, i, j) {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
+
+// the partition function
+function partition(arr, low, high) {
+  // pivot would be the last value of the high
+  let pivot = arr[high];
+  // i would be the returned value as a pivot
+  let i = low - 1;
+
+  // starts for loop to compare the current element with pivot
+  for (let j = low; j <= high - 1; j++) {
+    // if current element is smaller than pivot
+    if (arr[j] < pivot) {
+      // increment i
+      // and call swap with arr, i and j
+      i++;
+      swap(arr, i, j);
+    }
+  }
+  // call swap with arr, i+1 and high
+  // and return i+1
+  swap(arr, i + 1, high);
+  return i + 1;
+}
+
+// the main function of quickSort
+function quickSort(arr, low, high) {
+  if (low < high) {
+    // calling partition function as pi
+    let pi = partition(arr, low, high);
+
+    // this algorithm should call 2 recursive calls
+    quickSort(arr, low, pi - 1);
+    quickSort(arr, pi + 1, high);
+  }
+  return arr;
+}
+console.log(quickSort([8, 5, 4, 1], 0, 3));
