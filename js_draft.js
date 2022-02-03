@@ -4156,6 +4156,8 @@
 // }
 // console.log(FirstFactorial(4));
 
+// brute force approach using double loop
+// time: O(n^2) space: O(1)
 // function twoNumberSum(array, targetSum) {
 //   // Write your code here.
 
@@ -4179,23 +4181,41 @@
 
 // sortedSquaredArray with better time and space complexity:
 // time: O(n) space: O(n)
-function sortedSquaredArray(array) {
-  // Write your code here.
-  // optimal solution with pointers
-  let sortedSquares = [];
-  let smallerValueIdx = 0;
-  let largerValueIdx = array.length - 1;
+// function sortedSquaredArray(array) {
+//   // Write your code here.
+//   // optimal solution with pointers
+//   let sortedSquares = [];
+//   let smallerValueIdx = 0;
+//   let largerValueIdx = array.length - 1;
 
-  for (let idx = array.length - 1; idx >= 0; idx--) {
-    let smallerValue = array[smallerValueIdx];
-    let largerValue = array[largerValueIdx];
-    if (Math.abs(smallerValue) > Math.abs(largerValue)) {
-      sortedSquares[idx] = smallerValue * smallerValue;
-      smallerValueIdx++;
+//   for (let idx = array.length - 1; idx >= 0; idx--) {
+//     let smallerValue = array[smallerValueIdx];
+//     let largerValue = array[largerValueIdx];
+//     if (Math.abs(smallerValue) > Math.abs(largerValue)) {
+//       sortedSquares[idx] = smallerValue * smallerValue;
+//       smallerValueIdx++;
+//     } else {
+//       sortedSquares[idx] = largerValue * largerValue;
+//       largerValueIdx--;
+//     }
+//   }
+//   return sortedSquares;
+// }
+
+// hash table approach
+// time: O(n) space: O(n)
+function twoNumberSum(array, targetSum) {
+  // Write your code here.
+  let nums = {};
+  for (let num of array) {
+    let potentialMatch = targetSum - num;
+
+    if (potentialMatch in nums) {
+      return [potentialMatch, num];
     } else {
-      sortedSquares[idx] = largerValue * largerValue;
-      largerValueIdx--;
+      nums[num] = true;
     }
   }
-  return sortedSquares;
+  return [];
 }
+console.log(twoNumberSum([4, 6, 1, -3], 3));
