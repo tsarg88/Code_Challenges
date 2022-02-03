@@ -3886,7 +3886,7 @@
 //     let amtToPay = avg - sorted[payer];
 //     sorted[payer] += amtToPay;
 //     sorted[recipient] -= amtToPay;
-
+//     // console.log(`payer ${recipient} pays ${amtToPay} to recipient ${payer}`);
 //     if (sorted[recipient] === avg) {
 //       // carry = avg - sorted[recipient];
 //       // sorted[recipient] = avg;
@@ -3960,45 +3960,183 @@
 // console.log(quickSort(arr, 0, n - 1));
 
 // utility function to swap elements
-function swap(arr, i, j) {
-  let temp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = temp;
-}
+// function swap(arr, i, j) {
+//   let temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// }
 
-// the partition function
-function partition(arr, low, high) {
-  // pivot would be the last value of the high
-  let pivot = arr[high];
-  // i would be the returned value as a pivot
-  let i = low - 1;
+// // the partition function
+// function partition(arr, low, high) {
+//   // pivot would be the last value of the high
+//   let pivot = arr[high];
+//   // i would be the returned value as a pivot
+//   let i = low - 1;
 
-  // starts for loop to compare the current element with pivot
-  for (let j = low; j <= high - 1; j++) {
-    // if current element is smaller than pivot
-    if (arr[j] < pivot) {
-      // increment i
-      // and call swap with arr, i and j
-      i++;
-      swap(arr, i, j);
+//   // starts for loop to compare the current element with pivot
+//   for (let j = low; j <= high - 1; j++) {
+//     // if current element is smaller than pivot
+//     if (arr[j] < pivot) {
+//       // increment i
+//       // and call swap with arr, i and j
+//       i++;
+//       swap(arr, i, j);
+//     }
+//   }
+//   // call swap with arr, i+1 and high
+//   // and return i+1
+//   swap(arr, i + 1, high);
+//   return i + 1;
+// }
+
+// // the main function of quickSort
+// function quickSort(arr, low, high) {
+//   if (low < high) {
+//     // calling partition function as pi
+//     let pi = partition(arr, low, high);
+
+//     // this algorithm should call 2 recursive calls
+//     quickSort(arr, low, pi - 1);
+//     quickSort(arr, pi + 1, high);
+//   }
+//   return arr;
+// }
+// console.log(quickSort([8, 5, 4, 1], 0, 3));
+
+// // the swap utility function
+// function swap(arr, i, j) {
+//   let temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// }
+
+// // the partition function
+// function partition(arr, low, high) {
+//   // creates pivot as the value of arr as high
+//   let pivot = arr[high];
+//   // creates i as returned value/pivot of this function
+//   let i = low - 1;
+
+//   // for loop to compare j with pivot
+//   for (let j = low; j <= high - 1; j++) {
+//     // if value of j is less than pivot
+//     if (arr[j] < pivot) {
+//       // increment i
+//       // and call swap with arr, i and j
+//       i++;
+//       swap(arr, i, j);
+//     }
+//   } // call swap with arr, i+1 and high
+//   // return i+1
+//   swap(arr, i + 1, high);
+//   return i + 1;
+// }
+
+// // the main quickSort function
+// // will take 3 arguments: arr, low(which would be the starting index), high(the ending index)
+// function quickSort(arr, low, high) {
+//   // compares low with high
+//   if (low < high) {
+//     // calls partition function as pi
+//     let pi = partition(arr, low, high);
+
+//     // this algo should call 2 recursive calls
+//     quickSort(arr, low, pi - 1);
+//     quickSort(arr, pi + 1, high);
+//   }
+//   return arr;
+// }
+// console.log(quickSort([8, 5, 4, 1], 0, 3));
+
+// function payout(arr) {
+//   let sorted = arr.sort((a, b) => a - b);
+//   let total = arr.reduce((acc, curr) => acc + curr, 0);
+//   let avg = total / arr.length;
+//   let recipient = sorted.length - 1;
+//   let payer = 0;
+//   while (sorted[payer] !== sorted[recipient]) {
+//     let amtToPay = avg - sorted[payer];
+//     sorted[payer] += amtToPay;
+//     sorted[recipient] -= amtToPay;
+
+//     if (sorted[recipient] === avg) {
+//       recipient -= 1;
+//     }
+//     payer += 1;
+//   }
+//   return payer;
+// }
+
+// let payments = [0, 5, 10, 25];
+
+// console.log(payout(payments));
+
+// function Tree(x) {
+//   this.value = x;
+//   this.left = null;
+//   this.right = null;
+// }
+// function solution(t, s) {
+//   if (!t) return false;
+//   s -= t.value;
+//   if (!t.left && !t.right) {
+//     return s === 0;
+//   }
+//   return solution(t.left, s) || solution(t.right, s);
+// }
+// console.log(
+//   solution(
+//     {
+//       value: 4,
+//       left: {
+//         value: 1,
+//         left: {
+//           value: -2,
+//           left: null,
+//           right: {
+//             value: 3,
+//             left: null,
+//             right: null,
+//           },
+//         },
+//         right: null,
+//       },
+//       right: {
+//         value: 3,
+//         left: {
+//           value: 1,
+//           left: null,
+//           right: null,
+//         },
+//         right: {
+//           value: 2,
+//           left: {
+//             value: -2,
+//             left: null,
+//             right: null,
+//           },
+//           right: {
+//             value: -3,
+//             left: null,
+//             right: null,
+//           },
+//         },
+//       },
+//     },
+//     7
+//   )
+// );
+
+function isValidSubsequence(array, sequence) {
+  let seqIdx = 0;
+  for (let value of array) {
+    if (seqIdx === sequence.length) {
+      break;
+    }
+    if (sequence[seqIdx] === value) {
+      seqIdx++;
     }
   }
-  // call swap with arr, i+1 and high
-  // and return i+1
-  swap(arr, i + 1, high);
-  return i + 1;
+  return seqIdx === sequence.length;
 }
-
-// the main function of quickSort
-function quickSort(arr, low, high) {
-  if (low < high) {
-    // calling partition function as pi
-    let pi = partition(arr, low, high);
-
-    // this algorithm should call 2 recursive calls
-    quickSort(arr, low, pi - 1);
-    quickSort(arr, pi + 1, high);
-  }
-  return arr;
-}
-console.log(quickSort([8, 5, 4, 1], 0, 3));
+console.log(isValidSubsequence([1, 2, 3, 4], [2, 4]));
