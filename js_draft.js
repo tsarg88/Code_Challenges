@@ -4204,16 +4204,37 @@
 
 // hash table approach
 // time: O(n) space: O(n)
-function twoNumberSum(array, targetSum) {
-  // Write your code here.
-  let nums = {};
-  for (let num of array) {
-    let potentialMatch = targetSum - num;
+// function twoNumberSum(array, targetSum) {
+//   // Write your code here.
+//   let nums = {};
+//   for (let num of array) {
+//     let potentialMatch = targetSum - num;
 
-    if (potentialMatch in nums) {
-      return [potentialMatch, num];
-    } else {
-      nums[num] = true;
+//     if (potentialMatch in nums) {
+//       return [potentialMatch, num];
+//     } else {
+//       nums[num] = true;
+//     }
+//   }
+//   return [];
+// }
+// console.log(twoNumberSum([4, 6, 1, -3], 3));
+
+// using pointers approach
+// time: O(n log n) space: O(1)
+function twoNumberSum(array, targetSum) {
+  array = array.sort((a, b) => a - b);
+  let left = 0;
+  let right = array.length - 1;
+
+  while (left < right) {
+    let currentSum = array[right] + array[left];
+    if (currentSum === targetSum) {
+      return [array[right], array[left]];
+    } else if (currentSum < targetSum) {
+      left++;
+    } else if (currentSum > targetSum) {
+      right--;
     }
   }
   return [];
