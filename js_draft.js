@@ -4127,16 +4127,75 @@
 //   )
 // );
 
-function isValidSubsequence(array, sequence) {
-  let seqIdx = 0;
-  for (let value of array) {
-    if (seqIdx === sequence.length) {
-      break;
-    }
-    if (sequence[seqIdx] === value) {
-      seqIdx++;
+// function isValidSubsequence(array, sequence) {
+//   let seqIdx = 0;
+//   for (let value of array) {
+//     if (seqIdx === sequence.length) {
+//       break;
+//     }
+//     if (sequence[seqIdx] === value) {
+//       seqIdx++;
+//     }
+//   }
+//   return seqIdx === sequence.length;
+// }
+// console.log(isValidSubsequence([1, 2, 3, 4], [2, 4]));
+
+// var containsDuplicate = function (nums) {
+//   let withOutDuplicate = [...new Set(nums)];
+//   return nums.length === withOutDuplicate.length ? false : true;
+// };
+// console.log(containsDuplicate([1, 2, 3]));
+
+// function FirstFactorial(num) {
+//   let total = 4;
+//   // code goes here
+//   for (let i = num - 1; i >= 1; i--) {
+//     console.log(i);
+//   }
+// }
+// console.log(FirstFactorial(4));
+
+// function twoNumberSum(array, targetSum) {
+//   // Write your code here.
+
+//   // start 2 for loops: inned and outer as i and j
+//   // take the value of i and add to value of j(which should be i+1)
+//   // if the addition is equal to target
+//   // return both values of i and j
+//   // edge case:
+//   //	return []
+
+//   for (let i = 0; i < array.length - 1; i++) {
+//     for (let j = i + 1; j < array.length - 1; j++) {
+//       if (array[i] + array[j] === targetSum) {
+//         return [array[i], array[j]];
+//       }
+//     }
+//   }
+//   return [];
+// }
+// console.log(twoNumberSum([4, 6], 10));
+
+// sortedSquaredArray with better time and space complexity:
+// time: O(n) space: O(n)
+function sortedSquaredArray(array) {
+  // Write your code here.
+  // optimal solution with pointers
+  let sortedSquares = [];
+  let smallerValueIdx = 0;
+  let largerValueIdx = array.length - 1;
+
+  for (let idx = array.length - 1; idx >= 0; idx--) {
+    let smallerValue = array[smallerValueIdx];
+    let largerValue = array[largerValueIdx];
+    if (Math.abs(smallerValue) > Math.abs(largerValue)) {
+      sortedSquares[idx] = smallerValue * smallerValue;
+      smallerValueIdx++;
+    } else {
+      sortedSquares[idx] = largerValue * largerValue;
+      largerValueIdx--;
     }
   }
-  return seqIdx === sequence.length;
+  return sortedSquares;
 }
-console.log(isValidSubsequence([1, 2, 3, 4], [2, 4]));
