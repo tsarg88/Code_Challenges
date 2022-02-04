@@ -4222,21 +4222,80 @@
 
 // using pointers approach
 // time: O(n log n) space: O(1)
-function twoNumberSum(array, targetSum) {
-  array = array.sort((a, b) => a - b);
-  let left = 0;
-  let right = array.length - 1;
+// function twoNumberSum(array, targetSum) {
+//   array = array.sort((a, b) => a - b);
+//   let left = 0;
+//   let right = array.length - 1;
 
-  while (left < right) {
-    let currentSum = array[right] + array[left];
-    if (currentSum === targetSum) {
-      return [array[right], array[left]];
-    } else if (currentSum < targetSum) {
-      left++;
-    } else if (currentSum > targetSum) {
-      right--;
+//   while (left < right) {
+//     let currentSum = array[right] + array[left];
+//     if (currentSum === targetSum) {
+//       return [array[right], array[left]];
+//     } else if (currentSum < targetSum) {
+//       left++;
+//     } else if (currentSum > targetSum) {
+//       right--;
+//     }
+//   }
+//   return [];
+// }
+// console.log(twoNumberSum([4, 6, 1, -3], 3));
+
+// function variableTest() {
+//   const test = 1;
+//   test = 1;
+//   return test;
+// }
+// console.log(variableTest());
+
+// using hash/object approach but with some additional functions like finding keys by value etc,
+// therefore time and space would be approximately: O(n^2)
+function tournamentWinner(competitions, results) {
+  // Write your code here.
+
+  // using hash table/object approach
+
+  // defiining hash/object
+  let main = {};
+
+  // using for loop to traverse and compare values from both arays
+
+  for (let i = 0; i <= competitions.length - 1; i++) {
+    let homeTeamWins = competitions[i][0];
+    let awayTeamWins = competitions[i][1];
+    if (results[i] === 0) {
+      if (main[awayTeamWins] === undefined) {
+        main[awayTeamWins] = 3;
+      } else {
+        main[awayTeamWins] += 3;
+      }
+    } else {
+      // console.log(main[homeTeamWins]);
+      if (main[homeTeamWins] === undefined) {
+        main[homeTeamWins] = 3;
+      } else {
+        main[homeTeamWins] += 3;
+      }
     }
   }
-  return [];
+
+  // finding biggest value in main
+  let arr = Object.values(main);
+  let maxValue = Math.max(...arr);
+
+  // finding correct key based on value
+  function getKeyByValue(main, maxValue) {
+    return Object.keys(main).find((key) => main[key] === maxValue);
+  }
+  return getKeyByValue(main, maxValue);
 }
-console.log(twoNumberSum([4, 6, 1, -3], 3));
+console.log(
+  tournamentWinner(
+    [
+      ["HTML", "C#"],
+      ["C#", "Python"],
+      ["Python", "HTML"],
+    ],
+    [0, 0, 1]
+  )
+);
