@@ -4250,45 +4250,88 @@
 
 // using hash/object approach but with some additional functions like finding keys by value etc,
 // therefore time and space would be approximately: O(n^2)
+// function tournamentWinner(competitions, results) {
+//   // Write your code here.
+
+//   // using hash table/object approach
+
+//   // defiining hash/object
+//   let main = {};
+
+//   // using for loop to traverse and compare values from both arays
+
+//   for (let i = 0; i <= competitions.length - 1; i++) {
+//     let homeTeamWins = competitions[i][0];
+//     let awayTeamWins = competitions[i][1];
+//     if (results[i] === 0) {
+//       if (main[awayTeamWins] === undefined) {
+//         main[awayTeamWins] = 3;
+//       } else {
+//         main[awayTeamWins] += 3;
+//       }
+//     } else {
+//       // console.log(main[homeTeamWins]);
+//       if (main[homeTeamWins] === undefined) {
+//         main[homeTeamWins] = 3;
+//       } else {
+//         main[homeTeamWins] += 3;
+//       }
+//     }
+//   }
+
+//   // finding biggest value in main
+//   let arr = Object.values(main);
+//   let maxValue = Math.max(...arr);
+
+//   // finding correct key based on value
+//   function getKeyByValue(main, maxValue) {
+//     return Object.keys(main).find((key) => main[key] === maxValue);
+//   }
+//   return getKeyByValue(main, maxValue);
+// }
+
+// create Home_Team_Won which will store 1 as a winning team score
+// create currentBestTeam which will store initially an empty string
+// create an object scores with key of currentBestTeam and a value as 0
+// make a for loop from the len of competition
+// create result to store the current result from result[i]
+// create [homeTeam, awayTeam] to store current values from competitions[i]
+// create winningTeam which will determine and store current winning team
+// create updateScore function which will take args(winingTeam, 3, scores)
+// to store winning team in score(if its not there) and add 3 to it if its there
+// call updateScore
+// check in scores if values from winningTeam is bigger than currentBestTeam
+// if so update currentBestTeam with winningTeam
+// return currentBestTeam
+
+// time: O(n) space: O(n)
+let Home_Team_Won = 1;
 function tournamentWinner(competitions, results) {
-  // Write your code here.
+  let currentBestTeam = "";
+  let scores = { [currentBestTeam]: 0 };
 
-  // using hash table/object approach
+  for (let i = 0; i < competitions.length; i++) {
+    let result = results[i];
+    let [homeTeam, awayTeam] = competitions[i];
 
-  // defiining hash/object
-  let main = {};
+    let winningTeam = result === Home_Team_Won ? homeTeam : awayTeam;
+    updateScore(winningTeam, 3, scores);
 
-  // using for loop to traverse and compare values from both arays
-
-  for (let i = 0; i <= competitions.length - 1; i++) {
-    let homeTeamWins = competitions[i][0];
-    let awayTeamWins = competitions[i][1];
-    if (results[i] === 0) {
-      if (main[awayTeamWins] === undefined) {
-        main[awayTeamWins] = 3;
-      } else {
-        main[awayTeamWins] += 3;
-      }
-    } else {
-      // console.log(main[homeTeamWins]);
-      if (main[homeTeamWins] === undefined) {
-        main[homeTeamWins] = 3;
-      } else {
-        main[homeTeamWins] += 3;
-      }
+    if (scores[winningTeam] > scores[currentBestTeam]) {
+      currentBestTeam = winningTeam;
     }
   }
+  return currentBestTeam;
 
-  // finding biggest value in main
-  let arr = Object.values(main);
-  let maxValue = Math.max(...arr);
-
-  // finding correct key based on value
-  function getKeyByValue(main, maxValue) {
-    return Object.keys(main).find((key) => main[key] === maxValue);
+  function updateScore(winningTeam, points, scores) {
+    if (!(winningTeam in scores)) {
+      scores[winningTeam] = points;
+    } else {
+      scores[winningTeam] += points;
+    }
   }
-  return getKeyByValue(main, maxValue);
 }
+
 console.log(
   tournamentWinner(
     [
