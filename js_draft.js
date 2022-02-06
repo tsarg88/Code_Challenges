@@ -4305,40 +4305,64 @@
 // return currentBestTeam
 
 // time: O(n) space: O(n)
-let Home_Team_Won = 1;
-function tournamentWinner(competitions, results) {
-  let currentBestTeam = "";
-  let scores = { [currentBestTeam]: 0 };
+// let Home_Team_Won = 1;
+// function tournamentWinner(competitions, results) {
+//   let currentBestTeam = "";
+//   let scores = { [currentBestTeam]: 0 };
 
-  for (let i = 0; i < competitions.length; i++) {
-    let result = results[i];
-    let [homeTeam, awayTeam] = competitions[i];
+//   for (let i = 0; i < competitions.length; i++) {
+//     let result = results[i];
+//     let [homeTeam, awayTeam] = competitions[i];
 
-    let winningTeam = result === Home_Team_Won ? homeTeam : awayTeam;
-    updateScore(winningTeam, 3, scores);
+//     let winningTeam = result === Home_Team_Won ? homeTeam : awayTeam;
+//     updateScore(winningTeam, 3, scores);
 
-    if (scores[winningTeam] > scores[currentBestTeam]) {
-      currentBestTeam = winningTeam;
-    }
-  }
-  return currentBestTeam;
+//     if (scores[winningTeam] > scores[currentBestTeam]) {
+//       currentBestTeam = winningTeam;
+//     }
+//   }
+//   return currentBestTeam;
 
-  function updateScore(winningTeam, points, scores) {
-    if (!(winningTeam in scores)) {
-      scores[winningTeam] = points;
+//   function updateScore(winningTeam, points, scores) {
+//     if (!(winningTeam in scores)) {
+//       scores[winningTeam] = points;
+//     } else {
+//       scores[winningTeam] += points;
+//     }
+//   }
+// }
+
+// console.log(
+//   tournamentWinner(
+//     [
+//       ["HTML", "C#"],
+//       ["C#", "Python"],
+//       ["Python", "HTML"],
+//     ],
+//     [0, 0, 1]
+//   )
+// );
+
+// sort the coins
+// make a change var, set it to 0, to check the current change
+// make a for loop through coins
+// if the coin[i] > change+1
+// return change+1
+// else, change+1
+// return change+1
+
+// time: O(nlogn) space: O(1)
+function nonConstructibleChange(coins) {
+  // Write your code here.
+  coins.sort((a, b) => a - b);
+  let change = 0;
+  for (let coin of coins) {
+    if (coin > change + 1) {
+      return (change += 1);
     } else {
-      scores[winningTeam] += points;
+      change += coin;
     }
   }
+  return (change += 1);
 }
-
-console.log(
-  tournamentWinner(
-    [
-      ["HTML", "C#"],
-      ["C#", "Python"],
-      ["Python", "HTML"],
-    ],
-    [0, 0, 1]
-  )
-);
+console.log(nonConstructibleChange([1, 2, 3, 5]));
