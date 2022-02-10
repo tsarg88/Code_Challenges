@@ -4352,17 +4352,235 @@
 // return change+1
 
 // time: O(nlogn) space: O(1)
-function nonConstructibleChange(coins) {
-  // Write your code here.
-  coins.sort((a, b) => a - b);
-  let change = 0;
-  for (let coin of coins) {
-    if (coin > change + 1) {
-      return (change += 1);
-    } else {
-      change += coin;
+// function nonConstructibleChange(coins) {
+//   // Write your code here.
+//   coins.sort((a, b) => a - b);
+//   let change = 0;
+//   for (let coin of coins) {
+//     if (coin > change + 1) {
+//       return (change += 1);
+//     } else {
+//       change += coin;
+//     }
+//   }
+//   return (change += 1);
+// }
+// console.log(nonConstructibleChange([2, 3, 5]));
+
+// class BST {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+
+//   //recursive solution which takes more space O(logn)
+//   insert(value) {
+//     if (value < this.value) {
+//       if (this.left === null) {
+//         this.left = new BST(value);
+//       } else {
+//         this.left.insert(value);
+//       }
+//     } else {
+//       if (this.right === null) {
+//         this.right = new BST(value);
+//       } else {
+//         this.right.insert(value);
+//       }
+//     }
+//     return this;
+//   }
+
+//   // iterative solution which takes less space O(1)
+//   insert(value) {
+//     let currentNode = this;
+//     while (true) {
+//       if (value < currentNode.value) {
+//         if (currentNode.left === null) {
+//           currentNode.left = new BST(value);
+//           break;
+//         } else {
+//           currentNode = currentNode.left;
+//         }
+//       } else {
+//         if (currentNode.right === null) {
+//           currentNode.right = new BST(value);
+//           break;
+//         } else {
+//           currentNode = currentNode.right;
+//         }
+//       }
+//     }
+//     return this;
+//   }
+
+//   contains(value) {
+//     let currentNode = this;
+//     while (currentNode !== null) {
+//       if (value < currentNode.value) {
+//         currentNode = currentNode.left;
+//       } else if (value > currentNode.value) {
+//         currentNode = currentNode.right;
+//       } else {
+//         return true;
+//       }
+//     }
+//     return false;
+//   }
+
+//   remove(value) {
+//     // Write your code here.
+//     // Do not edit the return statement of this method.
+//     return this;
+//   }
+// }
+
+// let test = new BST();
+// test.insert(1);
+// test.insert(3);
+// test.insert(5);
+// console.log(test.contains(89));
+
+// creating Node class, which will have:
+// a value and left and right attributes
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// // creating BST class which will have:
+// // a root attribute
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
+
+//   // insert method, which will take an argument as a value
+//   insert(value) {
+//     // first, create a new node
+//     let newNode = new Node(value);
+//     // check to see if there is a value in root
+//     // if no, assign the root with that newNode and return this'
+//     if (this.root === null) {
+//       this.root = newNode;
+//       return this;
+//     }
+//     // let current as a root
+//     let current = this.root;
+//     // traverse through with while
+//     while (current) {
+//       // if the value is a duplicate with root, return undefined
+//       if (value === current.value) return undefined;
+//       // if the value less than current value
+//       // check if the current left is null
+//       // if so, assign current.left to newNode, and return this
+//       // if not, assign current to current.left(basically it becomes new root)
+//       // and continue traversing
+//       if (value < current.value) {
+//         if (current.left === null) {
+//           current.left = newNode;
+//           return this;
+//         }
+//         current = current.left;
+//       } else {
+//         if (current.right === null) {
+//           current.right = newNode;
+//           return this;
+//         }
+//         current = current.right;
+//       }
+//     }
+//   }
+
+//   find(value) {
+//     // first check if there is a root
+//     // if not, return false
+//     if (!this.root) return false;
+//     // let current as a this.root
+//     let current = this.root;
+//     let found = false;
+//     // start while loop with current and found as arguments
+//     // check if the value of the newNode is the value we're looking for
+//     while (current && !found) {
+//       if (value < current.value) {
+//         current = current.left;
+//       } else if (value > current.value) {
+//         current = current.right;
+//       } else {
+//         found = current;
+//       }
+//     }
+//     if (!found) return `the value of ${value} not found!`;
+//     return true;
+//   }
+// }
+// time: O(logn) space: O(n)
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BST {
+  constructor() {
+    this.root = null;
+  }
+
+  insert(value) {
+    let newNode = new Node(value);
+
+    if (this.root === null) {
+      this.root = newNode;
+      return this;
+    }
+
+    let current = this.root;
+
+    while (current) {
+      if (value < current.value) {
+        if (current.left === null) {
+          current.left = newNode;
+          return this;
+        }
+        current = current.left;
+      } else if (value > current.value) {
+        if (current.right === null) {
+          current.right = newNode;
+          return this;
+        }
+        current = current.right;
+      }
     }
   }
-  return (change += 1);
+
+  find(value) {
+    if (!this.root) return false;
+
+    let current = this.root;
+    let found = false;
+
+    while (current && !found) {
+      if (value < current.value) {
+        current = current.left;
+      } else if (value > current.value) {
+        current = current.right;
+      } else {
+        found = current;
+      }
+    }
+    if (!found) return `we did not find ${value} in BST!`;
+    return true;
+  }
 }
-console.log(nonConstructibleChange([1, 2, 3, 5]));
+
+let test = new BST();
+test.insert(1);
+test.insert(3);
+test.insert(5);
+console.log(test.find(50));
