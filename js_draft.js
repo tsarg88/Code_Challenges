@@ -4518,7 +4518,150 @@
 //     return true;
 //   }
 // }
-// time: O(logn) space: O(n)
+// time: O(logn) space: O(1), because we solve this iteratively!
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
+
+//   insert(value) {
+//     // creating newNode with value
+//     let newNode = new Node(value);
+
+//     // check this.root if its null
+//     // assign to this.root the newNode and return this
+//     if (this.root === null) {
+//       this.root = newNode;
+//       return this;
+//     }
+
+//     //creating current as a pointer to this.root
+//     let current = this.root;
+
+//     // while the current
+//     while (current) {
+//       // if the value is less than current.value
+//       if (value < current.value) {
+//         // and if current.left is null
+//         if (current.left === null) {
+//           // assign newNode to current.left
+//           current.left = newNode;
+//           // return this
+//           return this;
+//         }
+//         // assign current to current left
+//         // to traverse to the left to node
+//         current = current.left;
+//       } else if (value > current.value) {
+//         if (current.right === null) {
+//           current.right = newNode;
+//           return this;
+//         }
+//         current = current.right;
+//       }
+//     }
+//   }
+
+//   find(value) {
+//     // if not this.root return false
+//     if (!this.root) return false;
+
+//     //creating current as a pointer to this.root node
+//     let current = this.root;
+//     // creating found as false
+//     let found = false;
+
+//     //while current and !false
+//     while (current && !found) {
+//       // if the value is less than current.value
+//       if (value < current.value) {
+//         // move current to current.left node
+//         current = current.left;
+//       }
+//       // same here with bigger than
+//       else if (value > current.value) {
+//         current = current.right;
+//       }
+//       // else means we've found the value
+//       else {
+//         // just assign current to found(makes it true)
+//         found = current;
+//       }
+//     }
+//     // return value if not found(if found remains false)
+//     if (!found) return `we did not find ${value} in BST!`;
+//     return found;
+//   }
+
+//   remove(value) {
+//     // assigning this.root to removeNode method with
+//     // this.root and value
+//     this.root = this.removeNode(this.root, value);
+//   }
+//   removeNode(current, value) {
+//     // base case: if the tree is empty, just return it
+//     if (current === null) return current;
+
+//     // if the value is the same as current.value, then we've found the node with that value to be deleted
+//     if (value === current.value) {
+//       // we check to see whether the node is without child
+//       if (current.left === null && current.right === null) {
+//         // easy case, the node is the leaf: we just return null or delete the node
+//         return null;
+//       } //if the left is null
+//       else if (current.left === null) {
+//         // then we return current.right node as a replacement to the removed node/value
+//         return current.right;
+//       } else if (current.right === null) {
+//         return current.left;
+//       }
+
+//       // else case, where the node have 2 children
+//       else {
+//         // we have to get the smallest node in the RIGHT subtree
+//         // we create tempNode which will call smallestNode method with current.right as arg
+//         let tempNode = this.smallestNode(current.right);
+//         // and then we will overwrite current.value with tempNode.value
+//         current.value = tempNode.value;
+
+//         // calling removeNode recursively on current.right with
+//         // current.right and tempNode value to traverse and delete the moved node
+//         current.right = this.removeNode(current.right, tempNode.value);
+//         return current;
+//       }
+//     }
+//     // else if the value is less than current value
+//     else if (value < current.value) {
+//       // assign current.left to recursive call to removeNode with
+//       // current.left and value
+//       current.left = this.removeNode(current.left, value);
+//       return current;
+//     } else {
+//       current.right = this.removeNode(current.right, value);
+//     }
+//   }
+//   // smallestNode takes node(current.right)
+//   // traverses from it to left side
+//   // and returns smallest left most value of the node
+//   smallestNode(node) {
+//     while (node.left !== null) {
+//       node = node.left;
+//     }
+//     return node;
+//   }
+
+// }
+
+// Finding Closest Node in BST
+// time: O(logn) space: O(1)
 class Node {
   constructor(value) {
     this.value = value;
@@ -4534,14 +4677,11 @@ class BST {
 
   insert(value) {
     let newNode = new Node(value);
-
     if (this.root === null) {
       this.root = newNode;
       return this;
     }
-
     let current = this.root;
-
     while (current) {
       if (value < current.value) {
         if (current.left === null) {
@@ -4559,28 +4699,38 @@ class BST {
     }
   }
 
-  find(value) {
-    if (!this.root) return false;
+  findClosestValueInBstTree() {
+    let target = 2;
+    return this.findClosestValueInBstTreeHelper(
+      this.root,
+      target,
+      this.root.value
+    );
+  }
 
-    let current = this.root;
-    let found = false;
-
-    while (current && !found) {
-      if (value < current.value) {
+  findClosestValueInBstTreeHelper(current, target, closest) {
+    // while current !== null
+    // if the abs difference target - closest > than target - current.value
+    // means than current.value is less far(is less than closest) from target than closest
+    // so we have to assign current = current.value
+    while (current.value !== null) {
+      if (Math.abs(target - closest) > Math.abs(target - current.value)) {
+        closest = current.value;
+      }
+      if (target < current.value) {
         current = current.left;
-      } else if (value > current.value) {
+      } else if (target > current.value) {
         current = current.right;
       } else {
-        found = current;
+        break;
       }
     }
-    if (!found) return `we did not find ${value} in BST!`;
-    return true;
+    return closest;
   }
 }
-
 let test = new BST();
 test.insert(1);
 test.insert(3);
 test.insert(5);
-console.log(test.find(50));
+test.findClosestValueInBstTree();
+// console.log(test);
