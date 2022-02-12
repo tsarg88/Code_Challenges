@@ -4662,6 +4662,75 @@
 
 // Finding Closest Node in BST
 // time: O(logn) space: O(1)
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
+
+//   insert(value) {
+//     let newNode = new Node(value);
+//     if (this.root === null) {
+//       this.root = newNode;
+//       return this;
+//     }
+//     let current = this.root;
+//     while (current) {
+//       if (value < current.value) {
+//         if (current.left === null) {
+//           current.left = newNode;
+//           return this;
+//         }
+//         current = current.left;
+//       } else if (value > current.value) {
+//         if (current.right === null) {
+//           current.right = newNode;
+//           return this;
+//         }
+//         current = current.right;
+//       }
+//     }
+//   }
+
+//   findClosestValueInBstTree() {
+//     let target = 2;
+//     return this.findClosestValueInBstTreeHelper(
+//       this.root,
+//       target,
+//       this.root.value
+//     );
+//   }
+
+//   findClosestValueInBstTreeHelper(current, target, closest) {
+//     // while current !== null
+//     // if the abs difference target - closest > than target - current.value
+//     // means than current.value is less far(is less than closest) from target than closest
+//     // so we have to assign current = current.value
+//     while (current.value !== null) {
+//       if (Math.abs(target - closest) > Math.abs(target - current.value)) {
+//         closest = current.value;
+//       }
+//       if (target < current.value) {
+//         current = current.left;
+//       } else if (target > current.value) {
+//         current = current.right;
+//       } else {
+//         break;
+//       }
+//     }
+//     return closest;
+//   }
+// }
+
+// Calculate Branch Sums of a given BST
+// time: O(n) space: O(n)
 class Node {
   constructor(value) {
     this.value = value;
@@ -4669,7 +4738,6 @@ class Node {
     this.right = null;
   }
 }
-
 class BST {
   constructor() {
     this.root = null;
@@ -4677,18 +4745,20 @@ class BST {
 
   insert(value) {
     let newNode = new Node(value);
+
     if (this.root === null) {
       this.root = newNode;
       return this;
     }
+
     let current = this.root;
     while (current) {
       if (value < current.value) {
         if (current.left === null) {
           current.left = newNode;
-          return this;
         }
         current = current.left;
+        return this;
       } else if (value > current.value) {
         if (current.right === null) {
           current.right = newNode;
@@ -4699,38 +4769,30 @@ class BST {
     }
   }
 
-  findClosestValueInBstTree() {
-    let target = 2;
-    return this.findClosestValueInBstTreeHelper(
-      this.root,
-      target,
-      this.root.value
-    );
+  branchSums() {
+    let sums = [];
+    this.calculateBranchSums(this.root, 0, sums);
+    return sums;
   }
 
-  findClosestValueInBstTreeHelper(current, target, closest) {
-    // while current !== null
-    // if the abs difference target - closest > than target - current.value
-    // means than current.value is less far(is less than closest) from target than closest
-    // so we have to assign current = current.value
-    while (current.value !== null) {
-      if (Math.abs(target - closest) > Math.abs(target - current.value)) {
-        closest = current.value;
-      }
-      if (target < current.value) {
-        current = current.left;
-      } else if (target > current.value) {
-        current = current.right;
-      } else {
-        break;
-      }
+  calculateBranchSums(node, runningSum, sums) {
+    if (!node) return;
+
+    let newRunningSum = runningSum + node.value;
+
+    if (!node.left && !node.right) {
+      sums.push(newRunningSum);
+      return;
     }
-    return closest;
+    this.calculateBranchSums(node.left, newRunningSum, sums);
+    this.calculateBranchSums(node.right, newRunningSum, sums);
   }
 }
+
 let test = new BST();
 test.insert(1);
-test.insert(3);
-test.insert(5);
-test.findClosestValueInBstTree();
+test.insert(2);
+test.insert(4);
+test.insert(8);
+console.log(test.branchSums());
 // console.log(test);
