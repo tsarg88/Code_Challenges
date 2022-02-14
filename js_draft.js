@@ -4731,68 +4731,143 @@
 
 // Calculate Branch Sums of a given BST
 // time: O(n) space: O(n)
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
-}
-class BST {
-  constructor() {
-    this.root = null;
-  }
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
 
-  insert(value) {
-    let newNode = new Node(value);
+//   insert(value) {
+//     let newNode = new Node(value);
 
-    if (this.root === null) {
-      this.root = newNode;
-      return this;
-    }
+//     if (this.root === null) {
+//       this.root = newNode;
+//       return this;
+//     }
 
-    let current = this.root;
-    while (current) {
-      if (value < current.value) {
-        if (current.left === null) {
-          current.left = newNode;
-        }
-        current = current.left;
-        return this;
-      } else if (value > current.value) {
-        if (current.right === null) {
-          current.right = newNode;
-          return this;
-        }
-        current = current.right;
-      }
-    }
-  }
+//     let current = this.root;
+//     while (current) {
+//       if (value < current.value) {
+//         if (current.left === null) {
+//           current.left = newNode;
+//         }
+//         current = current.left;
+//         return this;
+//       } else if (value > current.value) {
+//         if (current.right === null) {
+//           current.right = newNode;
+//           return this;
+//         }
+//         current = current.right;
+//       }
+//     }
+//   }
 
-  branchSums() {
-    let sums = [];
-    this.calculateBranchSums(this.root, 0, sums);
-    return sums;
-  }
+//   branchSums() {
+//     let sums = [];
+//     this.calculateBranchSums(this.root, 0, sums);
+//     return sums;
+//   }
 
-  calculateBranchSums(node, runningSum, sums) {
-    if (!node) return;
+//   calculateBranchSums(node, runningSum, sums) {
+//     if (!node) return;
 
-    let newRunningSum = runningSum + node.value;
+//     let newRunningSum = runningSum + node.value;
 
-    if (!node.left && !node.right) {
-      sums.push(newRunningSum);
-      return;
-    }
-    this.calculateBranchSums(node.left, newRunningSum, sums);
-    this.calculateBranchSums(node.right, newRunningSum, sums);
-  }
-}
+//     if (!node.left && !node.right) {
+//       sums.push(newRunningSum);
+//       return;
+//     }
+//     this.calculateBranchSums(node.left, newRunningSum, sums);
+//     this.calculateBranchSums(node.right, newRunningSum, sums);
+//   }
+// }
 
-let test = new BST();
-test.insert(1);
-test.insert(2);
-test.insert(4);
-test.insert(8);
-console.log(test.branchSums());
+// Node Depths
+// Recursive approach
+// time: O(n) space: O(h)
+
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
+
+//   insert(value) {
+//     let newNode = new Node(value);
+
+//     if (this.root === null) {
+//       this.root = newNode;
+//       return this;
+//     }
+
+//     let current = this.root;
+
+//     while (current) {
+//       if (value < current.value) {
+//         if (current.left === null) {
+//           current.left = newNode;
+//           return this;
+//         }
+//         current = current.left;
+//       } else if (value > current.value) {
+//         if (current.right === null) {
+//           current.right = newNode;
+//           return this;
+//         }
+//         current = current.right;
+//       }
+//     }
+//   }
+
+//   nodeDepths(param, depth = 0) {
+//     if (this.root === null) return 0;
+//     return (
+//       depth +
+//       this.nodeDepths(this.root.left, depth + 1) +
+//       this.nodeDepths(this.root.right, depth + 1)
+//     );
+//   }
+// }
+
+// let test = new BST();
+// test.insert(1);
+// test.insert(2);
+// test.insert(4);
+// test.insert(8);
+// console.log(test.nodeDepths());
 // console.log(test);
+
+// time: O(nlogn); space: O(1)
+function minimumWaitingTime(queries) {
+  // let res = 0;
+  // queries = queries.sort((a, b) => a - b);
+  // for (let i = 1; i < queries.length; i++) {
+  //   res += (queries.length - i) * queries[i - 1];
+  // }
+  // return res;
+
+  // clean way:
+  queries.sort((a, b) => a - b);
+
+  let totalWaitingTime = 0;
+  for (let i = 0; i < queries.length; i++) {
+    let duration = queries[i];
+    let queriesLeft = queries.length - (i + 1);
+    totalWaitingTime += duration * queriesLeft;
+  }
+  return totalWaitingTime;
+}
+console.log(minimumWaitingTime([3, 2, 1, 2, 6]));
