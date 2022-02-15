@@ -4832,8 +4832,9 @@
 //     }
 //   }
 
-//   nodeDepths(param, depth = 0) {
-//     if (this.root === null) return 0;
+//   nodeDepths() {
+//     let depth = 0;
+//     if (this.root.value === null) return 0;
 //     return (
 //       depth +
 //       this.nodeDepths(this.root.left, depth + 1) +
@@ -4847,27 +4848,46 @@
 // test.insert(2);
 // test.insert(4);
 // test.insert(8);
-// console.log(test.nodeDepths());
-// console.log(test);
+// test.nodeDepths();
 
 // time: O(nlogn); space: O(1)
-function minimumWaitingTime(queries) {
-  // let res = 0;
-  // queries = queries.sort((a, b) => a - b);
-  // for (let i = 1; i < queries.length; i++) {
-  //   res += (queries.length - i) * queries[i - 1];
-  // }
-  // return res;
+// function minimumWaitingTime(queries) {
+// let res = 0;
+// queries = queries.sort((a, b) => a - b);
+// for (let i = 1; i < queries.length; i++) {
+//   res += (queries.length - i) * queries[i - 1];
+// }
+// return res;
 
-  // clean way:
-  queries.sort((a, b) => a - b);
+// clean way:
+//   queries.sort((a, b) => a - b);
 
-  let totalWaitingTime = 0;
-  for (let i = 0; i < queries.length; i++) {
-    let duration = queries[i];
-    let queriesLeft = queries.length - (i + 1);
-    totalWaitingTime += duration * queriesLeft;
+//   let totalWaitingTime = 0;
+//   for (let i = 0; i < queries.length; i++) {
+//     let duration = queries[i];
+//     let queriesLeft = queries.length - (i + 1);
+//     totalWaitingTime += duration * queriesLeft;
+//   }
+//   return totalWaitingTime;
+// }
+// console.log(minimumWaitingTime([3, 2, 1, 2, 6]));
+
+// time: O(nlogn); space: O(1)
+function classPhotos(blueShirtHeights, redShirtHeights) {
+  blueShirtHeights.sort((a, b) => b - a);
+  redShirtHeights.sort((a, b) => b - a);
+
+  let blueOrRed = blueShirtHeights[0] > redShirtHeights[0] ? "BLUE" : "RED";
+  console.log(blueOrRed);
+  for (let i = 0; i < blueShirtHeights.length; i++) {
+    if (blueOrRed === "BLUE") {
+      if (blueShirtHeights[i] <= redShirtHeights[i]) {
+        return false;
+      }
+    } else if (redShirtHeights[i] <= blueShirtHeights[i]) {
+      return false;
+    }
   }
-  return totalWaitingTime;
+  return true;
 }
-console.log(minimumWaitingTime([3, 2, 1, 2, 6]));
+console.log(classPhotos([5, 8, 1, 3, 4, 9], [6, 9, 2, 4, 5, 1]));
