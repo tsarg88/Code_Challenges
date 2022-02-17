@@ -4873,21 +4873,79 @@
 // console.log(minimumWaitingTime([3, 2, 1, 2, 6]));
 
 // time: O(nlogn); space: O(1)
-function classPhotos(blueShirtHeights, redShirtHeights) {
-  blueShirtHeights.sort((a, b) => b - a);
-  redShirtHeights.sort((a, b) => b - a);
+// function classPhotos(blueShirtHeights, redShirtHeights) {
+//   blueShirtHeights.sort((a, b) => b - a);
+//   redShirtHeights.sort((a, b) => b - a);
 
-  let blueOrRed = blueShirtHeights[0] > redShirtHeights[0] ? "BLUE" : "RED";
-  console.log(blueOrRed);
-  for (let i = 0; i < blueShirtHeights.length; i++) {
-    if (blueOrRed === "BLUE") {
-      if (blueShirtHeights[i] <= redShirtHeights[i]) {
-        return false;
-      }
-    } else if (redShirtHeights[i] <= blueShirtHeights[i]) {
-      return false;
-    }
+//   let blueOrRed = blueShirtHeights[0] > redShirtHeights[0] ? "BLUE" : "RED";
+//   console.log(blueOrRed);
+//   for (let i = 0; i < blueShirtHeights.length; i++) {
+//     if (blueOrRed === "BLUE") {
+//       if (blueShirtHeights[i] <= redShirtHeights[i]) {
+//         return false;
+//       }
+//     } else if (redShirtHeights[i] <= blueShirtHeights[i]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+// console.log(classPhotos([5, 8, 1, 3, 4, 9], [6, 9, 2, 4, 5, 1]));
+
+// function tandemBicycle(redShirtSpeeds, blueShirtSpeeds, fastest) {
+// when returning max sum
+// we will pair slowest with fastest
+
+// when returning min sum
+// we will pair fastest with fastest
+//   let res = [];
+
+//   for (let i = 0; i < redShirtSpeeds.length; i++) {
+//     if (fastest === true) {
+//       let true_case_red = redShirtSpeeds.sort((a, b) => a - b);
+//       let true_case_blue = blueShirtSpeeds.sort((a, b) => b - a);
+//       if (true_case_red[i] > true_case_blue[i]) {
+//         res.push(true_case_red[i]);
+//       } else {
+//         res.push(true_case_blue[i]);
+//       }
+//     } else if (fastest === false) {
+//       let false_case_red = redShirtSpeeds.sort((a, b) => b - a);
+//       let false_case_blue = blueShirtSpeeds.sort((a, b) => b - a);
+//       if (false_case_red[i] > false_case_blue[i]) {
+//         res.push(false_case_red[i]);
+//       } else {
+//         res.push(false_case_blue[i]);
+//       }
+//     }
+//   }
+//   return res.reduce((acc, curr) => acc + curr, 0);
+// }
+// console.log(tandemBicycle([5, 5, 3, 9, 2], [3, 6, 7, 2, 1], (fastest = true)));
+
+// Depth-first Search
+// time: O(v+e) (vertices + edges) space: O(1)
+class Node {
+  constructor(name) {
+    this.name = name;
+    this.children = [];
   }
-  return true;
+
+  addChild(name) {
+    this.children.push(new Node(name));
+    return this;
+  }
+
+  depthFirstSearch(array) {
+    array.push(this.name);
+    for (let child of this.children) {
+      child.depthFirstSearch(array);
+    }
+    return array;
+  }
 }
-console.log(classPhotos([5, 8, 1, 3, 4, 9], [6, 9, 2, 4, 5, 1]));
+let test = new Node();
+test.addChild("A");
+test.addChild("B");
+test.addChild("C");
+test.depthFirstSearch([]);
