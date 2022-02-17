@@ -4925,27 +4925,52 @@
 
 // Depth-first Search
 // time: O(v+e) (vertices + edges) space: O(1)
-class Node {
-  constructor(name) {
-    this.name = name;
-    this.children = [];
+// class Node {
+//   constructor(name) {
+//     this.name = name;
+//     this.children = [];
+//   }
+
+//   addChild(name) {
+//     this.children.push(new Node(name));
+//     return this;
+//   }
+
+//   depthFirstSearch(array) {
+//     array.push(this.name);
+//     for (let child of this.children) {
+//       child.depthFirstSearch(array);
+//     }
+//     return array;
+//   }
+// }
+// let test = new Node();
+// test.addChild("A");
+// test.addChild("B");
+// test.addChild("C");
+// test.depthFirstSearch([]);
+
+// Finding duplicate in Linked List
+// Time: O(n) space: O(1)
+class LinkedList {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
   }
 
-  addChild(name) {
-    this.children.push(new Node(name));
-    return this;
-  }
-
-  depthFirstSearch(array) {
-    array.push(this.name);
-    for (let child of this.children) {
-      child.depthFirstSearch(array);
+  removeDuplicatesFromLinkedList(linkedList) {
+    let currentNode = linkedList;
+    while (currentNode !== null) {
+      let nextDistinctNode = currentNode.next;
+      while (
+        nextDistinctNode !== null &&
+        nextDistinctNode.value === currentNode.value
+      ) {
+        nextDistinctNode = nextDistinctNode.next;
+      }
+      currentNode.next = nextDistinctNode;
+      currentNode = nextDistinctNode;
     }
-    return array;
+    return linkedList;
   }
 }
-let test = new Node();
-test.addChild("A");
-test.addChild("B");
-test.addChild("C");
-test.depthFirstSearch([]);
