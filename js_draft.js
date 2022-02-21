@@ -4952,25 +4952,65 @@
 
 // Finding duplicate in Linked List
 // Time: O(n) space: O(1)
-class LinkedList {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
+// class LinkedList {
+//   constructor(value) {
+//     this.value = value;
+//     this.next = null;
+//   }
 
-  removeDuplicatesFromLinkedList(linkedList) {
-    let currentNode = linkedList;
-    while (currentNode !== null) {
-      let nextDistinctNode = currentNode.next;
-      while (
-        nextDistinctNode !== null &&
-        nextDistinctNode.value === currentNode.value
-      ) {
-        nextDistinctNode = nextDistinctNode.next;
-      }
-      currentNode.next = nextDistinctNode;
-      currentNode = nextDistinctNode;
-    }
-    return linkedList;
+//   removeDuplicatesFromLinkedList(linkedList) {
+//     let currentNode = linkedList;
+//     while (currentNode !== null) {
+//       let nextDistinctNode = currentNode.next;
+//       while (
+//         nextDistinctNode !== null &&
+//         nextDistinctNode.value === currentNode.value
+//       ) {
+//         nextDistinctNode = nextDistinctNode.next;
+//       }
+//       currentNode.next = nextDistinctNode;
+//       currentNode = nextDistinctNode;
+//     }
+//     return linkedList;
+//   }
+// }
+
+// Get nth Fibonacci
+// Brute force, time: O(2^n) space: O(n)
+// function getNthFib(n) {
+//   if (n === 1) {
+//     return 0;
+//   } else if (n === 2) {
+//     return 1;
+//   } else {
+//     return getNthFib(n - 1) + getNthFib(n - 2);
+//   }
+// }
+
+// using hash approach to save time
+// time: O(n) space: O(n)
+// function getNthFib(n) {
+//   let memo = {1: 0, 2:1}
+//   if(n in memo){
+//     return memo[n]
+//   } else {
+//     memo[n] = getNthFib(n - 1) + getNthFib(n - 2)
+//     return memo[n]
+//   }
+// }
+
+// Iterative approach
+// time: O(n) space: O(1)
+function getNthFib(n) {
+  let lastTwo = [0, 1];
+  let counter = 3;
+  while (counter <= n) {
+    let nextFib = lastTwo[0] + lastTwo[1];
+    lastTwo[0] = lastTwo[1];
+    lastTwo[1] = nextFib;
+    counter++;
   }
+  return n > 1 ? lastTwo[1] : lastTwo[0];
 }
+
+console.log(getNthFib(5));
