@@ -5017,14 +5017,35 @@
 
 // Product sum, recursive approach
 // time O(n) space: O(d) where d === depth of recursive calls to subarrays
-function productSum(array, mul = 1) {
-  let sum = 0;
-  for (let el of array) {
-    if (Array.isArray(el)) {
-      sum += productSum(el, mul + 1);
-    } else {
-      sum += el;
+// function productSum(array, mul = 1) {
+//   let sum = 0;
+//   for (let el of array) {
+//     if (Array.isArray(el)) {
+//       sum += productSum(el, mul + 1);
+//     } else {
+//       sum += el;
+//     }
+//   }
+//   return sum * mul;
+// }
+
+// find target in Binary Search Tree
+// Recursive approach
+// time: O(log(n)) space: O(1)
+function binarySearch(array, target) {
+  let left = 0;
+  let right = array.length - 1;
+
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    let current = array[mid];
+    if (target === current) {
+      return mid;
+    } else if (current > target) {
+      right = mid - 1;
+    } else if (current < target) {
+      left = mid + 1;
     }
   }
-  return sum * mul;
+  return -1;
 }
