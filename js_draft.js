@@ -5001,16 +5001,30 @@
 
 // Iterative approach
 // time: O(n) space: O(1)
-function getNthFib(n) {
-  let lastTwo = [0, 1];
-  let counter = 3;
-  while (counter <= n) {
-    let nextFib = lastTwo[0] + lastTwo[1];
-    lastTwo[0] = lastTwo[1];
-    lastTwo[1] = nextFib;
-    counter++;
-  }
-  return n > 1 ? lastTwo[1] : lastTwo[0];
-}
+// function getNthFib(n) {
+//   let lastTwo = [0, 1];
+//   let counter = 3;
+//   while (counter <= n) {
+//     let nextFib = lastTwo[0] + lastTwo[1];
+//     lastTwo[0] = lastTwo[1];
+//     lastTwo[1] = nextFib;
+//     counter++;
+//   }
+//   return n > 1 ? lastTwo[1] : lastTwo[0];
+// }
 
-console.log(getNthFib(5));
+// console.log(getNthFib(1));
+
+// Product sum, recursive approach
+// time O(n) space: O(d) where d === depth of recursive calls to subarrays
+function productSum(array, mul = 1) {
+  let sum = 0;
+  for (let el of array) {
+    if (Array.isArray(el)) {
+      sum += productSum(el, mul + 1);
+    } else {
+      sum += el;
+    }
+  }
+  return sum * mul;
+}
