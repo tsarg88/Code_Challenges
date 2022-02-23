@@ -5032,20 +5032,52 @@
 // find target in Binary Search Tree
 // Recursive approach
 // time: O(log(n)) space: O(1)
-function binarySearch(array, target) {
-  let left = 0;
-  let right = array.length - 1;
+// function binarySearch(array, target) {
+//   let left = 0;
+//   let right = array.length - 1;
 
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
-    let current = array[mid];
-    if (target === current) {
-      return mid;
-    } else if (current > target) {
-      right = mid - 1;
-    } else if (current < target) {
-      left = mid + 1;
+//   while (left <= right) {
+//     let mid = Math.floor((left + right) / 2);
+//     let current = array[mid];
+//     if (target === current) {
+//       return mid;
+//     } else if (current > target) {
+//       right = mid - 1;
+//     } else if (current < target) {
+//       left = mid + 1;
+//     }
+//   }
+//   return -1;
+// }
+
+// Find 3 largest numbers
+// Iterative approach with helper function calls
+// time: O(n) space: O(1)
+function findThreeLargestNumbers(array) {
+  let threeLargest = [null, null, null];
+  for (let num of array) {
+    updateLargest(threeLargest, num);
+  }
+  return threeLargest;
+}
+
+function updateLargest(threeLargest, num) {
+  if (threeLargest[2] === null || num > threeLargest[2]) {
+    shiftAndUpdate(threeLargest, num, 2);
+  } else if (threeLargest[1] === null || num > threeLargest[1]) {
+    shiftAndUpdate(threeLargest, num, 1);
+  } else if (threeLargest[0] === null || num > threeLargest[0]) {
+    shiftAndUpdate(threeLargest, num, 0);
+  }
+}
+
+function shiftAndUpdate(threeLargest, num, idx) {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) {
+      threeLargest[i] = num;
+    } else {
+      threeLargest[i] = threeLargest[i + 1];
     }
   }
-  return -1;
 }
+console.log(findThreeLargestNumbers([10, 5, 9, 10, 12]));
