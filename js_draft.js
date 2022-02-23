@@ -5053,31 +5053,57 @@
 // Find 3 largest numbers
 // Iterative approach with helper function calls
 // time: O(n) space: O(1)
-function findThreeLargestNumbers(array) {
-  let threeLargest = [null, null, null];
-  for (let num of array) {
-    updateLargest(threeLargest, num);
-  }
-  return threeLargest;
-}
+// function findThreeLargestNumbers(array) {
+//   let threeLargest = [null, null, null];
+//   for (let num of array) {
+//     updateLargest(threeLargest, num);
+//   }
+//   return threeLargest;
+// }
 
-function updateLargest(threeLargest, num) {
-  if (threeLargest[2] === null || num > threeLargest[2]) {
-    shiftAndUpdate(threeLargest, num, 2);
-  } else if (threeLargest[1] === null || num > threeLargest[1]) {
-    shiftAndUpdate(threeLargest, num, 1);
-  } else if (threeLargest[0] === null || num > threeLargest[0]) {
-    shiftAndUpdate(threeLargest, num, 0);
-  }
-}
+// function updateLargest(threeLargest, num) {
+//   if (threeLargest[2] === null || num > threeLargest[2]) {
+//     shiftAndUpdate(threeLargest, num, 2);
+//   } else if (threeLargest[1] === null || num > threeLargest[1]) {
+//     shiftAndUpdate(threeLargest, num, 1);
+//   } else if (threeLargest[0] === null || num > threeLargest[0]) {
+//     shiftAndUpdate(threeLargest, num, 0);
+//   }
+// }
 
-function shiftAndUpdate(threeLargest, num, idx) {
-  for (let i = 0; i <= idx; i++) {
-    if (i === idx) {
-      threeLargest[i] = num;
-    } else {
-      threeLargest[i] = threeLargest[i + 1];
+// function shiftAndUpdate(threeLargest, num, idx) {
+//   for (let i = 0; i <= idx; i++) {
+//     if (i === idx) {
+//       threeLargest[i] = num;
+//     } else {
+//       threeLargest[i] = threeLargest[i + 1];
+//     }
+//   }
+// }
+// console.log(findThreeLargestNumbers([10, 5, 9, 10, 12]));
+
+// Bubble Sort with better time complexity
+// best case, time: O(n) space is always O(1); average case, time: O(n^2)
+function bubbleSort(array) {
+  let isSorted = false;
+  let counter = 0;
+
+  let swap = (firstIndex, secondIndex) => {
+    let temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+  };
+
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 0; i < array.length - 1 - counter; i++) {
+      if (array[i] > array[i + 1]) {
+        swap(i, i + 1);
+        isSorted = false;
+      }
     }
+    counter++;
   }
+  return array;
 }
-console.log(findThreeLargestNumbers([10, 5, 9, 10, 12]));
+console.log(bubbleSort([8, 5, 2, 9, 5, 6, 3]));
