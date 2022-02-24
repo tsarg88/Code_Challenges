@@ -5084,26 +5084,46 @@
 
 // Bubble Sort with better time complexity
 // best case, time: O(n) space is always O(1); average case, time: O(n^2)
-function bubbleSort(array) {
-  let isSorted = false;
-  let counter = 0;
+// function bubbleSort(array) {
+//   let isSorted = false;
+//   let counter = 0;
 
+//   let swap = (firstIndex, secondIndex) => {
+//     let temp = array[firstIndex];
+//     array[firstIndex] = array[secondIndex];
+//     array[secondIndex] = temp;
+//   };
+
+//   while (!isSorted) {
+//     isSorted = true;
+//     for (let i = 0; i < array.length - 1 - counter; i++) {
+//       if (array[i] > array[i + 1]) {
+//         swap(i, i + 1);
+//         isSorted = false;
+//       }
+//     }
+//     counter++;
+//   }
+//   return array;
+// }
+// console.log(bubbleSort([8, 5, 2, 9, 5, 6, 3]));
+
+// Insertion Sort
+// average time/space, time: O(n^2) space O(1)
+function insertionSort(arr) {
   let swap = (firstIndex, secondIndex) => {
-    let temp = array[firstIndex];
-    array[firstIndex] = array[secondIndex];
-    array[secondIndex] = temp;
+    let temp = arr[firstIndex];
+    arr[firstIndex] = arr[secondIndex];
+    arr[secondIndex] = temp;
   };
 
-  while (!isSorted) {
-    isSorted = true;
-    for (let i = 0; i < array.length - 1 - counter; i++) {
-      if (array[i] > array[i + 1]) {
-        swap(i, i + 1);
-        isSorted = false;
-      }
+  for (let i = 1; i < arr.length; i++) {
+    let j = i;
+    while (j !== 0 && arr[j] < arr[j - 1]) {
+      swap(j, j - 1);
+      j -= 1;
     }
-    counter++;
   }
-  return array;
+  return arr;
 }
-console.log(bubbleSort([8, 5, 2, 9, 5, 6, 3]));
+console.log(insertionSort([8, 5, 2, 9, 5, 6, 3]));
