@@ -5110,19 +5110,43 @@
 
 // Insertion Sort
 // average time/space, time: O(n^2) space O(1)
+// function insertionSort(arr) {
+//   let swap = (firstIndex, secondIndex) => {
+//     let temp = arr[firstIndex];
+//     arr[firstIndex] = arr[secondIndex];
+//     arr[secondIndex] = temp;
+//   };
+
+//   for (let i = 1; i < arr.length; i++) {
+//     let j = i;
+//     while (j !== 0 && arr[j] < arr[j - 1]) {
+//       swap(j, j - 1);
+//       j -= 1;
+//     }
+//   }
+//   return arr;
+// }
+// console.log(insertionSort([8, 5, 2, 9, 5, 6, 3]));
+
+// Selection Sort
+// time: O(n^2) space: O(1)
 function insertionSort(arr) {
-  let swap = (firstIndex, secondIndex) => {
-    let temp = arr[firstIndex];
-    arr[firstIndex] = arr[secondIndex];
-    arr[secondIndex] = temp;
+  let swap = (i, j) => {
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
   };
 
-  for (let i = 1; i < arr.length; i++) {
-    let j = i;
-    while (j !== 0 && arr[j] < arr[j - 1]) {
-      swap(j, j - 1);
-      j -= 1;
+  let startIdx = 0;
+  while (startIdx < arr.length - 1) {
+    let smallestIdx = startIdx;
+    for (let i = startIdx + 1; i < arr.length; i++) {
+      if (arr[smallestIdx] > arr[i]) {
+        smallestIdx = i;
+      }
     }
+    swap(startIdx, smallestIdx);
+    startIdx++;
   }
   return arr;
 }
