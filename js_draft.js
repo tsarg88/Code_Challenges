@@ -5130,7 +5130,7 @@
 
 // Selection Sort
 // time: O(n^2) space: O(1)
-function insertionSort(arr) {
+function selectionSort(arr) {
   let swap = (i, j) => {
     let temp = arr[i];
     arr[i] = arr[j];
@@ -5150,4 +5150,4 @@ function insertionSort(arr) {
   }
   return arr;
 }
-console.log(insertionSort([8, 5, 2, 9, 5, 6, 3]));
+console.log(selectionSort([8, 5, 2, 9, 5, 6, 3]));
