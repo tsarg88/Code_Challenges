@@ -5130,24 +5130,61 @@
 
 // Selection Sort
 // time: O(n^2) space: O(1)
-function selectionSort(arr) {
-  let swap = (i, j) => {
-    let temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-  };
+// function selectionSort(arr) {
+//   let swap = (i, j) => {
+//     let temp = arr[i];
+//     arr[i] = arr[j];
+//     arr[j] = temp;
+//   };
 
-  let startIdx = 0;
-  while (startIdx < arr.length - 1) {
-    let smallestIdx = startIdx;
-    for (let i = startIdx + 1; i < arr.length; i++) {
-      if (arr[smallestIdx] > arr[i]) {
-        smallestIdx = i;
-      }
+//   let startIdx = 0;
+//   while (startIdx < arr.length - 1) {
+//     let smallestIdx = startIdx;
+//     for (let i = startIdx + 1; i < arr.length; i++) {
+//       if (arr[smallestIdx] > arr[i]) {
+//         smallestIdx = i;
+//       }
+//     }
+//     swap(startIdx, smallestIdx);
+//     startIdx++;
+//   }
+//   return arr;
+// }
+// console.log(selectionSort([8, 5, 2, 9, 5, 6, 3]));
+
+// Is Palindrome
+// Brute force approach. time: O(n) space: O(n)
+// function isPalindrome(str) {
+//   let compare = [];
+//   for (let i = str.length - 1; i >= 0; i--) {
+//     compare.push(str[i]);
+//   }
+//   compare = compare.join("");
+//   return str === compare;
+// }
+
+// Recursive approach with ternary
+// time: O(n) space O(n)
+// function isPalindrome(string, i = 0) {
+//   let j = string.length - 1 - i;
+//   return i === j
+//     ? true
+//     : string[i] === string[j] && isPalindrome(string, i + 1);
+// }
+
+// Iterative approach
+// time O(n) space: O(1)
+function isPalindrome(string) {
+  let leftIdx = 0;
+  let rightIdx = string.length - 1;
+  while (leftIdx < rightIdx) {
+    if (string[leftIdx] !== string[rightIdx]) {
+      return false;
+    } else {
+      leftIdx++;
+      rightIdx--;
     }
-    swap(startIdx, smallestIdx);
-    startIdx++;
   }
-  return arr;
+  return true;
 }
-console.log(selectionSort([8, 5, 2, 9, 5, 6, 3]));
+console.log(isPalindrome("abcdcba"));
