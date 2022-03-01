@@ -5243,18 +5243,38 @@
 
 // caesarCipherEncryptor, Iterative approach
 // time: O(n) | space: O(n)
-function caesarCipherEncryptor(string, key) {
-  const getNewLetters = (letter, alphabet, key) => {
-    let newLetterCode = alphabet.indexOf(letter) + key;
-    return alphabet[newLetterCode % 26];
-  };
+// function caesarCipherEncryptor(string, key) {
+//   const getNewLetters = (letter, alphabet, key) => {
+//     let newLetterCode = alphabet.indexOf(letter) + key;
+//     return alphabet[newLetterCode % 26];
+//   };
 
-  let newLetters = [];
-  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+//   let newLetters = [];
+//   let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
-  for (let letter of string) {
-    newLetters.push(getNewLetters(letter, alphabet, key));
+//   for (let letter of string) {
+//     newLetters.push(getNewLetters(letter, alphabet, key));
+//   }
+//   return newLetters.join("");
+// }
+// console.log(caesarCipherEncryptor("xyz", 2));
+
+// runLengthEncoding, Iterative approach
+// time: O(n) | space: O(n)
+function runLengthEncoding(string) {
+  const encodedStringCharacters = [];
+  let currentRunLength = 1;
+
+  for (let i = 1; i < string.length; i++) {
+    if (string[i] !== string[i - 1] || currentRunLength === 9) {
+      encodedStringCharacters.push(currentRunLength.toString());
+      encodedStringCharacters.push(string[i - 1]);
+      currentRunLength = 0;
+    }
+    currentRunLength++;
   }
-  return newLetters.join("");
+  encodedStringCharacters.push(currentRunLength.toString());
+  encodedStringCharacters.push(string[string.length - 1]);
+  return encodedStringCharacters.join("");
 }
-console.log(caesarCipherEncryptor("xyz", 2));
+console.log(runLengthEncoding("AAAAAAAAAAAAABBCCCCDD"));
