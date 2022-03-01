@@ -5174,17 +5174,87 @@
 
 // Iterative approach
 // time O(n) space: O(1)
-function isPalindrome(string) {
-  let leftIdx = 0;
-  let rightIdx = string.length - 1;
-  while (leftIdx < rightIdx) {
-    if (string[leftIdx] !== string[rightIdx]) {
-      return false;
-    } else {
-      leftIdx++;
-      rightIdx--;
-    }
+// function isPalindrome(string) {
+//   let leftIdx = 0;
+//   let rightIdx = string.length - 1;
+//   while (leftIdx < rightIdx) {
+//     if (string[leftIdx] !== string[rightIdx]) {
+//       return false;
+//     } else {
+//       leftIdx++;
+//       rightIdx--;
+//     }
+//   }
+//   return true;
+// }
+// console.log(isPalindrome("abcdcba"));
+
+// const obj = {
+//   prop: 1,
+// };
+// console.log(obj.prop);
+
+// Object.defineProperty(obj, "prop", {
+//   writable: false,
+//   value: 2,
+// });
+// console.log(obj.prop);
+
+// obj.prop = 3;
+// console.log(obj.prop);
+
+// function* gen1() {
+//   console.log(yield 1);
+//   console.log(yield 2);
+//   console.log(yield 3);
+// }
+
+// const iterator = gen1();
+
+// console.log(iterator.next("a").value);
+// console.log(iterator.next("b").value);
+// console.log(iterator.next("c").value);
+
+// const myArray = new Array(2);
+
+// myArray[1] = 1;
+// myArray[3] = 3;
+
+// console.log("Length", myArray.length);
+
+// console.log("Elements");
+// for (const el of myArray) {
+//   console.log("\t", el);
+// }
+
+// async function apiCall() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve("b");
+//     }, 50);
+//   });
+// }
+// async function logger() {
+//   setTimeout(() => console.log("a"), 10);
+//   console.log(await apiCall());
+//   console.log("c");
+// }
+// logger();
+
+// caesarCipherEncryptor, Iterative approach
+// time: O(n) | space: O(n)
+function caesarCipherEncryptor(string, key) {
+  const getNewLetters = (letter, alphabet, key) => {
+    let newLetterCode = alphabet.indexOf(letter) + key;
+    return alphabet[newLetterCode % 26];
+  };
+
+  let newLetters = [];
+  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+
+  for (let letter of string) {
+    newLetters.push(getNewLetters(letter, alphabet, key));
   }
-  return true;
+  return newLetters.join("");
 }
-console.log(isPalindrome("abcdcba"));
+console.log(caesarCipherEncryptor("xyz", 2));
