@@ -5302,25 +5302,60 @@
 // Hash/object approach
 // time: O(n + m) where n is the number of characters, m is the length of the document
 // space: O(c) where c is the number of unique characters in the characters
-function generateDocument(characters, document) {
+// function generateDocument(characters, document) {
+//   const characterCounts = {};
+
+//   for (const character of characters) {
+//     if (!(character in characterCounts)) {
+//       characterCounts[character] = 0;
+//     }
+//     characterCounts[character]++;
+//   }
+
+//   for (const character of document) {
+//     if (!(character in characterCounts) || characterCounts[character] === 0) {
+//       return false;
+//     } else {
+//       characterCounts[character]--;
+//     }
+//   }
+//   return true;
+// }
+// console.log(
+//   generateDocument("Bste!hetsi ogEAxpelrt x ", "AlgoExpert is the Best!")
+// );
+// firstNonRepeatingCharacter with iterative double loop approach
+// time: O(n^2) | space: O(1)
+// function firstNonRepeatingCharacter(string) {
+//   for (let idx = 0; idx < string.length; idx++) {
+//     let foundDuplicate = false;
+//     for (let idx2 = 0; idx2 < string.length; idx2++) {
+//       if (string[idx] === string[idx2] && idx !== idx2) {
+//         foundDuplicate = true;
+//       }
+//     }
+//     if (!foundDuplicate) {
+//       return idx;
+//     }
+//   }
+//   return -1;
+// }
+
+// firstNonRepeatingCharacter with hash/object approach
+// time: O(n) where n is the length of the input string
+// space: O(1) because the input string only has lowercase eng letters
+function firstNonRepeatingCharacter(string) {
   const characterCounts = {};
-
-  for (const character of characters) {
-    if (!(character in characterCounts)) {
-      characterCounts[character] = 0;
+  for (char of string) {
+    if (!(char in characterCounts)) {
+      characterCounts[char] = 0;
     }
-    characterCounts[character]++;
+    characterCounts[char]++;
   }
-
-  for (const character of document) {
-    if (!(character in characterCounts) || characterCounts[character] === 0) {
-      return false;
-    } else {
-      characterCounts[character]--;
+  for (let i = 0; i < string.length; i++) {
+    if (characterCounts[string[i]] === 1) {
+      return i;
     }
   }
-  return true;
 }
-console.log(
-  generateDocument("Bste!hetsi ogEAxpelrt x ", "AlgoExpert is the Best!")
-);
+console.log(firstNonRepeatingCharacter("abcdcaf"));
