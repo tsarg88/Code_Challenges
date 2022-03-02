@@ -5261,20 +5261,66 @@
 
 // runLengthEncoding, Iterative approach
 // time: O(n) | space: O(n)
-function runLengthEncoding(string) {
-  const encodedStringCharacters = [];
-  let currentRunLength = 1;
+// function runLengthEncoding(string) {
+//   const encodedStringCharacters = [];
+//   let currentRunLength = 1;
 
-  for (let i = 1; i < string.length; i++) {
-    if (string[i] !== string[i - 1] || currentRunLength === 9) {
-      encodedStringCharacters.push(currentRunLength.toString());
-      encodedStringCharacters.push(string[i - 1]);
-      currentRunLength = 0;
+//   for (let i = 1; i < string.length; i++) {
+//     if (string[i] !== string[i - 1] || currentRunLength === 9) {
+//       encodedStringCharacters.push(currentRunLength.toString());
+//       encodedStringCharacters.push(string[i - 1]);
+//       currentRunLength = 0;
+//     }
+//     currentRunLength++;
+//   }
+//   encodedStringCharacters.push(currentRunLength.toString());
+//   encodedStringCharacters.push(string[string.length - 1]);
+//   return encodedStringCharacters.join("");
+// }
+// console.log(runLengthEncoding("AAAAAAAAAAAAABBCCCCDD"));
+
+// generateDocument, Recursive approach
+// time: O(m * (n + m)) where n is the number of chars and m is the length of the document
+// space: O(1)
+// function generateDocument(characters, document) {
+//   const countCharacterFrequency = (character, target) => {
+//     let frequency = 0;
+//     for (const char of target) {
+//       if (char === character) frequency++;
+//     }
+//     return frequency;
+//   };
+
+//   for (const character of document) {
+//     const documentFrequency = countCharacterFrequency(character, document);
+//     const chractersFrequency = countCharacterFrequency(character, characters);
+//     if (documentFrequency > chractersFrequency) return false;
+//   }
+//   return true;
+// }
+
+// Hash/object approach
+// time: O(n + m) where n is the number of characters, m is the length of the document
+// space: O(c) where c is the number of unique characters in the characters
+function generateDocument(characters, document) {
+  const characterCounts = {};
+
+  for (const character of characters) {
+    if (!(character in characterCounts)) {
+      characterCounts[character] = 0;
     }
-    currentRunLength++;
+    characterCounts[character]++;
   }
-  encodedStringCharacters.push(currentRunLength.toString());
-  encodedStringCharacters.push(string[string.length - 1]);
-  return encodedStringCharacters.join("");
+
+  for (const character of document) {
+    if (!(character in characterCounts) || characterCounts[character] === 0) {
+      return false;
+    } else {
+      characterCounts[character]--;
+    }
+  }
+  return true;
 }
-console.log(runLengthEncoding("AAAAAAAAAAAAABBCCCCDD"));
+console.log(
+  generateDocument("Bste!hetsi ogEAxpelrt x ", "AlgoExpert is the Best!")
+);
