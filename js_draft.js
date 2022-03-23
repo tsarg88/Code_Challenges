@@ -5344,18 +5344,283 @@
 // firstNonRepeatingCharacter with hash/object approach
 // time: O(n) where n is the length of the input string
 // space: O(1) because the input string only has lowercase eng letters
-function firstNonRepeatingCharacter(string) {
-  const characterCounts = {};
-  for (char of string) {
-    if (!(char in characterCounts)) {
-      characterCounts[char] = 0;
+// function firstNonRepeatingCharacter(string) {
+//   const characterCounts = {};
+//   for (char of string) {
+//     if (!(char in characterCounts)) {
+//       characterCounts[char] = 0;
+//     }
+//     characterCounts[char]++;
+//   }
+//   for (let i = 0; i < string.length; i++) {
+//     if (characterCounts[string[i]] === 1) {
+//       return i;
+//     }
+//   }
+// }
+// console.log(firstNonRepeatingCharacter("abcdcaf"));
+
+// function twoNumberSum(array, targetSum) {
+//   for (let i = 0; i < array.length; i++) {
+//     for (let j = 0; j < array.length; j++) {
+//       if (i !== j) {
+//         if (array[i] + array[j] === targetSum) {
+//           return [array[i], array[j]];
+//         }
+//       }
+//     }
+//   }
+//   return [];
+// }
+
+// function twoNumberSum(array, targetSum){
+//   const nums = {}
+//   for(num of array){
+//     let potentialMatch = targetSum - num
+//     if(potentialMatch in nums){
+//       return [num, potentialMatch]
+//     } nums[num] = true
+//   }
+// }
+// console.log(twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10));
+
+// function isValidSubsequence(array, sequence) {
+//   let obj = {};
+//   // let res = [];
+//   for (let i = 0; i < array.length; i++) {
+//     obj[array[i]] = i;
+//   }
+//   for (let i = 0; i < sequence.length - 1; i++) {
+//     let j = i + 1;
+//     if (!(sequence[i] && sequence[j] in obj)) {
+//       return false;
+//     }
+//     else if (obj[sequence[i]] < obj[sequence[j]]) {
+//       continue
+//     }
+//   } return true
+// }
+// console.log(isValidSubsequence([5, 1, 22, 25, 6, -1, 8, 10], [4, 5, 1, 22, 25, 6, -1, 8, 10]));
+
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
+
+//   insert(value) {
+//     let newNode = new Node(value);
+
+//     if (this.root === null) {
+//       this.root = newNode;
+//       return this;
+//     }
+
+//     let current = this.root;
+//     while (current) {
+//       if (value < current.value) {
+//         if (current.left === null) {
+//           current.left = newNode;
+//           return this;
+//         }
+//         current = current.left;
+//       } else if (value > current.value) {
+//         if (current.right === null) {
+//           current.right = newNode;
+//           return this;
+//         }
+//       }
+//       current = current.right;
+//     }
+//   }
+
+//   findClosestValueInBstTree(target) {
+//     // let target = 2;
+//     return this.findClosestValueInBstTreeHelper(
+//       this.root,
+//       target,
+//       this.root.value
+//     );
+//   }
+
+//   findClosestValueInBstTreeHelper(current, target, closest) {
+//     // while current !== null
+//     // if the abs difference target - closest > than target - current.value
+//     // means than current.value is less far(is less than closest) from target than closest
+//     // so we have to assign current = current.value
+//     while (current) {
+//       if (Math.abs(target - closest) > Math.abs(target - current.value)) {
+//         closest = current.value;
+//       }
+//       if (target < current.value) {
+//         current = current.left;
+//       } else if (target > current.value) {
+//         current = current.right;
+//       } else {
+//         break;
+//       }
+//     }
+//     return closest;
+//   }
+// }
+
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
+
+//   insert(value) {
+//     let newNode = new Node(value);
+//     if (this.root === null) {
+//       this.root = newNode;
+//       return this;
+//     }
+//     let currentNode = this.root;
+//     while (currentNode) {
+//       if (value < currentNode.value) {
+//         if (currentNode.left === null) {
+//           currentNode.left = newNode;
+//           return this;
+//         } else {
+//           currentNode = currentNode.left;
+//         }
+//       } else if (value > currentNode.value) {
+//         if (currentNode.right === null) {
+//           currentNode.right = newNode;
+//           return this;
+//         } else {
+//           currentNode = currentNode.right;
+//         }
+//       }
+//     }
+//   }
+//   // findClosestValueInBst(target) {
+//   //   return this.findClosestValueInBstHelper(this.root, target, this.root.value);
+//   // }
+//   // findClosestValueInBstHelper(currentNode, target, closest) {
+//   //   while (currentNode) {
+//   //     if (Math.abs(target - closest) > Math.abs(target - currentNode.value)) {
+//   //       closest = currentNode.value;
+//   //     } else if (target < currentNode.value) {
+//   //       currentNode = currentNode.left;
+//   //     } else if (target > currentNode.value) {
+//   //       currentNode = currentNode.right;
+//   //     } else {
+//   //       break;
+//   //     }
+//   //   }
+//   //   return closest;
+//   // }
+//   // branchSums() {
+//   //   let sums = [];
+//   //   return this.calculateBranchSums(this.root, 0, sums);
+//   // }
+
+//   // calculateBranchSums(node, runningSum, sums) {
+//   //   if (node === null) return;
+//   //   let newRunningSum = runningSum + node.value;
+//   //   if (!node.left && !node.right) {
+//   //     sums.push(newRunningSum);
+//   //     return;
+//   //   }
+//   //   this.calculateBranchSums(node.left, newRunningSum, sums);
+//   //   this.calculateBranchSums(node.right, newRunningSum, sums);
+//   //   return sums;
+//   // }
+
+//   nodeDepths() {
+//     let sumOfDepths = 0;
+//     const stack = [{ node: this.root, depth: 0 }];
+//     console.log(stack.length);
+//     while (stack.length > 0) {
+//       const { node, depth } = stack.pop();
+//       if (node === null) continue;
+//       sumOfDepths += depth;
+//       stack.push({ node: node.left, depth: depth + 1 });
+//       stack.push({ node: node.right, depth: depth + 1 });
+//     }
+//     return sumOfDepths;
+//   }
+// }
+
+// let test = new BST();
+// test.insert(4);
+// test.insert(6);
+// test.insert(5);
+// test.insert(8);
+// test.insert(3);
+// test.insert(9);
+// console.log(test.nodeDepths());
+// class ListNode {
+//   constructor(data) {
+//     this.data = data;
+//     this.next = null;
+//   }
+// }
+// class LinkedList {
+//   constructor(value) {
+//     this.value = value;
+//     this.next = null;
+//   }
+
+//   removeDuplicatesFromLinkedList(linkedList) {
+//     let currentNode = linkedList;
+//     while (currentNode !== null) {
+//       let nextDistinctNode = currentNode.next;
+//       while (
+//         nextDistinctNode !== null &&
+//         nextDistinctNode.value === currentNode.value
+//       ) {
+//         nextDistinctNode = nextDistinctNode.next;
+//       }
+//       currentNode.next = nextDistinctNode;
+//       currentNode = nextDistinctNode;
+//     }
+//     return linkedList;
+//   }
+// }
+// let node1 = new ListNode(2);
+// let node2 = new ListNode(3);
+// let node2 = new ListNode(3);
+// let node2 = new ListNode(5);
+// let list = new LinkedList(node1);
+// console.log(list.removeDuplicatesFromLinkedList());
+
+// Three number sum
+// time: O(n^2) | space: O(n)
+function threeNumberSum(array, targetSum) {
+  array.sort((a, b) => a - b);
+  const triplets = [];
+  for (let i = 0; i < array.length; i++) {
+    let right = array.length - 1;
+    let left = i + 1;
+    while (left < right) {
+      let potentialMatch = array[i] + array[left] + array[right];
+      if (potentialMatch === targetSum) {
+        triplets.push([array[i], array[left], array[right]]);
+        left++;
+        right--;
+      } else if (potentialMatch < targetSum) {
+        left++;
+      } else if (potentialMatch > targetSum) {
+        right--;
+      }
     }
-    characterCounts[char]++;
   }
-  for (let i = 0; i < string.length; i++) {
-    if (characterCounts[string[i]] === 1) {
-      return i;
-    }
-  }
+  return triplets;
 }
-console.log(firstNonRepeatingCharacter("abcdcaf"));
