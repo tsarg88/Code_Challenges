@@ -5603,24 +5603,59 @@
 
 // Three number sum
 // time: O(n^2) | space: O(n)
-function threeNumberSum(array, targetSum) {
-  array.sort((a, b) => a - b);
-  const triplets = [];
-  for (let i = 0; i < array.length; i++) {
-    let right = array.length - 1;
-    let left = i + 1;
-    while (left < right) {
-      let potentialMatch = array[i] + array[left] + array[right];
-      if (potentialMatch === targetSum) {
-        triplets.push([array[i], array[left], array[right]]);
-        left++;
-        right--;
-      } else if (potentialMatch < targetSum) {
-        left++;
-      } else if (potentialMatch > targetSum) {
-        right--;
-      }
+// function threeNumberSum(array, targetSum) {
+//   array.sort((a, b) => a - b);
+//   const triplets = [];
+//   for (let i = 0; i < array.length; i++) {
+//     let right = array.length - 1;
+//     let left = i + 1;
+//     while (left < right) {
+//       let potentialMatch = array[i] + array[left] + array[right];
+//       if (potentialMatch === targetSum) {
+//         triplets.push([array[i], array[left], array[right]]);
+//         left++;
+//         right--;
+//       } else if (potentialMatch < targetSum) {
+//         left++;
+//       } else if (potentialMatch > targetSum) {
+//         right--;
+//       }
+//     }
+//   }
+//   return triplets;
+// }
+
+// Smallest diference
+// time: O(nlog(n) + mlog(m)) because we sort it first, where n is the length of the firts array and m is the length of the second array
+// | space: O(1)
+
+function smallestDifference(arrayOne, arrayTwo) {
+  arrayOne.sort((a, b) => a - b);
+  arrayTwo.sort((a, b) => a - b);
+  let idxOne = 0;
+  let idxTwo = 0;
+  let smallest = Infinity;
+  let current = 0;
+  let smallestPair = [];
+
+  while (idxOne < arrayOne.length && idxTwo < arrayTwo.length) {
+    let firstNum = arrayOne[idxOne];
+    let secondNum = arrayTwo[idxTwo];
+    if (firstNum < secondNum) {
+      current = secondNum - firstNum;
+      idxOne++;
+    } else if (firstNum > secondNum) {
+      current = firstNum - secondNum;
+      idxTwo++;
+    } else {
+      return [firstNum, secondNum];
+    }
+    if (smallest > current) {
+      smallest = current;
+      smallestPair = [firstNum, secondNum];
     }
   }
-  return triplets;
+  return smallestPair;
 }
+//"arrayOne": [-1, 5, 10, 20, 3],
+//"arrayTwo": [26, 134, 135, 15, 17]
