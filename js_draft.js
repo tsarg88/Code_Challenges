@@ -5662,26 +5662,42 @@
 
 // Move element to end
 // time: O(n) | space: O(1)
-function moveElementToEnd(array, toMove) {
-  let left = 0;
-  let right = array.length - 1;
+// function moveElementToEnd(array, toMove) {
+//   let left = 0;
+//   let right = array.length - 1;
 
-  const swap = (firstIndex, secondIndex) => {
-    let temp = array[firstIndex];
-    array[firstIndex] = array[secondIndex];
-    array[secondIndex] = temp;
-  };
+//   const swap = (firstIndex, secondIndex) => {
+//     let temp = array[firstIndex];
+//     array[firstIndex] = array[secondIndex];
+//     array[secondIndex] = temp;
+//   };
 
-  while (left < right) {
-    let leftNum = array[left];
-    let rightNum = array[right];
-    if (leftNum === toMove && rightNum !== toMove) {
-      swap(left, right);
-    } else if (leftNum !== toMove) {
-      left++;
-    } else if (rightNum === toMove) {
-      right--;
+//   while (left < right) {
+//     let leftNum = array[left];
+//     let rightNum = array[right];
+//     if (leftNum === toMove && rightNum !== toMove) {
+//       swap(left, right);
+//     } else if (leftNum !== toMove) {
+//       left++;
+//     } else if (rightNum === toMove) {
+//       right--;
+//     }
+//   }
+//   return array;
+// }
+
+// Is monotonic
+// time: O(n) | space: O(1)
+function isMonotonic(array) {
+  let isNonIncreasing = true;
+  let isNonDecreasing = true;
+
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > array[i + 1]) {
+      isNonDecreasing = false;
+    } else if (array[i] < array[i + 1]) {
+      isNonIncreasing = false;
     }
   }
-  return array;
+  return isNonDecreasing || isNonIncreasing;
 }
