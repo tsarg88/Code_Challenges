@@ -5629,33 +5629,59 @@
 // time: O(nlog(n) + mlog(m)) because we sort it first, where n is the length of the firts array and m is the length of the second array
 // | space: O(1)
 
-function smallestDifference(arrayOne, arrayTwo) {
-  arrayOne.sort((a, b) => a - b);
-  arrayTwo.sort((a, b) => a - b);
-  let idxOne = 0;
-  let idxTwo = 0;
-  let smallest = Infinity;
-  let current = 0;
-  let smallestPair = [];
+// function smallestDifference(arrayOne, arrayTwo) {
+//   arrayOne.sort((a, b) => a - b);
+//   arrayTwo.sort((a, b) => a - b);
+//   let idxOne = 0;
+//   let idxTwo = 0;
+//   let smallest = Infinity;
+//   let current = 0;
+//   let smallestPair = [];
 
-  while (idxOne < arrayOne.length && idxTwo < arrayTwo.length) {
-    let firstNum = arrayOne[idxOne];
-    let secondNum = arrayTwo[idxTwo];
-    if (firstNum < secondNum) {
-      current = secondNum - firstNum;
-      idxOne++;
-    } else if (firstNum > secondNum) {
-      current = firstNum - secondNum;
-      idxTwo++;
-    } else {
-      return [firstNum, secondNum];
-    }
-    if (smallest > current) {
-      smallest = current;
-      smallestPair = [firstNum, secondNum];
-    }
-  }
-  return smallestPair;
-}
+//   while (idxOne < arrayOne.length && idxTwo < arrayTwo.length) {
+//     let firstNum = arrayOne[idxOne];
+//     let secondNum = arrayTwo[idxTwo];
+//     if (firstNum < secondNum) {
+//       current = secondNum - firstNum;
+//       idxOne++;
+//     } else if (firstNum > secondNum) {
+//       current = firstNum - secondNum;
+//       idxTwo++;
+//     } else {
+//       return [firstNum, secondNum];
+//     }
+//     if (smallest > current) {
+//       smallest = current;
+//       smallestPair = [firstNum, secondNum];
+//     }
+//   }
+//   return smallestPair;
+// }
 //"arrayOne": [-1, 5, 10, 20, 3],
 //"arrayTwo": [26, 134, 135, 15, 17]
+
+// Move element to end
+// time: O(n) | space: O(1)
+function moveElementToEnd(array, toMove) {
+  let left = 0;
+  let right = array.length - 1;
+
+  const swap = (firstIndex, secondIndex) => {
+    let temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+  };
+
+  while (left < right) {
+    let leftNum = array[left];
+    let rightNum = array[right];
+    if (leftNum === toMove && rightNum !== toMove) {
+      swap(left, right);
+    } else if (leftNum !== toMove) {
+      left++;
+    } else if (rightNum === toMove) {
+      right--;
+    }
+  }
+  return array;
+}
