@@ -5688,16 +5688,128 @@
 
 // Is monotonic
 // time: O(n) | space: O(1)
-function isMonotonic(array) {
-  let isNonIncreasing = true;
-  let isNonDecreasing = true;
+// function isMonotonic(array) {
+//   let isNonIncreasing = true;
+//   let isNonDecreasing = true;
 
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] > array[i + 1]) {
-      isNonDecreasing = false;
-    } else if (array[i] < array[i + 1]) {
-      isNonIncreasing = false;
-    }
-  }
-  return isNonDecreasing || isNonIncreasing;
-}
+//   for (let i = 0; i < array.length; i++) {
+//     if (array[i] > array[i + 1]) {
+//       isNonDecreasing = false;
+//     } else if (array[i] < array[i + 1]) {
+//       isNonIncreasing = false;
+//     }
+//   }
+//   return isNonDecreasing || isNonIncreasing;
+// }
+
+// function isPalindromeWithOneCharRemoved(str) {
+//   // let temp = str;
+//   // temp = temp.replace("a", "");
+//   // console.log(str);
+
+//   const isPalindrome = (temp) => {
+//     let leftIdx = 0;
+//     let rightIdx = temp.length - 1;
+//     while (leftIdx < rightIdx) {
+//       if (temp[leftIdx] !== temp[rightIdx]) {
+//         return false;
+//       } else {
+//         leftIdx++;
+//         rightIdx--;
+//       }
+//     }
+//     return true;
+//   };
+
+//   for (let i = 0; i < str.length; i++) {
+//     let temp = str;
+//     temp = temp.replace(temp[i], "");
+//     if (isPalindrome(temp) === true) {
+//       return true;
+//     } else {
+//       continue;
+//     }
+//   }
+//   return false;
+// }
+// console.log(isPalindromeWithOneCharRemoved("tacocats"));
+
+// racercar
+
+// the hardest of parenthes problem: given input of balanced/unbalanced parenthes give output of balanced parenthes
+
+// function balanceParenthes(str) {
+//   let weights = {
+//     "(": 1,
+//     ")": -1,
+//   };
+//   let partialResult = removeUnnecessaryChars(str, weights);
+
+//   processedString = partialResult.join("");
+//   processedString = processedString.split("");
+//   reversedProcessedString = processedString.reverse();
+//   reversedProcessedString = reversedProcessedString.split("");
+//   weights = {
+//     ")": 1,
+//     "(": -1,
+//   };
+//   partialResult = removeUnnecessaryChars(reversedProcessedString, weights);
+//   partialResult.reverse();
+//   return partialResult.join("");
+// }
+
+// function removeUnnecessaryChars(str, weight) {
+//   let partialResult = [];
+//   let weightSum = 0;
+//   for (let char of str) {
+//     if (!(char in weight)) {
+//       partialResult.push(char);
+//       continue;
+//     } else if (weightSum + weight[char] < 0) {
+//       continue;
+//     }
+//     weightSum += weight[char];
+//     partialResult.push(char);
+//     continue;
+//   }
+//   return partialResult;
+// }
+
+// console.log(balanceParenthes("(()()("));
+
+//  balance("(()()(") -> "()()"
+
+// the easy one of the parentehs series questions: given input of parenthes give output as true/false depending on balanced
+
+// function isBalanced(str) {
+//   const stack = [];
+//   for (let char of str) {
+//     if (char === "(") {
+//       stack.push(char);
+//     } else if (stack.pop() !== "(") {
+//       return false;
+//     }
+//   }
+//   return stack.length === 0 ? true : false;
+// }
+// console.log(isBalanced("()())"));
+
+// given input of parenthes give output of number of unbalanced parenthes
+
+// function balanceParentheses(s) {
+//   let right = 0;
+//   let left = 0;
+
+//   for (let i = 0; i < s.length; i++) {
+//     if (s[i] === "(") {
+//       right++;
+//     } else if (s[i] === ")" && right > 0) {
+//       right--;
+//     } else {
+//       left++;
+//     }
+//   }
+
+//   return left + right;
+// }
+// console.log(balanceParentheses("())"));
