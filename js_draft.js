@@ -5816,36 +5816,54 @@
 
 // Longest peak
 // time: O(n) | space: O(1)
-function longestPeak(array) {
-  let tempLongest = 0;
-  let longest = 0;
+// function longestPeak(array) {
+//   let tempLongest = 0;
+//   let longest = 0;
+//   for (let i = 0; i < array.length; i++) {
+//     if (array[i + 1] > array[i] && array[i + 1] > array[i + 2]) {
+//       tempLongest += 1;
+//       for (let j = i + 1; j > 0; j--) {
+//         if (array[j] > array[j - 1]) {
+//           tempLongest += 1;
+//         } else {
+//           break;
+//         }
+//       }
+//       for (let y = i + 1; y < array.length; y++) {
+//         if (array[y] > array[y + 1]) {
+//           tempLongest += 1;
+//         } else {
+//           break;
+//         }
+//       }
+//     }
+//     if (longest === 0) {
+//       longest = tempLongest;
+//       tempLongest = 0;
+//     } else if (tempLongest > longest) {
+//       longest = tempLongest;
+//       tempLongest = 0;
+//     } else {
+//       tempLongest = 0;
+//     }
+//   }
+//   return longest;
+// }
+
+//Array of products
+// time: O(n) | space: O(n)
+function arrayOfProducts(array) {
+  let res = [];
+
   for (let i = 0; i < array.length; i++) {
-    if (array[i + 1] > array[i] && array[i + 1] > array[i + 2]) {
-      tempLongest += 1;
-      for (let j = i + 1; j > 0; j--) {
-        if (array[j] > array[j - 1]) {
-          tempLongest += 1;
-        } else {
-          break;
-        }
-      }
-      for (let y = i + 1; y < array.length; y++) {
-        if (array[y] > array[y + 1]) {
-          tempLongest += 1;
-        } else {
-          break;
-        }
+    let runningProduct = 1;
+    for (let j = 0; j < array.length; j++) {
+      if (i !== j) {
+        runningProduct *= array[j];
       }
     }
-    if (longest === 0) {
-      longest = tempLongest;
-      tempLongest = 0;
-    } else if (tempLongest > longest) {
-      longest = tempLongest;
-      tempLongest = 0;
-    } else {
-      tempLongest = 0;
-    }
+    res[i] = runningProduct;
   }
-  return longest;
+  return res;
 }
+console.log(arrayOfProducts([5, 1, 4, 2]));
