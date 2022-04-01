@@ -5852,18 +5852,51 @@
 
 //Array of products
 // time: O(n) | space: O(n)
-function arrayOfProducts(array) {
-  let res = [];
+// function arrayOfProducts(array) {
+//   let res = [];
 
-  for (let i = 0; i < array.length; i++) {
-    let runningProduct = 1;
-    for (let j = 0; j < array.length; j++) {
-      if (i !== j) {
-        runningProduct *= array[j];
-      }
+//   for (let i = 0; i < array.length; i++) {
+//     let runningProduct = 1;
+//     for (let j = 0; j < array.length; j++) {
+//       if (i !== j) {
+//         runningProduct *= array[j];
+//       }
+//     }
+//     res[i] = runningProduct;
+//   }
+//   return res;
+// }
+// console.log(arrayOfProducts([5, 1, 4, 2]));
+
+// Merge Over Intervals
+// time: O(nlog(n)) space: O(n)
+function mergeOverlappingIntervals(array) {
+  let sortedIntervals = array.sort((a, b) => a[0] - b[0]);
+  let mergedIntervals = [];
+  let currentInterval = sortedIntervals[0];
+  mergedIntervals.push(currentInterval);
+
+  for (let nextInterval of sortedIntervals) {
+    [_, currentIntervalEnd] = currentInterval[
+      (nextIntervalStart, nextIntervalEnd)
+    ] = nextInterval;
+
+    if (currentIntervalEnd >= nextIntervalStart) {
+      currentInterval[1] = Math.max(currentIntervalEnd, nextIntervalEnd);
+    } else {
+      currentInterval = nextInterval;
+      mergedIntervals.push(currentInterval);
     }
-    res[i] = runningProduct;
   }
-  return res;
+  return mergedIntervals;
 }
-console.log(arrayOfProducts([5, 1, 4, 2]));
+
+console.log(
+  mergeOverlappingIntervals([
+    [1, 2],
+    [3, 5],
+    [4, 7],
+    [6, 8],
+    [9, 10],
+  ])
+);
