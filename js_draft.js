@@ -5870,33 +5870,67 @@
 
 // Merge Over Intervals
 // time: O(nlog(n)) space: O(n)
-function mergeOverlappingIntervals(array) {
-  let sortedIntervals = array.sort((a, b) => a[0] - b[0]);
-  let mergedIntervals = [];
-  let currentInterval = sortedIntervals[0];
-  mergedIntervals.push(currentInterval);
+// function mergeOverlappingIntervals(array) {
+//   let sortedIntervals = array.sort((a, b) => a[0] - b[0]);
+//   let mergedIntervals = [];
+//   let currentInterval = sortedIntervals[0];
+//   mergedIntervals.push(currentInterval);
 
-  for (let nextInterval of sortedIntervals) {
-    [_, currentIntervalEnd] = currentInterval[
-      (nextIntervalStart, nextIntervalEnd)
-    ] = nextInterval;
+//   for (let nextInterval of sortedIntervals) {
+//     [_, currentIntervalEnd] = currentInterval[
+//       (nextIntervalStart, nextIntervalEnd)
+//     ] = nextInterval;
 
-    if (currentIntervalEnd >= nextIntervalStart) {
-      currentInterval[1] = Math.max(currentIntervalEnd, nextIntervalEnd);
-    } else {
-      currentInterval = nextInterval;
-      mergedIntervals.push(currentInterval);
-    }
+//     if (currentIntervalEnd >= nextIntervalStart) {
+//       currentInterval[1] = Math.max(currentIntervalEnd, nextIntervalEnd);
+//     } else {
+//       currentInterval = nextInterval;
+//       mergedIntervals.push(currentInterval);
+//     }
+//   }
+//   return mergedIntervals;
+// }
+
+// console.log(
+//   mergeOverlappingIntervals([
+//     [1, 2],
+//     [3, 5],
+//     [4, 7],
+//     [6, 8],
+//     [9, 10],
+//   ])
+// );
+
+// Max subset sum of non adjasent values
+// time: O(n) | space: O(n)
+// function maxSubsetSumNoAdjacent(array) {
+//   if (!array.length) return 0;
+//   if (array.length === 1) return array[0];
+
+//   const maxSums = array.slice();
+//   maxSums[1] = Math.max(maxSums[0], maxSums[1]);
+
+//   for (let i = 2; i < array.length; i++) {
+//     maxSums[i] = Math.max(maxSums[i - 1], maxSums[i - 2] + maxSums[i]);
+//   }
+//   return maxSums[maxSums.length - 1];
+// }
+
+// another approach with better space
+// time: O(n) | space: O(1)
+function maxSubsetSumNoAdjacent(array) {
+  if (!array.length) return 0;
+  if (array.length === 1) return array[0];
+
+  let prevValue = array[0];
+  let currentValue = Math.max(array[0], array[1]);
+
+  for (let i = 2; i < array.length; i++) {
+    let current = Math.max(currentValue, prevValue + array[i]);
+    prevValue = currentValue;
+    currentValue = current;
   }
-  return mergedIntervals;
+  return currentValue;
 }
 
-console.log(
-  mergeOverlappingIntervals([
-    [1, 2],
-    [3, 5],
-    [4, 7],
-    [6, 8],
-    [9, 10],
-  ])
-);
+console.log(maxSubsetSumNoAdjacent([75, 105, 120, 75, 90, 135]));
