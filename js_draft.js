@@ -5918,19 +5918,35 @@
 
 // another approach with better space
 // time: O(n) | space: O(1)
-function maxSubsetSumNoAdjacent(array) {
-  if (!array.length) return 0;
-  if (array.length === 1) return array[0];
+// function maxSubsetSumNoAdjacent(array) {
+//   if (!array.length) return 0;
+//   if (array.length === 1) return array[0];
 
-  let prevValue = array[0];
-  let currentValue = Math.max(array[0], array[1]);
+//   let prevValue = array[0];
+//   let currentValue = Math.max(array[0], array[1]);
 
-  for (let i = 2; i < array.length; i++) {
-    let current = Math.max(currentValue, prevValue + array[i]);
-    prevValue = currentValue;
-    currentValue = current;
+//   for (let i = 2; i < array.length; i++) {
+//     let current = Math.max(currentValue, prevValue + array[i]);
+//     prevValue = currentValue;
+//     currentValue = current;
+//   }
+//   return currentValue;
+// }
+
+// console.log(maxSubsetSumNoAdjacent([75, 105, 120, 75, 90, 135]));
+
+// Number of ways to make change
+// time: O(nd) | space: O(n) where n is the target amount and d is the number of coin denominations
+function numberOfWaysToMakeChange(n, denoms) {
+  const ways = new Array(n + 1).fill(0);
+  ways[0] = 1;
+
+  for (let denom of denoms) {
+    for (let ammount = 1; ammount <= n; n++) {
+      if (denom <= ammount) {
+        ways[ammount] += ways[ammount - denom];
+      }
+    }
   }
-  return currentValue;
+  return ways[n];
 }
-
-console.log(maxSubsetSumNoAdjacent([75, 105, 120, 75, 90, 135]));
