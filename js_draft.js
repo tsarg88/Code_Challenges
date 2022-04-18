@@ -5937,16 +5937,725 @@
 
 // Number of ways to make change
 // time: O(nd) | space: O(n) where n is the target amount and d is the number of coin denominations
-function numberOfWaysToMakeChange(n, denoms) {
-  const ways = new Array(n + 1).fill(0);
-  ways[0] = 1;
+// function numberOfWaysToMakeChange(n, denoms) {
+//   const ways = new Array(n + 1).fill(0);
+//   ways[0] = 1;
 
-  for (let denom of denoms) {
-    for (let ammount = 1; ammount <= n; n++) {
-      if (denom <= ammount) {
-        ways[ammount] += ways[ammount - denom];
-      }
+//   for (let denom of denoms) {
+//     for (let ammount = 1; ammount <= n; n++) {
+//       if (denom <= ammount) {
+//         ways[ammount] += ways[ammount - denom];
+//       }
+//     }
+//   }
+//   return ways[n];
+// }
+
+// function levenshteinDistance(str1, str2) {
+//   let diffLen = str2.length > str1.length ? str2.length - str1.length : 0;
+//   let res = 0;
+//   res += diffLen;
+//   let dup = 0;
+
+//   for (let i = 0; i < str1.length; i++) {
+//     for (let j = 0; j < str2.length; j++) {
+//       if (str1[i] === str2[j]) {
+//         dup += 1;
+//       }
+//     }
+//   }
+//   let diff = str1.length - dup;
+//   let totalDiff = str2.length - res - diff;
+//   return Math.abs(totalDiff);
+// }
+// console.log(levenshteinDistance("abc", ""));
+
+// take a str palindrome
+
+// aba
+
+// function isPalindrome(str, i=0) {
+//   // let rev = str.split("");
+//   // rev = rev.reverse();
+//   // rev = rev.join("");
+//   // return str === rev ? true : false;
+
+//   // let rev = [];
+//   // for (let i = str.length - 1; i >= 0; i--) {
+//   //   rev.push(str[i]);
+//   // }
+//   // rev = rev.join("");
+//   // return str === rev ? true : false;
+
+//   // let left = 0;
+//   // let right = str.length - 1;
+
+//   // for (let i = 0; i <= str.length; i++) {
+//   //   if (str[left] === str[right]) {
+//   //     left++;
+//   //     right--;
+//   //   } else {
+//   //     return false;
+//   //   }
+//   // }
+//   // return true;
+
+//   let j = str.length-1-i
+//   return i >= j ? true : str[i] === str[j] && isPalindrome(str, i+1)
+
+//   // space: O(1)
+
+// }
+// console.log(palindrome("abda"));
+
+// function billFor(month, activeSubscription, users) {
+//   // your code here!
+// //   console.log(month, activeSubscription, users, "stegh")
+// //     console.log(activeSubscription.monthlyPriceInDollars)
+
+// // finds the current number of days in a month
+// function getDaysInMonth(year, month) {
+//   return new Date(year, month, 0).getDate();
+// }
+
+// const date = new Date();
+// const currentYear = date.getFullYear();
+// const currentMonth = date.getMonth() + 1;
+// const daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth);
+// // console.log(daysInCurrentMonth);
+
+//   // finds daily rate, by deviding monthly price to number of current month's days
+//   let dailyRate = activeSubscription.monthlyPriceInDollars / daysInCurrentMonth
+//   let daulyRateFixed = dailyRate.toFixed(2)
+//   console.log(daulyRateFixed)
+// //   console.log(new Date(year, month, 0).getDate(); "stegh")
+
+// Kadanes Algorithm
+// time: O(n) | space: O(1)
+// function kadanesalgorithm(array) {
+//   let currentMax = array[0];
+//   let max = array[0];
+
+//   for (let i = 1; i < array.length; i++) {
+//     currentMax = Math.max(array[i], array[i] + currentMax);
+//     max = Math.max(max, currentMax);
+//   }
+//   return max;
+// }
+
+// class ListNode {
+//   constructor(data) {
+//     this.data = data;
+//     this.next = null;
+//   }
+// }
+// class LinkedList {
+//   constructor(value) {
+//     this.value = value;
+//     this.next = null;
+//   }
+
+//   oddEvenList(head) {
+//     if(head ==null ) return head;
+//     let odd = head;
+//     let headNode = head;
+//     let even = head.next;
+//     let evenHead = head.next;
+
+//     while(even !== null && even.next !==null){
+//         odd.next = odd.next.next;
+//         odd= odd.next;
+//         even.next = odd.next;
+//         even = even.next;
+//     }
+
+//     odd.next = evenHead;
+//     return headNode;
+// };
+
+//   // oddEvenList(head){
+//   //   if (!head) return null;
+//   //   let odd = head
+//   //   let even = odd.next
+//   //   let evenHead = even;
+
+//   //   while (even && even.next) {
+//   //     odd.next = even.next;
+//   //     even.next = odd.next.next;
+//   //     odd = odd.next;
+//   //     even = even.next;
+//   //   }
+//   //   odd.next = evenHead;
+//   //   return head;
+//   // };
+
+// }
+// let node1 = new ListNode(1);
+// node1.next = new ListNode(2);
+// node1.next.next = new ListNode(3);
+// node1.next.next.next = new ListNode(4);
+// let list = new LinkedList(node1);
+// console.log(list.oddEvenList(node1));
+
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
+
+//   insert(value) {
+//     let newNode = new Node(value);
+//     if (this.root === null) {
+//       this.root = newNode;
+//       return this;
+//     }
+//     let currentNode = this.root;
+//     while (currentNode) {
+//       if (value < currentNode.value) {
+//         if (currentNode.left === null) {
+//           currentNode.left = newNode;
+//           return this;
+//         } else {
+//           currentNode = currentNode.left;
+//         }
+//       } else if (value > currentNode.value) {
+//         if (currentNode.right === null) {
+//           currentNode.right = newNode;
+//           return this;
+//         } else {
+//           currentNode = currentNode.right;
+//         }
+//       }
+//     }
+//   }
+
+//   /*
+// 1. Use BFS to traverse nodes in level-order.
+// 2. For each level, keep track of the maximum value and push it to the result array.
+// 3. Return the result array.
+// */
+
+//   largestValues(root) {
+//     // If given root is null, return an empty array
+//     if (!root) {
+//       return [];
+//     }
+//     // result array
+//     let res = [];
+//     // queue stores nodes to be traversed
+//     let queue = [];
+//     // the first node to be traversed is the root
+//     queue.push(root);
+
+//     // while there are nodes to be traversed
+//     while (queue.length > 0) {
+//       // number of nodes in one level
+//       let queueLen = queue.length;
+//       let max = -Infinity;
+//       for (let i = 0; i < queueLen; i++) {
+//         let node = queue.shift();
+//         max = Math.max(max, node.val);
+//         // push nodes in next level into queue
+//         if (node.left) queue.push(node.left);
+//         if (node.right) queue.push(node.right);
+//       }
+//       res.push(max);
+//     }
+//     return res;
+//     // T.C: O(N), we traverse every node once
+//     // S.C: O(N), the bottom level can contain at most N/2 nodes, and hence so can queue
+//   }
+// }
+
+// let test = new BST();
+// test.insert(1);
+// test.insert(3);
+// test.insert(3);
+// test.insert(5);
+// test.insert(2);
+// test.insert(9);
+// console.log(test.largestValues());
+
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+
+//   largestValues(root = this.value) {
+//     // If given root is null, return an empty array
+//     if (!root) {
+//       return [];
+//     }
+//     // result array
+//     let res = [];
+//     // queue stores nodes to be traversed
+//     let queue = [];
+//     // the first node to be traversed is the root
+//     queue.push(root);
+
+//     // while there are nodes to be traversed
+//     while (queue.length > 0) {
+//       // number of nodes in one level
+//       let queueLen = queue.length;
+//       let max = -Infinity;
+//       for (let i = 0; i < queueLen; i++) {
+//         let node = queue.shift();
+//         max = Math.max(max, node.value);
+//         // push nodes in next level into queue
+//         if (node.left) queue.push(node.left);
+//         if (node.right) queue.push(node.right);
+//       }
+//       res.push(max);
+//     }
+//     return res;
+//     // T.C: O(N), we traverse every node once
+//     // S.C: O(N), the bottom level can contain at
+//     // most N/2 nodes, and hence so can queue
+//   }
+// }
+
+// //     1
+// //   / \
+// //   3   2
+// // / \   \
+// // 5   3   9
+
+// let test = new Node();
+// test.value = new Node(1);
+// test.value.left = new Node(3);
+// test.value.left.right = new Node(3);
+// test.value.left.left = new Node(5);
+// test.value.right = new Node(2);
+// test.value.right.right = new Node(9);
+// test.largestValues();
+
+// function findMaxSum(arr, n) {
+//   let incl_curr = arr[0];
+//   let excl_curr = 0;
+
+//   let incl_prev = incl_curr;
+//   let excl_prev = excl_curr;
+
+//   for (let i = 0; i < n; i++) {
+//     excl_curr = max(incl_prev, excl_prev);
+//     incl_curr = excl_prev + arr[i];
+
+//     excl_prev = excl_curr;
+//     incl_prev = incl_curr;
+//   }
+//   return max(excl_curr, incl_curr);
+// }
+
+// function max(x, y) {
+//   return x > y ? x : y;
+// }
+// console.log(findMaxSum([5, 5, 10, 200, 10, 5], 6));
+
+// O(n logn ) time O(logn or O(n) in worst case) space
+// var merge = function (intervals) {
+//   // Sort the intervals
+//   intervals.sort((a, b) => a[0] - b[0]);
+//   let mergedIntervals = [];
+//   currentInterval = intervals[0];
+//   mergedIntervals.push(currentInterval);
+
+//   for (let nextInterval of intervals) {
+//     let [_, currentIntervalEnd] = currentInterval;
+//     let [nextIntervalStart, nextIntervalEnd] = nextInterval;
+
+//     if (currentIntervalEnd >= nextIntervalStart) {
+//       currentInterval[1] = Math.max(currentIntervalEnd, nextIntervalEnd);
+//     } else {
+//       currentInterval = nextInterval;
+//       mergedIntervals.push(currentInterval);
+//     }
+//   }
+//   return mergedIntervals;
+// };
+
+// console.log(
+//   merge([
+//     [1, 3],
+//     [2, 7],
+//     [4, 9],
+//   ])
+// );
+
+// class Node{
+//   constructor(val, left = null, right = null){
+//       this.val = val;
+//       this.left = left;
+//       this.right = right;
+//   }
+// }
+// const bst = new Node(27);
+// bst.left = new Node(14);
+// bst.left.left = new Node(10);
+// bst.left.right = new Node(19);
+// bst.right = new Node(35);
+// bst.right.left = new Node(31);
+// bst.right.right = new Node(42);
+
+// function plusMinus(arr) {
+// let positiveNums = [];
+// let negativeNums = [];
+// let zeroNums = [];
+// let len = 0;
+
+// for (let num of arr) {
+//   if (Math.sign(num) === 1) {
+//     positiveNums.push(num);
+//   } else if (Math.sign(num) === 0) {
+//     zeroNums.push(num);
+//   } else if (Math.sign(-1)) {
+//     negativeNums.push(num);
+//   }
+// }
+
+// if (positiveNums.length > 0) {
+//   let ratio = positiveNums.length / arr.length;
+//   console.log(ratio.toFixed(6));
+// }
+// if (negativeNums.length > 0) {
+//   let ratio = negativeNums.length / arr.length;
+//   console.log(ratio.toFixed(6));
+// }
+// if (zeroNums.length > 0) {
+//   let ratio = zeroNums.length / arr.length;
+//   console.log(ratio.toFixed(6));
+// }
+
+//   let positiveNums = 0;
+//   let negativeNums = 0;
+//   let zeroNums = 0;
+
+//   for (let num of arr) {
+//     if (num > 0) {
+//       positiveNums++;
+//     } else if (num < 0) {
+//       negativeNums++;
+//     } else {
+//       zeroNums++;
+//     }
+//   }
+//   [positiveNums, negativeNums, zeroNums].forEach((e) => {
+//     console.log(e / arr.length);
+//   });
+// }
+
+// console.log(plusMinus([1, -2, -7, 9, 1, -8, -5]));
+
+// var mostCommonWord = function (paragraph, banned) {
+//   let res = {};
+
+//   paragraph = paragraph.toLowerCase();
+//   paragraph = paragraph.split(/\W+/);
+//   console.log(paragraph);
+//   if (paragraph.length === 1) {
+//     return paragraph.join("");
+//   }
+//   for (let i = 0; i < paragraph.length; i++) {
+//     if (
+//       paragraph[i] !== banned[0] &&
+//       paragraph[i] !== "" &&
+//       !(paragraph[i] in res)
+//     ) {
+//       res[paragraph[i]] = 1;
+//     } else if (paragraph[i] !== banned[0] && paragraph[i] in res) {
+//       res[paragraph[i]] += 1;
+//     }
+//   }
+//   return Object.keys(res).reduce((a, b) => (res[a] > res[b] ? a : b));
+// };
+// console.log(mostCommonWord("abc abc? abcd the jeff!", ["abc", "abcd", "jeff"]));
+
+// function test() {
+//   let str = "a b c";
+//   str = str.split(" ");
+//   return str;
+// }
+// console.log(test());
+
+// var mostCommonWord = function (paragraph, banned) {
+//   const bannedSet = new Set(banned);
+
+//   const words = paragraph.toLowerCase().split(/\W+/);
+//   // console.log(words);
+
+//   const map = {};
+//   let frequentWord;
+//   let maxCount = 0;
+
+//   for (const word of words) {
+//     if (word && !bannedSet.has(word)) {
+//       map[word] = (map[word] || 0) + 1;
+//       if (map[word] > maxCount) {
+//         maxCount = map[word];
+//         frequentWord = word;
+//       }
+//     }
+//   }
+
+//   return frequentWord;
+// };
+// console.log(
+//   mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", [
+//     "hit",
+//   ])
+// );
+
+// function test() {
+//   // let res = "Bob hit a ball!!!!, the hit??? BALL flew far after it was hit.";
+//   // res = res.split(/\W+/);
+//   // return res;
+//   let str = "a,b,c";
+//   str = str.split(",").join("");
+//   let testSet = new Set(str);
+//   console.log(testSet);
+// }
+// console.log(test());
+
+// function mostCummonWord(paragraph, banned) {
+//   const words = paragraph.toLowerCase().split(/\W+/);
+//   let frequentWord;
+//   let maxValue = 0;
+//   let obj = {};
+//   for (let word of words) {
+//     if (banned.includes(word) === false) {
+//       obj[word] = (obj[word] || 0) + 1;
+//     }
+//     if (obj[word] > maxValue) {
+//       maxValue = obj[word];
+//       frequentWord = word;
+//     }
+//   }
+//   return frequentWord;
+
+// }
+// console.log(
+//   mostCummonWord("Bob hit a ball, the hit BALL flew far after it was hit.", [
+//     "hit",
+//   ])
+// );
+
+// function test() {
+//   let obj = {
+//     a: 1,
+//     b: 2,
+//   };
+
+//   if ("a" in obj) {
+//     return "kkk";
+//   } else {
+//     return "das";
+//   }
+// }
+
+// console.log(test());
+
+// BST depth-first search
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+
+//   dfsIterativePreorder(root) {
+//     const stack = [root],
+//     let traversed = [];
+//     let curr;
+
+//     while (stack.length) {
+//       curr = stack.pop();
+//       traversed.push(curr.val);
+//       if (curr.right) stack.push(curr.right);
+//       if (curr.left) stack.push(curr.left);
+//     }
+
+//     return traversed;
+//   }
+// }
+// const bst = new Node(27);
+// bst.left = new Node(14);
+// bst.left.left = new Node(10);
+// bst.left.right = new Node(19);
+// bst.right = new Node(35);
+// bst.right.left = new Node(31);
+// bst.right.right = new Node(42);
+// bst.dfsIterativePreorder(bst);
+
+// var countBinarySubstrings = function (s) {
+//   let numSubstrings = 0
+//   let numPrev = 0
+//   let numCurr = 1
+
+//   for(let i=0; i<s.length-1; i++){
+//     if(s[i] === s[i+1]){
+//       numCurr++
+//     } else {
+//       [numPrev, numCurr] = [numCurr 1]
+//     }
+//     if(numPrev >= numCur) numSubstrings++
+//   } return numSubstrings
+// };
+
+// console.log(countBinarySubstrings("00110011"));
+
+// function getPermutations(array) {
+//   let permutations = [];
+//   permutationsHelper(0, permutations, array);
+//   return permutations;
+// }
+
+// function permutationsHelper(i, permutations, array) {
+//   if (i === array.length - 1) {
+//     permutations.push(array.slice());
+//   }
+//   for (let j = i; j < array.length; j++) {
+//     swap(i, j, array);
+//     permutationsHelper(i + 1, permutations, array);
+//     swap(i, j, array);
+//   }
+// }
+
+// function swap(i, j, array) {
+//   const temp = array[i];
+//   array[i] = array[j];
+//   array[j] = temp;
+// }
+// console.log(getPermutations([1, 2, 3]));
+
+// ------ BST -- TRI(pronounces like try), which inclides: insert, search, startsWith:
+// class Trie {
+//   constructor() {
+//     this.root = {};
+//   }
+
+//   insert(word) {
+//     let node = this.root;
+//     for (let letter of word) {
+//       if (node[letter] === undefined) {
+//         node[letter] = {};
+//       }
+//       node = node[letter];
+//     }
+//     node.isEnd = true;
+//   }
+
+//   search(word) {
+//     let node = this.root;
+//     for (let letter of word) {
+//       if (!node[letter]) {
+//         return false;
+//       } else {
+//         node = node[letter];
+//       }
+//     }
+//     return node && node.isEnd === true;
+//   }
+
+//   startsWith(prefix) {
+//     let node = this.root;
+//     for (let letter of prefix) {
+//       if (!node[letter]) {
+//         return false;
+//       } else {
+//         node = node[letter];
+//       }
+//     }
+//     return true;
+//   }
+// }
+// let trie = new Trie();
+// trie.insert("apple");
+// trie.search("apple"); // return True
+// trie.search("app"); // return False
+// trie.startsWith("app"); // return True
+// trie.insert("app");
+// trie.search("app"); // return True
+
+// class Node{
+//   constructor(value){
+//     this.value = value
+//     this.right = null
+//     this.left = null
+//   }
+
+//   dfsTraversal(root=this.value){
+//     let traversed = []
+//     let curr
+//     let stack = [root]
+//     //let max = -Infinity
+//     while(stack.length > 0){
+//       curr = stack.pop()
+//       traversed.push(curr.val)
+//       if(curr.left) stack.push(curr.left)
+//       if(curr.right) stack.push(curr.right)
+//     } return traversed
+//   }
+
+//   //   dfsIterativePreorder(root) {
+// //     const stack = [root],
+// //     let traversed = [];
+// //     let curr;
+
+// //     while (stack.length) {
+// //       curr = stack.pop();
+// //       traversed.push(curr.val);
+// //       if (curr.right) stack.push(curr.right);
+// //       if (curr.left) stack.push(curr.left);
+// //     }
+
+// }
+
+// var sortArrayByParityII = function(nums) {
+//   /*
+//   Approach:
+//   Take care of even indexes only, odd indexes will be fixed automatically. It will work the other way also.
+//   Whenever we find an odd value on an even index, we will fetch an even value from the next possible odd index and swipe the values
+//   */
+//   let temp,  j=1;
+//   for(let i=0;i<nums.length;i+=2){
+//       if(nums[i]%2!==0){//if we find an odd value on an even index
+//           for(;j<nums.length;j+=2){
+//               if(nums[j]%2===0){//fetch an even value from the next possible odd index
+//                   temp = nums[i];
+//                   nums[i] = nums[j];
+//                   nums[j] = temp;
+//                   break;
+//               }
+//           }
+//       }
+//   }
+//   return nums;
+// };
+// console.log(sortArrayByParityII([4,1,6,7]))
+
+function maxIncreaseKeepingSkyline(grid) {
+  let row = new Array(grid.length).fill(0);
+  let col = new Array(grid.length).fill(0);
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid.length; j++) {
+      row[i] = Math.max(row[i], grid[i][j]);
+      col[j] = Math.max(col[j], grid[i][j]);
     }
   }
-  return ways[n];
+  let ans = 0;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid.length; j++) {
+      ans += Math.min(row[i], col[j]) - grid[i][j];
+    }
+  }
+  return ans;
 }
