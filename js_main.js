@@ -541,7 +541,7 @@
 // Create a function that squares every digit of a number.
 // function squareDigits(n) {
 //   // return n.map(x => x**2)
-//   const result = Array.from(String(n), Number);
+//   const result = Array.from(String(n), arr);
 //   return parseInt(result.map((n) => n ** 2).join(""));
 // }
 // console.log(squareDigits(9119));
@@ -7205,7 +7205,7 @@
 
 // class BST {
 //   constructor() {
-//     this.root === null;
+//     this.root = null;
 //   }
 
 //   insert(value) {
@@ -8035,18 +8035,917 @@
 // }
 // }
 
-var longestCommonPrefix = function (strs) {
-  if (strs.length === 0) return "";
-  let prefix = "";
-  let maxPrefixLength = Math.min(...strs.map((v) => v.length));
+// var longestCommonPrefix = function (strs) {
+//   if (strs.length === 0) return "";
+//   let prefix = "";
+//   let maxPrefixLength = Math.min(...strs.map((v) => v.length));
 
-  for (let i = 0; i < maxPrefixLength; i++) {
-    let char = strs[0][i];
-    if (strs.every((str) => str[i] === char)) {
-      prefix += char;
-    } else {
-      break;
-    }
-  }
-  return prefix;
-};
+//   for (let i = 0; i < maxPrefixLength; i++) {
+//     let char = strs[0][i];
+//     if (strs.every((str) => str[i] === char)) {
+//       prefix += char;
+//     } else {
+//       break;
+//     }
+//   }
+//   return prefix;
+// };
+
+// Valid parentheses
+// var isValid = function (s) {
+//   const stack = [];
+//   for (let char of s) {
+//     if (char === "(") {
+//       stack.push(")");
+//     } else if (char === "{") {
+//       stack.push("}");
+//     } else if (char === "[") {
+//       stack.push("]");
+//     } else {
+//       if (char !== stack.pop()) {
+//         return false;
+//       }
+//     }
+//   }
+//   return stack.length === 0;
+// };
+
+// --- Linked list with mergeTwoLists method/function ---
+// class ListNode {
+//   constructor(val, next) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+// class LinkedList {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+
+// let node1 = new ListNode(1);
+// node1.next = new ListNode(2);
+// node1.next.next = new ListNode(4);
+// let node2 = new ListNode(1)
+// node2.next = new ListNode(3)
+// node2.next.next = new ListNode(4)
+// // let list1 = new LinkedList(node1);
+// // let list2  = new LinkedList(node2)
+
+// const mergeTwoLists = function(l1 = node1, l2 = node2) {
+//     const head = new ListNode(null);
+//     let curr = head;
+//     while (l1 && l2) {
+//         if (l1.val < l2.val) {
+//             curr.next = l1;
+//             l1 = l1.next;
+//         } else {
+//             curr.next = l2;
+//             l2 = l2.next;
+//         }
+//         curr = curr.next;
+//     }
+//     curr.next = l1 || l2;
+//     return head.next;
+
+// };
+// mergeTwoLists()
+
+// var strStr = function(haystack, needle) {
+
+//   //     let len = needle.length
+
+//   //     for(let i=0; i<needle.length; i++){
+//   //         for(let j=0; j<haystack.length; j++){
+//   //             if(needle[i] === haystack[j]){
+//   //                let isMatch = haystack.substring(j, len+j)
+//   //                if(isMatch === needle){
+//   //                    return j
+//   //                } else {
+//   //                    continue
+//   //                }
+//   //             } else {
+//   //                 continue
+//   //             }
+//   //         }
+//   //     } return -1
+
+//       if(needle.length === 0) return 0
+
+//       for(let i=0; i<haystack.length; i++){
+//           let j = 0
+//           let k = i
+//             while(haystack[k] === needle[j] && j < needle.length){
+//                   k += 1
+//                   j += 1
+//           }
+//             if(j === needle.length) return i
+
+//       } return -1
+
+//       // Time Complexity: O(m*n)
+//       // Space Complexity: O(1)
+
+//   }
+
+// var plusOne = function (digits) {
+//   for (let i = digits.length - 1; i >= 0; i--) {
+//     if (digits[i] < 9) {
+//       digits[i]++;
+//       return digits;
+//     }
+//     digits[i] = 0;
+//   }
+//   digits.unshift(1);
+//   return digits;
+// };
+
+// var mySqrt = function (x) {
+//   let num = 0;
+//   let res;
+//   while (num * num <= x) {
+//     res = num;
+//     num++;
+//   }
+//   return res;
+// };
+
+// var climbStairs = function(n) {
+//   let dp = Array.from(n+1)
+//   dp[1] = 1
+//   dp[2] = 2
+
+//   for(let i=3; i<=n; i++){
+//      dp[i] = dp[i-1] + dp[i-2]
+//   }
+//   return dp[n]
+// }
+
+// inOrder traversal wth BST tree implemented
+// class Node{
+//   constructor(val){
+//     this.val = val
+//     this.left = null
+//     this.right = null
+//     }
+//   }
+
+//   class BST{
+//     constructor(){
+//       this.root = null
+//       }
+
+//       insert(val){
+//         let newNode = new Node(val)
+
+//         if(this.root === null){
+//           this.root = newNode
+//           return this
+//           }
+
+//           let curr = this.root
+//           while(curr){
+//             if(val < curr.val){
+//                 if(curr.left === null){
+//                     curr.left = newNode
+//                     return this
+//                   }
+//                   curr = curr.left
+//               }else if(val > curr.val){
+//                 if(curr.right === null){
+//                     curr.right = newNode
+//                     return this
+//                   }
+//                   curr = curr.right
+//               }
+
+//             }
+
+//         }
+
+//     }
+
+// var inorderTraversal = function(root=bst) {
+//   const output = [];
+
+//   if (root === null) {
+//     return output;
+//   }
+
+//   const stack = [];
+//   let curr = root;
+
+//   while (curr !== null || stack.length !== 0) {
+//     if (curr !== null) {
+//       stack.push(curr);
+//       curr = curr.left;
+//     } else {
+//       curr = stack.pop();
+//       output.push(curr.val);
+//       curr = curr.right;
+//     }
+//   }
+
+//   return output;
+// };
+
+// let bst = new Node(1)
+// bst.right = new Node(2)
+// bst.right.left = new Node(3)
+// inorderTraversal()
+
+// isSymentric tree with BST implemented
+// class Node{
+//   constructor(val){
+//     this.val = val
+//     this.left = null
+//     this.right = null
+//     }
+//   }
+
+//   class BST{
+//     constructor(){
+//       this.root = null
+//       }
+
+//       insert(val){
+//         let newNode = new Node(val)
+
+//         if(this.root === null){
+//           this.root = newNode
+//           return this
+//           }
+
+//           let curr = this.root
+//           while(curr){
+//             if(val < curr.val){
+//                 if(curr.left === null){
+//                     curr.left = newNode
+//                     return this
+//                   }
+//                   curr = curr.left
+//               }else if(val > curr.val){
+//                 if(curr.right === null){
+//                     curr.right = newNode
+//                     return this
+//                   }
+//                   curr = curr.right
+//               }
+
+//             }
+
+//         }
+
+//     }
+
+// var isSymmetric = function(root=bst) {
+// //     if there is no root that means it is a symettric tree
+//     if(!root) return true
+// //     Start 2 queue one for the left banch and one for the right branch
+//     let q1 = [root.left], q2 = [root.right]
+// //     traverse through both branches, until they are both exhausted at the same time
+//     while (q1.length > 0 && q2.length > 0){
+// //         get current left and compare it to the right of each branch (this is how a mirror works)
+//         let node1 = q1.shift()
+//         let node2 = q2.shift()
+// //         if both are null at the same time, just move on
+//         if(!node1 && !node2) continue
+// //         if the current level is not symmetric (1 of them is null or they are not equal) return false
+//         if(!node1 || !node2 || node1.val !== node2.val) return false
+// //         to mentain comparing left to right (this is the tricky part, you have to push left and right & reverse for each branch)
+//         q1.push(node1.left)
+//         q2.push(node2.right)
+//         q1.push(node1.right)
+//         q2.push(node2.left)
+//     }
+// //     If both are exhausted at the same time and they are symmeteric return true
+//     return true
+
+// };
+
+// let bst = new Node(1)
+// bst.right = new Node(2)
+// bst.left = new Node(2)
+// bst.left.left = new Node(3)
+// bst.right.right = new Node(3)
+// bst.left.right = new Node(4)
+// bst.right.left = new Node(400)
+
+// isSymmetric()
+
+// var maxProfit = function (prices) {
+//   let profit = 0;
+//   let min = prices[0];
+
+//   for (let i = 1; i < prices.length; i++) {
+//     if (min > prices[i]) {
+//       min = prices[i];
+//     } else if (prices[i] - min > profit) {
+//       profit = prices[i] - min;
+//     }
+//   }
+//   return profit;
+// };
+
+// var singleNumber = function (nums) {
+//   let map = {};
+//   for (let num of nums) {
+//     if (map[num] === undefined) {
+//       map[num] = 0;
+//     }
+//     map[num] += 1;
+//   }
+
+//   for (let key in map) {
+//     if (map[key] === 1) {
+//       return key;
+//     }
+//   }
+// };
+
+// Min Stack with stack implmentation
+// class MinStack{
+//   constructor(){
+//       this.stack = []
+//       this.min = Infinity
+//   }
+
+//   push(x){
+//       const stackObj = {val:x, prevMin:this.min}
+//       this.stack.push(stackObj)
+//       this.min = Math.min(this.min, x)
+//   }
+
+//   pop(){
+//       const {prevMin} = this.stack.pop()
+//       this.min = prevMin
+//   }
+
+//   top(){
+//       return this.stack[this.stack.length-1].val
+//   }
+
+//   getMin(){
+//       return this.min
+//   }
+
+// }
+// let minStack = new MinStack();
+// minStack.push(2);
+// minStack.push(0);
+// minStack.push(3);
+// minStack.push(0);
+// minStack.getMin(); // return -3
+// minStack.pop();
+
+// class ListNode {
+//   constructor(val, next) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+// // class LinkedList {
+// //   constructor(val) {
+// //     this.val = val;
+// //     this.next = null;
+// //   }
+// // }
+
+// var getIntersectionNode = function (headA = node1, headB = node2) {
+//   const set = new Set(); // This set will store all the nodes that are encountered while traversing the first LL
+//   let curr = headA;
+//   while (curr) {
+//     set.add(curr.val);
+//     curr = curr.next;
+//   }
+//   curr = headB;
+//   while (curr && !set.has(curr.val)) {
+//     // the loop will break when we find the intersection node or if there is no intersection
+//     curr = curr.next;
+//   }
+//   return curr;
+// };
+
+// let node1 = new ListNode(4);
+// node1.next = new ListNode(1);
+// node1.next.next = new ListNode(8);
+// node1.next.next.next = new ListNode(4);
+// node1.next.next.next.next = new ListNode(5);
+
+// let node2 = new ListNode(6);
+// node2.next = new ListNode(1);
+// node2.next.next = new ListNode(8);
+// node2.next.next.next = new ListNode(4);
+// node2.next.next.next.next = new ListNode(5);
+// // let list1 = new LinkedList(node1);
+// // let list2  = new LinkedList(node2)
+// getIntersectionNode();
+
+// var findMissingRanges = function (nums, lower, upper) {
+//   const res = [];
+//   let start = lower;
+
+//   const formatRange = (lower, upper) => {
+//     if (lower === upper) return String(lower);
+//     return `${lower}->${upper}`;
+//   };
+
+//   for (let num of nums) {
+//     if (start < num) {
+//       res.push(formatRange(start, num - 1));
+//     }
+//     start = num + 1;
+//   }
+//   if (start <= upper) res.push(formatRange(start, upper));
+//   return res;
+// };
+
+// var majorityElement = function (nums) {
+//     let obj = {}
+//     let len  = nums.length / 2
+
+//     for(let num of nums){
+//         if(obj[num] === undefined){
+//            obj[num] = 1
+//         } else {
+//             obj[num] += 1
+//         }
+//     }
+
+//     for(let key in obj){
+//        if(obj[key] >= len){
+//            return key
+//        }
+//     }
+
+//   let majorityNum = nums[0];
+//   let count = 1;
+
+//   for (let i = 1; i < nums.length; i++) {
+//     if (count === 0) {
+//       majorityNum = nums[i];
+//     }
+//     count = nums[i] === majorityNum ? (count += 1) : (count -= 1);
+//   }
+
+//   return majorityNum;
+// };
+
+// var reverseBits = function (n) {
+//   let res = 0,
+//     pow = 31;
+//   while (n > 0) {
+//     let rightMost = n & 1;
+//     res = res + (rightMost << pow);
+//     pow--;
+//     n = n >>> 1;
+//   }
+//   // take negative into positive
+//   return res >>> 0;
+// };
+// console.log(reverseBits(111));
+
+// function test() {
+//   let num = 123;
+
+//   return num
+//     .toString()
+//     .split("")
+//     .reduce(function (sum, num) {
+//       console.log(num);
+//       return sum + num;
+//     }, 0);
+
+//   // return num
+//   //   .toString()
+//   //   .split("")
+//   //   .reduce((acc, curr) => acc + curr, 0);
+//   // return num
+//   //   .toString()
+//   //   .split("")
+//   //   .reduce(function (sum, num) {
+//   //     return sum + Math.pow(num, 2);
+//   //   }, 0);
+// }
+// console.log(test());
+
+// var isAnagram = function (s, t) {
+//   if (s.length !== t.length) return false;
+//   let counts = {};
+
+//   for (let char of s) {
+//     counts[char] = (counts[char] || 0) + 1;
+//   }
+
+//   for (let char of t) {
+//     if (!counts[char]) return false;
+//     counts[char]--;
+//   }
+//   return true;
+// };
+
+// var missingNumber = function (nums) {
+//   nums.sort((a, b) => a - b);
+
+//   // Ensure that n is at the last index
+//   if (nums[nums.length - 1] != nums.length) {
+//     return nums.length;
+//   }
+//   // Ensure that 0 is at the first index
+//   else if (nums[0] != 0) {
+//     return 0;
+//   }
+
+//   // If we get here, then the missing number is on the range (0, n)
+//   for (let i = 0; i < nums.length; i++) {
+//     let expectedNum = nums[i] + 1;
+//     if (nums[i + 1] != expectedNum) {
+//       return expectedNum;
+//     }
+//   }
+//   // 0, 1, 3
+//   // Array was not missing any numbers
+//   return -1;
+// };
+
+// var reverseString = function (s) {
+//   let left = 0;
+//   let right = s.length - 1;
+
+//   while (left < right) {
+//     [s[left], s[right]] = [s[right], s[left]];
+//     left++;
+//     right--;
+//   }
+//   return s;
+
+// const helper = function(left, right) {
+//   if (left < right) {
+//     [s[left], s[right]] = [s[right], s[left]]
+//     helper(left + 1, right - 1)
+//   }
+// }
+// helper(0, s.length - 1)
+//};
+
+// var intersect = function (nums1, nums2) {
+//   let obj = {};
+//   let res = [];
+//   for (let num of nums1) {
+//     if (obj[num] === undefined) {
+//       obj[num] = 1;
+//     } else {
+//       obj[num] += 1;
+//     }
+//   }
+//   for (let num of nums2) {
+//     if (num in obj && obj[num] > 0) {
+//       res.push(num);
+//       obj[num] = obj[num] - 1;
+//     }
+//   }
+//   return res;
+// };
+
+// how to get the key of the max value from an obj:
+// var sortable = [];
+// for (var key in scores) {
+//     sortable.push([key, scores[key]]);
+// }
+
+// sortable.sort((a, b) => b[1] - a[1])
+// sortable[0][0]
+
+// let arr = Object.values(obj);
+// let max = Math.max(...arr);
+
+// for (let key in obj) {
+//   if (obj[key] === max) {
+//     return key;
+//   }
+// }
+
+// function findClosestValueInBst(tree=bst, target=12) {
+//     // let target = 2;
+//     return findClosestValueInBstHelper(
+//       tree,
+//       target,
+//       tree.val
+//     );
+//   }
+
+// function findClosestValueInBstHelper(current, target, closest) {
+//     // while current !== null
+//     // if the abs difference target - closest > than target - current.value
+//     // means than current.value is less far(is less than closest) from target than closest
+//     // so we have to assign current = current.value
+
+//     while (current) {
+//       if (Math.abs(target - closest) > Math.abs(target - current.val)) {
+//         closest = current.val;
+//       }
+//       if (target < current.val) {
+//         current = current.left;
+//       } else if (target > current.val) {
+//         current = current.right;
+//       } else {
+//         break;
+//       }
+//     }
+//     return closest;
+//   }
+
+// Depth First Traversal of Binary Tree
+// function dfsTraversal(root) {
+//   let visited = [];
+//   let curr = root;
+
+//   const traversal = (node) => {
+//     visited.push(node.val);
+
+//     if (node.left) traversal(node.left);
+//     if (node.right) traversal(node.right);
+//   };
+
+//   traversal(curr);
+//   return visited;
+// }
+
+//   //   dfsIterativePreorder(root) {
+// //     const stack = [root],
+// //     let traversed = [];
+// //     let curr;
+
+// //     while (stack.length) {
+// //       curr = stack.pop();
+// //       traversed.push(curr.val);
+// //       if (curr.right) stack.push(curr.right);
+// //       if (curr.left) stack.push(curr.left);
+// //     }
+
+// }
+
+// Bredth First Traversal of Binary Tree
+// function bfsTraversal(root) {
+//   let visited = [];
+//   let stack = [];
+//   let curr = root;
+
+//   stack.push(curr);
+//   while (stack.length) {
+//     curr = stack.shift();
+//     visited.push(curr.val);
+
+//     if (curr.left) stack.push(curr.left);
+//     if (curr.right) stack.push(curr.right);
+//   }
+//   return visited;
+// }
+// // balanced binary tree
+// let bst = new Node(10);
+// bst.right = new Node(15);
+// bst.left = new Node(7);
+// bst.left.left = new Node(6);
+// bst.left.right = new Node(9);
+// bst.right.left = new Node(13);
+// bst.right.right = new Node(18);
+
+// Remove duplicates from Linked List
+// with manual tree implementation
+// class LinkedList {
+//   constructor(value) {
+//     this.value = value;
+//     this.next = null;
+//   }
+// }
+
+// function removeDuplicatesFromLinkedList(linkedList = ls) {
+//   let currentNode = linkedList;
+//   while (currentNode !== null) {
+//     let nextDistinctNode = currentNode.next;
+//     while (
+//       nextDistinctNode !== null &&
+//       nextDistinctNode !== null &&
+//       nextDistinctNode.value === currentNode.value
+//     ) {
+//       nextDistinctNode = nextDistinctNode.next;
+//       currentNode.next = nextDistinctNode;
+//     }
+
+//     currentNode = currentNode.next;
+//   }
+//   return linkedList;
+// }
+
+// let ls = new LinkedList(1);
+// ls.next = new LinkedList(1);
+// ls.next.next = new LinkedList(3);
+// ls.next.next.next = new LinkedList(4);
+// ls.next.next.next.next = new LinkedList(4);
+// ls.next.next.next.next.next = new LinkedList(4);
+// ls.next.next.next.next.next.next = new LinkedList(5);
+// ls.next.next.next.next.next.next.next = new LinkedList(6);
+// ls.next.next.next.next.next.next.next.next = new LinkedList(6);
+// removeDuplicatesFromLinkedList(ls);
+
+// function isSameTree(p, q) {
+//   if (!p && !q) return true;
+
+//   if ((p && !q) || (q && !p) || p.val !== q.val) return false;
+//   return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+// }
+
+// Invert Binary Tree dfs or bfs(shift or pop) in-place approach
+// var invertTree = function (root) {
+//   if (!root) {
+//     return null;
+//   }
+
+//   let stack = [root];
+
+//   while (stack.length) {
+//     let node = stack.pop();
+
+//     [node.left, node.right] = [node.right, node.left];
+
+//     if (node.left) {
+//       stack.push(node.left);
+//     }
+//     if (node.right) {
+//       stack.push(node.right);
+//     }
+//   }
+
+//   return root;
+// };
+
+// var maxDepth = function (root) {
+//   if (root === null) return null;
+
+//   let depth = 1;
+//   let leftDepth = 0;
+//   let rightDepth = 0;
+
+//   if (root.left) leftDepth = maxDepth(root.left);
+//   if (root.right) rightDepth = maxDepth(root.right);
+
+//   return depth + Math.max(leftDepth, rightDepth);
+// };
+
+// Is Subtree of Binary Tree
+
+// function isSubtree(root, subRoot) {
+//   let stack = [root];
+
+//   const isSubTreeEqual = (root, subRoot) => {
+//     if (root === null && subRoot === null) return true;
+//     if (root === null || subRoot === null) return false;
+
+//     return (
+//       root.val === subRoot.val &&
+//       isSubTreeEqual(root.left, subRoot.left) &&
+//       isSubTreeEqual(root.right, subRoot.right)
+//     );
+//   };
+
+//   while (stack.length > 0) {
+//     let node = stack.shift();
+
+//     if (isSubTreeEqual(node, subRoot)) {
+//       return true;
+//     }
+
+//     if (node.left) stack.push(node.left);
+//     if (node.right) stack.push(node.right);
+//   }
+//   return false;
+// }
+
+// Lowest Common Ancestor of Binary Tree(balanced)
+// function lowestCommonAncestor(root, p, q) {
+//   if (p.val < root.val && q.val < root.val) {
+//     return lowestCommonAncestor(root.left, p, q);
+//   }
+//   if (p.val > root.val && q.val > root.val) {
+//     return lowestCommonAncestor(root.right, p, q);
+//   } else {
+//     return root;
+//   }
+// }
+
+// var containsDuplicate = function (nums) {
+//   let obj = {};
+
+//   for (let num of nums) {
+//     if (num in obj) {
+//       return true;
+//     } else {
+//       obj[num] = true;
+//     }
+//   }
+//   return false;
+// };
+
+// function isAnagram(s, t) {
+//   if (s.length !== t.length) return false;
+
+//   let counts = {};
+
+//   for (let char of s) {
+//     counts[char] = (counts[char] || 0) + 1;
+//   }
+
+//   for (let char of t) {
+//     if (counts[char] === 0 || counts[char] === undefined) return false;
+//     counts[char]--;
+//   }
+//   return true;
+// }
+
+// function twoSum(nums, target) {
+//   let obj = {};
+
+//   for (let i = 0; i < nums.length; i++) {
+//     let potMatch = target - nums[i];
+//     if (potMatch in obj) {
+//       return [i, obj[potMatch]];
+//     } else {
+//       obj[nums[i]] = i;
+//     }
+//   }
+//   return -1;
+// }
+
+// Regex to target only alphanumeric values and remove space
+// /[^a-z0-9]/gi, ""
+
+// function maxProfit(prices) {
+//   let profit = 0;
+//   let min = prices[0];
+
+//   for (let i = 1; i < prices.length; i++) {
+//     if (min > prices[i]) {
+//       min = prices[i];
+//     } else if (prices[i] - min > profit) {
+//       profit = prices[i] - min;
+//     }
+//   }
+//   return profit;
+// }
+
+// function searchRoratedArray(nums, target){
+//   let left = 0;
+//   let right = nums.length - 1;
+
+//   while (left <= right) {
+//     let mid = Math.floor((left + right) / 2);
+
+//     if(nums[mid] === target) return mid;
+
+//     // When dividing the roated array into two halves, one must be sorted.
+
+//     // Check if the left side is sorted
+//     if (nums[left] <= nums[mid]) {
+//       if (nums[left] <= target && target <= nums[mid]) {
+//         // target is in the left
+//         right = mid - 1;
+
+//       } else {
+//         // target is in the right
+//         left = mid + 1;
+//       }
+//     }
+
+//     // Otherwise, the right side is sorted
+//     else {
+//       if (nums[mid] <= target && target <= nums[right]) {
+//         // target is in the right
+//         left = mid + 1;
+
+//       } else {
+//         // target is in the left
+//         right = mid - 1;
+//       }
+//   }
+
+//   }
+
+//   return -1;
+// }
+
+// var isPalindrome = function (s) {
+//   s = s.replace(/[^a-z0-9]/gi, "").toLowerCase();
+//   let left = 0;
+//   let right = s.length - 1;
+
+//   while (left < right) {
+//     if (s[left] === s[right]) {
+//       left++;
+//       right--;
+//     } else {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
