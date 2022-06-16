@@ -6535,7 +6535,7 @@
 // }
 // console.log(getPermutations([1, 2, 3]));
 
-// ------ BST -- TRI(pronounces like try), which inclides: insert, search, startsWith:
+// ------ BST -- TRIE(pronounces like try), which inclides: insert, search, startsWith:
 // class Trie {
 //   constructor() {
 //     this.root = {};
@@ -8949,3 +8949,247 @@
 //   }
 //   return true;
 // };
+
+// function hasCycle(head) {
+//   let fast = head;
+
+//   while (fast && fast.next) {
+//     head = head.next;
+//     fast = fast.next.next;
+//     if (head === fast) return true;
+//   }
+//   return false;
+// }
+
+// class WordDictionary {
+//   constructor() {
+//     this.root = {};
+//   }
+
+//   addWord(word) {
+//     let node = this.root;
+//     for (let letter of word) {
+//       if (!node[letter]) {
+//         node[letter] = {};
+//       }
+//       node = node[letter];
+//     }
+//     node.isEnd = true;
+//   }
+
+//   search(word) {
+//     const traverse = (node, i) => {
+//       let char = word[i];
+//       if (i === word.length) return node.isEnd || false;
+
+//       if (char === ".") {
+//         for (let key in node) {
+//           if (traverse(node[key], i + 1)) return true;
+//         }
+//       } else if (node[char]) {
+//         return traverse(node[char], i + 1);
+//       }
+//       return false;
+//     };
+
+//     return traverse(this.root, 0);
+//   }
+// }
+
+// Dynamic Programming
+// function rob(nums) {
+//   let prevMax = 0;
+//   let nextMax = 0;
+
+//   for (let num of nums) {
+//     let tempMax = Math.max(num + prevMax, nextMax);
+//     prevMax = nextMax;
+//     nextMax = tempMax;
+//   }
+//   return nextMax;
+// }
+
+// 2d array, 2D array, creating Array
+//Array.from(Array(2), () => new Array(2))
+
+// function climbStairs(n) {
+//   let dp = []
+//   dp[1] = 1
+//   dp[2] = 2
+
+//   for(let i=3; i<=n; i++){
+//     dp[i] = dp[i-1] + dp[i-2]
+//   } return dp[n]
+// }
+// console.log(test());
+
+// var rob2 = function (nums) {
+//   if (nums.length === 1) return nums[0];
+
+//   const helper = (nums) => {
+//     let prevMax = 0;
+//     let nextMax = 0;
+
+//     for (let num of nums) {
+//       let tempMax = Math.max(num + prevMax, nextMax);
+//       prevMax = nextMax;
+//       nextMax = tempMax;
+//     }
+//     return nextMax;
+//   };
+
+//   return Math.max(
+//     helper(nums.slice(0, nums.length - 1)),
+//     helper(nums.slice(1))
+//   );
+// };
+
+// var letterCombinations = function (digits) {
+//   if (digits.length === 0) return [];
+//   const Digit_Letters = {
+//     0: ["0"],
+//     1: ["1"],
+//     2: ["a", "b", "c"],
+//     3: ["d", "e", "f"],
+//     4: ["g", "h", "i"],
+//     5: ["j", "k", "l"],
+//     6: ["m", "n", "o"],
+//     7: ["p", "q", "r", "s"],
+//     8: ["t", "u", "v"],
+//     9: ["w", "x", "y", "z"],
+//   };
+
+//   const helperFunc = (i, digits, currMnemonic, mnemonicsFound) => {
+//     if (i === currMnemonic.length) {
+//       const mnemonic = currMnemonic.join("");
+//       mnemonicsFound.push(mnemonic);
+//     } else {
+//       const digit = digits[i];
+//       const letters = Digit_Letters[digit];
+//       for (let letter of letters) {
+//         currMnemonic[i] = letter;
+//         helperFunc(i + 1, digits, currMnemonic, mnemonicsFound);
+//       }
+//     }
+//   };
+
+//   const currMnemonic = new Array(digits.length).fill(0);
+//   const mnemonicsFound = [];
+//   helperFunc(0, digits, currMnemonic, mnemonicsFound);
+//   return mnemonicsFound;
+// };
+
+// var threeSum = function(array) {
+
+// solution with set
+//   nums.sort((a,b)=> a-b);
+
+//   let set = new Set();
+//   let result = [];
+
+//   if(nums.length < 3 || !nums.length)return []
+
+//   for(let i =0; i < nums.length-2; i++){
+//       if(nums[i] > 0) break
+//       let start = i+1;
+//       let end = nums.length-1;
+
+//       while(start<end){
+
+//           let current = nums[i] + nums[start] + nums[end];
+//           if(current == 0){
+//               let data = `${nums[i]}${nums[start]}${nums[end]}`
+//               if(!set.has(data)){
+//                   set.add(data)
+//                   result.push([nums[i] ,nums[start] ,nums[end]])
+//                   start++;
+//                   end--
+//                   continue
+//               }
+//           }
+
+//           if(current > 0){
+//              end--
+//           }else {
+//               start++
+//           }
+
+//       }
+
+//   }
+
+//   return result;
+
+// solution without set
+//     array.sort((a, b) => a - b)
+//   const triples = []
+//   for(let i=0; i<array.length-2; i++){
+//         if (array[i] > 0) break
+//         if (i > 0 && array[i] === array[i - 1]) continue
+
+//     let left = i+1
+//     let right = array.length-1
+//     while(left < right){
+//       const currentSum = array[i] + array[left] + array[right]
+//       if(currentSum === 0){
+//         triples.push([array[i], array[left], array[right]])
+//                 while(array[left] === array[left+1]) left++
+//                 while(array[right] === array[right-1]) right--
+
+//         left++
+//         right--
+//       } else if(currentSum < 0){
+//         left++
+//       } else if(currentSum > 0){
+//         right--
+//       }
+//     }
+//   } return triples
+
+// };
+
+// function longestPalindromicSubstring(string) {
+//   const getLongestPalindromeFrom = (string, left, right) => {
+//     while (left >= 0 && right < string.length) {
+//       if (string[left] !== string[right]) break;
+//       left--;
+//       right++;
+//     }
+//     return [left + 1, right];
+//   };
+
+//   let currLongest = [0, 1];
+//   for (let i = 1; i < string.length; i++) {
+//     const odd = getLongestPalindromeFrom(string, i - 1, i + 1);
+//     const even = getLongestPalindromeFrom(string, i - 1, i);
+//     const longest = odd[1] - odd[0] > even[1] - even[0] ? odd : even;
+//     currLongest =
+//       currLongest[1] - currLongest[0] > longest[1] - longest[0]
+//         ? currLongest
+//         : longest;
+//   }
+//   return string.slice(currLongest[0], currLongest[1]);
+// }
+
+// Find min in rotated array
+var findMin = function (nums) {
+  let res = nums[0];
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left <= right) {
+    if (nums[left] < nums[right]) {
+      res = Math.min(res, nums[left]);
+      break;
+    }
+
+    let mid = Math.floor((left + right) / 2);
+    res = Math.min(res, nums[mid]);
+    if (nums[mid] >= nums[left]) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return res;
+};
