@@ -9172,24 +9172,361 @@
 // }
 
 // Find min in rotated array
-var findMin = function (nums) {
-  let res = nums[0];
-  let left = 0;
-  let right = nums.length - 1;
+// var findMin = function (nums) {
+//   let res = nums[0];
+//   let left = 0;
+//   let right = nums.length - 1;
 
-  while (left <= right) {
-    if (nums[left] < nums[right]) {
-      res = Math.min(res, nums[left]);
-      break;
-    }
+//   while (left <= right) {
+//     if (nums[left] < nums[right]) {
+//       res = Math.min(res, nums[left]);
+//       break;
+//     }
 
-    let mid = Math.floor((left + right) / 2);
-    res = Math.min(res, nums[mid]);
-    if (nums[mid] >= nums[left]) {
-      left = mid + 1;
-    } else {
-      right = mid - 1;
-    }
-  }
-  return res;
-};
+//     let mid = Math.floor((left + right) / 2);
+//     res = Math.min(res, nums[mid]);
+//     if (nums[mid] >= nums[left]) {
+//       left = mid + 1;
+//     } else {
+//       right = mid - 1;
+//     }
+//   }
+//   return res;
+// };
+
+// function numIslands(grid) {
+//   let count = 0;
+
+//   const explore = (row, col, grid) => {
+//     // check boundries and if grid[row][col] is 0 return from that recurisive call
+//     if (
+//       row < 0 ||
+//       col < 0 ||
+//       row >= grid.length ||
+//       col >= grid[row].length ||
+//       grid[row][col] === "0"
+//     ) {
+//       return;
+//     }
+
+//     // set the current spot as visited by making it 0
+//     grid[row][col] = "0";
+
+//     // possible moves: right, left, down, up with recursive calls
+//     // right
+//     explore(row, col + 1, grid);
+//     // left
+//     explore(row, col - 1, grid);
+//     // down
+//     explore(row + 1, col, grid);
+//     // up
+//     explore(row - 1, col, grid);
+//   };
+
+//   for (let row = 0; row < grid.length; row++) {
+//     for (let col = 0; col < grid[row].length; col++) {
+//       if (grid[row][col] === "1") {
+//         count++;
+//         explore(row, col, grid);
+//       }
+//     }
+//   }
+//   return count;
+// }
+
+// var eraseOverlapIntervals = function (intervals) {
+//   // sort by earliest finish time
+//   //intervals.sort((a, b) => a[1] - b[1]);
+//   let prev = intervals[0];
+//   let remove = 0;
+
+//   for (let i = 1; i < intervals.length; i++) {
+//     if (intervals[i][0] < prev[1]) remove++;
+//     else prev = intervals[i];
+//   }
+//   return remove;
+// };
+
+// var cloneGraph = function(node) {
+// BFS iterative
+//     var start = node
+//     if(start === null) return start
+//     var stack = [node]
+//     var visited = new Map()
+//     visited.set(start, new Node(start.val))
+//     while(stack.length > 0){
+//           var curr = stack.shift()
+//           for(let n of curr.neighbors){
+//               if(!visited.has(n)){
+//                  visited.set(n, new Node(n.val))
+//                  stack.push(n)
+//             }
+//               visited.get(curr).neighbors.push(visited.get(n))
+//           }
+//     } return visited.get(start)
+
+// DFS recursive
+//     var obj = {}
+//     const traverse = (node) => {
+//         if(node === null) return node
+//         if(!obj[node.val]){
+//             obj[node.val] = new Node(node.val)
+//             obj[node.val].neighbors = node.neighbors.map(n => traverse(n))
+//         } return obj[node.val]
+//     }
+
+//     return traverse(node)
+// };
+
+// Creation of Undorected Graph Node
+// class UndirectedGraphNode {
+//   constructor(val){
+//      this.val = val;
+//     this.neighbors = [];   // Array of UndirectedGraphNode
+//     }
+
+// }
+// Clone Undorected Graph:
+
+// var cloneGraph = function(node) {
+
+// DFS recursive solution using map method with manual assignment instead of push     //method
+
+//     let obj = {}
+
+//     const traverse = (node) => {
+//         if(!node) return node
+//         if(!obj[node.val]){
+//             obj[node.val] = new Node(node.val)
+//             obj[node.val].neighbors = node.neighbors.map(traverse)
+//         }
+//         return obj[node.val]
+//     }
+
+//      return traverse(node)
+
+// BFS iterative solution using map
+//     let start = node
+//     if(start === null) return null
+
+//     const visited = new Map()
+//     const stack = [start]
+//     visited.set(start, new Node(start.val))
+
+//     while(stack.length > 0){
+//         const curr = stack.shift()
+//         for(let neighbor of curr.neighbors){
+//             if(!visited.has(neighbor)){
+//                 visited.set(neighbor, new Node(neighbor.val))
+//                 stack.push(neighbor);
+//             }
+//             visited.get(curr).neighbors.push(visited.get(neighbor));
+
+//         }
+
+//     }
+//      return visited.get(start);
+// };
+
+// testing Graph
+//run a test
+// var aNode = new UndirectedGraphNode('0');
+// var bNode = new UndirectedGraphNode('1');
+// var cNode = new UndirectedGraphNode('2');
+
+// aNode.neighbors.push(bNode, cNode);
+// bNode.neighbors.push(cNode);
+// cNode.neighbors.push(cNode);
+
+// console.log(aNode);
+// console.log(cloneGraph(aNode));
+
+// class GraphNode {
+//   constructor(val) {
+//     this.val = val;
+//     this.children = [];
+//   }
+// }
+
+// function dfs(arr = []) {
+//   arr.push(aNode.val);
+
+//   for (let child of nodeA.children) {
+//     dfs(arr);
+//   }
+//   return arr;
+// }
+
+// // creating each graph nodes
+// var aNode = new GraphNode("A");
+// var bNode = new GraphNode("B");
+// var cNode = new GraphNode("C");
+// var dNode = new GraphNode("D");
+// var eNode = new GraphNode("E");
+// var fNode = new GraphNode("F");
+// let gNode = new GraphNode("G");
+// var hNode = new GraphNode("H");
+// var iNode = new GraphNode("I");
+// var jNode = new GraphNode("J");
+// var kNode = new GraphNode("K");
+
+// // creating connections/edges of the graph
+
+// aNode.children.push(bNode, cNode, dNode);
+// bNode.children.push(eNode, fNode);
+// dNode.children.push(gNode, hNode);
+// fNode.children.push(iNode, jNode);
+// gNode.children.push(kNode);
+// dfs();
+
+// var pacificAtlantic = function (heights) {
+//   var res = [];
+//   var oceanMap = Array(heights.length)
+//     .fill()
+//     .map(() => Array(heights[0].length))
+//     .fill(0);
+//   var pTrack = new Set();
+//   var aTrack = new Set();
+
+//   const traverse = (row, col, oceanTrack) => {
+//     if (oceanTrack.has(`${row}-${col}`)) return;
+//     oceanTrack.add(`${row}-${col}`);
+//     oceanMap[row][col]++;
+//     if (oceanMap[row][col] === 2) res.push([row, col]);
+//     console.log(oceanMap);
+
+//     // before traversing and calling recursively, the logic/formula of this task
+//     //requires checking for edge cases: boundries and if curr heights[row][col]<= to the
+//     // curr condition, which can be: Up, Down, Left or Right
+
+//     // check UP
+//     row > 0 &&
+//       heights[row][col] <= heights[row - 1][col] &&
+//       traverse(row - 1, col, oceanTrack);
+//     // check Down
+//     row < heights.length - 1 &&
+//       heights[row][col] <= heights[row + 1][col] &&
+//       traverse(row + 1, col, oceanTrack);
+//     // check Left
+//     col > 0 &&
+//       heights[row][col] <= heights[row][col - 1] &&
+//       traverse(row, col - 1, oceanTrack);
+//     // check Right
+//     col < heights[row].length - 1 &&
+//       heights[row][col] <= heights[row][col + 1] &&
+//       traverse(row, col + 1, oceanTrack);
+//   };
+
+//   for (let i = 0; i < heights[0].length; i++) {
+//     traverse(0, i, pTrack);
+//     traverse(heights.length - 1, i, aTrack);
+//   }
+
+//   for (let i = 1; i < heights.length; i++) {
+//     traverse(i, 0, pTrack);
+//     traverse(heights.length - 1 - i, heights[i].length - 1, aTrack);
+//   }
+//   return res;
+// };
+// console.log(
+//   pacificAtlantic([
+//     [1, 2, 2, 3, 5],
+//     [3, 2, 3, 4, 4],
+//     [2, 4, 5, 3, 1],
+//     [6, 7, 1, 4, 5],
+//     [5, 1, 1, 2, 4],
+//   ])
+// );
+
+// const uniquePaths = (m, n) => {
+//   return helper(m, n, 1, 1);
+// };
+
+// const helper = (m, n, row, col) => {
+//   if (row === m && col === n) return 1;
+//   if (row > m || col > n) return 0;
+
+//   const pathsRight = helper(m, n, row, col + 1);
+//   const pathsDown = helper(m, n, row + 1, col);
+
+//   return pathsRight + pathsDown;
+
+// const dp = new Array(n + 1).fill(1);
+
+// for(let row = 0; row < m-1; row++){
+//     for(let col = n - 1; col > 0; col--){
+//         dp[col] = dp[col] + dp[col + 1];
+//     }
+// }
+// return dp[1];
+// };
+
+// var isAnagram = function (s, t) {
+//   if (s.length !== t.length) return false;
+//   let counts = {};
+
+//   for (let char of s) {
+//     counts[char] = (counts[char] || 0) + 1;
+//   }
+
+//   for (let char of t) {
+//     if (!counts[char]) return false;
+//     counts[char]--;
+//   }
+//   return true;
+// };
+// console.log(isAnagram("eat", "ttia"));
+
+// var groupAnagrams = function (strs) {
+//   // using object with sort method
+
+//   var obj = {};
+
+//   for (let word of strs) {
+//     var sortedWord = word.split("").sort().join("");
+//     obj[sortedWord] ? obj[sortedWord].push(word) : (obj[sortedWord] = [word]);
+//   }
+//   return Object.values(obj);
+// };
+
+// var groupAnagrams = function (strs) {
+//   // using object with sort method
+
+//   //   var obj = {}
+
+//   //   for(let word of strs){
+//   //       var sortedWord = word.split("").sort().join("")
+//   //       obj[sortedWord] ? obj[sortedWord].push(word) : obj[sortedWord] = [word]
+//   //   }
+//   //     return Object.values(obj)
+
+//   // better time complexity without using sort method
+//   var obj = {};
+//   for (let word of strs) {
+//     var abc = Array(26).fill(0);
+//     for (let char of word) abc[char.charCodeAt() - 97]++;
+//     var key = abc.join("#");
+//     obj[key] ? obj[key].push(word) : (obj[key] = [word]);
+//   }
+//   return Object.values(obj);
+// };
+
+// var topKFrequent = function(nums, k) {
+//   const freqMap = new Map();
+//   const bucket = [];
+//   const result = [];
+
+//   for(let num of nums) {
+//       freqMap.set(num, (freqMap.get(num) || 0) + 1);
+//   }
+
+//   for(let [num, freq] of freqMap) {
+//       bucket[freq] = (bucket[freq] || new Set()).add(num);
+//   }
+
+//   for(let i = bucket.length-1; i >= 0; i--) {
+//       if(bucket[i]) result.push(...bucket[i]);
+//       if(result.length === k) break;
+//   }
+//   return result;
+// };
