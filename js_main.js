@@ -9530,3 +9530,163 @@
 //   }
 //   return result;
 // };
+
+/*
+we create 2 arrays:
+
+1 array with incremental multiplication from left, 1 array with incremental multiplication from right.
+
+at the start index of these arrays, we'll have 1 (as no multiplication prior to it).
+
+left arr = [1, (1)x1, (1x1)x2, (1x1x2)x3] = [1, 1, 2, 6]
+
+right arr = [(1x4x3)x2, (1x4)x3, (1)x4 ,1] = [24, 12, 4, 1]
+
+now, at each index, in left array, we'll have mutiple of left elements prior that index.
+
+In right array, we'll have mutiple of right elements ahead of that index.
+
+So, we'll multiply [1, 1, 2, 6] X  [24, 12, 4, 1] at each index.
+
+Result = [24, 12, 8, 6]
+
+1 array 
+
+*/
+// var productExceptSelf = function(nums) {
+//   // First, create a prefix array that moves from the left,
+//   // gathering the running product of the prefix at each index
+//   const prefix = []
+
+//   // Move left in the input array
+//   for (let i=0; i<nums.length; i++) {
+//       // If i === 0, start with `1`, since there is no prefix
+//       if (i===0) {
+//           prefix[i] = 1
+//       } else {
+//           // Otherwise, multiply nums[i-1] times the prefix at position i-1,
+//           // and add that to the prefix array at position i
+//           prefix[i] = nums[i-1] * prefix[i-1]
+//       }
+//   }
+
+//   // Then, let's create a suffix array
+//   const suffix = []
+
+//   // Move right in the input array
+//   for (let i=nums.length - 1; i>=0; i--) {
+//       // For the last index, we have no suffix, so just add a 1 to that position
+//       if (i===nums.length - 1) {
+//           suffix[i] = 1
+//       } else {
+//           // Otherwise, we multiply nums[i+1] by the suffix at position i+1
+//           // and add that to the suffix array at position i
+//           suffix[i] = nums[i + 1] * suffix[i + 1]
+//       }
+//   }
+
+//   // Finally, our result array should be the products of prefix * suffix for each position
+//   const result = []
+
+//   for (let i=0; i<nums.length; i++) {
+//       result[i] = prefix[i] * suffix[i]
+//   }
+
+//   return result
+// };
+// console.log(productExceptSelf([1,2,3,4]))
+
+// var longestConsecutive = function (nums) {
+// brure force with sort method
+//     if(nums.length === 0) return 0
+//     var res = 1
+//     var arr = []
+//    nums = nums.sort((a,b) => a-b)
+//    for(let i=0; i<nums.length; i++){
+//        if(nums[i] === nums[i+1]) continue
+//        let nextNum = nums[i]+1
+//        if(nums[i+1] === nextNum){
+//            res+=1
+//        } else {
+//            arr.push(res)
+//            res = 1
+//        }
+//    }
+
+//  return Math.max(...arr)
+
+// optimal solution using Set
+//   var numSet = new Set(nums);
+//   var longest = 0;
+
+//   for (let num of nums) {
+//     if (numSet.has(num - 1)) {
+//       continue;
+//     } else {
+//       let length = 0;
+//       while (numSet.has(num + length)) {
+//         length += 1;
+//         longest = Math.max(length, longest);
+//       }
+//     }
+//   }
+//   return longest;
+// };
+
+// function lengthOfLongestSubstring(s) {
+//   // Sliding Window with pointers
+
+//   var seen = new Set();
+//   var left = 0;
+//   var longest = 0;
+
+//   for (let right = 0; right < s.length; right++) {
+//     while (seen.has(s[right])) {
+//       seen.delete(s[left]);
+//       left++;
+//     }
+//     seen.add(s[right]);
+//     longest = Math.max(longest, right - left + 1);
+//   }
+//   return longest;
+// }
+
+// const characterReplacement = (s, k) => {
+//   // Solution with sliding window approach
+
+//   var left = 0;
+//   var right = 0;
+//   var freq = {};
+//   var maxCharCount = 0;
+
+//   while (right < s.length) {
+//     freq[s[right]] = (freq[s[right]] || 0) + 1;
+
+//     if (freq[s[right]] > maxCharCount) maxCharCount = freq[s[right]];
+
+//     if (right - left + 1 - maxCharCount > k) {
+//       freq[s[left]]--;
+//       left++;
+//     }
+
+//     right++;
+//   }
+//   return right - left;
+// };
+
+var combinationSum = function (candidates, target) {
+  // backtracking
+
+  var res = [];
+  const premutate = (arr = [], sum = 0, idx = 0) => {
+    if (sum > target) return;
+    if (sum === target) res.push(arr);
+
+    for (let i = idx; i < candidates.length; i++) {
+      premutate([...arr, candidates[i]], sum + candidates[i], i);
+    }
+  };
+
+  premutate();
+  return res;
+};
