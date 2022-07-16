@@ -9674,19 +9674,229 @@ Result = [24, 12, 8, 6]
 //   return right - left;
 // };
 
-var combinationSum = function (candidates, target) {
-  // backtracking
+// var combinationSum = function (candidates, target) {
+//   // backtracking
 
-  var res = [];
-  const premutate = (arr = [], sum = 0, idx = 0) => {
-    if (sum > target) return;
-    if (sum === target) res.push(arr);
+//   var res = [];
+//   const premutate = (arr = [], sum = 0, idx = 0) => {
+//     if (sum > target) return;
+//     if (sum === target) res.push(arr);
 
-    for (let i = idx; i < candidates.length; i++) {
-      premutate([...arr, candidates[i]], sum + candidates[i], i);
+//     for (let i = idx; i < candidates.length; i++) {
+//       premutate([...arr, candidates[i]], sum + candidates[i], i);
+//     }
+//   };
+
+//   premutate();
+//   return res;
+// };
+
+//var reorderList = function (head) {
+// Solution with stack(shift/pop)
+// if (!head) return null;
+// var stack = [];
+// var node = head;
+
+// while (node) {
+//   stack.push(node);
+//   node = node.next;
+// }
+
+// var len = stack.length;
+// node = head;
+// for (let i = 0; i < len; i++) {
+//   if (i % 2 === 0) {
+//     node.next = stack.shift();
+//   } else {
+//     node.next = stack.pop();
+//   }
+//   node = node.next;
+// }
+// node.next = null;
+
+// Solution with pointers
+// var slow = head;
+// var fast = head;
+
+// while (fast.next && fast.next.next) {
+//   slow = slow.next;
+//   fast = fast.next.next;
+// }
+
+// var curr = slow.next;
+// var prev = null;
+// while (curr) {
+//   let temp = curr.next;
+//   curr.next = prev;
+//   prev = curr;
+//   curr = temp;
+// }
+
+// slow.next = null;
+
+// var h1 = head;
+// var h2 = prev;
+
+// while (h2) {
+//   let temp = h1.next;
+//   h1.next = h2;
+//   h1 = h2;
+//   h2 = temp;
+// }
+//};
+
+// linked list with defined structure
+// class ListNode {
+//   constructor(val, next) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+
+// var reorderList = function(head) {
+//     // find middle
+//     // by moving "fast" twice, we'll have "slow" in the middle
+//     let slow = head
+//     let fast = head
+//     while (fast.next && fast.next.next) {
+//         slow = slow.next
+//         fast = fast.next.next
+//     }
+
+//     // reverse second half
+//     // with reverse linked list solution
+//     let prev = null
+//     let cur = slow.next
+//     while (cur) {
+//         let temp = cur.next
+//         cur.next = prev
+//         prev = cur
+//         cur = temp
+//     }
+
+//     slow.next = null
+
+//     // combine two halves
+//     let h1 = head
+//     let h2 = prev
+
+//     // if even, second half will be smaller
+//     while (h2) {
+//         let temp = h1.next
+//         h1.next = h2
+//         h1 = h2
+//         h2 = temp
+//     }
+// };
+
+// var node = new ListNode(1)
+// node.next = new ListNode(2)
+// node.next.next = new ListNode(3)
+// node.next.next.next = new ListNode(4)
+// node.next.next.next.next = new ListNode(5)
+
+// reorderList(node)
+
+// var removeNthFromEnd = function (head, n) {
+// Solution with stack more space time
+// var node = head
+// var stack = []
+// while(node){
+//     stack.push(node)
+//     node = node.next
+// }
+// if(stack.length === 1) return head.next
+// node = head
+// for(let i=0; i<stack.length; i++){
+//      if(stack.length-n-1 === -1){
+//           head = head.next
+//           node.next = null
+//           break
+//         }
+//     if(i === stack.length-n-1){
+//         node.next = node.next.next
+//         break
+//     }
+//     node = node.next
+// }
+// return head
+
+// Solution with pointers less space time
+
+//   var fast = head;
+//   var slow = head;
+
+//   for (let i = 0; i < n; i++) {
+//     fast = fast.next;
+//   }
+
+//   if (!fast) return head.next;
+
+//   while (fast.next) {
+//     fast = fast.next;
+//     slow = slow.next;
+//   }
+
+//   slow.next = slow.next.next;
+//   return head;
+// };
+
+// var levelOrder = function (root) {
+//   if (!root) return [];
+
+//   const result = [];
+//   const queue = [root];
+
+//   while (queue.length) {
+//     const len = queue.length;
+//     const temp = [];
+//     for (let i = 0; i < len; i++) {
+//       const curr = queue.shift();
+//       temp.push(curr.val);
+//       if (curr.left) queue.push(curr.left);
+//       if (curr.right) queue.push(curr.right);
+//     }
+//     result.push(temp);
+//   }
+
+//   return result;
+// };
+
+function quickSort(array) {
+  const swap = (i, j) => {
+    let temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  };
+
+  const quickSortHelper = (start, end) => {
+    if (start >= end) return;
+    var pivot = start;
+    var left = start + 1;
+    var right = end;
+
+    while (right >= left) {
+      if (array[left] > array[pivot] && array[right] < array[pivot]) {
+        swap(left, right);
+      }
+      if (array[left] <= array[pivot]) {
+        left++;
+      }
+      if (array[right] >= array[pivot]) {
+        right--;
+      }
+    }
+    swap(pivot, right);
+    var leftSubarrayIsSmaller = right - 1 < right + 1;
+    if (leftSubarrayIsSmaller) {
+      quickSortHelper(start, right - 1);
+      quickSortHelper(right + 1, end);
+    } else {
+      quickSortHelper(right + 1, end);
+      quickSortHelper(start, right - 1);
     }
   };
 
-  premutate();
-  return res;
-};
+  quickSortHelper(0, array.length - 1);
+  return array;
+}
