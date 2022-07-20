@@ -9862,41 +9862,140 @@ Result = [24, 12, 8, 6]
 //   return result;
 // };
 
-function quickSort(array) {
-  const swap = (i, j) => {
-    let temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  };
+// function quickSort(array) {
+//   const swap = (i, j) => {
+//     let temp = array[i];
+//     array[i] = array[j];
+//     array[j] = temp;
+//   };
 
+//   const quickSortHelper = (start, end) => {
+//     if (start >= end) return;
+//     var pivot = start;
+//     var left = start + 1;
+//     var right = end;
+
+//     while (right >= left) {
+//       if (array[left] > array[pivot] && array[right] < array[pivot]) {
+//         swap(left, right);
+//       }
+//       if (array[left] <= array[pivot]) {
+//         left++;
+//       }
+//       if (array[right] >= array[pivot]) {
+//         right--;
+//       }
+//     }
+//     swap(pivot, right);
+//     var leftSubarrayIsSmaller = right - 1 < right + 1;
+//     if (leftSubarrayIsSmaller) {
+//       quickSortHelper(start, right - 1);
+//       quickSortHelper(right + 1, end);
+//     } else {
+//       quickSortHelper(right + 1, end);
+//       quickSortHelper(start, right - 1);
+//     }
+//   };
+
+//   quickSortHelper(0, array.length - 1);
+//   return array;
+// }
+
+// function mergeSort(array) {
+//   // time = O(nlog(n))
+//   // space = 0(nlog(n))
+//   const mergeSortedArrays = (leftHalf, rightHalf) => {
+//     var sortedArray = new Array(leftHalf.length + rightHalf.length);
+//     let k = 0;
+//     let i = 0;
+//     let j = 0;
+//     while (i < leftHalf.length && j < rightHalf.length) {
+//       if (leftHalf[i] <= rightHalf[j]) {
+//         sortedArray[k++] = leftHalf[i++];
+//       } else {
+//         sortedArray[k++] = rightHalf[j++];
+//       }
+//     }
+//     while (i < leftHalf.length) {
+//       sortedArray[k++] = leftHalf[i++];
+//     }
+//     while (j < rightHalf.length) {
+//       sortedArray[k++] = rightHalf[j++];
+//     }
+//     return sortedArray;
+//   };
+
+//   if (array.length <= 1) return array;
+//   var middle = Math.floor(array.length / 2);
+//   var leftHalf = array.slice(0, middle);
+//   var rightHalf = array.slice(middle);
+//   return mergeSortedArrays(mergeSort(leftHalf), mergeSort(rightHalf));
+// }
+
+// function mergeSort(array) {
+//   // space = 0(n)
+//   const doMerge = (mainArray, start, middle, end, auxiliaryArray) => {
+//     let k = start;
+//     let i = start;
+//     let j = middle + 1;
+//     while (i <= middle && j <= end) {
+//       if (auxiliaryArray[i] <= auxiliaryArray[j]) {
+//         mainArray[k++] = auxiliaryArray[i++];
+//       } else {
+//         mainArray[k++] = auxiliaryArray[j++];
+//       }
+//     }
+//     while (i <= middle) {
+//       mainArray[k++] = auxiliaryArray[i++];
+//     }
+//     while (j <= end) {
+//       mainArray[k++] = auxiliaryArray[j++];
+//     }
+//   };
+
+//   const mergeSortHelper = (mainArray, start, end, auxiliaryArray) => {
+//     if (start === end) return;
+//     const middle = Math.floor((start + end) / 2);
+//     mergeSortHelper(auxiliaryArray, start, middle, mainArray);
+//     mergeSortHelper(auxiliaryArray, middle + 1, end, mainArray);
+//     doMerge(mainArray, start, middle, end, auxiliaryArray);
+//   };
+
+//   if (array.length <= 1) return array;
+//   const auxiliaryArray = array.slice();
+//   mergeSortHelper(array, 0, array.length - 1, auxiliaryArray);
+//   return array;
+// }
+
+// Quick Sort -- good version
+var quickSort = function (nums) {
   const quickSortHelper = (start, end) => {
     if (start >= end) return;
-    var pivot = start;
-    var left = start + 1;
-    var right = end;
+    let left = start;
+    let right = end;
+    const pivot = nums[Math.floor((start + end) / 2)];
 
-    while (right >= left) {
-      if (array[left] > array[pivot] && array[right] < array[pivot]) {
-        swap(left, right);
-      }
-      if (array[left] <= array[pivot]) {
+    while (left <= right) {
+      while (left <= right && pivot > nums[left]) {
         left++;
       }
-      if (array[right] >= array[pivot]) {
+      while (left <= right && pivot < nums[right]) {
+        right--;
+      }
+      if (left <= right) {
+        let temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+        left++;
         right--;
       }
     }
-    swap(pivot, right);
-    var leftSubarrayIsSmaller = right - 1 < right + 1;
-    if (leftSubarrayIsSmaller) {
-      quickSortHelper(start, right - 1);
-      quickSortHelper(right + 1, end);
-    } else {
-      quickSortHelper(right + 1, end);
-      quickSortHelper(start, right - 1);
-    }
+    quickSortHelper(start, right);
+    quickSortHelper(left, end);
   };
 
-  quickSortHelper(0, array.length - 1);
-  return array;
-}
+  if (nums.length === 1) return nums;
+
+  quickSortHelper(0, nums.length - 1);
+  return nums;
+};
