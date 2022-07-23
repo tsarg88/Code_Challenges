@@ -5110,21 +5110,20 @@
 
 // Insertion Sort
 // average time/space, time: O(n^2) space O(1)
-// function insertionSort(arr) {
-//   let swap = (firstIndex, secondIndex) => {
-//     let temp = arr[firstIndex];
-//     arr[firstIndex] = arr[secondIndex];
-//     arr[secondIndex] = temp;
-//   };
-
-//   for (let i = 1; i < arr.length; i++) {
-//     let j = i;
-//     while (j !== 0 && arr[j] < arr[j - 1]) {
-//       swap(j, j - 1);
-//       j -= 1;
-//     }
+// function insertionSort(array) {
+//   const swap = (firstIndex, secondIndex) => {
+//     let temp = array[firstIndex];
+//     array[firstIndex] = array[secondIndex];
+//     array[secondIndex] = temp;
 //   }
-//   return arr;
+
+// 	for(let i=1; i<array.length; i++){
+// 		while(i > 0 && array[i] < array[i-1]){
+// 			swap(i, i-1)
+// 			i--
+// 		}
+// 	} return array
+
 // }
 // console.log(insertionSort([8, 5, 2, 9, 5, 6, 3]));
 
@@ -8182,7 +8181,7 @@
 //   return dp[n]
 // }
 
-// inOrder traversal wth BST tree implemented
+// In Order traversal wth BST tree implemented
 // class Node{
 //   constructor(val){
 //     this.val = val
@@ -8903,7 +8902,7 @@
 
 //     if(nums[mid] === target) return mid;
 
-//     // When dividing the roated array into two halves, one must be sorted.
+//     // When dividing the rotated array into two halves, one must be sorted.
 
 //     // Check if the left side is sorted
 //     if (nums[left] <= nums[mid]) {
@@ -9968,34 +9967,151 @@ Result = [24, 12, 8, 6]
 // }
 
 // Quick Sort -- good version
-var quickSort = function (nums) {
-  const quickSortHelper = (start, end) => {
-    if (start >= end) return;
-    let left = start;
-    let right = end;
-    const pivot = nums[Math.floor((start + end) / 2)];
+// var quickSort = function (nums) {
+//   const quickSortHelper = (start, end) => {
+//     if (start >= end) return;
+//     let left = start;
+//     let right = end;
+//     const pivot = nums[Math.floor((start + end) / 2)];
 
-    while (left <= right) {
-      while (left <= right && pivot > nums[left]) {
-        left++;
-      }
-      while (left <= right && pivot < nums[right]) {
-        right--;
-      }
-      if (left <= right) {
-        let temp = nums[left];
-        nums[left] = nums[right];
-        nums[right] = temp;
-        left++;
-        right--;
-      }
-    }
-    quickSortHelper(start, right);
-    quickSortHelper(left, end);
-  };
+//     while (left <= right) {
+//       while (left <= right && pivot > nums[left]) {
+//         left++;
+//       }
+//       while (left <= right && pivot < nums[right]) {
+//         right--;
+//       }
+//       if (left <= right) {
+//         let temp = nums[left];
+//         nums[left] = nums[right];
+//         nums[right] = temp;
+//         left++;
+//         right--;
+//       }
+//     }
+//     quickSortHelper(start, right);
+//     quickSortHelper(left, end);
+//   };
 
-  if (nums.length === 1) return nums;
+//   if (nums.length === 1) return nums;
 
-  quickSortHelper(0, nums.length - 1);
-  return nums;
-};
+//   quickSortHelper(0, nums.length - 1);
+//   return nums;
+// };
+
+// Merge Sort easy version
+// const mergeSort = (nums) => {
+//   if (nums.length <= 1) return nums;
+
+//   let arr = [];
+//   const merge = (left, right) => {
+//     //const result = []
+
+//     while (left.length && right.length) {
+//       if (left[0] <= right[0]) {
+//         arr.push(left.shift());
+//       } else {
+//         arr.push(right.shift());
+//       }
+//     }
+
+//     return (arr = [...arr, ...left, ...right]);
+//   };
+
+//   const middle = Math.floor(nums.length / 2);
+//   const left = nums.slice(0, middle);
+//   const right = nums.slice(middle);
+
+//   merge(mergeSort(left), mergeSort(right));
+//   return arr;
+// };
+
+// In average/general case time complexity of tree traversals is: O(n)
+
+// In Order Trversal of Binary Tree
+// order for inorder traversal is Left, Root, Right
+// Recursive approach
+// var inorderTraversal = function (root) {
+//   const res = [];
+
+//   const traverse = (node) => {
+//     if (node) {
+//       traverse(node.left);
+//       res.push(node.val);
+//       traverse(node.right);
+//     }
+//   };
+
+//   traverse(root);
+//   return res;
+// }
+
+// Post Order Traversal of Binary Tree
+// var postorderTraversal = function(root) {
+
+//   const traverse = (node) => {
+
+//       if(!node) return
+//       traverse(node.left)
+//       traverse(node.right)
+//       res.push(node.val)
+//   }
+
+//   const res = []
+//   traverse(root)
+//   return res
+
+// };
+
+// Balanced Binary Tree construction for test 1 to 7
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+// let bst = new Node(4);
+// bst.left = new Node(2);
+// bst.left.left = new Node(1);
+// bst.left.right = new Node(3);
+// bst.right = new Node(6);
+// bst.right.left = new Node(5);
+// bst.right.right = new Node(7);
+// inorderTraversal(bst);
+
+// Pre Order Traversal of Binary Search Tree
+// order for pre order traversal is Root, Left, Right
+// Iterative approach using stack
+// var preOrderTraversal = function (root) {
+//   if (!root) return [];
+//   const res = [];
+//   const stack = [root];
+
+//   while (stack.length > 0) {
+//     let curr = stack.pop();
+//     res.push(curr.val);
+
+//     if (curr.right) stack.push(curr.right);
+//     if (curr.left) stack.push(curr.left);
+//   }
+//   return res;
+// };
+
+// Level Order Traversal
+function levelOrder(root) {
+  if (!root) return [];
+  const res = [];
+  const queue = [root];
+
+  while (queue.length > 0) {
+    let curr = queue.shift();
+    res.push(curr.val);
+
+    if (curr.left) queue.push(node.left);
+    if (curr.right) queue.push(node.right);
+  }
+
+  return res;
+}
