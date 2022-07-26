@@ -9840,6 +9840,7 @@ Result = [24, 12, 8, 6]
 //   return head;
 // };
 
+// level order with 2d
 // var levelOrder = function (root) {
 //   if (!root) return [];
 
@@ -9975,10 +9976,10 @@ Result = [24, 12, 8, 6]
 //     const pivot = nums[Math.floor((start + end) / 2)];
 
 //     while (left <= right) {
-//       while (left <= right && pivot > nums[left]) {
+//       while (pivot > nums[left]) {
 //         left++;
 //       }
-//       while (left <= right && pivot < nums[right]) {
+//       while (pivot < nums[right]) {
 //         right--;
 //       }
 //       if (left <= right) {
@@ -10000,31 +10001,27 @@ Result = [24, 12, 8, 6]
 // };
 
 // Merge Sort easy version
-// const mergeSort = (nums) => {
+// function mergeSort(nums) {
 //   if (nums.length <= 1) return nums;
-
-//   let arr = [];
 //   const merge = (left, right) => {
-//     //const result = []
-
 //     while (left.length && right.length) {
 //       if (left[0] <= right[0]) {
-//         arr.push(left.shift());
+//         res.push(left.shift());
 //       } else {
-//         arr.push(right.shift());
+//         res.push(right.shift());
 //       }
 //     }
 
-//     return (arr = [...arr, ...left, ...right]);
+//     res = [...res, ...left, ...right];
 //   };
-
+//   let res = [];
 //   const middle = Math.floor(nums.length / 2);
 //   const left = nums.slice(0, middle);
 //   const right = nums.slice(middle);
 
 //   merge(mergeSort(left), mergeSort(right));
-//   return arr;
-// };
+//   return res;
+// }
 
 // In average/general case time complexity of tree traversals is: O(n)
 
@@ -10047,6 +10044,7 @@ Result = [24, 12, 8, 6]
 // }
 
 // Post Order Traversal of Binary Tree
+// order for inorder traversal is Left, Right, Root
 // var postorderTraversal = function(root) {
 
 //   const traverse = (node) => {
@@ -10094,24 +10092,79 @@ Result = [24, 12, 8, 6]
 //     res.push(curr.val);
 
 //     if (curr.right) stack.push(curr.right);
-//     if (curr.left) stack.push(curr.left);
+//     if (curr.left)  stack.push(curr.left);
 //   }
 //   return res;
 // };
 
 // Level Order Traversal
-function levelOrder(root) {
-  if (!root) return [];
-  const res = [];
-  const queue = [root];
+// function levelOrder(root) {
+//   if (!root) return [];
+//   const res = [];
+//   const queue = [root];
 
-  while (queue.length > 0) {
-    let curr = queue.shift();
-    res.push(curr.val);
+//   while (queue.length > 0) {
+//     let curr = queue.shift();
+//     res.push(curr.val);
 
-    if (curr.left) queue.push(node.left);
-    if (curr.right) queue.push(node.right);
+//     if (curr.left) queue.push(node.left);
+//     if (curr.right) queue.push(node.right);
+//   }
+
+//   return res;
+// }
+
+// Linked List from 1 to 7
+// class ListNode {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null
+//   }
+// }
+
+// let ll = new ListNode(1)
+// ll.next = new ListNode(2)
+// ll.next.next = new ListNode(3)
+// ll.next.next.next = new ListNode(4)
+// ll.next.next.next.next = new ListNode(5)
+// ll.next.next.next.next.next = new ListNode(6)
+// ll.next.next.next.next.next.next = new ListNode(7)
+// sortedListToBST(ll)
+
+// Sorted Linked List to Balanced BST
+// var sortedListToBST = function (head) {
+//   let curr = head;
+//   let count = 0;
+
+//   while (curr) {
+//     curr = curr.next;
+//     count++;
+//   }
+
+//   const convert = (i, j) => {
+//     if (j < i) return null;
+//     let mid = (i + j) >> 1;
+//     let node = new ListNode();
+//     node.left = convert(i, mid - 1);
+//     node.val = curr.val;
+//     curr = curr.next;
+//     node.right = convert(mid + 1, j);
+//     return node;
+//   };
+//   curr = head;
+//   return convert(1, count);
+// };
+
+// Rverse lnked list
+var reverseList = function (head) {
+  let curr = head;
+  let prev = null;
+
+  while (curr !== null) {
+    let next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
   }
-
-  return res;
-}
+  return prev;
+};
