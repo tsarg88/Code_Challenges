@@ -10000,6 +10000,42 @@ Result = [24, 12, 8, 6]
 //   return nums;
 // };
 
+// Merge Sort -- efficient version
+// function mergeSort(array) {
+//   // space = 0(n)
+// const doMerge = (mainArray, start, middle, end, auxiliaryArray) => {
+//     let i = start;
+//     let k = start;
+//     let j = middle + 1;
+//     while (k <= middle && j <= end) {
+//       if (auxiliaryArray[k] <= auxiliaryArray[j]) {
+//         mainArray[i++] = auxiliaryArray[k++];
+//       } else {
+//         mainArray[i++] = auxiliaryArray[j++];
+//       }
+//     }
+//     while (k <= middle) {
+//       mainArray[i++] = auxiliaryArray[k++];
+//     }
+//     while (j <= end) {
+//       mainArray[i++] = auxiliaryArray[j++];
+//     }
+//   };
+
+//   const mergeSortHelper = (mainArray, start, end, auxiliaryArray) => {
+//     if (start === end) return;
+//     const middle = Math.floor((start + end) / 2);
+//     mergeSortHelper(auxiliaryArray, start, middle, mainArray);
+//     mergeSortHelper(auxiliaryArray, middle + 1, end, mainArray);
+//     doMerge(mainArray, start, middle, end, auxiliaryArray);
+//   };
+
+//   if (array.length <= 1) return array;
+//   const auxiliaryArray = array.slice();
+//   mergeSortHelper(array, 0, array.length - 1, auxiliaryArray);
+//   return array;
+// }
+
 // Merge Sort easy version
 // function mergeSort(nums) {
 //   if (nums.length <= 1) return nums;
