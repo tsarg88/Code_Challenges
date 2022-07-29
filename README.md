@@ -1,2 +1,2 @@
-# JavaScript_Code_Challenges
-The majority of those code challenges has been taken from -- https://edabit.com/ 
+# Code Challenges mainly focused on <b>Data Structutes</b> and <b>Algorithms</b>. 
+
