@@ -8893,6 +8893,7 @@
 //   return profit;
 // }
 
+// search in rotated array
 // function searchRoratedArray(nums, target){
 //   let left = 0;
 //   let right = nums.length - 1;
@@ -10079,6 +10080,21 @@ Result = [24, 12, 8, 6]
 //   return res;
 // }
 
+// Pre Order traversal, iterative approach
+// var preorderTraversal = function (root) {
+//   if (!root) return [];
+//   const stack = [root];
+//   const res = [];
+//   while (stack.length > 0) {
+//     let curr = stack.pop();
+//     res.push(curr.val);
+
+//     if (curr.right) stack.push(curr.right);
+//     if (curr.left) stack.push(curr.left);
+//   }
+//   return res;
+// };
+
 // Post Order Traversal of Binary Tree
 // order for inorder traversal is Left, Right, Root
 // var postorderTraversal = function(root) {
@@ -10095,6 +10111,26 @@ Result = [24, 12, 8, 6]
 //   traverse(root)
 //   return res
 
+// };
+
+// Post Order Traversal Iterative approach
+// var postorderTraversal = function (root) {
+//   if (!root) return [];
+
+//   const stack = [root];
+//   const res = [];
+
+//   while (stack.length) {
+//     let node = stack[stack.length - 1];
+//     if (node.left) {
+//       stack.push(node.left);
+//       node.left = null;
+//     } else if (node.right) {
+//       stack.push(node.right);
+//       node.right = null;
+//     } else res.push(stack.pop().val);
+//   }
+//   return res;
 // };
 
 // Balanced Binary Tree construction for test 1 to 7
@@ -10192,15 +10228,175 @@ Result = [24, 12, 8, 6]
 // };
 
 // Rverse lnked list
-var reverseList = function (head) {
-  let curr = head;
-  let prev = null;
+// var reverseList = function (head) {
+//   let curr = head;
+//   let prev = null;
 
-  while (curr !== null) {
-    let next = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = next;
+//   while (curr !== null) {
+//     let next = curr.next;
+//     curr.next = prev;
+//     prev = curr;
+//     curr = next;
+//   }
+//   return prev;
+// };
+
+// function isValidSudoku(board) {
+//   for (let r = 0; r < board.length; r++) {
+//     let row = new Set(),
+//       col = new Set(),
+//       box = new Set();
+//     for (let c = 0; c < board.length; c++) {
+//       let _row = board[r][c],
+//         _col = board[c][r],
+//         _box =
+//           board[3 * Math.floor(r / 3) + Math.floor(c / 3)][
+//             3 * (r % 3) + (c % 3)
+//           ];
+
+//       if (_row !== ".") {
+//         if (row.has(_row)) return false;
+//         row.add(_row);
+//       }
+
+//       if (_col !== ".") {
+//         if (col.has(_col)) return false;
+//         col.add(_col);
+//       }
+
+//       if (_box != ".") {
+//         if (box.has(_box)) return false;
+//         box.add(_box);
+//       }
+//     }
+//   }
+//   return true;
+// }
+// console.log(
+//   isValidSudoku([
+//     ["8", "3", ".", ".", "7", ".", ".", ".", "."],
+//     ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+//     [".", "9", "8", ".", ".", ".", ".", "6", "."],
+//     ["1", ".", ".", ".", "6", ".", ".", ".", "3"],
+//     ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+//     ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+//     [".", "6", ".", ".", ".", ".", "2", "8", "."],
+//     [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+//     [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+//   ])
+// );
+
+// Design phone directory
+// class PhoneDirectory{
+//   constructor(maxNumbers) {
+//        this.dir = new Array(maxNumbers).fill(true)
+//        this.avail = []
+//        for(let i=0; i<maxNumbers; i++){
+//        this.avail.push(i)
+//        }
+//   }
+//   get(){
+//      if(this.avail.length === 0){
+//           return -1
+//        }
+//        let idx = this.avail.pop()
+//        this.dir[idx] = false
+//        return idx
+//     }
+
+//    check(number){
+//        return number >= 0 && number < this.dir.length && this.dir[number] === true
+//    }
+
+//    release(number){
+//        if(number >= 0 && number < this.dir.length && this.dir[number] === false){
+//          this.dir[number] = true
+//          this.avail.push(number)
+//         }
+//    }
+// }
+
+// find all recipes
+
+// var findAllRecipes = function (recipes, ingredients, supplies) {
+//   // brute force
+//   let res = [];
+//   for (let i = 0; i < recipes.length; ) {
+//     if (res.indexOf(recipes[i]) >= 0) {
+//       i++;
+//       continue;
+//     }
+
+//     let valid = true;
+//     for (let j = 0; j < ingredients[i].length; j++) {
+//       if (supplies.indexOf(ingredients[i][j]) === -1) {
+//         valid = false;
+//         break;
+//       }
+//     }
+
+//     if (valid) {
+//       res.push(recipes[i]);
+//       supplies.push(recipes[i]);
+//       i = 0;
+//     } else {
+//       i++;
+//     }
+//   }
+//   return res;
+// };
+// console.log(
+//   findAllRecipes(
+//     ["bread", "sandwich"],
+//     [
+//       ["yeast", "flour"],
+//       ["bread", "meat"],
+//     ],
+//     ["yeast", "flour", "meat"]
+//   )
+// );
+
+// Find all recipes: efficient solution using map and set
+var findAllRecipes = function (recipes, ingredients, supplies) {
+  const listOfSupplies = new Set(supplies);
+  const indexes = new Map();
+  const map = new Map();
+  for (let i = 0; i < recipes.length; i++) {
+    indexes.set(recipes[i], i);
   }
-  return prev;
+
+  const indegree = new Array(recipes.length).fill(0);
+
+  for (let i = 0; i < recipes.length; i++) {
+    let ingr = ingredients[i];
+    for (let ing of ingr) {
+      if (listOfSupplies.has(ing)) continue;
+
+      if (!map.has(ing)) map.set(ing, []);
+      map.get(ing).push(recipes[i]);
+      indegree[i]++;
+    }
+  }
+
+  const queue = [];
+  const result = [];
+  for (let i = 0; i < indegree.length; i++) {
+    if (indegree[i] === 0) queue.push(i);
+  }
+  while (queue.length > 0) {
+    let idx = queue.shift();
+    result.push(recipes[idx]);
+    if (!map.has(recipes[idx])) continue;
+    const listOfDeps = map.get(recipes[idx]);
+    removeDeps(listOfDeps, queue, indexes, indegree);
+  }
+  return result;
 };
+
+function removeDeps(listOfDeps, queue, indexes, indegree) {
+  for (const dep of listOfDeps) {
+    let depsIdx = indexes.get(dep);
+    indegree[depsIdx]--;
+    if (indegree[depsIdx] === 0) queue.push(depsIdx);
+  }
+}
