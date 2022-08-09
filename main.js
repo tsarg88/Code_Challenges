@@ -10080,6 +10080,26 @@ Result = [24, 12, 8, 6]
 //   return res;
 // }
 
+// In order traversal
+// Iterative approach
+// function inorderTraversal(root) {
+//   const stack = [];
+//   const res = [];
+
+//   while (root || stack.length) {
+//     if (root) {
+//       stack.push(root);
+//       root = root.left;
+//     } else {
+//       root = stack.pop();
+//       res.push(root.val);
+//       root = root.right;
+//     }
+//   }
+
+//   return res;
+// }
+
 // Pre Order traversal, iterative approach
 // var preorderTraversal = function (root) {
 //   if (!root) return [];
@@ -10096,10 +10116,16 @@ Result = [24, 12, 8, 6]
 // };
 
 // Post Order Traversal of Binary Tree
-// order for inorder traversal is Left, Right, Root
+// recursive approach
+// post order traversal is Left, Right, Root
 // var postorderTraversal = function(root) {
 
 //   const traverse = (node) => {
+
+//       // if(!node) return
+//       // traverse(node.left)
+//       // traverse(node.right)
+//       // res.push(node.val)
 
 //       if(!node) return
 //       traverse(node.left)
@@ -10241,37 +10267,39 @@ Result = [24, 12, 8, 6]
 //   return prev;
 // };
 
-// function isValidSudoku(board) {
-//   for (let r = 0; r < board.length; r++) {
-//     let row = new Set(),
-//       col = new Set(),
-//       box = new Set();
-//     for (let c = 0; c < board.length; c++) {
-//       let _row = board[r][c],
-//         _col = board[c][r],
-//         _box =
-//           board[3 * Math.floor(r / 3) + Math.floor(c / 3)][
-//             3 * (r % 3) + (c % 3)
-//           ];
+// var isValidSudoku = function (board) {
+//   for (let row = 0; row < board.length; row++) {
+//     const colSet = new Set();
+//     const rowSet = new Set();
+//     const boxSet = new Set();
 
-//       if (_row !== ".") {
-//         if (row.has(_row)) return false;
-//         row.add(_row);
-//       }
+//     for (let col = 0; col < board.length; col++) {
+//       const _col = board[col][row];
+//       const _row = board[row][col];
+//       const _box =
+//         board[3 * Math.floor(row / 3) + Math.floor(col / 3)][
+//           3 * (row % 3) + (col % 3)
+//         ];
 
 //       if (_col !== ".") {
-//         if (col.has(_col)) return false;
-//         col.add(_col);
+//         if (colSet.has(_col)) return false;
+//         colSet.add(_col);
 //       }
 
-//       if (_box != ".") {
-//         if (box.has(_box)) return false;
-//         box.add(_box);
+//       if (_row !== ".") {
+//         if (rowSet.has(_row)) return false;
+//         rowSet.add(_row);
+//       }
+
+//       if (_box !== ".") {
+//         if (boxSet.has(_box)) return false;
+//         boxSet.add(_box);
 //       }
 //     }
 //   }
+
 //   return true;
-// }
+// };
 // console.log(
 //   isValidSudoku([
 //     ["8", "3", ".", ".", "7", ".", ".", ".", "."],
@@ -10357,46 +10385,177 @@ Result = [24, 12, 8, 6]
 // );
 
 // Find all recipes: efficient solution using map and set
-var findAllRecipes = function (recipes, ingredients, supplies) {
-  const listOfSupplies = new Set(supplies);
-  const indexes = new Map();
-  const map = new Map();
-  for (let i = 0; i < recipes.length; i++) {
-    indexes.set(recipes[i], i);
-  }
+// var findAllRecipes = function (recipes, ingredients, supplies) {
+//   const listOfSupplies = new Set(supplies);
+//   const indexes = new Map();
+//   const map = new Map();
+//   for (let i = 0; i < recipes.length; i++) {
+//     indexes.set(recipes[i], i);
+//   }
 
-  const indegree = new Array(recipes.length).fill(0);
+//   const indegree = new Array(recipes.length).fill(0);
 
-  for (let i = 0; i < recipes.length; i++) {
-    let ingr = ingredients[i];
-    for (let ing of ingr) {
-      if (listOfSupplies.has(ing)) continue;
+//   for (let i = 0; i < recipes.length; i++) {
+//     let ingr = ingredients[i];
+//     for (let ing of ingr) {
+//       if (listOfSupplies.has(ing)) continue;
 
-      if (!map.has(ing)) map.set(ing, []);
-      map.get(ing).push(recipes[i]);
-      indegree[i]++;
+//       if (!map.has(ing)) map.set(ing, []);
+//       map.get(ing).push(recipes[i]);
+//       indegree[i]++;
+//     }
+//   }
+
+//   const queue = [];
+//   const result = [];
+//   for (let i = 0; i < indegree.length; i++) {
+//     if (indegree[i] === 0) queue.push(i);
+//   }
+//   while (queue.length > 0) {
+//     let idx = queue.shift();
+//     result.push(recipes[idx]);
+//     if (!map.has(recipes[idx])) continue;
+//     const listOfDeps = map.get(recipes[idx]);
+//     removeDeps(listOfDeps, queue, indexes, indegree);
+//   }
+//   return result;
+// };
+
+// function removeDeps(listOfDeps, queue, indexes, indegree) {
+//   for (const dep of listOfDeps) {
+//     let depsIdx = indexes.get(dep);
+//     indegree[depsIdx]--;
+//     if (indegree[depsIdx] === 0) queue.push(depsIdx);
+//   }
+// }
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// var findLeaves = function (root) {
+// const res = {};
+// const dfs = (node) => {
+//   if (!node) return 0;
+//   const depth = Math.max(dfs(node.left), dfs(node.right));
+//   if (res[depth]) {
+//     res[depth].push(node.val);
+//   } else {
+//     res[depth] = [node.val];
+//   }
+//   return depth + 1;
+// };
+// dfs(root);
+// return Object.values(res);
+// };
+
+// let bst = new Node(4);
+// bst.left = new Node(2);
+// bst.left.left = new Node(1);
+// bst.left.right = new Node(3);
+// bst.right = new Node(6);
+// bst.right.left = new Node(5);
+// bst.right.right = new Node(7);
+// findLeaves(bst);
+
+// back space compare
+// stack approach
+// const backspaceCompare = (s, t) => {
+//   const strip = (str) => {
+//     const stack = [];
+//     for (const char of str) {
+//       char === "#" ? stack.pop() : stack.push(char);
+//     }
+//     return stack.join("");
+//   };
+
+//   return strip(s) === strip(t);
+// };
+
+// two pointers with O(1) space:
+// var backspaceCompare = function(s, t) {
+//   let si = s.length - 1
+//   let ti = t.length - 1
+
+//   while (si >= 0 || ti >= 0) {
+//     si = clearBackSpace(s, si)
+//     ti = clearBackSpace(t, ti)
+
+//     let sChar = s[si]
+//     let tChar = t[ti]
+//     if (sChar !== tChar) {
+//       return false
+//       }
+
+//     si--
+//     ti--
+//   }
+
+//   return true
+// }
+
+// var clearBackSpace = function(string, index) {
+//   let skip = 0
+
+//   while (index >= 0) {
+//     if (string[index] === '#') {
+//       skip++
+//       index--
+//       }
+//     else if (skip > 0){
+//       skip--
+//       index--
+//       }
+//     else {
+//       break
+//       }
+//   }
+
+//   return index
+// }
+
+var longestLine = function (mat) {
+  let max = 0;
+
+  // This is the row of max '1s' in each of the four directions that we want to build off of
+  // we use a 2D array because we only need to reference the previous row for the next summation
+  let dp = new Array(mat[0].length).fill(0).map(() => new Array(4).fill(0));
+
+  for (let i = 0; i < mat.length; i++) {
+    // For each row we want to create a temporary array that saves the dp values of the current row
+    const currDp = new Array(mat[0].length)
+      .fill(0)
+      .map(() => new Array(4).fill(0));
+    for (let j = 0; j < mat[0].length; j++) {
+      // We are looking for 1s
+      if (mat[i][j] == 1) {
+        // Lets update the current dp values based on the previous row
+        // horizontal (saving at 0 index in dp array)
+
+        // Because its horizontal, we can simply reference the column to the left;
+        currDp[j][0] = j > 0 ? currDp[j - 1][0] + 1 : 1;
+
+        //vertical
+        // we reference the same column, because its vertical
+        currDp[j][1] = dp[j][1] + 1;
+
+        //diagonal
+        // we reference the left column, because diagonally comes from the top left
+        currDp[j][2] = j > 0 ? dp[j - 1][2] + 1 : 1;
+
+        //anti-diagonal
+        // We reference the right column, because diagonally comes from the top right;
+        currDp[j][3] = j < mat[0].length - 1 ? dp[j + 1][3] + 1 : 1;
+      }
+      // update max, checking all 4 direction's values up to this point
+      max = Math.max(max, Math.max(...currDp[j]));
     }
+    // save the final result of the row for the next iteration to reference
+    dp = currDp;
   }
-
-  const queue = [];
-  const result = [];
-  for (let i = 0; i < indegree.length; i++) {
-    if (indegree[i] === 0) queue.push(i);
-  }
-  while (queue.length > 0) {
-    let idx = queue.shift();
-    result.push(recipes[idx]);
-    if (!map.has(recipes[idx])) continue;
-    const listOfDeps = map.get(recipes[idx]);
-    removeDeps(listOfDeps, queue, indexes, indegree);
-  }
-  return result;
+  return max;
 };
-
-function removeDeps(listOfDeps, queue, indexes, indegree) {
-  for (const dep of listOfDeps) {
-    let depsIdx = indexes.get(dep);
-    indegree[depsIdx]--;
-    if (indegree[depsIdx] === 0) queue.push(depsIdx);
-  }
-}
