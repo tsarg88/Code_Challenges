@@ -10437,6 +10437,7 @@ Result = [24, 12, 8, 6]
 //   }
 // }
 
+// Find leaves of a binary tree
 // var findLeaves = function (root) {
 // const res = {};
 // const dfs = (node) => {
@@ -10518,44 +10519,79 @@ Result = [24, 12, 8, 6]
 //   return index
 // }
 
-var longestLine = function (mat) {
+// var longestLine = function (mat) {
+//   let max = 0;
+
+//   // This is the row of max '1s' in each of the four directions that we want to build off of
+//   // we use a 2D array because we only need to reference the previous row for the next summation
+//   let dp = new Array(mat[0].length).fill(0).map(() => new Array(4).fill(0));
+
+//   for (let i = 0; i < mat.length; i++) {
+//     // For each row we want to create a temporary array that saves the dp values of the current row
+//     const currDp = new Array(mat[0].length)
+//       .fill(0)
+//       .map(() => new Array(4).fill(0));
+//     for (let j = 0; j < mat[0].length; j++) {
+//       // We are looking for 1s
+//       if (mat[i][j] == 1) {
+//         // Lets update the current dp values based on the previous row
+//         // horizontal (saving at 0 index in dp array)
+
+//         // Because its horizontal, we can simply reference the column to the left;
+//         currDp[j][0] = j > 0 ? currDp[j - 1][0] + 1 : 1;
+
+//         //vertical
+//         // we reference the same column, because its vertical
+//         currDp[j][1] = dp[j][1] + 1;
+
+//         //diagonal
+//         // we reference the left column, because diagonally comes from the top left
+//         currDp[j][2] = j > 0 ? dp[j - 1][2] + 1 : 1;
+
+//         //anti-diagonal
+//         // We reference the right column, because diagonally comes from the top right;
+//         currDp[j][3] = j < mat[0].length - 1 ? dp[j + 1][3] + 1 : 1;
+//       }
+//       // update max, checking all 4 direction's values up to this point
+//       max = Math.max(max, Math.max(...currDp[j]));
+//     }
+//     // save the final result of the row for the next iteration to reference
+//     dp = currDp;
+//   }
+//   return max;
+// };
+
+// Longest substring
+// time and space should be O(n)
+var longestSubarray = function (nums, limit) {
+  let count = 0;
+  let result = 0;
+  let current = [];
+  let min = Infinity;
   let max = 0;
 
-  // This is the row of max '1s' in each of the four directions that we want to build off of
-  // we use a 2D array because we only need to reference the previous row for the next summation
-  let dp = new Array(mat[0].length).fill(0).map(() => new Array(4).fill(0));
+  for (let index = 0; index < nums.length; index++) {
+    current.push(nums[index]);
 
-  for (let i = 0; i < mat.length; i++) {
-    // For each row we want to create a temporary array that saves the dp values of the current row
-    const currDp = new Array(mat[0].length)
-      .fill(0)
-      .map(() => new Array(4).fill(0));
-    for (let j = 0; j < mat[0].length; j++) {
-      // We are looking for 1s
-      if (mat[i][j] == 1) {
-        // Lets update the current dp values based on the previous row
-        // horizontal (saving at 0 index in dp array)
+    min = Math.min(min, nums[index]);
+    max = Math.max(max, nums[index]);
 
-        // Because its horizontal, we can simply reference the column to the left;
-        currDp[j][0] = j > 0 ? currDp[j - 1][0] + 1 : 1;
+    let diff = Math.abs(max - min);
 
-        //vertical
-        // we reference the same column, because its vertical
-        currDp[j][1] = dp[j][1] + 1;
+    if (diff <= limit) {
+      count = current.length;
+    } else {
+      let ele = current.shift();
 
-        //diagonal
-        // we reference the left column, because diagonally comes from the top left
-        currDp[j][2] = j > 0 ? dp[j - 1][2] + 1 : 1;
-
-        //anti-diagonal
-        // We reference the right column, because diagonally comes from the top right;
-        currDp[j][3] = j < mat[0].length - 1 ? dp[j + 1][3] + 1 : 1;
+      if (ele === min) {
+        min = Math.min(...current);
+      } else if (ele === max) {
+        max = Math.max(...current);
       }
-      // update max, checking all 4 direction's values up to this point
-      max = Math.max(max, Math.max(...currDp[j]));
     }
-    // save the final result of the row for the next iteration to reference
-    dp = currDp;
+
+    result = Math.max(result, count);
   }
-  return max;
+
+  return result;
 };
