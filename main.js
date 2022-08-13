@@ -10563,35 +10563,82 @@ Result = [24, 12, 8, 6]
 
 // Longest substring
 // time and space should be O(n)
-var longestSubarray = function (nums, limit) {
-  let count = 0;
-  let result = 0;
-  let current = [];
-  let min = Infinity;
-  let max = 0;
+// var longestSubarray = function (nums, limit) {
+// let current = [];
+// let count = 0;
+// let result = 0;
+// let min = Infinity
+// let max = 0
 
-  for (let index = 0; index < nums.length; index++) {
-    current.push(nums[index]);
+// for (let index = 0; index< nums.length; index++) {
 
-    min = Math.min(min, nums[index]);
-    max = Math.max(max, nums[index]);
+//     current.push(nums[index]);
 
-    let diff = Math.abs(max - min);
+//     min = Math.min(min, nums[index]);
+//     max = Math.max(max, nums[index]);
 
-    if (diff <= limit) {
-      count = current.length;
-    } else {
-      let ele = current.shift();
+//     let diff = Math.abs(max-min);
 
-      if (ele === min) {
-        min = Math.min(...current);
-      } else if (ele === max) {
-        max = Math.max(...current);
-      }
-    }
+//     if (diff <= limit) {
+//         count = current.length;
+//     } else {
+//         let ele = current.shift();
 
-    result = Math.max(result, count);
+//         if (ele === min) {
+//             min = Math.min(...current);
+//         } else if (ele === max) {
+//             max = Math.max(...current);
+//         }
+
+//     }
+
+//     result = Math.max(result, count);
+// }
+
+// return result;
+// };
+
+// var numOfMinutes = function (n, headID, manager, informTime) {
+//   const tree = [...Array(n)].map(() => []);
+
+//   for (let i = 0; i < n; i++) {
+//     if (manager[i] !== -1) tree[manager[i]].push(i);
+//   }
+
+//   function traverse(node) {
+//     let maxTime = 0;
+
+//     for (let subordinate of tree[node]) {
+//       maxTime = Math.max(maxTime, traverse(subordinate));
+//     }
+//     return maxTime + informTime[node];
+//   }
+//   return traverse(headID);
+// };
+// console.log(
+//   numOfMinutes(
+//     15,
+//     0,
+//     [-1, 0, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [1, 1, 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//   )
+// );
+
+class MovingAverage {
+  constructor(size) {
+    this.size = size;
+    this.array = [];
+    this.sum = 0;
   }
 
-  return result;
-};
+  next(val) {
+    if (this.array.length == this.size) {
+      this.sum -= this.array.shift();
+    }
+
+    this.array.push(val);
+    this.sum += val;
+
+    return this.sum / this.array.length;
+  }
+}
