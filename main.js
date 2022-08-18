@@ -10624,21 +10624,125 @@ Result = [24, 12, 8, 6]
 //   )
 // );
 
-class MovingAverage {
-  constructor(size) {
-    this.size = size;
-    this.array = [];
-    this.sum = 0;
+// class MovingAverage {
+//   constructor(size) {
+//     this.size = size;
+//     this.array = [];
+//     this.sum = 0;
+//   }
+
+//   next(val) {
+//     if (this.array.length == this.size) {
+//       this.sum -= this.array.shift();
+//     }
+
+//     this.array.push(val);
+//     this.sum += val;
+
+//     return this.sum / this.array.length;
+//   }
+// }
+
+// var addBoldTag = function (s, words) {
+//   let marked = new Array(s.length).fill(false);
+
+//   for (let word of words) {
+//     let start = s.indexOf(word);
+
+//     while (start > -1) {
+//       let end = start + word.length;
+
+//       for (let i = start; i < end; i++) {
+//         marked[i] = true;
+//       }
+
+//       start = s.indexOf(word, start + 1);
+//     }
+//   }
+
+//   let res = "";
+
+//   for (let i = 0; i < s.length; i++) {
+//     if (marked[i] === true && (i == 0 || marked[i - 1] === false)) {
+//       res += "<b>";
+//     }
+
+//     res += s[i];
+
+//     if (marked[i] === true && (i === s.length - 1 || marked[i + 1] === false)) {
+//       res += "</b>";
+//     }
+//   }
+
+//   return res;
+// };
+
+// var uniqueOccurrences = function (arr) {
+//   // let set = new Set([...arr])
+//   let obj = {};
+
+//   for (let i = 0; i < arr.length; i++) {
+//     if (obj[arr[i]]) {
+//       obj[arr[i]] += 1;
+//     } else {
+//       obj[arr[i]] = 1;
+//     }
+//   }
+
+//   let set = new Set(Object.values(obj));
+//   let setSize = set.size;
+
+//   let objSize = Object.values(obj).length;
+
+//   return setSize === objSize ? true : false;
+// };
+// console.log(uniqueOccurrences([1, 2, 2, 1, 1, 3]));
+
+// efficient solotion
+// var minOperations = function (boxes) {
+//   const ans = new Array(boxes.length).fill(0);
+
+//   let ballsLeft = 0;
+//   let ballsRight = 0;
+//   let movesLeft = 0;
+//   let movesRight = 0;
+
+//   const len = boxes.length - 1;
+
+//   for (let i = 0; i <= len; i++) {
+//     movesLeft += ballsLeft;
+//     movesRight += ballsRight;
+//     ans[i] += movesLeft;
+//     ans[len - i] += movesRight;
+//     ballsLeft += Number(boxes[i]);
+//     ballsRight += Number(boxes[len - i]);
+//   }
+
+//   return ans;
+// };
+
+var minOperations = function (boxes) {
+  const res = Array(boxes.length).fill(0);
+
+  let nonEmpty = 0;
+  let runSum = 0;
+
+  for (let i = 0; i < boxes.length; i++) {
+    res[i] += runSum;
+
+    if (boxes[i] === "1") nonEmpty++;
+    runSum += nonEmpty;
   }
 
-  next(val) {
-    if (this.array.length == this.size) {
-      this.sum -= this.array.shift();
-    }
+  nonEmpty = 0;
+  runSum = 0;
 
-    this.array.push(val);
-    this.sum += val;
+  for (let i = boxes.length - 1; i >= 0; i--) {
+    res[i] += runSum;
 
-    return this.sum / this.array.length;
+    if (boxes[i] === "1") nonEmpty++;
+    runSum += nonEmpty;
   }
-}
+
+  return res;
+};
