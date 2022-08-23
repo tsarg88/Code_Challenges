@@ -10721,28 +10721,260 @@ Result = [24, 12, 8, 6]
 //   return ans;
 // };
 
-var minOperations = function (boxes) {
-  const res = Array(boxes.length).fill(0);
+// var minOperations = function (boxes) {
+//   const res = Array(boxes.length).fill(0);
 
-  let nonEmpty = 0;
-  let runSum = 0;
+//   let nonEmpty = 0;
+//   let runSum = 0;
 
-  for (let i = 0; i < boxes.length; i++) {
-    res[i] += runSum;
+//   for (let i = 0; i < boxes.length; i++) {
+//     res[i] += runSum;
 
-    if (boxes[i] === "1") nonEmpty++;
-    runSum += nonEmpty;
-  }
+//     if (boxes[i] === "1") nonEmpty++;
+//     runSum += nonEmpty;
+//   }
 
-  nonEmpty = 0;
-  runSum = 0;
+//   nonEmpty = 0;
+//   runSum = 0;
 
-  for (let i = boxes.length - 1; i >= 0; i--) {
-    res[i] += runSum;
+//   for (let i = boxes.length - 1; i >= 0; i--) {
+//     res[i] += runSum;
 
-    if (boxes[i] === "1") nonEmpty++;
-    runSum += nonEmpty;
-  }
+//     if (boxes[i] === "1") nonEmpty++;
+//     runSum += nonEmpty;
+//   }
 
-  return res;
-};
+//   return res;
+// };
+// 1395. Count Number of Teams
+// var numTeams = function (rating) {
+//   let res = 0;
+
+//   for (let i = 1; i < rating.length; i++) {
+//     let descRight = 0;
+//     let descLeft = 0;
+//     let ascLeft = 0;
+//     let ascRight = 0;
+
+//     // check left side
+//     for (let j = 0; j < i; j++) {
+//       if (rating[j] < rating[i]) {
+//         ascLeft++;
+//       } else {
+//         descLeft++;
+//       }
+//     }
+
+//     // check right side
+//     for (let j = i + 1; j < rating.length; j++) {
+//       if (rating[j] < rating[i]) {
+//         descRight++;
+//       } else {
+//         ascRight++;
+//       }
+//     }
+
+//     // applying formula
+//     res += ascLeft * ascRight + descLeft * descRight;
+//   }
+
+//   return res;
+// };
+
+// var prisonAfterNDays = function (cells, N) {
+//   const nextDay = (prison) => {
+//     let newPrison = "";
+//     for (let i = 0; i < prison.length; i++) {
+//       if (prison[i - 1] == prison[i + 1]) newPrison += "1";
+//       else newPrison += "0";
+//     }
+//     return newPrison;
+//   };
+//   let prison = cells.join("");
+//   let history = [];
+//   while (N--) {
+//     prison = nextDay(prison);
+//     let lookUp = history.indexOf(prison); // cycle found, get the cycle position
+//     // if (lookUp != -1) {
+//     //   let mod = N % (history.length - lookUp); // check how many extra moves after the cycle
+//     //   return history[lookUp + mod].split("");
+//     // }
+//     history.push(prison);
+//   }
+//   return prison.split("");
+// };
+// console.log(prisonAfterNDays([1, 0, 0, 1, 0, 0, 1, 0], 1000000000));
+
+// var prisonAfterNDays = function (cells, N) {
+//   const nextDay = (prison) => {
+//     let newPrison = "";
+//     for (let i = 0; i < prison.length; i++) {
+//       if (prison[i - 1] == prison[i + 1]) newPrison += "1";
+//       else newPrison += "0";
+//     }
+//     return newPrison;
+//   };
+//   let prison = cells.join("");
+//   let history = [];
+//   while (N--) {
+//     prison = nextDay(prison);
+//     let lookUp = history.indexOf(prison); // cycle found, get the cycle position
+//     if (lookUp != -1) {
+//       let mod = N % (history.length - lookUp); // check how many extra moves after the cycle
+//       return history[lookUp + mod].split("");
+//     }
+//     history.push(prison);
+//   }
+//   return prison.split("");
+// };
+
+// var mostCommonWord = function (paragraph, banned) {
+//   let words = paragraph.toLowerCase().split(/[^a-z]/);
+//   const bannedSet = new Set(banned);
+//   let freqWord;
+//   let maxValue = 0;
+//   let obj = {};
+
+//   for (let word of words) {
+//     if (word && !bannedSet.has(word)) {
+//       obj[word] = (obj[word] || 0) + 1;
+//       if (obj[word] > maxValue) {
+//         maxValue = obj[word];
+//         freqWord = word;
+//       }
+//     }
+//   }
+//   return freqWord;
+// };
+
+// var cutOffTree = function (forest) {
+//   const trees = forest
+//     .flat()
+//     .filter((x) => x && x !== 1)
+//     .sort((a, b) => b - a);
+//   let currPos = [0, 0],
+//     totalDist = 0;
+
+//   while (trees.length) {
+//     const grid = [...forest.map((row) => [...row])];
+//     //console.log("first", grid);
+//     const res = getDist(currPos, trees.pop(), grid);
+//     if (res == null) return -1;
+//     const [pos, dist] = res;
+//     currPos = pos;
+//     totalDist += dist;
+//   }
+//   return totalDist;
+
+//   function getDist(start, target, grid) {
+//     const dir = [
+//       [1, 0],
+//       [-1, 0],
+//       [0, 1],
+//       [0, -1],
+//     ];
+//     let queue = [start],
+//       dist = 0;
+
+//     while (queue.length) {
+//       const next = [];
+
+//       for (let [r, c] of queue) {
+//         if (grid[r][c] === target) return [[r, c], dist];
+//         if (!grid[r][c]) continue;
+
+//         for (let [x, y] of dir) {
+//           x += r;
+//           y += c;
+//           if (
+//             x >= 0 &&
+//             x < grid.length &&
+//             y >= 0 &&
+//             y < grid[0].length &&
+//             grid[x][y]
+//           )
+//             next.push([x, y]);
+//         }
+//         grid[r][c] = 0;
+//       }
+//       dist++;
+//       queue = next;
+//     }
+//     return null;
+//   }
+// };
+// console.log(
+//   cutOffTree([
+//     [1, 2, 3],
+//     [0, 0, 4],
+//     [7, 6, 5],
+//   ])
+// );
+
+// var findRoot = function(tree) {
+
+//   let curr = [tree]
+
+//   console.log(tree)
+//   // for(let i=0; i<tree.length; i++){
+//   //     console.log(tree[i])
+//   // }
+
+// }
+
+// const findRoot = (tree) => {
+//   const set = new Set();
+//   //console.log('tree', tree)
+//   for (const node of tree) {
+//     console.log("node", node);
+//     for (const child of node.children) {
+//       //console.log('child', child)
+//       set.add(child.val);
+//     }
+//   }
+
+//   //console.log('set', set)
+
+//   let root = null;
+
+//   for (const node of tree) {
+//     //console.log('node', node)
+//     //console.log('node.val', node.val)
+//     if (!set.has(node.val)) root = node;
+//   }
+
+//   return root;
+// };
+
+
+// solution with O(1) space!    
+// sum=0;
+// sum= +1 -3 -2 -4 +3 -5 -6 +2 +4 +5 +6 [=1]
+
+
+let sum = 0;
+
+for (let i = 0; i < tree.length; i++) {
+    console.log('tree[i].val', tree[i].val)
+    sum += tree[i].val;
+    console.log('sum', sum)
+    const curChildren = tree[i].children
+    console.log('curChildren', curChildren)
+    curChildren.forEach(child => {
+        sum -= child.val
+        console.log('sum inside forEach', sum)
+    })
+}
+//console.log(sum)
+let root;
+
+for(let node of tree){
+    if(node.val === sum){
+        root = node
+        break
+    }
+}
+
+return root
+
+}
