@@ -10946,35 +10946,444 @@ Result = [24, 12, 8, 6]
 //   return root;
 // };
 
-
-// solution with O(1) space!    
+// solution with O(1) space!
 // sum=0;
 // sum= +1 -3 -2 -4 +3 -5 -6 +2 +4 +5 +6 [=1]
 
+// let sum = 0;
 
-let sum = 0;
+// for (let i = 0; i < tree.length; i++) {
+//     console.log('tree[i].val', tree[i].val)
+//     sum += tree[i].val;
+//     console.log('sum', sum)
+//     const curChildren = tree[i].children
+//     console.log('curChildren', curChildren)
+//     curChildren.forEach(child => {
+//         sum -= child.val
+//         console.log('sum inside forEach', sum)
+//     })
+// }
+// //console.log(sum)
+// let root;
 
-for (let i = 0; i < tree.length; i++) {
-    console.log('tree[i].val', tree[i].val)
-    sum += tree[i].val;
-    console.log('sum', sum)
-    const curChildren = tree[i].children
-    console.log('curChildren', curChildren)
-    curChildren.forEach(child => {
-        sum -= child.val
-        console.log('sum inside forEach', sum)
-    })
-}
-//console.log(sum)
-let root;
+// for(let node of tree){
+//     if(node.val === sum){
+//         root = node
+//         break
+//     }
+// }
 
-for(let node of tree){
-    if(node.val === sum){
-        root = node
-        break
+// return root
+
+// }
+
+// var numIslands = function (grid) {
+//   let count = 0;
+
+//   const explore = (row, col) => {
+//     // check for boundries and if the position is "0" return from rec call
+//     if (
+//       row < 0 ||
+//       col < 0 ||
+//       row >= grid.length ||
+//       col >= grid[row].length ||
+//       grid[row][col] === "0"
+//     ) {
+//       return;
+//     }
+
+//     // set the curr spot to "0"
+//     grid[row][col] === "0";
+
+//     //traverse to all directions
+
+//     // right
+//     explore(row, col + 1);
+//     // left
+//     explore(row, col - 1);
+//     // top
+//     explore(row + 1, col);
+//     // down
+//     explore(row - 1, col);
+//   };
+
+//   for (let row = 0; row < grid.length; row++) {
+//     for (let col = 0; col < grid[row].length; col++) {
+//       if (grid[row][col] === "1") {
+//         count++;
+//         explore(row, col);
+//       }
+//     }
+//   }
+
+//   return count;
+// };
+// console.log(
+//   numIslands([
+//     ["1", "1", "1", "1", "0"],
+//     ["1", "1", "0", "1", "0"],
+//     ["1", "1", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0"],
+//   ])
+// );
+
+// var zigzagLevelOrder = function (root) {
+//   let res = [];
+
+//   const go = (node, l, res) => {
+//     // l means level
+//     if (!node) return;
+
+//     if (res[l] == null) {
+//       res.push([]);
+//     }
+
+//     if (l % 2 === 0) {
+//       res[l].push(node.val);
+//     } else {
+//       res[l].unshift(node.val);
+//     }
+
+//     go(node.left, l + 1, res);
+//     go(node.right, l + 1, res);
+//   };
+
+//   go(root, 0, res);
+//   return res;
+// };
+
+// var intToRoman = function (num) {
+//   let res = [];
+
+//   let arr = [
+//     [1000, "M"],
+//     [900, "CM"],
+//     [500, "D"],
+//     [400, "CD"],
+//     [100, "C"],
+//     [90, "XC"],
+//     [50, "L"],
+//     [40, "XL"],
+//     [10, "X"],
+//     [9, "IX"],
+//     [5, "V"],
+//     [4, "IV"],
+//     [1, "I"],
+//   ];
+
+//   // 20
+
+//   for (let i = 0; i < arr.length; i++) {
+//     while (num >= arr[i][0]) {
+//       res.push(arr[i][1]);
+//       num -= arr[i][0];
+//     }
+//   }
+
+//   return res.join("");
+// };
+
+// var largestVariance = function (s) {
+//   let chars = new Set(s);
+//   let maxDiff = 0;
+//   for (let l of chars) {
+//     for (let r of chars) {
+//       if (l === r) continue;
+//       let lCount = 0,
+//         rCount = 0,
+//         hasRight = false;
+//       for (let char of s) {
+//         lCount += char === l ? 1 : 0;
+//         rCount += char === r ? 1 : 0;
+//         if (rCount > 0 && lCount > rCount) {
+//           // has both characters and positive difference
+//           maxDiff = Math.max(maxDiff, lCount - rCount);
+//         }
+//         if (lCount > rCount && hasRight) {
+//           // has positive difference and a previous "right" character we can add to the start
+//           maxDiff = Math.max(maxDiff, lCount - rCount - 1);
+//         }
+//         if (lCount < rCount) {
+//           (lCount = 0), (rCount = 0);
+//           hasRight = true;
+//         }
+//       }
+//     }
+//   }
+//   return maxDiff;
+// };
+
+// var allPossibleFBT = function (number) {
+//   // If a number is even, we can not construct a perfect binary tree so we return blank tree
+//   if (number % 2 == 0) {
+//     return [];
+//   }
+
+//   // The idea is that perfect binary tree of 1 i.e. PBT(1) is a single node without left and right nodes.
+//   // A perfect binary tree of 3 is :
+//   // - a node with left = PBT(1) and right = PBT(1)
+//   // A perfect binary tree of 5 is :
+//   // - a node with left = PBT(3) and right = PBT(1)
+//   // - a node with left = PBT(1) and right = PBT(3)
+//   // A perfect binary tree of 7 is :
+//   // - a node with left = PBT(5) and right = PBT(1)
+//   // - a node with left = PBT(3) and right = PBT(3)
+//   // - a node with left = PBT(1) and right = PBT(5)
+//   // and so on...
+
+//   // So if you observe, we need PBT of a number more than one time in recursion
+//   // SO we use memoization to speed up the re-calculations
+//   var memo = new Array(number + 1).fill(null).map((i) => []);
+
+//   let helper = (n) => {
+//     // If the value is already memoized, return it
+//     if (memo[n].length > 0) {
+//       return memo[n];
+//     }
+
+//     // Base case
+//     if (n == 1) {
+//       return [new TreeNode(0)];
+//     }
+
+//     // Initialize perfect binary trees to empty array
+//     var trees = [];
+
+//     // Now find all odd pairs of from 1 to n-1(n - 1  because we will take out one node as the root node)
+//     for (let i = 1; i < n - 1; i += 2) {
+//       let lt = helper(i);
+//       let rt = helper(n - 1 - i);
+
+//       // Now get all possible perfect binary trees of left tree and right tree
+//       lt.forEach((ltr) => {
+//         rt.forEach((rtr) => {
+//           // Make a new tree
+//           trees.push(new TreeNode(0, ltr, rtr));
+//         });
+//       });
+//     }
+
+//     memo[n] = trees;
+//     return memo[n];
+//   };
+
+//   return helper(number);
+// };
+
+// var minPathSum = function (grid) {
+//   const n = grid.length;
+//   const m = grid[0].length;
+
+//   // get the sum of the first column
+//   for (let i = 1; i < n; i++) {
+//     grid[i][0] += grid[i - 1][0];
+//   }
+
+//   // get the sum of the first row
+//   for (let j = 1; j < m; j++) {
+//     grid[0][j] += grid[0][j - 1];
+//   }
+
+//   // get the remaining sum of the cells up to the required grid[n][m] one
+//   // with the choice of minimum valuebetween up or left cells's values
+//   for (let i = 1; i < n; i++) {
+//     for (let j = 1; j < m; j++) {
+//       grid[i][j] += Math.min(grid[i - 1][j], grid[i][j - 1]);
+//     }
+//   }
+
+//   return grid[n - 1][m - 1];
+// };
+
+// var cherryPickup = function (grid) {
+//   let result = 0,
+//     N = grid.length,
+//     cache = {},
+//     cherries;
+
+//   const solve = (x1, y1, x2, y2) => {
+//     if (x1 === N - 1 && y1 === N - 1)
+//       return grid[x1][y1] !== -1 ? grid[x1][y1] : -Infinity;
+//     if (
+//       x1 > N - 1 ||
+//       y1 > N - 1 ||
+//       x2 > N - 1 ||
+//       y2 > N - 1 ||
+//       grid[x1][y1] === -1 ||
+//       grid[x2][y2] === -1
+//     )
+//       return -Infinity;
+
+//     let lookup_key = `${x1}:${y1}:${x2}:${y2}`;
+//     if (cache[lookup_key]) return cache[lookup_key];
+
+//     if (x1 === x2 && y1 === y2) cherries = grid[x1][y1];
+//     else cherries = grid[x1][y1] + grid[x2][y2];
+
+//     result =
+//       cherries +
+//       Math.max(
+//         solve(x1 + 1, y1, x2 + 1, y2),
+//         solve(x1, y1 + 1, x2, y2 + 1),
+//         solve(x1 + 1, y1, x2, y2 + 1),
+//         solve(x1, y1 + 1, x2 + 1, y2)
+//       );
+
+//     cache[lookup_key] = result;
+//     return result;
+//   };
+
+//   result = solve(0, 0, 0, 0);
+//   return result > 0 ? result : 0;
+// };
+
+// var searchRange = function (nums, target) {
+//   let left = 0;
+//   let right = nums.length - 1;
+//   let mid;
+
+//   // find the start
+//   while (left <= right) {
+//     mid = Math.floor((left + right) / 2);
+//     if (nums[mid] >= target) {
+//       right = mid - 1;
+//     } else left = mid + 1;
+//   }
+
+//   // if target doesn't exist
+//   if (nums[left] !== target) return [-1, -1];
+
+//   const start = left;
+
+//   // reset the right
+//   right = nums.length - 1;
+
+//   // find the end
+//   while (left <= right) {
+//     mid = Math.floor((left + right) / 2);
+//     if (nums[mid] <= target) {
+//       left = mid + 1;
+//     } else right = mid - 1;
+//   }
+
+//   return [start, right];
+// };
+
+// function validateBst(tree) {
+//   const validateBstHelper = (tree, minValue, maxValue) => {
+//     if (tree === null) return true;
+//     if (tree.value < minValue || tree.value >= maxValue) return false;
+//     const leftIsValid = validateBstHelper(tree.left, minValue, tree.value);
+//     return leftIsValid && validateBstHelper(tree.right, tree.value, maxValue);
+//   };
+
+//   return validateBstHelper(tree, -Infinity, Infinity);
+// }
+
+// function minHeightBst(array) {
+//   const constructBst = (startIdx, endIdx) => {
+//     if (endIdx < startIdx) return null;
+
+//     const mid = Math.floor((startIdx + endIdx) / 2);
+//     const bst = new BST(array[mid]);
+
+//     bst.left = constructBst(startIdx, mid - 1);
+//     bst.right = constructBst(mid + 1, endIdx);
+//     return bst;
+//   };
+
+//   return constructBst(0, array.length - 1);
+// }
+
+// BST construction wirh insert, contains and remove methods
+class BST {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+
+  insert(value) {
+    if (value < this.value) {
+      if (this.left === null) {
+        this.left = new BST(value);
+      } else {
+        this.left.insert(value);
+      }
+    } else if (value >= this.value) {
+      if (this.right === null) {
+        this.right = new BST(value);
+      } else {
+        this.right.insert(value);
+      }
     }
-}
+    return this;
+  }
 
-return root
+  contains(value) {
+    if (value < this.value) {
+      if (this.left !== null) {
+        return this.left.contains(value);
+      } else {
+        return false;
+      }
+    } else if (value > this.value) {
+      if (this.right !== null) {
+        return this.right.contains(value);
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
 
+  remove(value, parent = null) {
+    if (value < this.value) {
+      if (this.left !== null) {
+        this.left.remove(value, this);
+      }
+    } else if (value > this.value) {
+      if (this.right !== null) {
+        this.right.remove(value, this);
+      }
+    } else {
+      // if the removalble node is a subroot
+      if (this.left !== null && this.right !== null) {
+        this.value = this.right.getMinVal();
+        this.right.remove(this.value, this);
+      }
+
+      // if the removable is root with parent null
+      else if (parent === null) {
+        if (this.left !== null) {
+          this.value = this.left.value;
+          this.right = this.left.right;
+          this.left = this.left.left;
+        } else if (this.right !== null) {
+          this.value = this.right.value;
+          this.right = this.right.right;
+          this.left = this.right.left;
+        }
+      }
+
+      // if the removable is a leaf node
+      else if (parent.left === this) {
+        // parent.left = this.left !== null ? this.left :  this.right
+        parent.left = this.left === null ? this.right : this.left;
+      } else if (parent.right === this) {
+        //parent.right = this.left !== null ? this.left : this.right
+        parent.right = this.left === null ? this.right : this.left;
+      }
+    }
+    return this;
+  }
+
+  getMinVal() {
+    if (this.left === null) {
+      return this.value;
+    } else {
+      return this.left.getMinVal();
+    }
+  }
 }
