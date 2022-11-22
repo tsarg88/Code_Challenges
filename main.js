@@ -11296,94 +11296,526 @@ Result = [24, 12, 8, 6]
 // }
 
 // BST construction wirh insert, contains and remove methods
-class BST {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
+// class BST {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
 
-  insert(value) {
-    if (value < this.value) {
-      if (this.left === null) {
-        this.left = new BST(value);
-      } else {
-        this.left.insert(value);
-      }
-    } else if (value >= this.value) {
-      if (this.right === null) {
-        this.right = new BST(value);
-      } else {
-        this.right.insert(value);
+//   insert(value) {
+//     if (value < this.value) {
+//       if (this.left === null) {
+//         this.left = new BST(value);
+//       } else {
+//         this.left.insert(value);
+//       }
+//     } else if (value >= this.value) {
+//       if (this.right === null) {
+//         this.right = new BST(value);
+//       } else {
+//         this.right.insert(value);
+//       }
+//     }
+//     return this;
+//   }
+
+//   contains(value) {
+//     if (value < this.value) {
+//       if (this.left !== null) {
+//         return this.left.contains(value);
+//       } else {
+//         return false;
+//       }
+//     } else if (value > this.value) {
+//       if (this.right !== null) {
+//         return this.right.contains(value);
+//       } else {
+//         return false;
+//       }
+//     } else {
+//       return true;
+//     }
+//   }
+
+//   remove(value, parent = null) {
+//     if (value < this.value) {
+//       if (this.left !== null) {
+//         this.left.remove(value, this);
+//       }
+//     } else if (value > this.value) {
+//       if (this.right !== null) {
+//         this.right.remove(value, this);
+//       }
+//     } else {
+//       // if the removalble node is a subroot
+//       if (this.left !== null && this.right !== null) {
+//         this.value = this.right.getMinVal();
+//         this.right.remove(this.value, this);
+//       }
+
+//       // if the removable is root with parent null
+//       else if (parent === null) {
+//         if (this.left !== null) {
+//           this.value = this.left.value;
+//           this.right = this.left.right;
+//           this.left = this.left.left;
+//         } else if (this.right !== null) {
+//           this.value = this.right.value;
+//           this.right = this.right.right;
+//           this.left = this.right.left;
+//         }
+//       }
+
+//       // if the removable is a leaf node
+//       else if (parent.left === this) {
+//         // parent.left = this.left !== null ? this.left :  this.right
+//         parent.left = this.left === null ? this.right : this.left;
+//       } else if (parent.right === this) {
+//         //parent.right = this.left !== null ? this.left : this.right
+//         parent.right = this.left === null ? this.right : this.left;
+//       }
+//     }
+//     return this;
+//   }
+
+//   getMinVal() {
+//     if (this.left === null) {
+//       return this.value;
+//     } else {
+//       return this.left.getMinVal();
+//     }
+//   }
+// }
+
+// function findKthLargestValueInBst(tree, k) {
+
+//   const reverseInOrder = (node, k, treeInfo) => {
+//     if(node === null || treeInfo.numVis === k) return
+
+//     reverseInOrder(node.right, k, treeInfo)
+//       if(treeInfo.numVis < k){
+//         treeInfo.numVis++
+//         treeInfo.recentVal = node.value
+//      reverseInOrder(node.left, k, treeInfo)
+//       }
+//   }
+
+//   const treeInfo = new TreeInfo(0, -1)
+//   reverseInOrder(tree, k, treeInfo)
+//   return treeInfo.recentVal
+// }
+
+// let ll = new LinkedList(1)
+// ll.next = new LinkedList(1)
+// ll.next.next = new LinkedList(3)
+// ll.next.next.next = new LinkedList(4)
+// ll.next.next.next.next = new LinkedList(4)
+// ll.next.next.next.next.next = new LinkedList(4)
+// ll.next.next.next.next.next.next = new LinkedList(5)
+// ll.next.next.next.next.next.next.next = new LinkedList(6)
+// ll.next.next.next.next.next.next.next.next = new LinkedList(6)
+// removeDuplicatesFromLinkedList(ll)
+
+// class DoublyLinkedList {
+//   constructor() {
+//     this.head = null;
+//     this.tail = null;
+//   }
+
+//   setHead(node) {
+//     if(this.head === null){
+//       this.head = node
+//       this.tail = node
+//       return
+//     }
+//     this.insertBefore(this.head, node)
+//   }
+
+//   setTail(node) {
+//     if(this.tail === null){
+//       this.setHead(node)
+//       return
+//     }
+//     this.insertAfter(this.tail, node)
+//   }
+
+//   insertBefore(node, nodeToInsert) {
+//     if(nodeToInsert === this.head && nodeToInsert === this.tail) return
+//     this.remove(nodeToInsert)
+//     nodeToInsert.prev = node.prev
+//     nodeToInsert.next = node
+//     if(node.prev === null){
+//       this.head = nodeToInsert
+//     } else {
+//       node.prev.next = nodeToInsert
+//     }
+//      node.prev = nodeToInsert
+//   }
+
+//   insertAfter(node, nodeToInsert) {
+//     if(nodeToInsert === this.head && nodeToInsert === this.tail) return
+//     this.remove(nodeToInsert)
+//     nodeToInsert.prev = node
+//     nodeToInsert.next = node.next
+//     if(node.next === null){
+//       this.tail = nodeToInsert
+//     } else {
+//       node.next.prev = nodeToInsert
+//     }
+//     node.next = nodeToInsert
+//   }
+
+//   insertAtPosition(position, nodeToInsert) {
+//     //
+//     let node = this.head
+//     let currentPosition = 1
+
+//     while(node && currentPosition !== position){
+//       node = node.next
+//       currentPosition++
+//     }
+
+//     if(node !== null){
+//       this.insertBefore(node, nodeToInsert)
+//     } else {
+//       this.setTail(nodeToInsert)
+//     }
+//   }
+
+//   removeNodesWithValue(value) {
+//     let node = this.head
+
+//     while(node !== null){
+//       let nodeToRemove = node
+//       node = node.next
+//       if(nodeToRemove.value === value){
+//         this.remove(nodeToRemove)
+//       }
+//     }
+//   }
+
+//   remove(node) {
+//     if(node === this.head){
+//       this.head = this.head.next
+//     }
+//     if(node === this.tail){
+//       this.tail = this.tail.prev
+//     }
+//     this.removeNodeBindings(node)
+//   }
+
+//   containsNodeWithValue(value) {
+//     let node = this.head
+
+//     while(node !== null && node.value !== value){
+//       node = node.next
+//     }
+//     return node ? true : false
+//   }
+
+//   removeNodeBindings(node){
+//     if(node.prev !== null){
+//       node.prev.next = node.next
+//     }
+//     if(node.next !== null){
+//       node.next.prev = node.prev
+//     }
+//     node.prev = null
+//     node.next = null
+//   }
+
+// }
+
+// let bt = new BST(10)
+// bt.left = new BST(5)
+// bt.left.right = new BST(5)
+// bt.left.left = new BST(2)
+// bt.left.left.left = new BST(1)
+// bt.right = new BST(15)
+// bt.right.left = new BST(13)
+// bt.right.right = new BST(22)
+// bt.right.left.left = new BST(12)
+// bt.right.left.right = new BST(14)
+
+// function shiftLinkedList(head, k) {
+
+//   let listLen = 1
+//   let listTail = head
+
+//   while(listTail.next){
+//     listTail = listTail.next
+//     listLen++
+//   }
+
+//   const offset = Math.abs(k) % listLen
+//   if(offset === 0) return head
+//   const newTailPos = k > 0 ? listLen - offset : offset
+
+//   let newTail = head
+//   for(let i=1; i<newTailPos; i++){
+//     newTail = newTail.next
+//   }
+
+//   const newHead = newTail.next
+//   newTail.next = null
+//   listTail.next = head
+
+//   return newHead
+
+// }
+
+// level order recursive 2d
+// var levelOrder = function (root) {
+//   const order = [];
+//   const BFS = (node, depth) => {
+//     if (!node) return;
+
+//     if (depth === order.length) {
+//       order.push([]);
+//     }
+
+//     order[depth].push(node.val);
+//     BFS(node.left, depth + 1);
+//     BFS(node.right, depth + 1);
+//   };
+//   BFS(root, 0);
+//   return order;
+// };
+
+// level order iterative
+// var levelOrder = function(root) {
+//   const res = []
+//   const queue = [root]
+//   while(queue.length){
+//       let currNode = queue.shift()
+//       res.push(currNode.value)
+
+//       if(currNode.left) queue.push(currNode.left)
+//       if(currNode.right) queue.push(currNode.right)
+//   }
+//    return res
+// }
+
+// const stack = [tree]
+//   while(stack.length){
+//     let node = stack[stack.length-1]
+//     if(node.left){
+//       stack.push(node.left)
+//       node.left = null
+//     } else if(node.right){
+//       stack.push(node.right)
+//       node.right = null
+//     } else {
+//       array.push(stack.pop().value)
+//     }
+//   }
+//     return array
+
+// function test() {
+//   return 2 % 6;
+// }
+// console.log(test());
+
+// function binaryTreeDiameter(tree) {
+
+//   const calcDiamater = (tree) => {
+//     if(tree === null) return 0
+
+//     const leftCount = calcDiamater(tree.left)
+//     const rightCount = calcDiamater(tree.right)
+//     max = Math.max(leftCount + rightCount, max)
+
+//     return Math.max(leftCount + 1, rightCount + 1)
+//   }
+
+//   let max = -Infinity
+//   calcDiamater(tree, max)
+//   return max
+// }
+
+// classical BST
+// let bt = new BST(4)
+// bt.right = new BST(6)
+// bt.left = new BST(2)
+// bt.left.right = new BST(3)
+// bt.left.left = new BST(1)
+// bt.right.right = new BST(7)
+// bt.right.left = new BST(5)
+
+// function findNodesDistanceK(tree, target, k) {
+
+//   const findDisNodes = (node, dis) => {
+//     if(node === null) return
+
+//     if(dis === k){
+//       res.push(node.value)
+//     } else {
+//       findDisNodes(node.left, dis+1)
+//       findDisNodes(node.right, dis+1)
+//     }
+//   }
+
+//   const mainFun = (node) => {
+//     if(node === null) return -1
+
+//     // find the target node
+//     if(node.value === target){
+//       findDisNodes(node, 0)
+//       return 1
+//     }
+
+//     const left = mainFun(node.left)
+//     const right = mainFun(node.right)
+
+//     if(left === k || right === k){
+//       res.push(node.value)
+//       return res
+//     }
+
+//   }
+
+//    const res = []
+//    mainFun(tree)
+//    return res
+//  }
+
+// function getRandom() {
+//   // let arr = [1, 2, 3, 4];
+//   // let min = Math.min(...arr);
+//   // let max = Math.max(...arr);
+//   // return Math.floor(Math.random() * (4 - 0) + min);
+
+//   let set = new Set();
+//   set.add(1);
+//   set.add(2);
+//   set.add(3);
+//   set.add(4);
+
+//   return Array.from(set);
+// }
+// console.log(getRandom());
+
+// class RandomizedSet {
+//   constructor() {
+//     this.obj = {};
+//     this.keys = [];
+//   }
+
+//   insert(val) {
+//     if (val in obj) {
+//       return false;
+//     } else {
+//       this.obj[val] = this.keys.length;
+//       this.keys.push(val);
+//       return true;
+//     }
+//   }
+
+//   remove(val) {
+//     if (!(val in obj)) {
+//       return false;
+//     } else {
+//       let idx = this.obj[val];
+//       // swap the current val idx to the last element of keys O(1)
+//       [this.keys[idx], this.keys[this.keys.length - 1]] = [
+//         this.keys[this.keys.length - 1],
+//         this.keys[idx],
+//       ];
+//       // update the swaped keys idx O(1)
+//       this.obj[this.keys[idx]] = idx;
+//       delete this.hashMap[val];
+//       // remove the last element from keys O(1)
+//       this.keys.pop();
+//       return true;
+//     }
+//   }
+
+//   getRandom() {
+//     // idx will be randomply picked from this.keys O(1)
+//     let idx = Math.floor(this.keys.length * Math.random());
+//     return this.keys[idx];
+//   }
+// }
+
+// class RandomizedSet {
+//   constructor() {
+//     this.map = new Map();
+//     this.arr = [];
+//   }
+
+//   insert(val) {
+//     if (this.map.has(val)) return false;
+//     this.map.set(val, this.arr.length);
+//     this.arr.push(val);
+//     return true;
+//   }
+
+//   remove(val) {
+//     if (!this.map.has(val)) return false;
+//     const valIdx = this.map.get(val);
+//     const lastIdx = this.arr.length - 1;
+//     const lastNum = this.arr[lastIdx];
+
+//     [this.arr[valIdx], this.arr[lastIdx]] = [
+//       this.arr[lastIdx],
+//       this.arr[valIdx],
+//     ];
+//     this.arr.pop();
+//     this.map.set(lastNum, valIdx);
+//     this.map.delete(val);
+//     return true;
+//   }
+
+//   getRandom() {
+//     const randIdx = Math.floor(Math.random() * this.arr.length);
+//     return this.arr[randIdx];
+//   }
+// }
+
+// function test() {
+//   let arr = [[1]];
+//   return arr[0][90] ? true : false;
+//   // if (arr[0][1]) {
+//   //   return "agha";
+//   // }
+//   // if (true) {
+//   //   return true;
+//   // }
+// }
+// console.log(test());
+
+function riverSizes(matrix) {
+  const explore = (row, col, size) => {
+    size++;
+    matrix[row][col] = 0;
+
+    // check right
+    if (matrix[row][col + 1]) {
+      size = explore(row, col + 1, size);
+    }
+    // check left
+    if (matrix[row][col - 1]) {
+      size = explore(row, col - 1, size);
+    }
+    // check down
+    if (matrix[row + 1] && matrix[row + 1][col]) {
+      size = explore(row + 1, col, size);
+    }
+    // check up
+    if (matrix[row - 1] && matrix[row - 1][col]) {
+      size = explore(row - 1, col, size);
+    }
+    return size;
+  };
+
+  let arr = [];
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (matrix[row][col]) {
+        arr.push(explore(row, col, 0));
       }
     }
-    return this;
   }
-
-  contains(value) {
-    if (value < this.value) {
-      if (this.left !== null) {
-        return this.left.contains(value);
-      } else {
-        return false;
-      }
-    } else if (value > this.value) {
-      if (this.right !== null) {
-        return this.right.contains(value);
-      } else {
-        return false;
-      }
-    } else {
-      return true;
-    }
-  }
-
-  remove(value, parent = null) {
-    if (value < this.value) {
-      if (this.left !== null) {
-        this.left.remove(value, this);
-      }
-    } else if (value > this.value) {
-      if (this.right !== null) {
-        this.right.remove(value, this);
-      }
-    } else {
-      // if the removalble node is a subroot
-      if (this.left !== null && this.right !== null) {
-        this.value = this.right.getMinVal();
-        this.right.remove(this.value, this);
-      }
-
-      // if the removable is root with parent null
-      else if (parent === null) {
-        if (this.left !== null) {
-          this.value = this.left.value;
-          this.right = this.left.right;
-          this.left = this.left.left;
-        } else if (this.right !== null) {
-          this.value = this.right.value;
-          this.right = this.right.right;
-          this.left = this.right.left;
-        }
-      }
-
-      // if the removable is a leaf node
-      else if (parent.left === this) {
-        // parent.left = this.left !== null ? this.left :  this.right
-        parent.left = this.left === null ? this.right : this.left;
-      } else if (parent.right === this) {
-        //parent.right = this.left !== null ? this.left : this.right
-        parent.right = this.left === null ? this.right : this.left;
-      }
-    }
-    return this;
-  }
-
-  getMinVal() {
-    if (this.left === null) {
-      return this.value;
-    } else {
-      return this.left.getMinVal();
-    }
-  }
+  return arr;
 }
