@@ -11785,37 +11785,257 @@ Result = [24, 12, 8, 6]
 // }
 // console.log(test());
 
-function riverSizes(matrix) {
-  const explore = (row, col, size) => {
-    size++;
-    matrix[row][col] = 0;
+// function riverSizes(matrix) {
+//   const explore = (row, col, size) => {
+//     size++;
+//     matrix[row][col] = 0;
 
-    // check right
-    if (matrix[row][col + 1]) {
-      size = explore(row, col + 1, size);
-    }
-    // check left
-    if (matrix[row][col - 1]) {
-      size = explore(row, col - 1, size);
-    }
-    // check down
-    if (matrix[row + 1] && matrix[row + 1][col]) {
-      size = explore(row + 1, col, size);
-    }
-    // check up
-    if (matrix[row - 1] && matrix[row - 1][col]) {
-      size = explore(row - 1, col, size);
-    }
-    return size;
-  };
+//     // check right
+//     if (matrix[row][col + 1]) {
+//       size = explore(row, col + 1, size);
+//     }
+//     // check left
+//     if (matrix[row][col - 1]) {
+//       size = explore(row, col - 1, size);
+//     }
+//     // check down
+//     if (matrix[row + 1] && matrix[row + 1][col]) {
+//       size = explore(row + 1, col, size);
+//     }
+//     // check up
+//     if (matrix[row - 1] && matrix[row - 1][col]) {
+//       size = explore(row - 1, col, size);
+//     }
+//     return size;
+//   };
 
-  let arr = [];
-  for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix[row].length; col++) {
-      if (matrix[row][col]) {
-        arr.push(explore(row, col, 0));
-      }
-    }
-  }
-  return arr;
-}
+//   let arr = [];
+//   for (let row = 0; row < matrix.length; row++) {
+//     for (let col = 0; col < matrix[row].length; col++) {
+//       if (matrix[row][col]) {
+//         arr.push(explore(row, col, 0));
+//       }
+//     }
+//   }
+//   return arr;
+// }
+
+// function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
+//   const getDepth = (descendant) => {
+//     let depth = 0;
+//     while (descendant !== topAncestor) {
+//       depth++;
+//       descendant = descendant.ancestor;
+//     }
+//     return depth;
+//   };
+
+//   const backtrackAncestralTree = (lowerDescendant, higherDescendant, diff) => {
+//     while (diff > 0) {
+//       lowerDescendant = lowerDescendant.ancestor;
+//       diff--;
+//     }
+//     while (lowerDescendant !== higherDescendant) {
+//       lowerDescendant = lowerDescendant.ancestor;
+//       higherDescendant = higherDescendant.ancestor;
+//     }
+//     return higherDescendant;
+//   };
+
+//   const depthOne = getDepth(descendantOne);
+//   const depthTwo = getDepth(descendantTwo);
+//   if (depthOne > depthTwo) {
+//     return backtrackAncestralTree(
+//       descendantOne,
+//       descendantTwo,
+//       depthOne - depthTwo
+//     );
+//   } else {
+//     return backtrackAncestralTree(
+//       descendantTwo,
+//       descendantOne,
+//       depthTwo - depthOne
+//     );
+//   }
+// }
+
+// Graph
+// Youngest common ancestor
+// class AncestralTree {
+//   constructor(name) {
+//     this.name = name;
+//     this.ancestor = null;
+//   }
+
+//   addAsAncestor(descendants) {
+//     for (const descendant of descendants) {
+//       descendant.ancestor = this;
+//     }
+//   }
+// }
+
+// function getTrees() {
+//   const trees = {};
+//   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+//   for (const letter of ALPHABET) {
+//     trees[letter] = new AncestralTree(letter);
+//   }
+//   return trees;
+// }
+
+// function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
+//   const getDepth = (descendant, topAncestor) => {
+//     let depth = 0;
+//     while (descendant !== topAncestor) {
+//       depth++;
+//       descendant = descendant.ancestor;
+//     }
+//     return depth;
+//   };
+
+//   const backtrackAncestralTree = (lowerDescendant, higherDescendant, diff) => {
+//     while (diff > 0) {
+//       lowerDescendant = lowerDescendant.ancestor;
+//       diff--;
+//     }
+//     while (lowerDescendant !== higherDescendant) {
+//       lowerDescendant = lowerDescendant.ancestor;
+//       higherDescendant = higherDescendant.ancestor;
+//     }
+//     return higherDescendant;
+//   };
+
+//   const depthOne = getDepth(descendantOne, topAncestor);
+//   const depthTwo = getDepth(descendantTwo, topAncestor);
+//   if (depthOne > depthTwo) {
+//     return backtrackAncestralTree(
+//       descendantOne,
+//       descendantTwo,
+//       depthOne - depthTwo
+//     );
+//   } else {
+//     return backtrackAncestralTree(
+//       descendantTwo,
+//       descendantOne,
+//       depthTwo - depthOne
+//     );
+//   }
+// }
+
+// const trees = getTrees();
+// trees["A"].addAsAncestor([trees["B"], trees["C"]]);
+// trees["B"].addAsAncestor([trees["D"], trees["E"]]);
+// trees["D"].addAsAncestor([trees["H"], trees["I"]]);
+// trees["C"].addAsAncestor([trees["F"], trees["G"]]);
+// getYoungestCommonAncestor(trees["A"], trees["E"], trees["I"]);
+
+// Graph
+// Depth First Search
+// class Node {
+//   constructor(name) {
+//     this.name = name;
+//     this.children = [];
+//   }
+
+//   addChild(name) {
+//     this.children.push(new Node(name));
+//     return this;
+//   }
+
+//   depthFirstSearch(array=[]) {
+//    // console.log(this.children)
+//     array.push(this.name)
+//         for(let child of this.children){
+//             child.depthFirstSearch(array)
+//         }
+//         return array
+
+//   }
+// }
+
+// function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
+//   let currOne = descendantOne
+//   let currTwo = descendantTwo
+
+//   while(currOne !== currTwo){
+//     currOne = currOne === topAncestor ? descendantTwo : currOne.ancestor
+//     currTwo = currTwo === topAncestor ? descendantOne : currTwo.ancestor
+//   }
+//    return currOne
+// }
+
+// const graph = new Node("A");
+//   graph.addChild('B').addChild('C').addChild('D');
+//   graph.children[0].addChild('E').addChild('F');
+//   graph.children[2].addChild('G').addChild('H');
+//   graph.children[0].children[1].addChild('I').addChild('J');
+//   graph.children[2].children[0].addChild('K');
+// graph.depthFirstSearch([])
+
+// const getNeighbors = (row, col) => {
+//   const neighbors = []
+
+//   const numRows = matrix.length-1
+//   const numCols = matrix[row].length-1
+
+//   //UP
+//   if(row-1 >= 0 && matrix[row-1][col] === 1) neighbors.push([row-1, col])
+//   //DOWN
+//   if(row+1 <= numRows && matrix[row+1][col] === 1) neighbors.push([row+1, col])
+//   //LEFT
+//   if(col-1 >= 0 && matrix[row][col-1] === 1) neighbors.push([row, col-1])
+//   //RIGHT
+//   if(col+1 <= numCols && matrix[row][col+1] === 1) neighbors.push([row, col+1])
+
+//   return neighbors
+// }
+
+// const changeBorOnesToTwos = (startRow, startCol) => {
+//   const stack = [[startRow, startCol]]
+
+//   while(stack.length > 0){
+//     const currPos = stack.pop()
+//     const [currRow, currCol] = currPos
+
+//     matrix[currRow][currCol] = 2
+
+//     const neighbors = getNeighbors(currRow, currCol)
+//     for(const neighbor of neighbors){
+//       // const [row, col] = neighbor
+
+//       // if(matrix[row][col] !== 1) continue
+
+//       stack.push(neighbor)
+//     }
+//   }
+// }
+
+// for(let row=0; row<matrix.length; row++){
+//   for(let col=0; col<matrix[row].length; col++){
+//     const rowIsBorder = row === 0 || row === matrix.length-1
+//     const colIsBorder = col === 0 || col === matrix[row].length-1
+//     const isBorder = rowIsBorder || colIsBorder
+//     if(isBorder === false) continue
+
+//     if(matrix[row][col] !== 1) continue
+//     changeBorOnesToTwos(row, col)
+//   }
+// }
+
+// for(let row = 0; row<matrix.length; row++){
+//   for(let col=0; col<matrix[row].length; col++){
+//     const color = matrix[row][col]
+//     // if(color === 1){
+//     //   matrix[row][col] = 0
+//     // } else if(color === 2){
+//     //   matrix[row][col] = 1
+//     // }
+//     if(color === 2){
+//       matrix[row][col] = 1
+//     } else {
+//        matrix[row][col] = 0
+//     }
+//   }
+// }
+//  return matrix
+// }
