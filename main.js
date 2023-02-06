@@ -9380,54 +9380,38 @@
 // dfs();
 
 // var pacificAtlantic = function (heights) {
-//   var res = [];
-//   var oceanMap = Array(heights.length)
-//     .fill()
-//     .map(() => Array(heights[0].length))
-//     .fill(0);
-//   var pTrack = new Set();
-//   var aTrack = new Set();
+//   var res = []
+//   var pTrack = new Set()
+//   var aTrack = new Set()
+//   var oceanMap = Array(heights.length).fill().map(_ => Array(heights[0].length).fill(0))
 
-//   const traverse = (row, col, oceanTrack) => {
-//     if (oceanTrack.has(`${row}-${col}`)) return;
-//     oceanTrack.add(`${row}-${col}`);
-//     oceanMap[row][col]++;
-//     if (oceanMap[row][col] === 2) res.push([row, col]);
-//     console.log(oceanMap);
+//      const traverse = (row, col, ocean) => {
+//          if(ocean.has(`${row}-${col}`)) return
+//          ocean.add(`${row}-${col}`)
+//          oceanMap[row][col]++
+//          if(oceanMap[row][col] === 2) res.push([row, col])
 
-//     // before traversing and calling recursively, the logic/formula of this task
-//     //requires checking for edge cases: boundries and if curr heights[row][col]<= to the
-//     // curr condition, which can be: Up, Down, Left or Right
+//          // UP
+//          row > 0 && heights[row][col] <= heights[row-1][col] && traverse(row-1, col, ocean)
+//          // Down
+//          row < heights.length-1 && heights[row][col] <= heights[row+1][col] && traverse(row+1, col, ocean)          // Right
+//          col < heights[row].length-1 && heights[row][col] <= heights[row][col+1] && traverse(row, col+1, ocean)
+//           // Left
+//          col > 0 && heights[row][col] <= heights[row][col-1] && traverse(row, col-1, ocean)
 
-//     // check UP
-//     row > 0 &&
-//       heights[row][col] <= heights[row - 1][col] &&
-//       traverse(row - 1, col, oceanTrack);
-//     // check Down
-//     row < heights.length - 1 &&
-//       heights[row][col] <= heights[row + 1][col] &&
-//       traverse(row + 1, col, oceanTrack);
-//     // check Left
-//     col > 0 &&
-//       heights[row][col] <= heights[row][col - 1] &&
-//       traverse(row, col - 1, oceanTrack);
-//     // check Right
-//     col < heights[row].length - 1 &&
-//       heights[row][col] <= heights[row][col + 1] &&
-//       traverse(row, col + 1, oceanTrack);
-//   };
+//      }
 
-//   for (let i = 0; i < heights[0].length; i++) {
-//     traverse(0, i, pTrack);
-//     traverse(heights.length - 1, i, aTrack);
-//   }
+//      for(let i=0; i<heights[0].length; i++){
+//          traverse(0, i, pTrack)
+//          traverse(heights.length-1, i, aTrack)
+//      }
 
-//   for (let i = 1; i < heights.length; i++) {
-//     traverse(i, 0, pTrack);
-//     traverse(heights.length - 1 - i, heights[i].length - 1, aTrack);
-//   }
-//   return res;
-// };
+//      for(let i=1; i<heights.length; i++){
+//          traverse(i, 0, pTrack)
+//          traverse(heights.length-1-i, heights[i].length-1, aTrack)
+//      }
+//        return res
+//  }
 // console.log(
 //   pacificAtlantic([
 //     [1, 2, 2, 3, 5],
@@ -12039,3 +12023,1099 @@ Result = [24, 12, 8, 6]
 // }
 //  return matrix
 // }
+
+// function boggleBoard(board, words) {
+//   class Trie {
+//     constructor() {
+//       this.root = {};
+//       this.endSymbol = "*";
+//     }
+
+//     add(word) {
+//       let current = this.root;
+//       for (const letter of word) {
+//         if (!(letter in current)) {
+//           current[letter] = {};
+//         }
+//         current = current[letter];
+//       }
+//       current[this.endSymbol] = word;
+//     }
+//   }
+
+//   const getNeighbors = (i, j) => {
+//     const neighbors = [];
+//     if (i > 0 && j > 0) {
+//       neighbors.push([i - 1, j - 1]);
+//     }
+//     if (i > 0 && j < board[0].length - 1) {
+//       neighbors.push([i - 1, j + 1]);
+//     }
+//     if (i < board.length - 1 && j < board[0].length - 1) {
+//       neighbors.push([i + 1, j + 1]);
+//     }
+//     if (i < board.length - 1 && j > 0) {
+//       neighbors.push([i + 1, j - 1]);
+//     }
+//     if (i > 0) {
+//       neighbors.push([i - 1, j]);
+//     }
+//     if (i < board.length - 1) {
+//       neighbors.push([i + 1, j]);
+//     }
+//     if (j > 0) {
+//       neighbors.push([i, j - 1]);
+//     }
+//     if (j < board[0].length - 1) {
+//       neighbors.push([i, j + 1]);
+//     }
+//     return neighbors;
+//   };
+
+//   const explore = (i, j, trieNode, visited, finalWords) => {
+//     if (visited[i][j]) return;
+//     const letter = board[i][j];
+//     if (!(letter in trieNode)) return;
+//     visited[i][j] = true;
+//     trieNode = trieNode[letter];
+//     if ("*" in trieNode) {
+//       finalWords[trieNode["*"]] = true;
+//     }
+//     const neighbors = getNeighbors(i, j);
+//     for (const neighbor of neighbors) {
+//       explore(neighbor[0], neighbor[1], trieNode, visited, finalWords);
+//     }
+//     visited[i][j] = false;
+//   };
+
+//   const trie = new Trie();
+//   for (const word of words) {
+//     trie.add(word);
+//   }
+//   const finalWords = {};
+//   const visited = board.map((row) => row.map((letter) => false));
+//   for (let i = 0; i < board.length; i++) {
+//     for (let j = 0; j < board[i].length; j++) {
+//       explore(i, j, trie.root, visited, finalWords);
+//     }
+//   }
+//   return Object.keys(finalWords);
+// }
+
+// console.log(
+//   boggleBoard(
+//     [
+//       ["t", "h", "i", "s", "i", "s", "a"],
+//       ["s", "i", "m", "p", "l", "e", "x"],
+//       ["b", "x", "x", "x", "x", "e", "b"],
+//       ["x", "o", "g", "g", "l", "x", "o"],
+//       ["x", "x", "x", "D", "T", "r", "a"],
+//       ["R", "E", "P", "E", "A", "d", "x"],
+//       ["x", "x", "x", "x", "x", "x", "x"],
+//       ["N", "O", "T", "R", "E", "-", "P"],
+//       ["x", "x", "D", "E", "T", "A", "E"],
+//     ],
+//     [
+//       "this",
+//       "is",
+//       "not",
+//       "a",
+//       "simple",
+//       "boggle",
+//       "board",
+//       "test",
+//       "REPEATED",
+//       "NOTRE-PEATED",
+//     ]
+//   )
+// );
+
+// function test() {
+//   let matrix = [
+//     [1, 2, 3, 4],
+//     [5, 6, 7, 8],
+//     [9, 10, 11, 12],
+//   ];
+//   matrix = matrix[0].map((val, index) =>
+//     matrix.map((row) => row[index]).reverse()
+//   );
+//   return matrix;
+// }
+// console.log(test());
+
+// You are given array of non-negative integers numbers. You are allowed to
+// choose any number from this array and swap any two digits in It. If after the swap operation the number contains leading zeros
+// function solution(numbers) {
+//   const numLength = numbers.length;
+//   const uniqueNumbers = [...new Set(numbers)];
+//   if (uniqueNumbers.length !== numLength) return false;
+//   const sortedNumbers = [...numbers].sort((a, b) => a - b);
+//   if (numbers.join("") === sortedNumbers.join("")) return true;
+//   let res = false;
+//   for (let i = 0; i < numLength; i++) {
+//     const targetNum = numbers[i];
+//     if (targetNum > numbers[i + 1]) {
+//       const numStr = targetNum.toString();
+//       const numStrLen = numStr.length;
+
+//       // Just two digit movement possible numbers
+//       // 1920 => 9120 2910 0921 1290 1029 1902
+//       // 0123    1023 2103 3120 0213 0321 0132 (Indexes)
+//       //          01   02   03   12   13   23 (Index Changing)
+
+//       const possibleNums = [];
+//       for (let j = 0; j < numStrLen; j++) {
+//         for (let k = j + 1; k < numStrLen; k++) {
+//           const temp = [...numStr];
+//           temp[j] = numStr[k];
+//           temp[k] = numStr[j];
+
+//           possibleNums.push(+temp.join(""));
+//         }
+//       }
+//       possibleNums.sort((a, b) => a - b);
+//       for (let j = 0; j < possibleNums.length; j++) {
+//         const modifiedNumbers = [...numbers];
+//         modifiedNumbers[i] = possibleNums[j];
+//         if (
+//           modifiedNumbers.join("") ===
+//           [...modifiedNumbers].sort((a, b) => a - b).join("")
+//         ) {
+//           res = true;
+//           break;
+//         }
+//       }
+//       break;
+//     }
+//   }
+//   return res;
+// }
+
+// console.log(solution([1, 3, 900, 10]));
+
+//1861. Rotating the Box
+// var rotateTheBox = function (box) {
+//   const R = box.length;
+//   const C = box[0].length;
+
+//   const ans = box[0].map((val, index) => box.map((row) => "."));
+
+//   for (let i = 0; i < R; i++) {
+//     // maintain the index of stone insertion
+//     let insRow = C - 1;
+
+//     for (let j = C - 1; j >= 0; j--) {
+//       const el = box[i][j];
+//       if (el === "*") {
+//         ans[j][R - i - 1] = "*";
+//         insRow = j - 1;
+//       } else if (el === "#") {
+//         ans[insRow][R - i - 1] = "#";
+//         insRow--;
+
+//       }
+//     }
+//   }
+
+//   return ans;
+// };
+
+// var lengthOfLongestSubstring = function(s) {
+
+//   // var seen = new Set()
+//   // var left = 0
+//   // var longest = 0
+//   // for(let right=0; right<s.length; right++){
+//   //     while(seen.has(s[right])){
+//   //             seen.delete(s[left])
+//   //             left++
+//   //           }
+//   //     seen.add(s[right])
+//   //     longest = Math.max(longest, (right-left) +1)
+//   // } return longest
+
+//   // let maxLength = 0;
+//   // let start = 0;
+//   // let seen = {};
+//   // for (let i = 0; i < s.length; i++) {
+//   //     let c = s[i];
+//   //     if (c in seen && start <= seen[c]) {
+//   //         start = seen[c] + 1;
+//   //     } else {
+//   //         maxLength = Math.max(maxLength, i - start + 1);
+//   //     }
+//   //     seen[c] = i;
+//   // }
+//   // return maxLength;
+
+//       // keeps track of the most recent index of each letter.
+//   const seen = new Map();
+//   // keeps track of the starting index of the current substring.
+//   let start = 0;
+//   // keeps track of the maximum substring length.
+//   let maxLen = 0;
+
+//   for(let i = 0; i < s.length; i++) {
+//       // if the current char was seen, move the start to (1 + the last index of this char)
+//       // max prevents moving backward, 'start' can only move forward
+//       if(seen.has(s[i])) start = Math.max(seen.get(s[i]) + 1)
+//       seen.set(s[i], i);
+//       // maximum of the current substring length and maxLen
+//       maxLen = Math.max((i - start) + 1, maxLen);
+//   }
+
+//   return maxLen;
+// };
+
+//Suffix Trie
+// class SuffixTrie {
+//   constructor(string) {
+//     this.root = {};
+//     this.endSymbol = '*';
+//     this.populateSuffixTrieFrom(string);
+//   }
+
+//   populateSuffixTrieFrom(string) {
+//     for(let i=0; i<string.length; i++){
+//       this.insertSubStrStartAt(i, string)
+//     }
+//   }
+
+//   insertSubStrStartAt(i, string){
+//     let node = this.root
+//     for(let j=i; j<string.length; j++){
+//       const letter = string[j]
+//       if(!(letter in node)){
+//         node[letter] = {}
+//       }
+//       node = node[letter]
+//     }
+//     node[this.endSymbol] = true
+//   }
+
+//   contains(string) {
+//     let node = this.root
+//     for(const letter of string){
+//       if(!(letter in node)){
+//         return false
+//       }
+//      node = node[letter]
+//     }
+//     return this.endSymbol in node
+//   }
+// }
+
+// function multiStringSearch(bigString, smallStrings) {
+//   class Trie {
+//     constructor() {
+//       this.root = {};
+//       this.endSymbol = "*";
+//     }
+
+//     insert(string) {
+//       let curr = this.root;
+//       for (let i = 0; i < string.length; i++) {
+//         const char = string[i];
+//         if (!(char in curr)) {
+//           curr[char] = {};
+//         }
+//         curr = curr[char];
+//       }
+//       curr[this.endSymbol] = string;
+//     }
+//   }
+
+//   const findSmallStringsIn = (startIdx, containedStrings) => {
+//     let curr = trie.root;
+//     for (let i = startIdx; i < bigString.length; i++) {
+//       const char = bigString[i];
+//       if (!(char in curr)) {
+//         break;
+//       }
+//       curr = curr[char];
+//       if (trie.endSymbol in curr) {
+//         containedStrings[curr[trie.endSymbol]] = true;
+//       }
+//     }
+//   };
+
+//   const trie = new Trie();
+//   for (const str of smallStrings) {
+//     trie.insert(str);
+//   }
+
+//   const containedStrings = {};
+//   for (let i = 0; i < bigString.length; i++) {
+//     findSmallStringsIn(i, containedStrings);
+//   }
+//   return smallStrings.map((str) => str in containedStrings);
+// }
+
+// function riverSizes(matrix) {
+
+//   const explore = (row, col, size) => {
+//     size++
+//     matrix[row][col] = 0
+
+//     // check right
+//     if(matrix[row][col+1]){
+//       size = explore(row, col+1, size)
+//     }
+//     // check left
+//     if(matrix[row][col-1]){
+//       size = explore(row, col-1, size)
+//     }
+//     // check down
+//     if(matrix[row+1] && matrix[row+1][col]){
+//       size = explore(row+1, col, size)
+//     }
+//     // check up
+//     if(matrix[row-1] && matrix[row-1][col]){
+//       size = explore(row-1, col, size)
+//     }
+//      return size
+//   }
+
+//    let arr = []
+//    for(let row=0; row<matrix.length; row++){
+//      for(let col=0; col<matrix[row].length; col++){
+//        if(matrix[row][col]){
+//          arr.push(explore(row, col, 0))
+//        }
+//      }
+//    }
+//     return arr
+//  }
+
+// function removeIslands(matrix) {
+//   const getNeighbors = (row, col) => {
+//     matrix[row][col] = 2;
+
+//     // check right
+//     if (matrix[row][col + 1] && matrix[row][col + 1] === 1) {
+//       getNeighbors(row, col + 1);
+//     }
+//     // check left
+//     if (matrix[row][col - 1] && matrix[row][col - 1] === 1) {
+//       getNeighbors(row, col - 1);
+//     }
+//     // check down
+//     if (matrix[row + 1] && matrix[row + 1][col] === 1) {
+//       getNeighbors(row + 1, col);
+//     }
+//     // check up
+//     if (matrix[row - 1] && matrix[row - 1][col]) {
+//       getNeighbors(row - 1, col);
+//     }
+//     return;
+//   };
+
+//   const changeBorOnesToTwos = (row, col) => {
+//     matrix[row][col] = 2;
+//     getNeighbors(row, col);
+//   };
+
+//   for (let row = 0; row < matrix.length; row++) {
+//     for (let col = 0; col < matrix[row].length; col++) {
+//       const rowIsBorder = row === 0 || row === matrix.length - 1;
+//       const colIsBorder = col === 0 || col === matrix[row].length - 1;
+//       const isBorder = rowIsBorder || colIsBorder;
+//       if (isBorder === false) {
+//         continue;
+//       }
+//       if (matrix[row][col] !== 1) {
+//         continue;
+//       }
+//       changeBorOnesToTwos(row, col);
+//     }
+//   }
+
+//   for (let row = 0; row < matrix.length; row++) {
+//     for (let col = 0; col < matrix[row].length; col++) {
+//       if (matrix[row][col] === 2) {
+//         matrix[row][col] === 1;
+//       } else if (matrix[row][col] === 1) {
+//         matrix[row][col] === 0;
+//       }
+//     }
+//   }
+//   return matrix;
+// }
+// console.log(
+//   removeIslands([
+//     [1, 0, 0, 0, 0, 0],
+//     [0, 1, 0, 1, 1, 1],
+//     [0, 0, 1, 0, 1, 0],
+//     [1, 1, 0, 0, 1, 0],
+//     [1, 0, 1, 1, 0, 0],
+//     [1, 0, 0, 0, 0, 1],
+//   ])
+// );
+
+// function cycleInGraph(edges) {
+
+//   for(let start = 0; start < edges.length; start++){
+//     const stack = [...edges[start]]
+//     const visited = new Set()
+//     while(stack.length){
+//       const node = stack.shift()
+//       if(start === node){
+//         return true
+//       }
+//       if(visited.has(node)){
+//         break
+//       }
+//        else {
+//          visited.add(node)
+//          stack.push(...edges[node])
+
+//        }
+//     }
+//   }
+//    return false
+// }
+
+// function minimumPassesOfMatrix(matrix) {
+//   const containsNegative = () => {
+//     for (const row of matrix) {
+//       for (const value of row) {
+//         if (value < 0) return true;
+//       }
+//     }
+//     return false;
+//   };
+
+//   const getAdjPos = (row, col) => {
+//     const adjPos = [];
+//     // UP
+//     if (matrix[row - 1] && matrix[row - 1][col] < 0)
+//       adjPos.push([row - 1, col]);
+//     // DOWN
+//     if (matrix[row + 1] && matrix[row + 1][col] < 0)
+//       adjPos.push([row + 1, col]);
+//     // LEFT
+//     if (matrix[row][col - 1] && matrix[row][col - 1] < 0)
+//       adjPos.push([row, col - 1]);
+//     // RIGHT
+//     if (matrix[row][col + 1] && matrix[row][col + 1] < 0)
+//       adjPos.push([row, col + 1]);
+
+//     return adjPos;
+//   };
+
+//   const getAllPosPositions = (matrix) => {
+//     const posPositions = [];
+
+//     for (let row = 0; row < matrix.length; row++) {
+//       for (let col = 0; col < matrix[row].length; col++) {
+//         const value = matrix[row][col];
+//         if (value > 0) {
+//           posPositions.push([row, col]);
+//         }
+//       }
+//     }
+//     return posPositions;
+//   };
+
+//   const convertNegatives = () => {
+//     const queue = getAllPosPositions(matrix);
+//     let passes = 0;
+//     while (queue.length > 0) {
+//       let currSize = queue.length;
+//       while (currSize > 0) {
+//         const [currRow, currCol] = queue.shift();
+//         const adjPos = getAdjPos(currRow, currCol);
+//         for (const pos of adjPos) {
+//           const [row, col] = pos;
+//           const value = matrix[row][col];
+
+//           matrix[row][col] *= -1;
+//           queue.push([row, col]);
+//         }
+//         currSize--;
+//       }
+//       passes++;
+//     }
+//     return passes;
+//   };
+
+//   const passes = convertNegatives();
+//   return containsNegative() ? -1 : passes - 1;
+// }
+
+// function validIPAddresses(string) {
+//   const ipAdressesFound = [];
+
+//   const isValidPart = (str) => {
+//     const stringAsInt = parseInt(str);
+//     if (stringAsInt > 255) return false;
+//     return str.length === stringAsInt.toString().length;
+//   };
+
+//   for (let i = 0; i < Math.min(string.length, 4); i++) {
+//     const currentIPAdressesParts = ["", "", "", ""];
+//     currentIPAdressesParts[0] = string.slice(0, i);
+//     if (isValidPart(currentIPAdressesParts[0]) === false) {
+//       continue;
+//     }
+//     for (let j = i + 1; j < i + Math.min(string.length - i, 4); j++) {
+//       currentIPAdressesParts[1] = string.slice(i, j);
+//       if (!isValidPart(currentIPAdressesParts[1])) continue;
+//       for (let k = j + 1; k < j + Math.min(string.length - j, 4); k++) {
+//         currentIPAdressesParts[2] = string.slice(j, k);
+//         currentIPAdressesParts[3] = string.slice(k);
+//         if (
+//           isValidPart(currentIPAdressesParts[2]) &&
+//           isValidPart(currentIPAdressesParts[3])
+//         ) {
+//           ipAdressesFound.push(currentIPAdressesParts.join("."));
+//         }
+//       }
+//     }
+//   }
+//   return ipAdressesFound;
+// }
+
+// function reverseWordsInString(string) {
+//   const reverseListRange = (list, start, end) => {
+//     while (start < end) {
+//       const temp = list[start];
+//       list[start] = list[end];
+//       list[end] = temp;
+//       start++;
+//       end--;
+//     }
+//   };
+
+//   const characters = [];
+//   for (const char of string) {
+//     characters.push(char);
+//   }
+//   reverseListRange(characters, 0, characters.length - 1);
+
+//   let startOdWord = 0;
+//   while (startOdWord < characters.length) {
+//     let endOfWord = startOdWord;
+//     while (endOfWord < characters.length && characters[endOfWord] !== " ") {
+//       endOfWord++;
+//     }
+//     reverseListRange(characters, startOdWord, endOfWord - 1);
+//     startOdWord = endOfWord + 1;
+//   }
+//   return characters.join("");
+// }
+
+// var numIslands = function (grid) {
+//   let count = 0;
+
+//   const explore = (row, col) => {
+// check for boundries and if the position is "0" return from rec call
+//    if(
+//     row < 0 ||
+//     col < 0 ||
+//     row >= grid.length ||
+//     col >= grid[row].length ||
+//     grid[row][col] === "0"
+//     ){
+//         return
+//      }
+
+// set the curr spot to "0"
+//    grid[row][col] = "0"
+
+//traverse to all directions
+
+//    // right
+//    explore(row, col+1)
+//    // left
+//    explore(row, col-1)
+//    // down
+//    explore(row+1, col)
+//    // up
+//    explore(row-1, col)
+
+//     grid[row][col] = "0";
+
+//     if (grid[row] && grid[row][col + 1]) {
+//       explore(row, col + 1);
+//     } else {
+//       return;
+//     }
+//     if (grid[row] && grid[row][col - 1]) {
+//       explore(row, col - 1);
+//     } else {
+//       return;
+//     }
+//     if (grid[row + 1] && grid[row + 1][col]) {
+//       explore(row + 1, col);
+//     } else {
+//       return;
+//     }
+//     if (grid[row - 1] && grid[row - 1][col]) {
+//       explore(row - 1, col);
+//     } else {
+//       return;
+//     }
+//   };
+
+//   for (let row = 0; row < grid.length; row++) {
+//     for (let col = 0; col < grid[row].length; col++) {
+//       if (grid[row][col] === "1") {
+//         count++;
+//         explore(row, col);
+//       }
+//     }
+//   }
+
+//   return count;
+// };
+// console.log(
+//   numIslands([
+//     ["1", "1", "1", "1", "0"],
+//     ["1", "1", "0", "1", "0"],
+//     ["1", "1", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0"],
+//   ])
+// );
+
+//find seconf largest one-pass algorithm
+// function secondLargest(nums) {
+//   let first = -Infinity;
+//   let second = -Infinity;
+//   for (let i = 0; i < nums.length; i++) {
+//     if (nums[i] > first) {
+//       second = first;
+//       first = nums[i];
+//     } else if (nums[i] > second && nums[i] < first) {
+//       second = nums[i];
+//     }
+//   }
+//   return second;
+// }
+
+// function diskStacking(disks) {
+
+//   const areValidDimensions = (o, c) => {
+//     return o[0] < c[0] && o[1] < c[1] && o[2] < c[2]
+//   }
+
+//   const buildSequence = (sequences, currIdx) => {
+//     const sequence = []
+//     while(currIdx !== undefined){
+//       sequence.unshift(disks[currIdx])
+//       currIdx = sequences[currIdx]
+//     }
+//      return sequence
+//   }
+
+//    disks.sort((a, b) => a[2] - b[2])
+//    const heights = disks.map(disk => disk[2])
+//    const sequences = new Array(disks.length)
+//    let maxHeghtIdx = 0
+//    for(let i=1; i<disks.length; i++){
+//      const currDisk = disks[i]
+//      for(let j=0; j<i; j++){
+//        const otherDisk = disks[j]
+//        if(areValidDimensions(otherDisk, currDisk)){
+//          if(heights[i] <= currDisk[2] + heights[j]){
+//            heights[i] = currDisk[2] + heights[j]
+//            sequences[i] = j
+//          }
+//        }
+//      }
+//      if(heights[i] >= heights[maxHeghtIdx]){
+//        maxHeghtIdx = i
+//      }
+//    }
+//     return buildSequence(sequences, maxHeghtIdx)
+//  }
+
+// function maximumSumSubmatrix(matrix, size) {
+//   const createSubMatrix = () => {
+//     // const sums = []
+//     // for(let row=0; row<matrix.length; row++){
+//     //   sums.push([])
+//     //   for(let col=0; col<matrix[row].length; col++){
+//     //     sums[row].push(0)
+//     //   }
+//     // }
+//     const sums = new Array(matrix.length)
+//       .fill(0)
+//       .map(() => new Array(matrix[0]).fill(0));
+//     // console.log(sums)
+
+//     sums[0][0] = matrix[0][0];
+
+//     // fill the first row
+//     for (let i = 1; i < matrix[0].length; i++) {
+//       sums[0][i] = sums[0][i - 1] + matrix[0][i];
+//     }
+
+//     // fill the first column
+//     for (let i = 1; i < matrix.length; i++) {
+//       sums[i][0] = sums[i - 1][0] + matrix[i][0];
+//     }
+
+//     // fill the the rest of the matrix
+//     for (let row = 1; row < matrix.length; row++) {
+//       for (let col = 1; col < matrix[row].length; col++) {
+//         sums[row][col] =
+//           sums[row - 1][col] +
+//           sums[row][col - 1] -
+//           sums[row - 1][col - 1] +
+//           matrix[row][col];
+//       }
+//     }
+//     return sums;
+//   };
+
+//   const sums = createSubMatrix();
+//   let maxSubMatrixSum = -Infinity;
+
+//   for (let row = size - 1; row < matrix.length; row++) {
+//     for (let col = size - 1; col < matrix[row].length; col++) {
+//       let total = sums[row][col];
+
+//       const touchesTopBar = row - size < 0;
+//       if (touchesTopBar === false) {
+//         total -= sums[row - size][col];
+//       }
+//       const touchesLeftBorder = col - size < 0;
+//       if (touchesLeftBorder === false) {
+//         total -= sums[row][col - size];
+//       }
+//       const touchesTopOrLeftBorder = touchesTopBar || touchesLeftBorder;
+//       if (touchesTopOrLeftBorder === false) {
+//         total += sums[row - size][col - size];
+//       }
+//       maxSubMatrixSum = Math.max(maxSubMatrixSum, total);
+//     }
+//   }
+//   return maxSubMatrixSum;
+// }
+
+// function numbersInPi(pi, numbers) {
+//   let res = 0;
+//   let obj = {};
+//   for (let str of numbers) {
+//     obj[str] = true;
+//   }
+
+//   let flag = false;
+//   let currPiNum = "";
+//   for (let i = 0; i < pi.length; i++) {
+//     if (res !== 0 && flag === false) {
+//       return -1;
+//     }
+//     let currLongest = 0;
+//     currPiNum = "";
+//     currPiNum += pi[i];
+//     for (let j = i + 1; j < pi.length; j++) {
+//       currPiNum += pi[j];
+//       if (currPiNum in obj) {
+//         currLongest = j;
+//         if (currLongest > i) {
+//           i = currLongest;
+//           res++;
+//           flag = true;
+//           break;
+//         } else {
+//           flag = false;
+//           break;
+//         }
+//       }
+//     }
+// if (j === pi.length - 1) {
+//   if (currLongest > i) {
+//     i = currLongest;
+//     res++;
+//     flag = true;
+//   } else {
+//     flag = false;
+//   }
+// }
+// }
+// return res - 1;
+// }
+
+// console.log(
+//   numbersInPi("3141592653589793238462643383279", [
+//     "314159265358979323846",
+//     "26433",
+//     "8",
+//     "3279",
+//     "314159265",
+//     "35897932384626433832",
+//     "79",
+//   ])
+// );
+
+// function maximizeExpression(array) {
+//   if(array.length < 4) return 0
+
+//   const maxOfA = new Array(1).fill(array[0])
+//   const maxOfAMinusB = new Array(1).fill(-Infinity)
+//   const maxOfAMinusBPlusC = new Array(2).fill(-Infinity)
+//   const maxOfAMinusBPlusCMinusD = new Array(3).fill(-Infinity)
+
+//   for(let i=1; i<array.length; i++){
+//     const currMax = Math.max(maxOfA[i-1], array[i])
+//     maxOfA.push(currMax)
+//   }
+
+//   for(let i=1; i<array.length; i++){
+//     const currMax = Math.max(maxOfAMinusB[i-1], maxOfA[i-1] - array[i])
+//     maxOfAMinusB.push(currMax)
+//   }
+
+//   for(let i=2; i<array.length; i++){
+//     const currMax = Math.max(maxOfAMinusBPlusC[i-1], maxOfAMinusB[i-1] + array[i])
+//     maxOfAMinusBPlusC.push(currMax)
+//   }
+
+//   for(let i=3; i<array.length; i++){
+//     const currMax = Math.max(maxOfAMinusBPlusCMinusD[i-1], maxOfAMinusBPlusC[i-1] - array[i])
+//     maxOfAMinusBPlusCMinusD.push(currMax)
+//   }
+//    return maxOfAMinusBPlusCMinusD[maxOfAMinusBPlusCMinusD.length-1]
+// }
+
+// class UnionFind {
+//   constructor() {
+//     this.parents = {};
+//     this.ranks = {};
+//   }
+
+//   createSet(value) {
+//     this.parents[value] = value;
+//     this.ranks[value] = 0;
+//   }
+
+//   find(value) {
+//     if (!(value in this.parents)) return null;
+
+//     if (value !== this.parents[value]) {
+//       value = this.find(this.parents[value]);
+//     }
+
+//     return value;
+//   }
+
+//   union(valueOne, valueTwo) {
+//     if (!(valueOne in this.parents) || !(valueTwo in this.parents)) return null;
+
+//     const valueOneRoot = this.find(valueOne);
+//     const valueTwoRoot = this.find(valueTwo);
+//     if (this.ranks[valueOneRoot] < this.ranks[valueTwoRoot]) {
+//       this.parents[valueOneRoot] = valueTwoRoot;
+//     } else if (this.ranks[valueOneRoot] > this.ranks[valueTwoRoot]) {
+//       this.parents[valueTwoRoot] = valueOneRoot;
+//     } else {
+//       this.parents[valueTwoRoot] = valueOneRoot;
+//       this.ranks[valueOneRoot] += 1;
+//     }
+//   }
+// }
+
+// function kruskalsAlgorithm(edges) {
+
+//   const find = (vertex) => {
+//     if(vertex !== parents[vertex]){
+//       vertex = find(parents[vertex])
+//     }
+//      return vertex
+//   }
+
+//   const union = (vertex1Root, vertex2Root) => {
+//     if(ranks[vertex1Root] < ranks[vertex2Root]){
+//       parents[vertex1Root] = vertex2Root
+//     } else if(ranks[vertex1Root] > ranks[vertex2Root]){
+//       parents[vertex2Root] = vertex1Root
+//     } else {
+//       parents[vertex2Root] = vertex1Root
+//       ranks[vertex1Root] += 1
+//     }
+//   }
+
+//   const edgeList = []
+//   for(let sourceIdx=0; sourceIdx<edges.length; sourceIdx++){
+//     const vertex = edges[sourceIdx]
+//     for(const edge of vertex){
+//       if(edge[0] > sourceIdx){
+//         edgeList.push([sourceIdx, edge[0], edge[1]])
+//       }
+//     }
+//   }
+
+//   // const sortedEdges = edgeList.sort((edgeA, edgeB) => {
+//   //   return edgeA[2] - edgeB[2]
+//   // })
+//   const sortedEdges = edgeList.sort((a, b) => {
+//     return a[2] - b[2]
+//   })
+
+//   const parents = edges.map((_, i) => i)
+//   const ranks = edges.map((_) => 0)
+//   const mst = edges.map((_) => [])
+
+//   for(const edge of sortedEdges){
+//     const vertex1Root = find(edge[0])
+//     const vertex2Root = find(edge[1])
+//     if(vertex1Root !== vertex2Root){
+//       mst[ edge[0] ].push([ edge[1], edge[2] ])
+//       mst[ edge[1] ].push([ edge[0], edge[2] ])
+//       union(vertex1Root, vertex2Root)
+//     }
+//   }
+//    return mst
+// }
+
+// function underscorifySubstring(string, substring) {
+
+//   const getLocations = () => {
+//     const locations = []
+//     let startIdx = 0
+//     while(startIdx < string.length){
+//       const nextIdx = string.indexOf(substring, startIdx)
+//       if(nextIdx !== -1){
+//         locations.push([ nextIdx, nextIdx + substring.length ])
+//         startIdx = nextIdx + 1
+//       } else {
+//         break
+//       }
+//     }
+//      return locations
+//   }
+
+//    const collapse = (locations) => {
+//      if(locations.length === 0) return locations
+//      const newLocations = [locations[0]]
+//      let previous = newLocations[0]
+//      for(let i=1; i<locations.length; i++){
+//        const current = locations[i]
+//        if(current[0] <= previous[1]){
+//          previous[1] = current[1]
+//        } else {
+//          newLocations.push(current)
+//          previous = current
+//        }
+//      }
+//       return newLocations
+//    }
+
+//    const underscorify = () => {
+//      let locationsIdx = 0
+//      let stringIdx = 0
+//      let inBetweenUnderscores = false
+//      const finalChars = []
+//      let i = 0
+//      while(stringIdx < string.length && locationsIdx < locations.length){
+//        if(stringIdx === locations[locationsIdx][i]){
+//          finalChars.push("_")
+//          inBetweenUnderscores = !inBetweenUnderscores
+//          if(!inBetweenUnderscores){
+//            locationsIdx++
+//          }
+//           i = i === 0 ? 1 : 0
+//        }
+//        finalChars.push(string[stringIdx])
+//        stringIdx++
+//      }
+//      if(locationsIdx < locations.length){
+//        finalChars.push("_")
+//      }
+//     if(stringIdx < string.length){
+//        finalChars.push(string.slice(stringIdx))
+//      }
+//       return finalChars.join("")
+//    }
+
+//    const locations = collapse(getLocations())
+//    return underscorify()
+//  }
+
+// function patternMatcher(pattern, string) {
+
+//   const getNewPattern = () => {
+//     const newPattern = pattern.split("")
+//     if(newPattern[0] !== "x"){
+//       return newPattern.map((char) => char === "y" ? "x" : "y")
+//     }
+//      return newPattern
+//   }
+
+//   const getCountsAndFirstYPos = () => {
+//     let firstYPos = null
+//     for(let i=0; i<newPattern.length; i++){
+//       const char = newPattern[i]
+//       counts[char] += 1
+//       if(char === "y" && counts[char] === 1){
+//         firstYPos = i
+//       }
+//     }
+//      return firstYPos
+//   }
+
+//     //if(pattern.length > string.length) return []
+//     const newPattern = getNewPattern()
+//     const didSwitch = newPattern[0] !== pattern[0]
+//     const counts = {x: 0, y: 0}
+//     const firstYPos = getCountsAndFirstYPos()
+
+//     if(counts["y"] !== 0){
+//       for(let lenOfX = 1; lenOfX < string.length; lenOfX++){
+//         const lenOfY = (string.length - lenOfX * counts["x"]) / counts["y"]
+//         //if(lenOfY <= 0 || lenOfY % 1 !== 0) continue
+//         const yIdx = firstYPos * lenOfX
+//         const x = string.slice(0, lenOfX)
+//         const y = string.slice(yIdx, yIdx + lenOfY)
+//         const potentialMatch = newPattern.map(char => (char === "x" ? x : y))
+
+//         if(string === potentialMatch.join("")){
+//           return didSwitch ? [y, x] : [x, y]
+//         }
+//       }
+//     }
+//     else {
+//       const lenOfX = string.length / counts["x"]
+//       //if(lenOfX % 1 === 0){
+//         const x = string.slice(0, lenOfX)
+//         const potentialMatch = newPattern.map(char => x)
+//         if(string === potentialMatch.join("")){
+//           return didSwitch ? ["", x] : [x, ""]
+//         }
+//       //}
+//     }
+//      return []
+//   }
+
+function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
+  const getDepth = (descendant) => {
+    let depth = 0;
+    while (descendant !== topAncestor) {
+      depth++;
+      descendant = descendant.ancestor;
+    }
+    return depth;
+  };
+
+  const getCommon = (lowerDescendant, higherDescendant, diff) => {
+    while (diff > 0) {
+      lowerDescendant = lowerDescendant.ancestor;
+      diff--;
+    }
+    while (lowerDescendant !== higherDescendant) {
+      lowerDescendant = lowerDescendant.ancestor;
+      higherDescendant = higherDescendant.ancestor;
+    }
+    return higherDescendant;
+  };
+
+  const depthOne = getDepth(descendantOne);
+  const depthTwo = getDepth(descendantTwo);
+  if (depthOne > depthTwo) {
+    return getCommon(descendantOne, descendantTwo, depthOne - depthTwo);
+  } else {
+    return getCommon(descendantTwo, descendantOne, depthTwo - depthOne);
+  }
+}
