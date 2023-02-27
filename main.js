@@ -13089,33 +13089,585 @@ Result = [24, 12, 8, 6]
 //      return []
 //   }
 
-function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
-  const getDepth = (descendant) => {
-    let depth = 0;
-    while (descendant !== topAncestor) {
-      depth++;
-      descendant = descendant.ancestor;
-    }
-    return depth;
-  };
+// function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
+//   const getDepth = (descendant) => {
+//     let depth = 0;
+//     while (descendant !== topAncestor) {
+//       depth++;
+//       descendant = descendant.ancestor;
+//     }
+//     return depth;
+//   };
 
-  const getCommon = (lowerDescendant, higherDescendant, diff) => {
-    while (diff > 0) {
-      lowerDescendant = lowerDescendant.ancestor;
-      diff--;
-    }
-    while (lowerDescendant !== higherDescendant) {
-      lowerDescendant = lowerDescendant.ancestor;
-      higherDescendant = higherDescendant.ancestor;
-    }
-    return higherDescendant;
-  };
+//   const getCommon = (lowerDescendant, higherDescendant, diff) => {
+//     while (diff > 0) {
+//       lowerDescendant = lowerDescendant.ancestor;
+//       diff--;
+//     }
+//     while (lowerDescendant !== higherDescendant) {
+//       lowerDescendant = lowerDescendant.ancestor;
+//       higherDescendant = higherDescendant.ancestor;
+//     }
+//     return higherDescendant;
+//   };
 
-  const depthOne = getDepth(descendantOne);
-  const depthTwo = getDepth(descendantTwo);
-  if (depthOne > depthTwo) {
-    return getCommon(descendantOne, descendantTwo, depthOne - depthTwo);
-  } else {
-    return getCommon(descendantTwo, descendantOne, depthTwo - depthOne);
-  }
-}
+//   const depthOne = getDepth(descendantOne);
+//   const depthTwo = getDepth(descendantTwo);
+//   if (depthOne > depthTwo) {
+//     return getCommon(descendantOne, descendantTwo, depthOne - depthTwo);
+//   } else {
+//     return getCommon(descendantTwo, descendantOne, depthTwo - depthOne);
+//   }
+// }
+
+//     let obj = {}
+
+//     for(let num of nums){
+//         if(num in obj){
+//             return true
+//         } else {
+//             obj[num] = true
+//         }
+//     } return false
+
+// var isAnagram = function(s, t) {
+//   if (s.length !== t.length) return false;
+
+//   let counts = {};
+
+//   for (let char of s) {
+//     counts[char] = (counts[char] || 0) + 1;
+//   }
+
+//   for (let char of t) {
+//     if (counts[char] === 0 || counts[char] === undefined) return false;
+//     counts[char]--;
+//   }
+//   return true;
+// }
+
+// using object with sort method
+
+//   var obj = {}
+
+//   for(let word of strs){
+//       var sortedWord = word.split("").sort().join("")
+//       obj[sortedWord] ? obj[sortedWord].push(word) : obj[sortedWord] = [word]
+//   }
+//     return Object.values(obj)
+
+// better time complexity without using sort method
+// var obj = {};
+// for (let word of strs) {
+//   var abc = Array(26).fill(0);
+//   for (let char of word) abc[char.charCodeAt() - 97]++;
+//   var key = abc.join("#");
+//   obj[key] ? obj[key].push(word) : (obj[key] = [word]);
+// }
+// return Object.values(obj);
+
+// brure force with sort method
+//     if(nums.length === 0) return 0
+//     var res = 1
+//     var arr = []
+//    nums = nums.sort((a,b) => a-b)
+//    for(let i=0; i<nums.length; i++){
+//        if(nums[i] === nums[i+1]) continue
+//        let nextNum = nums[i]+1
+//        if(nums[i+1] === nextNum){
+//            res+=1
+//        } else {
+//            arr.push(res)
+//            res = 1
+//        }
+//    }
+
+//  return Math.max(...arr)
+
+// optimal solution using Set
+// var numSet = new Set(nums)
+// var longest = 0
+
+// for(let num of nums){
+//    if(numSet.has(num-1)){
+//        continue
+//    } else {
+//        let length = 0
+//        while(numSet.has(num + length)){
+//             length += 1
+//             longest = Math.max(length, longest)
+//      }
+//    }
+// } return longest
+
+// s = s.replace(/[^a-z0-9]/gi, "").toLowerCase()
+// let left = 0
+// let right = s.length-1
+
+// while(left < right){
+//    if(s[left] === s[right]){
+//       left++
+//       right--
+//    } else {
+//        return false
+//   }
+// } return true
+
+// solution with sorting and pointers
+
+// var triplets = []
+// array.sort((a,b) => a-b)
+// for(let i=0; i<array.length-2; i++){
+//     if(array[i] > 0) break
+//     if(i > 0 && array[i] === array[i-1]) continue
+
+//     var left = i+1
+//     var right = array.length-1
+//     while(left < right){
+//           var currSum = array[i] + array[left] + array[right]
+//           if(currSum === 0){
+//              triplets.push([array[i], array[left], array[right]])
+//               while(array[left] === array[left+1]) left++
+//               while(array[right] === array[right-1]) right--
+//               left++
+//               right--
+//         } else if(currSum > 0){
+//                   right--
+//             } else {
+//                 left++
+//             }
+//     }
+// } return triplets
+
+//  class MinStack{
+//   constructor(){
+//     this.elements = [];
+//   }
+
+//   push(x) {
+//     this.elements.push({
+//       value: x,
+//       min: this.elements.length === 0 ? x : Math.min(x, this.getMin()),
+//     });
+//   }
+
+//   pop() {
+//     this.elements.pop();
+//   }
+
+//   top() {
+//     return this.elements[this.elements.length - 1].value;
+//   }
+
+//   getMin() {
+//     return this.elements[this.elements.length - 1].min;
+//   };
+
+//  }
+
+// const anagramHelper = (originalI, currI, currObj, word) => {
+
+//    let copyObj = {
+//        ...currObj
+//    }
+//    for(let char of word){
+
+//        if(copyObj[char] === 0 || copyObj[char] === undefined){
+//            return
+//        } else {
+//            copyObj[char] -= 1
+//        }
+//    }
+//     obj[strs[currI]] = false
+//     res[originalI].push(word)
+// }
+
+// const helper = (originalI, i, word) => {
+//    let currObj = {}
+//    for(let i=0; i<word.length; i++){
+//        currObj[word[i]] = (obj[word[i]] || 0) + 1
+//    }
+
+//    for(i; i<strs.length; i++){
+//        anagramHelper(originalI, i, currObj, strs[i])
+//    }
+// }
+
+// let res = []
+// let obj = {}
+// for(let word of strs){
+//     obj[word] = true
+// }
+
+// for(let i=0; i<strs.length; i++){
+//     if(obj[strs[i]] === true){
+//         obj[strs[i]] = false
+//         res.push([strs[i]])
+//         let newI = res.length-1
+//         helper(newI, i+1, strs[i])
+//     } else {
+//         continue
+//     }
+// }
+//  return res
+
+// var groupAnagrams = function(words) {
+
+//   const getPositions = (char, wordPosition) => {
+//       let pos = char.charCodeAt(0) - "a".charCodeAt(0)
+//       wordPosition[pos] += 1
+//   }
+
+//   const getAnagramHelper = (word) => {
+//       let wordPosition = new Array(26).fill(0)
+//       for(let char of word){
+//           getPositions(char, wordPosition)
+//       }
+//        return wordPosition.join()
+//   }
+
+//   const getAnagram = () => {
+//       for(let word of words){
+//         let wordPosition = getAnagramHelper(word)
+//         let values = map.get(wordPosition) || []
+//         values.push(word)
+//         map.set(wordPosition, values)
+//       }
+//   }
+
+//   if(words.length === 0) return -1
+//   let map = new Map()
+//   getAnagram()
+//   return [ ...map.values() ]
+
+// };
+
+//   var topKFrequent = function(nums, k) {
+//     const res = []
+//     const freqMap = new Map()
+//     const bucket = []
+
+//     for(let num of nums){
+//        freqMap.set( num, (freqMap.get(num) || 0 )+1  )
+//     }
+
+//     for(let [num, freq] of freqMap){
+//       bucket[freq] = ( bucket[freq] || new Set()).add(num)
+//     }
+
+//     for(let i=bucket.length; i>0; i--){
+//         if(bucket[i]) res.push(...bucket[i])
+//         if(res.length >= k) break
+//     }
+
+//     return res
+//  }
+
+// var productExceptSelf = function(nums) {
+
+//   const res = []
+//   let prefix = 1
+//   let postfix = 1
+
+//    for(let i=0; i<nums.length; i++){
+//        res[i] = prefix
+//        prefix *= nums[i]
+//    }
+
+//    for(let i=nums.length-2; i>=0; i--){
+//        postfix *= nums[i+1]
+//        res[i] = postfix * res[i]
+//    }
+//     return res
+// }
+
+// var isValidSudoku = function(board) {
+
+//   for(let row=0; row<board.length; row++){
+//          let rowSet = new Set()
+//          let colSet = new Set()
+//          let boxSet = new Set()
+//      for(let col=0; col<board.length; col++){
+//           let _col = board[col][row]
+//           let _row = board[row][col]
+//           let _box = board[ 3 * Math.floor(row / 3) + Math.floor(col / 3) ][ 3 * (row % 3) + (col % 3)  ]
+
+//          if(_col !== "."){
+//               if(colSet.has(_col)) return false
+//               colSet.add(_col)
+//           }
+//          if(_row !== "."){
+//               if(rowSet.has(_row)) return false
+//               rowSet.add(_row)
+//           }
+//          if(_box !== "."){
+//               if(boxSet.has(_box)) return false
+//               boxSet.add(_box)
+//           }
+//       }
+//   }
+//     return true
+//  }
+
+// var longestConsecutive = function(nums) {
+
+//   const numsSet = new Set(nums)
+//   let longest = 0
+
+//   for(const num of nums){
+//       if(numsSet.has(num-1)){
+//           continue
+//       } else {
+//           let length = 0
+//           while(numsSet.has(length + num)){
+//               length += 1
+//               longest = Math.max(longest, length)
+//           }
+//       }
+//   }
+//    return longest
+
+// }
+
+// var isPalindrome = function(s) {
+
+//   s = s.replace(/[^a-z0-9]/gi, "").toLowerCase()
+
+//   let left = 0
+//   let right = s.length-1
+//   while(right >= left){
+//       if(s[left] === s[right]){
+//           left++
+//           right--
+//       } else {
+//           return false
+//       }
+//   }
+//    return true
+// }
+
+// var twoSum = function(numbers, target) {
+
+// hash/object approach
+//    let obj = {}
+//    for(let i=0; i<numbers.length; i++){
+//       let potentialMath = target - numbers[i]
+//       if(!(potentialMath in obj)){
+//           obj[numbers[i]] = i
+//       } else {
+//           return [ obj[potentialMath]+1, i+1 ]
+//       }
+
+//    }
+//     return -1
+
+// two pointers approach
+// let left = 0
+// let right = numbers.length-1
+// while(left < right){
+//     let sum = numbers[left] + numbers[right]
+//     if(sum === target){
+//         return [left+1, right+1]
+//     } else if(sum < target){
+//         left++
+//     } else {
+//         right--
+//     }
+// }
+//   return -1
+// }
+
+//   var threeSum = function(nums) {
+//     const res = []
+//     nums.sort((a,b) => a-b)
+
+//     for(let i=0; i<nums.length; i++){
+//         const a = nums[i]
+//         let left = i+1
+//         let right = nums.length-1
+//         if(i > 0 && a === nums[i-1]) continue
+//         while(left < right){
+//             let sum = a + nums[left] + nums[right]
+//             if(sum === 0){
+//                 res.push([a, nums[left], nums[right]])
+//                 left++
+//                 right--
+//                     while(nums[left] === nums[left-1]){
+//                     left++
+//               }
+//             } else if(sum < 0){
+//                 left++
+//             } else {
+//                 right--
+//             }
+//         }
+//     }
+
+//       return res
+
+// }
+// var isValid = function(s) {
+
+//   let stack = []
+//   for(let char of s){
+//      if(char === "("){
+//          stack.push(")")
+//      } else if(char === "{"){
+//          stack.push("}")
+//      } else if(char === "["){
+//          stack.push("]")
+//      } else {
+//          if(char !== stack.pop()){
+//              return false
+//          }
+//      }
+//   }
+//    return stack.length === 0 ? true : false
+// }
+
+// class MinStack{
+//   constructor(){
+//       this.elements = []
+//   }
+
+//   push(n){
+//       this.elements.push({
+//           value: n,
+//           min: this.elements.length === 0 ?
+//             n : Math.min(n, this.elements[this.elements.length-1].min)
+//       })
+//   }
+
+//   pop(){
+//       this.elements.pop()
+//   }
+
+//   top(){
+//       return this.elements[this.elements.length-1].value
+//   }
+
+//   getMin(){
+//       return this.elements[this.elements.length-1].min
+//   }
+
+//  }
+
+// var evalRPN = function(tokens) {
+
+//   const stack = []
+//   const ops = {
+//       "+" : (a,b) => a+b,
+//       "-" : (a,b) => a-b,
+//       "*" : (a,b) => a*b,
+//       "/" : (a,b) => Math.trunc(a / b)
+//   }
+
+//   for(let t of tokens){
+//       if(!(ops[t])){
+//           stack.push(Number(t))
+//       } else {
+//           const firstNum = stack.pop()
+//           const secondNum = stack.pop()
+//           stack.push(ops[t](secondNum, firstNum))
+//       }
+//   }
+//    return stack.pop()
+// };
+
+// var generateParenthesis = function(n) {
+
+//   const helper = (left, right, s) => {
+//       if(s.length === n * 2){
+//           res.push(s)
+//           return
+//       }
+
+//       if(left < n) helper(left+1, right, s + "(")
+//       if(right < left) helper(left, right+1, s + ")")
+//   }
+
+//   const res = []
+//   helper(0, 0, "")
+//   return res
+// }
+
+// var dailyTemperatures = function (t) {
+//   let res = new Array(t.length).fill(0);
+//   let stack = [];
+
+//   for (let i = 0; i < t.length; i++) {
+//     let top = stack[stack.length - 1];
+//     while (stack.length && t[top] < t[i]) {
+//       let idx = stack.pop();
+//       res[idx] = i - idx;
+//       top = stack[stack.length - 1];
+//     }
+//     stack.push(i);
+//   }
+//   return res;
+// };
+
+// var carFleet = function(target, position, speed) {
+// let stack = []
+// let pair = []
+//position.forEach((val, idx) => {pair.push([ position[idx], speed[idx] ])})
+// pair = position.map((val, idx) => [ position[idx], speed[idx] ])
+// pair.sort((a,b) => b[0] - a[0])
+
+// pair.forEach((car, idx) => {
+//     stack.push((target - car[0]) / car[1])
+//     let stackLen = stack.length-1
+//     if(stack.length > 1 && stack[stackLen] <= stack[stackLen-1]){
+//         stack.pop()
+//     }
+// })
+
+// for(let car of pair){
+//     stack.push((target - car[0]) / car[1])
+//     let stackLen = stack.length-1
+//     if(stack.length > 1 && stack[stackLen] <= stack[stackLen-1]){
+//         stack.pop()
+//     }
+// }
+
+//  return stack.length
+//   let res = 0
+//   const len = position.length
+//   let map = new Map()
+//   let lastTime = -1
+
+//   for(let i=0; i<len; i++){
+//       map.set(position[i], speed[i])
+//   }
+
+//   const sortedPos = [...map.keys()].sort((a, b) => b-a)
+
+//   for(let i=0; i<len; i++){
+//       let time = (target - sortedPos[i]) / map.get(sortedPos[i])
+
+//       if(time > lastTime){
+//           res += 1
+//           lastTime = time
+//       }
+
+//   }
+
+//     return res
+
+// }
+
+// var largestRectangleArea = function (heights) {
+//   heights.push(0);
+//   let stack = [[0, heights[0]]];
+//   let res = 0;
+//   for (let i = 1; i < heights.length; i++) {
+//     let heightStartIdx = i;
+//     while (stack.length && stack[stack.length - 1][1] > heights[i]) {
+//       let [pos, height] = stack.pop();
+//       res = Math.max(res, (i - pos) * height);
+//       heightStartIdx = pos;
+//     }
+//     stack.push([heightStartIdx, heights[i]]);
+//   }
+//   return res;
+// };
