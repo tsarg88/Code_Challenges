@@ -13671,3 +13671,2561 @@ Result = [24, 12, 8, 6]
 //   }
 //   return res;
 // };
+
+// var search = function(nums, target) {
+
+//   let left = 0
+//   let right = nums.length-1
+
+//   while(left <= right){
+//      const mid = (left + right) >> 1
+//      if(nums[mid] === target) return mid
+
+//       if(nums[mid] > target){
+//             right = mid-1
+//         } else {
+//             left = mid+1
+//         }
+
+//   } return -1
+
+// };
+
+// var minEatingSpeed = function (piles, h) {
+//   const getHoursSpent = (currCountPerHour) => {
+//     let hoursSpent = 0;
+//     for (let pile of piles) {
+//       hoursSpent += Math.ceil(pile / currCountPerHour);
+//     }
+//     return hoursSpent;
+//   };
+
+//   let left = 1;
+//   let right = Math.max(...piles);
+//   while (left < right) {
+//     let mid = Math.floor((left + right) / 2);
+//     let hoursSpent = getHoursSpent(mid);
+//     if (hoursSpent > h) {
+//       left = mid + 1;
+//     } else {
+//       right = mid;
+//     }
+//   }
+//   return right;
+// };
+
+// var findMin = function(nums) {
+
+//   let res = nums[0]
+//   let left = 0
+//   let right = nums.length-1
+
+//   while(left<= right){
+//       if(nums[left] < nums[right]){
+//           res = Math.min(res, nums[left])
+//           break
+//       }
+
+//       let mid = Math.floor((left+right) / 2)
+//       res = Math.min(res, nums[mid])
+//       if(nums[mid] >= nums[left]){
+//           left = mid+1
+//       } else {
+//           right = mid-1
+//       }
+//   } return res
+
+// }
+
+// var search = function(nums, target) {
+
+//   let left = 0
+//   let right = nums.length-1
+
+//   while(left <= right){
+
+//       const mid = (left + right) >> 1
+//       if(nums[mid] === target) return mid
+
+//       if(nums[left] <= nums[mid]){
+//          if(nums[left] <= target && target <= nums[mid]){
+//                right = mid-1
+//             } else {
+//                 left = mid+1
+//             }
+//        }
+
+//           else {
+//             if (nums[mid] <= target && target <= nums[right]) {
+
+//              left = mid + 1;
+
+//     } else {
+//       // target is in the left
+//       right = mid - 1;
+//     }
+// }
+//   }
+
+//   return -1
+
+// }
+
+// class TimeMap {
+//   constructor() {
+//       this.map = {};
+//   }
+
+//   /**
+//    * @param {string} key
+//    * @param {string} value
+//    * @param {number} timestamp
+//    * Time O(1) | Space O(1)
+//    * @return {void}
+//    */
+//   set(key, value, timestamp) {
+//       const bucket = this.map[key] || [];
+
+//       this.map[key] = bucket;
+
+//       bucket.push([value, timestamp]);
+//   }
+
+//   /**
+//    * @param {string} key
+//    * @param {number} timestamp
+//    * Time O(log(N)) | Space O(1)
+//    * @return {string}
+//    */
+//   get(key, timestamp, value = '', bucket = this.map[key] || []) {
+//       let [left, right] = [0, bucket.length - 1];
+
+//       while (left <= right) {
+//           const mid = (left + right) >> 1;
+//           const [guessValue, guessTimestamp] = bucket[mid];
+
+//           const isTargetGreater = guessTimestamp <= timestamp;
+//           if (isTargetGreater) {
+//               value = guessValue;
+//               left = mid + 1;
+//           }
+
+//           const isTargetLess = timestamp < guessTimestamp;
+//           if (isTargetLess) right = mid - 1;
+//       }
+
+//       return value;
+//   }
+// }
+
+// var findMedianSortedArrays = function(nums1, nums2) {
+//   //find the smallest length array
+//   const len1 = nums1.length;
+//   const len2 = nums2.length;
+
+//   //swap if len1>len2
+//   if(len1 > len2) return findMedianSortedArrays(nums2, nums1);
+
+//   //find high and low
+//   let lo = 0;
+//   let hi = len1;
+
+//   while(lo <= hi) {
+
+//       //find cut1 and cut2
+//       let cut1 = Math.floor((lo+hi)/2);
+//       let cut2 = Math.floor((len1+len2)/2) - cut1;
+
+//       //find l1 , l2, r1, r2
+//       let l1 = (cut1 === 0 ? Number.NEGATIVE_INFINITY : nums1[cut1-1]);
+//       let l2 = (cut2 === 0 ? Number.NEGATIVE_INFINITY : nums2[cut2-1]);
+//       let r1 = (cut1 === len1 ? Number.MAX_VALUE : nums1[cut1]);
+//       let r2 = (cut2 === len2 ? Number.MAX_VALUE : nums2[cut2]);
+
+//       //loop again if l1>r2 || l2>r1
+//       if(l1>r2) hi = cut1-1;
+//       else if(l2>r1) lo = cut1+1;
+//       else {
+
+//           //return median for even and odd
+//           if((len1+len2)%2 === 0) return (Math.max(l1,l2) + Math.min(r1,r2))/2
+//           else return (Math.min(r1,r2))
+//       }
+//   }
+//   return -1;
+
+// };
+// console.log(findMedianSortedArrays([1,2,3], [4,5,6]))
+
+// var maxProfit = function(prices) {
+
+//   let profit = 0;
+//   let min = prices[0];
+
+//   for(let i=1; i<prices.length; i++){
+//       if(min > prices[i]){
+//           min = prices[i]
+//       } else {
+//           let tempProfit = prices[i] - min
+//           if(tempProfit > profit){
+//               profit = tempProfit
+//           }
+//       }
+//   }
+
+//   return profit;
+
+//    let res = 0
+//     for(let i=0; i<prices.length; i++){
+//         let tempRes = 0
+//         for(let j=i+1; j<prices.length; j++){
+//             if(prices[i] < prices[j]){
+//                tempRes = prices[j] - prices[i]
+//                if(tempRes > res){
+//                    res = tempRes
+//                }
+//           }
+//         }
+//     } return res
+// }
+
+// var lengthOfLongestSubstring = function(s) {
+
+// var seen = new Set()
+// var left = 0
+// var longest = 0
+// for(let right=0; right<s.length; right++){
+//     while(seen.has(s[right])){
+//             seen.delete(s[left])
+//             left++
+//           }
+//     seen.add(s[right])
+//     longest = Math.max(longest, (right-left) +1)
+// } return longest
+
+// let maxLength = 0;
+// let start = 0;
+// let seen = {};
+// for (let i = 0; i < s.length; i++) {
+//     let c = s[i];
+//     if (c in seen && start <= seen[c]) {
+//         start = seen[c] + 1;
+//     } else {
+//         maxLength = Math.max(maxLength, i - start + 1);
+//     }
+//     seen[c] = i;
+// }
+// return maxLength;
+
+// let seen = new Map()
+// let start = 0
+// let maxLen = 0
+
+// for(let i=0; i<s.length; i++){
+//     let char = s[i]
+//     if(seen.has(char)){
+//        start = Math.max(seen.get(char)+1, start)
+//     }
+//     seen.set(char, i)
+//     maxLen = Math.max((i - start)+1, maxLen)
+// }
+//  return maxLen
+
+// };
+
+// var lengthOfLongestSubstring = function (s) {
+//   const set = new Set();
+//   let l = 0;
+//   let max = 0;
+
+//   for (let r = 0; r < s.length; r++) {
+//       while (set.has(s[r])) {
+//           set.delete(s[l]);
+//           l++;
+//       }
+//       set.add(s[r]);
+//       max = Math.max(max, set.size);
+//   }
+//   return max;
+// };
+
+// const characterReplacement = (s, k) => {
+//   // Solution with sliding window approach
+
+//   var left = 0
+//   var right = 0
+//   var freq = {}
+//   var maxCharCount = 0
+
+//   while(right < s.length){
+
+//       freq[s[right]] = (freq[s[right]] || 0) + 1
+
+//       if(freq[s[right]] > maxCharCount) maxCharCount = freq[s[right]]
+
+//       if((right - left + 1) - maxCharCount > k){
+//           //freq[s[left]]--
+//           left++
+//       }
+
+//       right++
+//   } return right - left
+// }
+
+// var maximumSubarraySum = function (nums, k) {
+//   if (new Set(nums).size < k) return 0;
+
+//   let max = 0;
+//   let curr = 0;
+//   let freq = new Map();
+//   for (let i = 0; i < nums.length; i++) {
+//     const r = nums[i];
+//     curr += r;
+//     freq.set(r, (freq.get(r) || 0) + 1);
+
+//     if (i < k - 1) continue;
+//     if (freq.size === k) max = Math.max(max, curr);
+
+//     const l = nums[i - k + 1];
+//     curr -= l;
+//     freq.set(l, (freq.get(l) || 0) - 1);
+//     if ( freq.get(l) === 0 ) freq.delete(l);
+//   }
+//   return max;
+// };
+// console.log(maximumSubarraySum([1, 1, 1, 7, 8, 9], 3));
+
+// var checkInclusion = function(s1, s2) {
+//   if (s1 === "" || s2 === "") {
+//       return false;
+//   }
+//   let m = new Map();
+//   // Record every character of s1 to Hash table with entry being
+//   // (character, number of occurrences)
+//   for (let i = 0; i < s1.length; i++) {
+//       m.set(s1[i], m.get(s1[i]) + 1 || 1);
+//   }
+//   let start = 0, windowSize = s1.length;
+//   // number of unique characters to collect
+//   let counter = m.size;
+//   for (let end = 0; end < s2.length; end++) {
+//       let char = s2[end];
+//       if (m.has(char)) m.set(char, m.get(char) - 1);
+//       if (m.get(char) === 0) counter--; // we collected all occurrences of this char
+//       // we collected all occurrences of every character in s1
+//       while (counter === 0) {
+//           if (end-start === windowSize) return true;
+//           if (m.has(s2[start])) m.set(s2[start], m.get(s2[start]) + 1);
+//           if (m.get(s2[start]) === 1) counter++; // we should collect one more unique char
+//           start++;
+//       }
+//   }
+//   return false;
+//   // T.C: O(M+N), M = length of s1, N = length of s2
+//   // S.C: O(M)
+// }
+
+// var reverseList = function(head) {
+
+//   let prev = null
+//   let curr = head
+
+//   while(curr){
+//       let next = curr.next
+//       curr.next = prev
+//       prev = curr
+//       curr = next
+//   }
+//   return prev
+
+// };
+
+// var mergeTwoLists = function(list1, list2) {
+//   let head = new ListNode()
+//   let node = head
+
+//   while(list1 && list2){
+
+//      if(list1.val > list2.val){
+//          node.next = list2
+//          list2 = list2.next
+//     } else {
+//          node.next = list1
+//          list1 = list1.next
+//      }
+//       node = node.next
+//   }
+//   node.next = list1 || list2
+//   return head.next
+
+// }
+
+// var reorderList = function(head) {
+// Solution with stack(shift/pop)
+//     if(!head) return null
+//     var stack = []
+//     var node = head
+
+//     while(node){
+//         stack.push(node)
+//         node = node.next
+//     }
+
+//     var len = stack.length
+//     node = head
+//     for(let i=0; i<len; i++){
+//         if(i % 2 === 0){
+//            node.next = stack.shift()
+//       } else {
+//           node.next = stack.pop()
+//       }
+//         node = node.next
+//     }
+//     node.next = null
+
+// Solution with pointers
+//  var slow = head
+//  var fast = head
+
+//  while(fast.next && fast.next.next){
+//         slow = slow.next
+//         fast = fast.next.next
+//     }
+
+//   var curr = slow.next
+//   var prev = null
+//   while(curr){
+//      let temp = curr.next
+//      curr.next = prev
+//      prev = curr
+//      curr = temp
+//     }
+
+//  slow.next = null
+
+//   var h1 = head
+//   var h2 = prev
+
+//  while(h2){
+//   let temp = h1.next
+//   h1.next = h2
+//   h1 = h2
+//   h2 = temp
+// }
+
+// }
+
+// var removeNthFromEnd = function(head, n) {
+
+// Solution with stack more space time
+// var node = head
+// var stack = []
+// while(node){
+//     stack.push(node)
+//     node = node.next
+// }
+// if(stack.length === 1) return head.next
+// node = head
+// for(let i=0; i<stack.length; i++){
+//      if(stack.length-n-1 === -1){
+//           head = head.next
+//           node.next = null
+//           break
+//         }
+//     if(i === stack.length-n-1){
+//         node.next = node.next.next
+//         break
+//     }
+//     node = node.next
+// }
+// return head
+
+// Solution with pointers less space time
+
+//     var fast = head
+//     var slow = head
+
+//     for(let i=0; i<n; i++){
+//         fast = fast.next
+//     }
+
+//     if(!fast) return head.next
+
+//     while(fast.next){
+//         fast = fast.next
+//         slow = slow.next
+
+//     }
+
+//     slow.next = slow.next.next
+//     return head
+
+// }
+
+// var copyRandomList = function (head, cloneMap = new Map()) {
+//   if (head === null) return null;
+//   if (cloneMap.has(head)) {
+//     return cloneMap.get(head);
+//   }
+
+//   let clone = new Node(head.val);
+//   cloneMap.set(head, clone);
+//   clone.next = copyRandomList(head.next, cloneMap);
+//   clone.random = copyRandomList(head.random, cloneMap);
+
+//   return clone;
+
+// T.C: O(N)
+// S.C: O(N)
+// };
+
+// var addTwoNumbers = function (l1, l2) {
+//   let newHeadNode = new ListNode();
+//   let currNode = newHeadNode;
+//   let carry = 0;
+//   while (l1 || l2) {
+//     let l1Val = l1 && l1.val;
+//     let l2Val = l2 && l2.val;
+//     let sum = l1Val + l2Val + carry;
+//     carry = Math.floor(sum / 10);
+//     currNode.next = new ListNode(sum % 10);
+//     if (l1) l1 = l1.next;
+//     if (l2) l2 = l2.next;
+//     currNode = currNode.next;
+//   }
+
+//   carry !== 0 ? (currNode.next = new ListNode(carry)) : carry;
+//   return newHeadNode.next;
+// };
+
+// var findDuplicate = function(nums) {
+
+//   // start hopping from Node_#0
+//   let [slow, fast] = [0,0];
+
+//   // for locating start node of cycle
+//   let check = 0;
+
+//   // Step_#1
+//   // Cycle detection
+//   // Let slow jumper and fast jumper meet somewhere in the cycle
+
+//   while( true ){
+
+//       // slow jumpper hops 1 step, while fast jumpper hops two steps forward
+//       slow = nums[ slow ];
+//       fast = nums[ nums[ fast ] ];
+
+//       if( slow == fast ){
+//           break;
+//       }
+//   }
+
+//   // Step_#2
+//   // Locate the start node of cycle (i.e., the duplicate number)
+//   while( true ){
+
+//       slow = nums[ slow ];
+//       check = nums[ check ];
+
+//       if( slow == check ){
+//           break;
+//       }
+//   }
+
+//   return check;
+
+// };
+
+// class LRUCache{
+//   constructor(capacity){
+//       this.cache = new Map()
+//       this.capacity = capacity
+//   }
+
+//   get(key){
+//       if(!this.cache.has(key)) return -1
+
+//       let val = this.cache.get(key)
+//       this.cache.delete(key)
+//       this.cache.set(key, val)
+//       return this.cache.get(key)
+//   }
+
+//   put(key, value){
+//       if(this.cache.has(key)){
+//           this.cache.delete(key)
+//       }
+
+//       this.cache.set(key, value)
+
+//       if(this.cache.size > this.capacity){
+//           this.cache.delete(this.cache.keys().next().value)
+//       }
+//   }
+// }
+
+// let main = new LRUCache(2)
+// main.put(1,1)
+// main.put(2,2)
+// main.put(5,5)
+// main.get(2)
+// main.put(3,3)
+// main.get(2)
+// main.put(4,4)
+// main.get(3)
+// main.get(4)
+
+// var searchMatrix = function (matrix, target) {
+//   for (let row = 0; row < matrix.length; row++) {
+//     let left = 0;
+//     let right = matrix[row].length - 1;
+//     while (left <= right) {
+//       let mid = Math.floor((left + right) / 2);
+//       if (matrix[row][mid] === target) {
+//         return true;
+//       } else if (matrix[row][mid] < target) {
+//         left++;
+//       } else {
+//         right--;
+//       }
+//     }
+//   }
+//   return false;
+// };
+
+// var minEatingSpeed = function(piles, h) {
+
+//   const getHoursSpent = (currCountPerHour) => {
+//       let hoursSpent = 0
+//       for(let pile of piles){
+//           hoursSpent += Math.ceil(pile / currCountPerHour)
+//       }
+//           return hoursSpent
+//   }
+
+//   let left = 1
+//   let right = Math.max(...piles)
+//   while(left < right){
+//       let mid = Math.floor((left + right) / 2)
+//       let hoursSpent = getHoursSpent(mid)
+//       if(hoursSpent > h){
+//           left = mid+1
+//       } else {
+//           right = mid
+//       }
+
+//   }
+//      return right
+// }
+
+// var findMin = function(nums) {
+
+//   let res = nums[0]
+//   let left = 0
+//   let right = nums.length-1
+//   while(left <= right){
+//       if(nums[left] < nums[right]){
+//           res = Math.min(res, nums[left])
+//       }
+//       let mid = Math.floor((left + right) / 2)
+//       res = Math.min(res, nums[mid])
+//       if(nums[mid] >= nums[left]){
+//           left = mid+1
+//       } else {
+//           right = mid-1
+//       }
+//   }
+//       return res
+
+// }
+
+// var search = function(nums, target) {
+
+//   let left  = 0
+//   let right = nums.length-1
+//   while(left <= right){
+//       let mid = Math.floor((left + right) / 2)
+//       if(nums[mid] === target) return mid
+
+//       if(nums[left] <= nums[mid]){
+//           if(target <= nums[mid] && nums[left] <= target ){
+//               right = mid-1
+//           } else {
+//               left = mid+1
+//           }
+//       } else {
+//           if(nums[mid] <= target && target <= nums[right]){
+//               left = mid+1
+//           } else {
+//               right = mid-1
+//           }
+//       }
+//   }
+//       return -1
+// }
+
+// var maxProfit = function(prices) {
+
+//   let maxProfit = 0
+//   let min = prices[0]
+//   for(let right=1; right<prices.length; right++){
+//       if(min > prices[right]){
+//           min = prices[right]
+//       } else {
+//           let diff = prices[right] - min
+//           maxProfit = Math.max(maxProfit, diff)
+//       }
+//   }
+//   return maxProfit
+// }
+
+// var lengthOfLongestSubstring = function (s) {
+
+//   let set = new Set()
+//   let max = 0
+//   let left = 0
+//   for(let right=0; right<s.length; right++){
+//       while(set.has(s[right])){
+//           set.delete(s[left])
+//           left++
+//       }
+//       set.add(s[right])
+//       max = Math.max(max, set.size)
+//   }
+//       return max
+// }
+
+// const characterReplacement = (s, k) => {
+//   // Solution with sliding window approach
+
+//     let left = 0
+//     let right = 0
+//     let freq = {}
+//     let maxCount = 0
+//     while(right < s.length){
+//         freq[s[right]] = ( freq[s[right]] || 0 )+1
+//         console.log(freq)
+//         //maxCount = Math.max(maxCount, freq[s[right]])
+//          if(freq[s[right]] > maxCount) maxCount = freq[s[right]]
+
+//         if( (right - left + 1) - maxCount > k){
+//             freq[s[left]]--
+//             left++
+//         }
+//           right++
+//     }
+//         return right - left
+// }
+
+// var checkInclusion = function (s1, s2) {
+//   if (s1 === "" || s2 === "") {
+//     return false;
+//   }
+//   let m = new Map();
+//   // Record every character of s1 to Hash table with entry being
+//   // (character, number of occurrences)
+//   for (let i = 0; i < s1.length; i++) {
+//     m.set(s1[i], m.get(s1[i]) + 1 || 1);
+//   }
+//   let start = 0;
+//   let windowSize = s1.length;
+//   // number of unique characters to collect
+//   let counter = m.size;
+//   for (let end = 0; end < s2.length; end++) {
+//     let char = s2[end];
+//     if (m.has(char)) {
+//       m.set(char, m.get(char) - 1);
+//     }
+//     if (m.get(char) === 0) {
+//       counter--; // we collected all occurrences of this char
+//     }
+//     // we collected all occurrences of every character in s1
+//     while (counter === 0) {
+//       if (end - start + 1 === windowSize) {
+//         return true;
+//       }
+//       if (m.has(s2[start])) {
+//         m.set(s2[start], m.get(s2[start]) + 1);
+//       }
+//       if (m.get(s2[start]) === 1) {
+//         counter++; // we should collect one more unique char
+//       }
+//       start++;
+//     }
+//   }
+//   return false;
+//   // T.C: O(M+N), M = length of s1, N = length of s2
+//   // S.C: O(M)
+// };
+
+// var mergeTwoLists = function(list1, list2) {
+
+//   let head = new ListNode()
+//   let node = head
+//   while(list1 && list2){
+//       if(list1.val > list2.val){
+//           node.next = list2
+//           list2 = list2.next
+//       } else {
+//           node.next = list1
+//           list1 = list1.next
+//       }
+//       node = node.next
+//   }
+
+//   node.next = list1 || list2
+//   return head.next
+// }
+
+// function reorderList(head) {
+
+//   let stack = []
+//   let node = head
+//   while(node){
+//       stack.push(node)
+//       node = node.next
+//   }
+//   let len = stack.length
+//   node = head
+//   for(let i=0; i<len; i++){
+//       if(i % 2 === 0){
+//           node.next = stack.shift()
+//       } else {
+//           node.next = stack.pop()
+//       }
+//       node = node.next
+//   }
+//       node.next = null
+
+// }
+
+// var removeNthFromEnd = function(head, n) {
+
+//   let fast = head
+//   let slow = head
+//   for(let i=0; i<n; i++){
+//       fast = fast.next
+//   }
+
+//   if(fast === null) return head.next
+
+//   while(fast.next){
+//       fast = fast.next
+//       slow = slow.next
+//   }
+
+//  slow.next = slow.next.next
+//  return head
+
+// }
+
+// var copyRandomList = function(head, cloneMap=new Map()) {
+
+//   if(head === null) return null
+//   if(cloneMap.has(head)){
+//       return cloneMap.get(head)
+//   }
+
+//   let clone = new Node(head.val)
+//   cloneMap.set(head, clone)
+//   clone.next = copyRandomList(head.next, cloneMap)
+//   clone.random = copyRandomList(head.random, cloneMap)
+
+//       return clone
+
+// }
+
+// var addTwoNumbers = function(l1, l2) {
+
+//   let newHeadNode = new ListNode()
+//   let currNode = newHeadNode
+//   let carry = 0
+//   while(l1 || l2){
+//       let l1Val = l1 && l1.val
+//       let l2Val = l2 && l2.val
+//       let sum = l1Val + l2Val + carry
+//       carry = Math.floor(sum / 10)
+//       currNode.next = new ListNode(sum%10)
+//       if(l1) l1 = l1.next
+//       if(l2) l2 = l2.next
+//       currNode = currNode.next
+//   }
+
+//     carry !== 0 ? currNode.next = new ListNode(carry) : carry
+//     return newHeadNode.next
+// }
+
+// var hasCycle = function(head) {
+
+//   let slow = head
+//   let fast = head
+
+//   while (fast && fast.next) {/* Time O(N) */
+//       slow = slow.next;
+//       fast = fast.next.next;
+
+//      if(slow === fast) return true
+//   }
+
+//   return false;
+// };
+
+// var findDuplicate = function(nums) {
+
+//   let slow = 0
+//   let fast = 0
+
+//   let check = 0
+
+//   while(true){
+//       slow = nums[slow]
+//       fast = nums[ nums[fast] ]
+
+//       if(slow === fast){
+//           break
+//       }
+//   }
+
+//   while(true){
+//       slow = nums[slow]
+//       check = nums[check]
+//       if(slow === check){
+//           break
+//       }
+//   }
+
+//    return check
+
+// }
+
+// class LRUCache {
+//   constructor(capacity){
+//       this.cache = new Map()
+//       this.capacity = capacity
+//   }
+
+//   get(key){
+//       if(!this.cache.has(key)) return -1
+
+//       let val = this.cache.get(key)
+//       this.cache.delete(key)
+//       this.cache.set(key, val)
+//       return this.cache.get(key)
+//   }
+
+//   put(key, val){
+//       if(this.cache.has(key)){
+//           this.cache.delete(key)
+//       }
+
+//       this.cache.set(key, val)
+
+//       if(this.cache.size > this.capacity){
+//           this.cache.delete(this.cache.keys().next().value)
+//       }
+
+//   }
+
+// }
+
+// var invertTree = function(root) {
+//   if (!root) return null;
+//   let stack = [root]
+
+// while(stack.length > 0){
+//     let node = stack.shift();
+//     [node.left, node.right] = [node.right, node.left];
+
+//     if(node.left) stack.push(node.left)
+//     if(node.right) stack.push(node.right)
+// } return root
+// };
+
+// var invertTree = (root) => {
+//   const isBaseCase = root === null;
+//   if (isBaseCase) return root;
+
+//   return dfs(root);
+// }
+
+// const dfs = (root) => {
+//   const left = invertTree(root.left);
+//   const right = invertTree(root.right);
+
+//   root.left = right;
+//   root.right = left;
+
+//   return root;
+// }
+
+// var invertTree = (root,) => {
+//   const isBaseCase = root === null;
+//   if (isBaseCase) return root;
+
+//   bfs([ root ]);
+
+//   return root;
+// }
+
+// const bfs = (queue) => {
+//   while (queue.length) {
+//       for (let i = (queue.length - 1); 0 <= i; i--) {
+//           const node = queue.shift();
+//           const left = node.right;
+//           const right = node.left;
+
+//           node.left = left;
+//           node.right = right;
+
+//           if (node.left) queue.push(node.left);
+//           if (node.right) queue.push(node.right);
+//       }
+//   }
+// }
+
+// var maxDepth = function(root) {
+//   if(root === null) return null
+
+//    let depth = 1
+//    let leftDepth = 0
+//    let rightDepth = 0
+
+//    if(root.left)  leftDepth = maxDepth(root.left)
+//    if(root.right) rightDepth = maxDepth(root.right)
+
+//    return depth + Math.max(leftDepth, rightDepth)
+// };
+
+// var maxDepth = function(root) {
+//   const isBaseCase = root === null;
+//   if (isBaseCase) return 0;
+
+//   return bfs([[ root, 0 ]]);
+// }
+
+// const bfs = (queue, height = 0) => {
+//   while (queue.length) {
+//       for (let i = (queue.length - 1); 0 <= i; i--) {
+//           const [ root, depth ] = queue.shift();
+
+//           height = Math.max(height, (depth + 1));
+
+//           if (root.left) queue.push([ root.left, (depth + 1) ]);
+//           if (root.right) queue.push([  root.right, (depth + 1) ]);
+//       }
+//   }
+
+//   return height;
+// }
+
+// var diameterOfBinaryTree = function(root, max = [0]) {
+//   diameterOfTree(root, max);
+
+//   return max[0];
+// };
+
+// const diameterOfTree = (root, max) => {
+//   const isBaseCase = root === null;
+//   if (isBaseCase) return 0;
+
+//   return dfs(root, max);
+// }
+
+// const dfs = (root, max) => {
+//   const left = diameterOfTree(root.left, max);
+//   const right = diameterOfTree(root.right, max);
+
+//   const diameter = left + right;
+//   max[0] = Math.max(max[0], diameter);
+
+//   const height = Math.max(left, right);
+
+//   return height + 1;
+// }
+
+// function diameterOfBinaryTree(tree) {
+
+//   const dfs = (tree) => {
+
+//       if(tree === null) return 0
+
+//       let leftCount = dfs(tree.left)
+//       let rightCount = dfs(tree.right)
+
+//       max = Math.max(leftCount+rightCount, max)
+
+//       return Math.max(leftCount+1, rightCount+1)
+//   }
+
+//   let max = -Infinity
+//   dfs(tree)
+//   return max
+// }
+
+// var isBalanced = function(root) {
+
+//   let balanced = true;
+
+//   function findHeight(root) {
+//       if (!root) return 0;
+//       if (balanced === false) return; // optimisation: early exit
+
+//       let leftHeight = findHeight(root.left);
+//       let rightHeight = findHeight(root.right);
+//       let diff = Math.abs(leftHeight - rightHeight);
+
+//       if (diff > 1) balanced = false;
+
+//       return Math.max(leftHeight+1, rightHeight+1)
+//   }
+
+//   findHeight(root);
+//   return balanced;
+//   // Time Complexity: O(n), we possibly visit all nodes
+//   // Space Complexity: O(H), call stack will possibly go as deep as height
+
+// }
+
+// function isSameTree(p, q){
+
+//   if(p === null && q === null) return true
+
+//   if((p && !q) || (q && !p) || p.val !== q.val) return false
+
+//   return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+// }
+
+// var isSubtree = function (root, subRoot) {
+//   const isEqual = (root, subRoot) => {
+//     if (root === null && subRoot === null) return true;
+//     if (root === null || subRoot === null) return false;
+
+//     return (
+//       root.val === subRoot.val &&
+//       isEqual(root.left, subRoot.left) &&
+//       isEqual(root.right, subRoot.right)
+//     );
+//   };
+
+//   if (root === null) return false;
+//   return (
+//     isEqual(root, subRoot) ||
+//     isSubtree(root.left, subRoot) ||
+//     isSubtree(root.right, subRoot)
+//   );
+// };
+
+// var lowestCommonAncestor = function (root, p, q) {
+//   while (root) {
+//     const isGreater = root.val > p.val && root.val > q.val;
+//     if (isGreater) {
+//       root = root.left;
+//       continue;
+//     }
+//     const isLesser = root.val < p.val && root.val < q.val;
+//     if (isLesser) {
+//       root = root.right;
+//       continue;
+//     }
+//     break;
+//   }
+//   return root;
+// };
+
+// var levelOrder = function(root) {
+
+// bfs approach
+//   if(root === null) return []
+//   const res = []
+//   let queue = [root]
+//   while(queue.length){
+//       let temp = []
+//       const len = queue.length
+//       for(let i=0; i<len; i++){
+//           let currNode = queue.shift()
+//           temp.push(currNode.val)
+//           if(currNode.left) queue.push(currNode.left)
+//           if(currNode.right) queue.push(currNode.right)
+//       }
+
+//       res.push(temp)
+//       temp = []
+//   }
+//     return res
+
+// dfs recursion
+
+//     const traverse = (node, level) => {
+//         if(node === null) return
+
+//         if(!res[level]) res[level] = [node.val]
+//         else res[level].push(node.val)
+
+//         traverse(node.left, level+1)
+//         traverse(node.right, level+1)
+//     }
+
+//     const res = []
+//     traverse(root, 0)
+//     return res
+// }
+
+// var rightSideView = function(root) {
+//   if(!root) return []
+
+//   let queue = [root];
+//   const result = [root.val]
+
+//   while(queue.length) {
+//       const next = [];
+
+//       for(let node of queue) {
+//           if(node.left) next.push(node.left);
+//           if(node.right) next.push(node.right);
+//       }
+//       if(next.length) result.push(next[next.length-1].val);
+//       queue = next;
+//   }
+//   return result;
+// }
+
+// var goodNodes = function(root) {
+
+//dfs recursive
+//    const dfs = (node, max) => {
+//        if(node === null) return
+
+//        if(node.val >= max){
+//            count++
+//        }
+//       max = Math.max(max, node.val)
+//       dfs(node.left, max)
+//       dfs(node.right, max)
+//    }
+
+//    let count = 0
+//    dfs(root, -Infinity)
+//    return count
+
+// bfs iterative
+
+//     const bfs = (queue) => {
+
+//         let count = 0
+//         while(queue.length){
+
+//             for(let i=0; i<queue.length; i++){
+//                 let [node, max] = queue.shift()
+//                 if(node.val >= max){
+//                     count++
+//                 }
+//                 max = Math.max(max, node.val)
+//                 if(node.left)  queue.push([node.left, max])
+//                 if(node.right) queue.push([node.right, max])
+//             }
+
+//         }
+
+//             return count
+//     }
+
+//     return bfs([ [root, -Infinity] ])
+
+// }
+
+// var isValidBST = function (root) {
+// inOrder traversal approach
+// const inOrder = (node, res=[]) => {
+//     if(node == null) return
+
+//     inOrder(node.left, res)
+//       res.push(node.val)
+//     inOrder(node.right, res)
+
+//     return res
+// }
+
+// const sortedArr = inOrder(root)
+// console.log(sortedArr)
+
+// for(let i = 0; i < sortedArr.length; i++) {
+//     if(sortedArr[i+1] <= sortedArr[i]) return false;
+// }
+// return true;
+
+// dfs/recursive
+//   const dfs = (node, low, high) => {
+//     if (node === null) return true;
+
+//     return (
+//       node.val > low &&
+//       node.val < high &&
+//       dfs(node.left, low, node.val) &&
+//       dfs(node.right, node.val, high)
+//     );
+//   };
+
+//   return dfs(root, -Infinity, Infinity);
+// };
+
+// var kthSmallest = function (root, k) {
+// inOrder traversal approach
+// const inOrderFun = (node, res=[]) => {
+//     if(node === null) return
+
+//     inOrderFun(node.left, res)
+//         res.push(node.val)
+//     inOrderFun(node.right, res)
+
+//         return res
+// }
+
+// const inOrder = inOrderFun(root)
+
+// return inOrder[k-1]
+
+// soltion with less t/c which kind of utilizes same inOrder traversal method
+//   const dfs = (node) => {
+//     if (node === null) return;
+
+//     dfs(node.left);
+//     k--; // node is visited
+//     if (k === 0) res = node.val;
+//     dfs(node.right);
+//   };
+
+//   res = null;
+//   dfs(root);
+//   return res;
+// };
+// var preorderTraversal = function (root) {
+//   const preOrder = (node) => {
+//     if (node === null) return;
+
+//     res.push(node.val);
+//     preOrder(node.left);
+//     preOrder(node.right);
+//   };
+
+//   let res = [];
+//   preOrder(root);
+//   return res;
+// };
+
+// var buildTree = function(preorder, inorder) {
+
+//   if (preorder.length === 0 || inorder.length === 0) return null;
+
+//   let node = new TreeNode(preorder[0])
+//   let mid = inorder.indexOf(preorder[0])
+//   node.left = buildTree( preorder.slice(1, mid+1), inorder.slice(0, mid) )
+//   node.right = buildTree( preorder.slice(mid+1), inorder.slice(mid+1) )
+//   return node
+// }
+
+// var invertTree = function (root) {
+//     // DFS Approach
+//     if(root === null) return null
+//     return dfs(root)
+// }
+
+// const dfs = (node) => {
+
+//     const left = invertTree(node.left)
+//     const right = invertTree(node.right)
+//     node.left = right
+//     node.right = left
+//     return node
+
+//BFS Approach
+
+//   let queue = [root];
+//   if (root === null) return null;
+//   while (queue.length) {
+//     let node = queue.shift();
+//     let left = node.right;
+//     let right = node.left;
+//     node.left = left;
+//     node.right = right;
+//     if (node.left) queue.push(node.left);
+//     if (node.right) queue.push(node.right);
+//   }
+
+//   return root;
+// };
+
+// var maxDepth = function (root, depth = 0) {
+//     // DFS approach
+//     if(root === null) return null
+//     return dfs(root)
+
+// }
+
+// const dfs = (node) => {
+
+//     const left = maxDepth(node.left)
+//     const right = maxDepth(node.right)
+
+//     const height = Math.max(left, right)
+//     return height+1
+
+// BFS approach
+
+//   const bfs = (queue) => {
+//     let height = 0;
+//     while (queue.length) {
+//       const [node, depth] = queue.shift();
+//       height = Math.max(height, depth + 1);
+//       if (node.left) queue.push([node.left, depth + 1]);
+//       if (node.right) queue.push([node.right, depth + 1]);
+//     }
+//     return height;
+//   };
+
+//   if (root === null) return 0;
+//   return bfs([[root, 0]]);
+// };
+//DFS
+// if(root === null) return null
+
+// const dfs = (node) => {
+//     if(node === null) return null
+
+//     let left = dfs(node.left)
+//     let right = dfs(node.right)
+//     node.left = right
+//     node.right = left
+
+//     return node
+// }
+
+// return dfs(root)
+
+//BFS
+// let queue = [root]
+// if(root === null) return null
+// while(queue.length){
+//      let node = queue.shift()
+//      let left = node.left
+//      let right = node.right
+//      node.left = right
+//      node.right = left
+//      if(node.left)  queue.push(node.left)
+//      if(node.right) queue.push(node.right)
+// }
+
+//  return root
+
+// }
+
+// var isSubtree = function(root, subRoot) {
+
+//   const isEqual = (root, subRoot) => {
+//     if(root === null && subRoot === null) return true
+//     if(root === null || subRoot === null) return false
+
+//     return(
+//       root.val === subRoot.val
+//         &&
+//       isEqual(root.left, subRoot.left)
+//         &&
+//       isEqual(root.right, subRoot.right)
+//     )
+
+//   }
+
+//   if(root === null) return false
+//   return(
+//     isEqual(root, subRoot)
+//       ||
+//     isSubtree(root.left, subRoot)
+//       ||
+//     isSubtree(root.right, subRoot)
+//   )
+// }
+
+// var lowestCommonAncestor = function(root, p, q) {
+
+//   while(root){
+//       const isGreater = root.val > p.val && root.val > q.val
+//       if(isGreater){
+//           root = root.left
+//           continue
+//       }
+//       const isLesser = root.val < p.val && root.val < q.val
+//       if(isLesser){
+//           root = root.right
+//           continue
+//       }
+//       break
+//   }
+//       return root
+// }
+
+// var levelOrder = function(root) {
+
+//   //DFS
+
+//       const dfs = (node, level) => {
+//           if(node === null) return
+
+//           if(res[level] === undefined){
+//               res[level] = [node.val]
+//           } else {
+//               res[level].push(node.val)
+//           }
+//           if(node.left) dfs(node.left, level+1)
+//           if(node.right) dfs(node.right, level+1)
+//       }
+
+//      let res = []
+//      dfs(root, 0)
+//      return res
+
+//BFS
+// if(root === null) return []
+// let res = []
+// let queue = [root]
+// while(queue.length){
+//     let temp = []
+//     const len = queue.length
+//     for(let i=0; i<len; i++){
+//         let node = queue.shift()
+//         temp.push(node.val)
+//         if(node.left) queue.push(node.left)
+//         if(node.right) queue.push(node.right)
+//     }
+//     res.push(temp)
+// }
+// return res
+// }
+
+// var climbStairs = function(n) {
+
+//   //fibonacci seq method
+//   let dp = []
+//   dp[1] = 1
+//   dp[2] = 2
+
+//   for(let i=3; i<=n; i++){
+//       dp[i] = dp[i-2] + dp[i-1]
+//   }
+//       console.log(dp)
+//       return dp[n]
+// }
+
+// class Trie{
+//   constructor(){
+//       this.root = {}
+//   }
+
+//   insert(word){
+//       let node = this.root
+//       for(let letter of word){
+//           if(!node[letter]){
+//              node[letter] = {}
+//         }
+//           node = node[letter]
+//       }
+//       node.isEnd = true
+//   }
+
+//   search(word){
+//       let node = this.root
+//       for(let letter of word){
+//           if(!node[letter]){
+//            return false
+//         }
+//           node = node[letter]
+//       }
+//      return node.isEnd === true ? true : false
+//    }
+
+//   startsWith(word){
+//       let node = this.root
+//       for(let letter of word){
+//         if(!node[letter]){
+//           return false
+//         }
+//         node = node[letter]
+//       }
+//     return true
+
+//   }
+
+// }
+
+// class WordDictionary {
+//   constructor() {
+//     this.root = {};
+//   }
+
+//   addWord(word) {
+//     let node = this.root;
+//     for (let letter of word) {
+//       if (!node[letter]) {
+//         node[letter] = {};
+//       }
+//       node = node[letter];
+//     }
+//     node.isEnd = true;
+//   }
+
+//   search(word) {
+//     const traverse = (node, i) => {
+//       let char = word[i];
+//       if (i === word.length) return node.isEnd || false;
+
+//       if (char === ".") {
+//         for (let key in node) {
+//           if (traverse(node[key], i + 1)) return true;
+//         }
+//       } else if (node[char]) {
+//         return traverse(node[char], i + 1);
+//       }
+//       return false;
+//     };
+
+//     return traverse(this.root, 0);
+//   }
+// }
+
+// var exist = function (board, word) {
+//   const ROW_NUM = board.length,
+//     COL_NUM = board[0].length;
+
+//   function callDFS(r, c, idx) {
+//     if (word.length === idx) return true;
+//     if (r >= ROW_NUM || r < 0 || board[r][c] !== word[idx]) return false;
+
+//     board[r][c] = "#"; // mark as visited
+
+//     if (
+//       callDFS(r + 1, c, idx + 1) ||
+//       callDFS(r - 1, c, idx + 1) ||
+//       callDFS(r, c + 1, idx + 1) ||
+//       callDFS(r, c - 1, idx + 1)
+//     )
+//       return true;
+
+//     board[r][c] = word[idx]; // reset the board
+//   }
+
+//   for (let r = 0; r < ROW_NUM; r++) {
+//     for (let c = 0; c < COL_NUM; c++) {
+//       if (board[r][c] === word[0] && callDFS(r, c, 0)) return true;
+//     }
+//   }
+//   return false;
+// };
+
+// var exist = function (board, word) {
+//   const callDFS = (row, col, wordIdx) => {
+//     // // below I am just returning empty as I do not need anything other than returning from the
+//     //current call //stuck
+//     if (row < 0 || row >= rowNum || board[row][col] !== word[wordIdx]) return;
+//     board[row][col] = 1;
+//     // the main change, to return true if the length equals after visiting board
+//     if (wordIdx === word.length - 1) return true;
+
+//     if (
+//       //UP
+//       callDFS(row - 1, col, wordIdx + 1) ||
+//       //DOWN
+//       callDFS(row + 1, col, wordIdx + 1) ||
+//       //LEFT
+//       callDFS(row, col - 1, wordIdx + 1) ||
+//       //RIGHT
+//       callDFS(row, col + 1, wordIdx + 1)
+//     )
+//       return true;
+
+//     board[row][col] = word[wordIdx];
+//     // and here, I am returning `false` instead of `undefined`
+//     return false;
+//   };
+
+//   let rowNum = board.length;
+//   let colNum = board[0].length;
+//   for (let row = 0; row < rowNum; row++) {
+//     for (let col = 0; col < colNum; col++) {
+//       if (board[row][col] === word[0] && callDFS(row, col, 0)) return true;
+//     }
+//   }
+//   return false;
+// };
+
+// var numIslands = function(grid) {
+
+//   let count = 0
+
+//   const explore = (row, col) => {
+
+//    grid[row][col] = "0"
+
+//    if(grid[row] && grid[row][col+1] && grid[row][col+1] === "1"){
+//        explore(row, col+1)
+//    }
+//    if(grid[row] && grid[row][col-1] && grid[row][col-1] === "1"){
+//        explore(row, col-1)
+//    }
+//    if(grid[row+1] && grid[row+1][col] && grid[row+1][col] === "1"){
+//        explore(row+1, col)
+//    }
+//    if(grid[row-1] && grid[row-1][col] && grid[row-1][col] === "1"){
+//        explore(row-1, col)
+//    }
+//     return
+
+//   }
+
+//   for(let row=0; row<grid.length; row++){
+//       for(let col=0; col<grid[row].length; col++){
+//           if(grid[row][col] === "1"){
+//              count++
+//              explore(row, col)
+//          }
+//       }
+//   }
+
+//    return count
+
+// }
+
+// leetcode things this one is better time/space
+// var numIslands = function(grid) {
+
+//   const callDFS = (i, j) => {
+//       if(i < 0 || i >= grid.length || j < 0 || j >= grid[i].length || grid[i][j] === '0') return;
+
+//       grid[i][j] = '0';
+
+//       callDFS(i-1, j); // up
+//       callDFS(i+1, j); // down
+//       callDFS(i, j-1); // left
+//       callDFS(i, j+1); // right
+//   }
+
+//   let count = 0;
+//   for(let i = 0; i < grid.length; i++) {
+
+//       for(let j = 0; j < grid[i].length; j++) {
+
+//           if(grid[i][j] === '1') {
+//               count++;
+//               callDFS(i, j)
+//           }
+//       }
+//   }
+//   return count;
+// };
+
+// but I think mine is better!
+// var numIslands = function(grid) {
+
+//   const explore = (row, col) => {
+
+//       grid[row][col] = "0"
+
+//      //UP
+//       if(row-1 >= 0 && grid[row-1][col] === "1")
+//           explore(row-1, col)
+//      //DOWN
+//       if(row+1 <= grid.length-1 && grid[row+1][col] === "1"){
+//           explore(row+1, col)
+//       }
+//      //LEFT
+//       if(col-1 >= 0 && grid[row][col-1] === "1"){
+//           explore(row, col-1)
+//       }
+//      //RIGHT
+//       if(col+1 <= grid[0].length-1 && grid[row][col+1] === "1"){
+//           explore(row, col+1)
+//       }
+//      return
+//   }
+
+//   let res = 0
+//   for(let row=0; row<grid.length; row++){
+//       for(let col=0; col<grid[0].length; col++){
+//           console.log(col)
+//           if(grid[row][col] === "1"){
+//               res++
+//               explore(row, col)
+//           }
+//       }
+//   }
+//       return res
+
+// }
+
+// var cloneGraph = function(node) {
+//   // BFS Itertaive
+//   let start = node
+//   if(start === null) return start
+//   let queue = [start]
+//   let visited = new Map()
+//   visited.set(start, new Node(start.val))
+//   while(queue.length){
+//     let curr = queue.shift()
+//     for(let n of curr.neighbors){
+//         if(visited.has(n) === false){
+//            visited.set(n, new Node(n.val))
+//            queue.push(n)
+//         }
+//         visited.get(curr).neighbors.push(visited.get(n))
+//     }
+
+//   }
+//    return visited.get(start)
+
+// };
+
+// var pacificAtlantic = function (heights) {
+//   let res = []
+//   let pTrack = new Set()
+//   let aTrack = new Set()
+//   let oceanMap = new Array(heights.length).fill().map(() => Array(heights[0].length).fill(0))
+
+//   const traverse = (row, col, ocean) => {
+//     if(ocean.has(`${row}-${col}`)) return
+//     ocean.add(`${row}-${col}`)
+//     oceanMap[row][col]++
+//     if(oceanMap[row][col] === 2) res.push([row, col])
+
+//     //UP
+//     if(row > 0 && heights[row][col] <= heights[row-1][col]) traverse(row-1, col, ocean)
+//     //DOWN
+//     if(row < heights.length-1 && heights[row][col] <= heights[row+1][col]) traverse(row+1, col, ocean)
+//     //RIGHT
+//     if(col < heights[row].length-1 && heights[row][col] <= heights[row][col+1]) traverse(row, col+1, ocean)
+//     //LEFT
+//      if(col > 0 && heights[row][col] <= heights[row][col-1]) traverse(row, col-1, ocean)
+
+//   }
+
+//   for(let i=0; i<heights[0].length; i++){
+//       traverse(0, i, pTrack)
+//       traverse(heights.length-1, i, aTrack)
+//   }
+
+//   for(let i=1; i<heights.length; i++){
+//       traverse(i, 0, pTrack)
+//       traverse(heights.length-1-i, heights[i].length-1, aTrack)
+//   }
+
+//   return res
+
+// }
+
+// var pacificAtlantic = function (heights) {
+//   const traverse = (row, col, ocean) => {
+//     if (ocean.has(`${row}-${col}`)) return;
+//     ocean.add(`${row}-${col}`);
+//     visited[row][col]++;
+//     if (visited[row][col] === 2) res.push([row, col]);
+
+//     //UP
+//     if (row > 0 && heights[row][col] <= heights[row - 1][col])
+//       traverse(row - 1, col, ocean);
+//     //DOWN
+//     if (row < heights.length - 1 && heights[row][col] <= heights[row + 1][col])
+//       traverse(row + 1, col, ocean);
+//     //LEFT
+//     if (col > 0 && heights[row][col] <= heights[row][col - 1])
+//       traverse(row, col - 1, ocean);
+//     //RIGHT
+//     if (
+//       col < heights[0].length - 1 &&
+//       heights[row][col] <= heights[row][col + 1]
+//     )
+//       traverse(row, col + 1, ocean);
+//     return;
+//   };
+
+//   let res = [];
+//   let visited = new Array(heights.length)
+//     .fill()
+//     .map(() => Array(heights[0].length).fill(0));
+//   pTrack = new Set();
+//   aTrack = new Set();
+//   for (let i = 0; i < heights[0].length; i++) {
+//     traverse(0, i, pTrack);
+//     traverse(heights.length - 1, i, aTrack);
+//   }
+//   for (let i = 1; i < heights.length; i++) {
+//     traverse(i, 0, pTrack);
+//     traverse(heights.length - 1 - i, heights[i].length - 1, aTrack);
+//   }
+//   return res;
+// };
+
+// var canFinish = function (numCourses, prerequisites) {
+//   const createGraph = () => {
+//     let graph = new Array(numCourses).fill().map(() => []);
+//     for (let edge of prerequisites) {
+//       let [a, b] = edge;
+//       graph[a].push(b);
+//     }
+//     return graph;
+//   };
+
+//   const explore = (course) => {
+//     if (seeing.has(course)) return false;
+//     if (seen.has(course)) return;
+//     seeing.add(course);
+//     for (let n of graph[course]) {
+//       if (explore(n) === false) return false;
+//     }
+//     seeing.delete(course);
+//     seen.add(course);
+//   };
+
+//   let seeing = new Set();
+//   let seen = new Set();
+//   let graph = createGraph();
+//   for (let i = 0; i < numCourses; i++) {
+//     if (explore(i) === false) return false;
+//   }
+//   return true;
+// };
+
+// var validTree = function(n, edges, root = 0) {
+
+//   const isEqual = edges.length === (n - 1)
+//   if (!isEqual) return false;
+//   let visited = new Set()
+//   let graph = buildGraph(n, edges)
+
+//   dfs(root, graph, visited);
+
+//   return visited.size === n;
+// }
+
+// var buildGraph = (n, edges) => {
+//   let graph = new Array(n).fill().map(() => []);
+//   for(let edge of edges){
+//     let [a, b] = edge
+//     graph[a].push(b)
+//   }
+//   return graph
+//   // const { graph, visited } = initGraph(n)
+
+//   // for (const [ src, dst ] of edges) {
+//   //     graph[src].push(dst);
+//   //     graph[dst].push(src);
+//   // }
+
+//   // return { graph, visited }
+// }
+
+// const dfs = (node, graph, visited) => {
+//   if (visited.has(node)) return;
+//   visited.add(node);
+
+//   for (const neighbor of graph[node]) {
+//       dfs(neighbor, graph, visited);
+//   }
+// }
+
+// var rob = function(nums) {
+//   let prevMax = 0;
+//   let nextMax = 0;
+
+//   for (let num of nums) {
+//     let tempMax = Math.max(num + prevMax, nextMax);
+//     prevMax = nextMax;
+//     nextMax = tempMax;
+//   }
+//   return nextMax;
+
+//      if (!nums.length) return 0;
+//     if (nums.length === 1) return nums[0];
+//     if (nums.length === 2) return Math.max(nums[0], nums[1]);
+
+//     let maxAtTwoBefore = nums[0];
+//     let maxAtOneBefore = Math.max(nums[0], nums[1]);
+
+//     for (let i = 2; i < nums.length; i++) {
+//         const maxAtCurrent = Math.max(nums[i] + maxAtTwoBefore, maxAtOneBefore);
+
+//         maxAtTwoBefore = maxAtOneBefore;
+//         maxAtOneBefore = maxAtCurrent;
+//     }
+
+//     return maxAtOneBefore;
+// }
+
+// var rob = function(nums) {
+//   if(nums.length === 1) return nums[0]
+
+//   const helper = (nums) => {
+//       let prevMax = 0;
+//       let nextMax = 0;
+
+//       for (let num of nums) {
+//           let tempMax = Math.max(num + prevMax, nextMax);
+//           prevMax = nextMax;
+//           nextMax = tempMax;
+//       }
+//       return nextMax;
+// }
+
+//   return Math.max(helper(nums.slice(0, nums.length-1)), helper(nums.slice(1)))
+// }
+
+// var longestPalindrome = function(s) {
+
+// more time but relatively easy/bruteforce solution
+// with time: O(n^3) speace: O(n)
+//     const isPalindrome = (substr) => {
+//        let left = 0
+//        let right = substr.length-1
+//        while(left < right){
+//           if(substr[left] !== substr[right]) return false
+//           left++
+//           right--
+//        } return true
+//     }
+
+//     let longest = ""
+//     for(let i=0; i<s.length; i++){
+//         for(let j=i; j<s.length; j++){
+//             const substr = s.slice(i, j+1)
+//             if(substr.length > longest.length && isPalindrome(substr)){
+//                 longest = substr
+//             }
+//         }
+//     } return longest
+
+//   const isPalindrome = (s, left, right) => {
+//       while(left >= 0 && right < s.length){
+//           if(s[left] !== s[right]) break
+//           left--
+//           right++
+//       } return [left+1, right]
+//  }
+
+// time: O(n^2) spece: O(n) using odd/even expanding approach
+//   let currLongest = [0, 1]
+//   for(let i=1; i<s.length; i++){
+//       const odd = isPalindrome(s, i-1, i+1 )
+//       const even = isPalindrome(s, i-1, i )
+//       let longest = (odd[1] - odd[0]) > (even[1] - even[0]) ? odd : even
+//       currLongest = (currLongest[1] - currLongest[0]) > (longest[1] - longest[0])
+//       ? currLongest : longest
+//   } return s.slice(currLongest[0], currLongest[1])
+
+// }
+
+// var longestPalindrome = function (s) {
+//   const search = (left, right) => {
+//     while (left >= 0 && s[left] === s[right]) {
+//       // start the expansion
+//       left--;
+//       right++;
+//     }
+//     left++;
+//     right--;
+//     if (longestPal.length < right - left + 1) {
+//       longestPal = s.slice(left, right + 1);
+//     }
+//   };
+
+//   let longestPal = "";
+//   for (let i = 0; i < s.length; i++) {
+//     search(i, i); //odd
+//     search(i, i + 1); //even
+//   }
+//   return longestPal;
+// };
+
+// var countSubstrings = function(s, count=0) {
+
+//   const isPalindrome = (left, right) => {
+//     const isBoundry = () => left >= 0 && right < s.length
+//     while(isBoundry()){
+//      const isEqual = s[left] === s[right]
+//      if(isEqual === false) break
+//      count++
+//      left--
+//      right++
+//     }
+//      return count
+//   }
+
+//   for(let i=0; i<s.length; i++){
+//       const [odd, even] = [i, i+1]
+//       count + isPalindrome(i, odd)
+//       count + isPalindrome(i, even)
+//   }
+
+//    return count
+// }
+
+// var countSubstrings = function(s) {
+
+//   const search = (left, right) => {
+//       while(left >= 0 && s[left] === s[right]){
+//           //increment and start the expansion
+//           count++
+//           left--
+//           right++
+//       }
+//   }
+
+//   let count = 0
+//   for(let i=0; i<s.length; i++){
+//       search(i,i) //odd
+//       search(i,i+1) //even
+//   }
+//   return count
+// }
+
+// var numDecodings = function (s) {
+//   let curr = 1;
+//   let prev = 0;
+//   for (let i = s.length - 1; i >= 0; i--) {
+//     let dp = s[i] === "0" ? 0 : curr;
+//     if (i < s.length - 1 && (s[i] === "1" || (s[i] === "2" && s[i + 1] < 7))) {
+//       dp += prev;
+//     }
+
+//     prev = curr;
+//     curr = dp;
+//   }
+
+//   return curr;
+// };
+
+// var coinChange = function(coins, amount) {
+
+//   let count = 0
+//   if(coins.length === 1 && coins[coins.length-1] < amount){
+//       return -1
+//   }
+//   while(amount){
+
+//     let comp_val = coins[coins.length-1]
+
+//     if(comp_val <= amount){
+//         amount -= comp_val
+//         count++
+//     } else {
+//         coins.pop()
+//     }
+
+//   }
+//    return count
+// };
+
+// const coinChange = (coins, amount) => {
+//   const dp = Array(amount + 1).fill(Infinity); // This arr tells us how many coins we need for each amount.
+//   dp[0] = 0; // To make 0, we need 0 coins.
+//   for (let coin of coins) {
+//     // Check each coin
+//     for (let i = coin; i <= amount; i++) {
+//       // Iterate through the entire amount from coin
+//       dp[i] = Math.min(dp[i], dp[i - coin] + 1); // Update minimum number of needed coins.
+//     }
+//   }
+//   return dp[amount] === Infinity ? -1 : dp[amount]; // If the last element is Infinity, then we cannot make the amount.
+// };
+
+// var wordBreak = function (s, wordDict) {
+//   const dp = {};
+//   dp[0] = true;
+//   for (let i = 0; i < s.length; i++) {
+//     if (!dp[i]) continue;
+//     wordDict.forEach((word) => {
+//       if (s.slice(i, i + word.length) === word) {
+//         dp[i + word.length] = true;
+//       }
+//     });
+//   }
+
+//   return dp[s.length] === undefined ? false : true;
+// };
+
+// var lengthOfLIS = function (nums) {
+//   let dp = new Array(nums.length).fill(1);
+//   for (let i = 1; i < nums.length; i++) {
+//     for (let j = 0; j < i; j++) {
+//       if (nums[j] < nums[i]) {
+//         dp[i] = Math.max(dp[i], dp[j] + 1);
+//       }
+//     }
+//   }
+
+//   return Math.max(...dp);
+// };
+
+// const uniquePaths = (m, n) => {
+// brute force with recursiion
+//     const helper = (m, n, row, col) => {
+//         if(row === m && col === n) return 1
+//         if(row > m || col > n) return 0
+
+//         var rightPath = helper(m, n, row, col+1)
+//         var downPath = helper(m, n, row+1, col)
+
+//         return rightPath + downPath
+//     }
+//     return helper(m, n, 1, 1)
+
+// dp solution with two loops
+//   var grid = Array(n + 1).fill(1);
+
+//   for (let row = 0; row < m - 1; row++) {
+//     for (let col = n - 1; col > 0; col--) {
+//       grid[col] = grid[col] + grid[col + 1];
+//     }
+//   }
+//   return grid[1];
+// };
+// const uniquePaths = (m, n) => {
+//   let dp = new Array(m).fill(0).map(() => new Array(n));
+
+//   for(let row = m - 1; row >= 0; row--) {
+//       for(let col = n - 1; col >= 0; col--) {
+//           if(row === (m - 1) || col === (n - 1)) dp[row][col] = 1;
+//           else dp[row][col] = dp[row + 1][col] + dp[row][col + 1];
+//       }
+//   }
+//   return dp[0][0];
+// }
+
+// var uniquePaths = function (row, col) {
+//   let dp = Array(row)
+//     .fill(0)
+//     .map(() => Array(col));
+//   for (let _row = row - 1; _row >= 0; _row++) {
+//     for (let _col = col - 1; _col >= 0; _col++) {
+//       if (_row === row - 1 || _col === col - 1) dp[_row][_col] = 1;
+//       else dp[_row][_col] = dp[_row + 1][_col] + dp[_row][_col + 1];
+//     }
+//   }
+
+//   return dp[0][0];
+// };
+// console.log(uniquePaths(2, 3));
+
+// var uniquePaths = function (row, col) {
+//   let dp = Array(row)
+//     .fill(0)
+//     .map(() => Array(col));
+//   for (let _row = row - 1; _row >= 0; _row--) {
+//     for (let _col = col - 1; _col >= 0; _col--) {
+//       if (_row === row - 1 || _col === col - 1) dp[_row][_col] = 1;
+//       else dp[_row][_col] = dp[_row + 1][_col] + dp[_row][_col + 1];
+//     }
+//   }
+
+//   return dp[0][0];
+// };
+
+// var longestCommonSubsequence = function (text1, text2) {
+//   let dp = Array(text1.length + 1)
+//     .fill()
+//     .map(() => Array(text2.length + 1).fill(0));
+
+//   for (let row = 1; row <= text1.length; row++) {
+//     for (let col = 1; col <= text2.length; col++) {
+//       if (text1[row - 1] === text2[col - 1]) {
+//         dp[row][col] = dp[row - 1][col - 1] + 1;
+//       } else {
+//         dp[row][col] = Math.max(dp[row - 1][col], dp[row][col - 1]);
+//       }
+//     }
+//   }
+//   return dp[text1.length][text2.length];
+// };
+
+// var maxSubArray = function(nums) {
+//   let currMax = nums[0]
+//   let max = nums[0]
+
+//   for(let i=1; i<nums.length; i++){
+//       currMax = Math.max(nums[i], nums[i] + currMax)
+//       max = Math.max(max, currMax)
+//   }
+//      return max
+
+//  }
+
+// var canJump = function(nums) {
+//   let right = nums.length-1
+//   for(let i=right; i>=0; i--){
+
+//     if(i + nums[i] >= right){
+//       right = i
+//     }
+//   }
+
+//    return right === 0
+// }
+
+// var insert = function (intervals, newInterval) {
+//   let [start, end] = newInterval;
+//   let left = [];
+//   let right = [];
+
+//   for (const interval of intervals) {
+//     const [first, last] = interval;
+
+//     // current interval is smaller than newInterval
+//     if (last < start) left.push(interval);
+
+//     // current interval is larger than newInterval
+//     else if (first > end) right.push(interval);
+
+//     // there is a overlap
+//     else {
+//       start = Math.min(start, first);
+//       end = Math.max(end, last);
+//     }
+//   }
+
+//   //[[1,3],[6,9]], [2,5]
+
+//   return [...left, [start, end], ...right];
+// };
+
+// var merge = function (intervals) {
+//   const sortedIntervals = intervals.sort((a, b) => a[0] - b[0])
+
+// 	const mergedIntervals = []
+// 	let currentInterval = sortedIntervals[0]
+// 	mergedIntervals.push(currentInterval)
+
+// 	for(let nextInterval of sortedIntervals){
+// 			const [_, currentIntervalEnd] = currentInterval
+// 			const [nextIntervalStart, nextIntervalEnd] = nextInterval
+
+// 			if(currentIntervalEnd >= nextIntervalStart){
+// 				currentInterval[1] = Math.max(currentIntervalEnd, nextIntervalEnd)
+// 			} else {
+// 				currentInterval = nextInterval
+// 				mergedIntervals.push(currentInterval)
+// 			}
+// 	} return mergedIntervals
+// };
+
+//Time O(N * logN) | Space O(N)
+// var merge = function (intervals) {
+//   intervals.sort((a, b) => a[0] - b[0]);
+//   let res = [intervals[0]];
+//   for ([start, end] of intervals) {
+//     let endPrev = res[res.length - 1][1];
+//     if (start <= endPrev) res[res.length - 1][1] = Math.max(end, endPrev);
+//     else res.push([start, end]);
+//   }
+//   return res;
+// };
+
+// var eraseOverlapIntervals = function(intervals) {
+// 	// sort by earliest finish time
+//     intervals.sort((a, b) => a[1] - b[1]);
+//     let prev = intervals[0]
+//     let remove = 0
+
+//     for(let i = 1; i < intervals.length; i++) {
+//         if(intervals[i][0] < prev[1]) remove++;
+//         else prev = intervals[i];
+//     }
+//     return remove;
+// };
+
+// var eraseOverlapIntervals = function(intervals) {
+//   //Time O(N * logN) | Space O(1)
+//   intervals.sort((a, b) => a[1] - b[1]);
+//   let counter = 0
+//   let prev = intervals[0]
+//   for(let cur=1; cur<intervals.length; cur++){
+//       let curStart = intervals[cur][0]
+//       let prevEnd = prev[1]
+//       if(curStart < prevEnd) counter++
+//       else  prev = intervals[cur]
+//   }
+//     return counter
+// }
+
+// var spiralOrder = function (matrix) {
+//   let res = [];
+//   let R = matrix.length - 1;
+//   let C = matrix[0].length - 1;
+//   let left = 0;
+//   let right = C;
+//   let top = 0;
+//   let bottom = R;
+
+//   while (left <= right && top <= bottom) {
+//     //traverse top row from left to right
+//     for (let i = left; i <= right; i++) {
+//       res.push(matrix[top][i]);
+//     }
+//     top++;
+
+//     //traverse down from right side
+//     for (let i = top; i <= bottom; i++) {
+//       res.push(matrix[i][right]);
+//     }
+//     right--;
+
+//     //traverse bottom row from right to left
+//     for (let i = right; i >= left && top <= bottom; i--) {
+//       res.push(matrix[bottom][i]);
+//     }
+//     bottom--;
+
+//     //traverse up from left side
+//     for (let i = bottom; i >= top && left <= right; i--) {
+//       res.push(matrix[i][left]);
+//     }
+//     left++;
+//   }
+//   return res;
+// };
+
+// var setZeroes = function(matrix) {
+//   let col0 = 1, row = matrix.length, col = matrix[0].length;
+
+//   for(let i = 0; i < row; i++) {
+//       if(matrix[i][0] === 0) col0 = 0;
+//       for(let j = 1; j < col; j++) {
+//           if(matrix[i][j] === 0) {
+//               matrix[i][0] = 0
+//               matrix[0][j] = 0
+//           }
+//       }
+//   }
+
+//   for(let i = row-1; i >= 0; i--) {
+//       for(let j = col-1; j > 0; j--) {
+//           if(matrix[i][0] === 0 || matrix[0][j] === 0){
+//               matrix[i][j] = 0;
+//             }
+//       }
+//       if(col0 === 0) matrix[i][0] = 0;
+//   }
+// }
+
+// var setZeroes = function (matrix) {
+//   let col0 = 1;
+//   for (let row = 0; row <= matrix.length - 1; row++) {
+//     // check if first rows[0] is 0 then make col0=0
+//     if (matrix[row][0] === 0) col0 = 0;
+//     for (let col = 1; col <= matrix[0].length - 1; col++) {
+//       //if curr matrix[row][col] === 0 then make two 0's:
+//       // to upper most col and left most rows col
+//       if (matrix[row][col] === 0) {
+//         matrix[0][col] = 0;
+//         matrix[row][0] = 0;
+//       }
+//     }
+//   }
+
+//   for (let row = matrix.length - 1; row >= 0; row--) {
+//     for (let col = matrix[0].length - 1; col > 0; col--) {
+//       if (matrix[row][0] === 0 || matrix[0][col] === 0) {
+//         matrix[row][col] = 0;
+//       }
+//     }
+//     if (col0 === 0) matrix[row][0] = 0;
+//   }
+//   return matrix;
+// };
+
+// var hammingWeight = function (n) {
+//   let counter = 0;
+//   // the way bitwise and(&=) works in the below case is that it basically turns right most 1 to 0
+//   // on each iteration
+//   while (n) {
+//     counter++;
+//     n &= n - 1;
+//   }
+//   return counter;
+// };
+
+// var reverseBits = function (n) {
+// let res = 0,
+//   pow = 31;
+// while (n > 0) {
+//   let rightMost = n & 1;
+//   res = res + (rightMost << pow);
+//   pow--;
+//   n = n >>> 1;
+// }
+
+// // take negative into positive
+
+// return res >>> 0;
+
+// // T.C: O(1)
+// // S.C: O(1)
+//   var result = 0;
+//   var count = 32;
+
+//   while (count--) {
+//     result *= 2;
+//     result += n & 1;
+//     n = n >> 1;
+//   }
+//   return result;
+// };
+// console.log(reverseBits(00000010100101000001111010011100));
+
+// var missingNumber = function (nums) {
+//   // let numSet = new Set(nums)
+//   // let max = Math.max(...nums) + 1
+
+//   // for (let i = 0; i <= max; i++) {
+//   //     if (!numSet.has(i)) return i
+//   // }
+
+// const n = nums.length;
+// const expectedSum = (n * (n + 1)) / 2;
+
+// let actualSum = 0;
+
+// for (let i = 0; i < nums.length; i++) {
+//   actualSum = actualSum + nums[i]
+// }
+
+// return expectedSum-actualSum
+
+// };
+
+// var getSum = function (a, b) {
+//   while (true) {
+//     const [xor, carry] = [a ^ b, (a & b) << 1];
+//     a = xor;
+//     b = carry;
+//     if (b === 0) break;
+//   }
+//   return a;
+// };
+
+// var reverseBits = function (n) {
+//   let res = 0,
+//     pow = 31;
+//   while (n > 0) {
+//     let rightMost = n & 1;
+//     res = res + (rightMost << pow);
+//     pow--;
+//     n = n >>> 1;
+//   }
+
+//   // console.log("0110000000000000000000000000000".length);
+//   // console.log("0000000000000000000000000000110".length);
+
+//   // take negative into positive
+//   return res >>> 0;
+// };
+// console.log(reverseBits(4));
+
+function test() {
+  return 7 << 2;
+}
+console.log(test());
