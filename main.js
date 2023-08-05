@@ -11619,13 +11619,13 @@ Result = [24, 12, 8, 6]
 // }
 
 // classical BST
-// let bt = new BST(4)
-// bt.right = new BST(6)
-// bt.left = new BST(2)
-// bt.left.right = new BST(3)
-// bt.left.left = new BST(1)
-// bt.right.right = new BST(7)
-// bt.right.left = new BST(5)
+// let root = new BST(4)
+// root.right = new BST(6)
+// root.left = new BST(2)
+// root.left.right = new BST(3)
+// root.left.left = new BST(1)
+// root.right.right = new BST(7)
+// root.right.left = new BST(5)
 
 // function findNodesDistanceK(tree, target, k) {
 
@@ -18459,22 +18459,1006 @@ Result = [24, 12, 8, 6]
 //   return max
 // }
 
-var addBinary = function (a, b) {
-  // let aBin = `0b${a}`
-  // let bBin = `0b${b}`
-  //  let sum = BigInt(aBin) + BigInt(bBin)
-  //  return sum.toString(2)
+// var middleNode = function(head) {
+// let len = 0
+// let lenHead = head
+// while(lenHead){
+//     len++
+//     lenHead = lenHead.next
+// }
+// let mid = Math.floor(len / 2)
+// while(mid){
+//     mid--
+//     head = head.next
+// }
+// return head
 
-  let binaryA = BigInt(`0b${a}`);
-  let binaryB = BigInt(`0b${b}`);
-  let sum;
-  let carry;
-  while (binaryB || carry === undefined) {
-    sum = binaryA ^ binaryB;
-    carry = (binaryA & binaryB) << BigInt(1);
-    binaryA = sum;
-    binaryB = carry;
-  }
-  return sum > "0" ? sum.toString(2) : "0";
-};
-console.log(addBinary("1", "1"));
+//   let fast = head
+//   let slow = head
+//   while(fast && fast.next){
+//       fast = fast.next.next
+//       slow = slow.next
+//   }
+
+//   return slow
+
+// };
+
+// var insert = function(intervals, newInterval) {
+
+//   let [start, end] = newInterval
+//   let left = []
+//   let right = []
+//   for(let interval of intervals){
+//       let [currStart, currEnd] = interval
+//        //curr less than new interval
+//        if(currEnd < start) left.push(interval)
+//        // curr is larger than new interval
+//        else if(currStart > end) right.push(interval)
+//        // overlap case
+//        else {
+//            start = Math.min(currStart, start)
+//            end = Math.max(currEnd, end)
+//        }
+//   }
+//   return [...left, [start, end], ...right]
+
+// }
+
+// var updateMatrix = function(mat) {
+//   const numRows = mat.length;
+//   const numCols = mat[0].length;
+//   const maxDistance = numRows + numCols;
+
+//   const queue = [];
+
+//   // Initialize the queue with cells containing 0
+//   for (let row = 0; row < numRows; row++) {
+//     for (let col = 0; col < numCols; col++) {
+//       if (mat[row][col] === 0) {
+//         queue.push([row, col]);
+//       } else {
+//         mat[row][col] = maxDistance; // Set initial distance to a maximum value
+//       }
+//     }
+//   }
+
+//   const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+
+//   while (queue.length > 0) {
+//     const [row, col] = queue.shift();
+
+//     for (const [dx, dy] of directions) {
+//       const newRow = row + dx;
+//       const newCol = col + dy;
+
+//       if (
+//         newRow < 0 ||
+//         newRow >= numRows ||
+//         newCol < 0 ||
+//         newCol >= numCols ||
+//         mat[newRow][newCol] < mat[row][col] + 1
+//       ) {
+//         continue;
+//       }
+
+//       mat[newRow][newCol] = mat[row][col] + 1;
+//       queue.push([newRow, newCol]);
+//     }
+//   }
+
+//   return mat;
+// };
+
+// class GraphNode {
+//   constructor(val) {
+//     this.val = val;
+//     this.neighbors = [];
+//   }
+// }
+
+// var cloneGraph = function(node) {
+
+//   const dfs = (node) => {
+//       if(obj[node.val] === undefined){
+//           obj[node.val] = new GraphNode(node.val)
+//           obj[node.val].neighbors = node.neighbors.map(dfs)
+//       }
+//        return obj[node.val]
+//   }
+
+//   if(node === null) return node
+//   let obj = {}
+//   return dfs(node)
+
+// }
+
+// let aNode = new GraphNode(1);
+// let bNode = new GraphNode(2);
+// let cNode = new GraphNode(3);
+// let dNode = new GraphNode(4);
+
+// aNode.neighbors.push(bNode, dNode)
+// bNode.neighbors.push(aNode, cNode)
+// cNode.neighbors.push(bNode, dNode)
+// dNode.neighbors.push(aNode, cNode)
+
+// cloneGraph(aNode)
+
+// var isValidBST = function(root) {
+
+//   const dfs = (node, high, low) => {
+//       if(node === null) return true
+
+//       return (
+//         node.val < high && node.val > low
+//             &&
+//         dfs(node.left, node.val, low) && dfs(node.right, high, node.val)
+
+//       )
+
+//   }
+
+//   return dfs(root, Infinity, -Infinity)
+
+// }
+
+// var accountsMerge = function(accounts) {
+
+//   let graph = {}
+//   let nameDict = {}
+
+//   for(let acc of accounts){
+//       let name = acc[0]
+//       nameDict[acc[1]] = name
+//       for(let i=1; i<acc.length; i++){
+//           if(!graph[acc[i]]) graph[acc[i]] = new Set()
+//           nameDict[acc[i]] = name
+//           if(i != 1){
+//               graph[acc[i-1]].add(acc[i])
+//               graph[acc[i]].add(acc[i-1])
+//           }
+//       }
+//   }
+
+//   let res = []
+//   let visited = new Set()
+
+//  let dfs = function (key) {
+//      visited.add(key);
+//      let emails = [key];
+//      graph[key].forEach((e)=>{
+//          if (!visited.has(e)) {
+//              emails.push(...dfs(e));
+//          }
+//      })
+
+//      return emails;
+//  }
+
+//  for (let key in graph) {
+//      if (!visited.has(key)) {
+//          let temp = dfs(key);
+//          temp.sort();
+//          temp.unshift(nameDict[temp[0]]);
+//          res.push(temp);
+//      }
+//  }
+
+//    return res
+
+// }
+
+// var canPartition = function(nums) {
+
+//   let sum = nums.reduce((a,b) => a+b, 0)
+//   if(sum % 2 !== 0) return false
+//   let targetSum = sum / 2
+//   let dp = new Array(targetSum+1).fill(false)
+//   dp[0] = true
+//   for(let num of nums){
+//       for(let i=targetSum; i>=num; i--){
+//           dp[i] = dp[i] || dp[i - num]
+//       }
+//   }
+//    return dp[targetSum]
+
+// }
+
+// var minWindow = function(s, t) {
+
+//   let freq = {}
+//   let counter = 0
+//   let start = 0
+//   let l = 0
+//   let r = 0
+//   let minLen = 0
+
+//   for(let char of t){
+//       if(freq[char]){
+//           freq[char] += 1
+//       } else {
+//           freq[char] = 1
+//           counter++
+//       }
+//   }
+
+//   while(r < s.length){
+//       if(freq[ s[r] ] !== undefined){
+//         freq[ s[r] ]--
+//         if(freq[ s[r] ] === 0) counter--
+//       }
+
+//     while(counter === 0){
+//         if(minLen === 0 || r-l+1 < minLen){
+//             minLen = r-l+1
+//             start = l
+//         }
+//         if(freq[ s[l] ] !== undefined){
+//             if(freq[ s[l] ] === 0) counter++
+//             freq[ s[l] ]++
+//         }
+
+//         l++
+//     }
+
+//     r++
+
+//   }
+
+//     return s.slice(start, start+minLen)
+
+// }
+
+// var serialize = function(root) {
+
+//   const preOrder = (node) => {
+//     if(node == null){
+//       data.push(null)
+//       return
+//     }
+
+//     data.push(node.val);
+//     preOrder(node.left)
+//     preOrder(node.right)
+
+//   }
+
+//   let data = []
+//   preOrder(root)
+//   return data
+// }
+
+// /**
+//  * Decodes your encoded data to tree.
+//  *
+//  * @param {string} data
+//  * @return {TreeNode}
+//  */
+
+// //const data = serialize()
+// var deserialize = function(data) {
+//     if(data.length === 0) return
+//     let val = data.shift()
+//     if(val === null) return null
+//     let node = new TreeNode(val)
+//     node.left = deserialize(data)
+//     node.right = deserialize(data)
+//     return node
+// }
+
+// var ladderLength = function (beginWord, endWord, wordList) {
+//   let steps = 1;
+//   const wordSet = new Set(wordList);
+//   let queue = [beginWord];
+
+//   while (queue.length) {
+//     let next = [];
+//     for (let word of queue) {
+//       if (word === endWord) return steps;
+//       for (let i = 0; i < word.length; i++) {
+//         for (let j = 0; j < 26; j++) {
+//           let newWord =
+//             word.slice(0, i) + String.fromCharCode(j + 97) + word.slice(i + 1);
+//           if (wordSet.has(newWord)) {
+//             next.push(newWord);
+//             //wordSet.delete(newWord);
+//           }
+//         }
+//       }
+//     }
+//     steps++;
+//     queue = next;
+//   }
+
+//   return 0;
+// };
+// console.log(ladderLength("hot", "dog", ["hot", "dog"]));
+
+// function mergeSort(nums){
+//   if(nums.length <= 1) return nums
+
+//   let arr = []
+//   const mergeSortHelper = (left, right) => {
+
+//       while(left.length && right.length){
+//             if(left[0] <= right[0]){
+//               arr.push(left.shift())
+//           } else {
+//               arr.push(right.shift())
+//           }
+//         }
+
+//       return arr = [...arr, ...left, ...right]
+//   }
+
+//   const middle = Math.floor(nums.length / 2)
+//   const left = nums.slice(0, middle)
+//   const right = nums.slice(middle)
+//   mergeSortHelper(mergeSort(left), mergeSort(right))
+//   return arr
+// }
+
+// var calculate = function(s) {
+//   let sign = 1, sum = 0;
+
+//   const stack = [];
+//   for (let i = 0; i < s.length; i += 1) {
+//       if (s[i] >= '0' && s[i] <= '9') {
+//           let num = 0
+//           // num can be multiple digits, iterate to build full num.
+//           while (s[i] >= '0' && s[i] <= '9') {
+//               num = (num * 10) + (s[i] - "0");
+//               i += 1;
+//           }
+//           // add your completed sum.
+//           sum += (num * sign);
+//           // while loop from earlier causes our index to move forward once, bring it back
+//           i -= 1;
+//       } else if (s[i] === '+') {
+//           sign = 1;
+//       } else if (s[i] === '-') {
+//           sign = -1;
+//       } else if (s[i] === '(') {
+//           // open parens signifies that we should calculate the inside of the parens first and store the outer sum and sign in stack.
+//           // we can later retrieve the values in our stack once we find a closing bracket.
+//           stack.push(sum);
+//           stack.push(sign);
+//           sum = 0
+//           // we used our sign, reset it to default.
+//           sign = 1;
+//       } else if (s[i] === ')') {
+//           // closing bracket assumes we've calculated the sum inside the parens.
+//           // Earlier, we pushed the sum first into our stack. First pop will be the sign. Second pop will be the outer sum.
+//           sum = stack.pop() * sum;
+//           sum += stack.pop();
+//       }
+//   }
+
+//   return sum
+// }
+
+// var jobScheduling = function(startTime, endTime, profit) {
+
+//   let n = startTime.length
+//   let dp = new Array(n).fill(0)
+//   let jobs = []
+//   for(let i=0; i<n; i++){
+//     jobs[i] = [startTime[i], endTime[i], profit[i]]
+//   }
+
+//   jobs.sort((a,b) => a[1]-b[1])
+
+//   const binarySearch = (start, endIdx) => {
+//     let left = 0
+//     let right = endIdx-1
+//     let result = -1
+//     while(left <= right){
+//       let mid = Math.floor((left+right) / 2)
+//       if(start >= jobs[mid][1]){
+//         result = mid
+//         left = mid+1
+//       } else {
+//         right = mid-1
+//       }
+//     }
+//      return result
+//   }
+
+//   for(let i=0; i<n; i++){
+//     let [start, end, currProfit] = jobs[i]
+//     let maxProfit = currProfit
+
+//     let lastCompatibleJob = binarySearch(start, i)
+//     if(lastCompatibleJob !== -1){
+//       let prevProfit = dp[lastCompatibleJob]
+//       maxProfit = currProfit + prevProfit
+//     }
+//     dp[i] = i>0 ? Math.max(maxProfit, dp[i-1]) : maxProfit
+//   }
+//    return dp[n-1]
+
+//  }
+
+// var mergeKLists = function(lists) {
+//   if(lists.length === 0) return null
+
+//    const mergeTwoiLists = (a,b) => {
+//        let newHead = new ListNode()
+//        let currNode = newHead
+//        while(a && b){
+//            if(a.val < b.val){
+//                currNode.next = a
+//                a = a.next
+//            } else {
+//                currNode.next = b
+//                b = b.next
+//            }
+//            currNode = currNode.next
+//        }
+//        if(a) currNode.next = a
+//        if(b) currNode.next = b
+//        return newHead.next
+//    }
+
+//  while(lists.length > 1){
+//     const a = lists.shift()
+//     const b = lists.shift()
+//     const res = mergeTwoiLists(a,b)
+//     lists.push(res)
+//  }
+//    return lists[0]
+
+// }
+
+// var largestRectangleArea = function(heights) {
+
+//   let res = 0
+//   heights.push(0)
+//   let stack = [ [0, heights[0]] ]
+
+//   for(let i=1; i<heights.length; i++){
+//    let currStartIdx = i
+//     while(stack.length && stack[stack.length-1][1] > heights[i]){
+
+//        let [pos, val] = stack.pop()
+//        res = Math.max(res, (i-pos)*val )
+//        currStartIdx = pos
+//     }
+//     stack.push([ currStartIdx,  heights[i]])
+//   }
+
+//    return res
+
+// }
+
+// var gcdOfStrings = function(str1, str2) {
+//   if(str1 + str2 !== str2 + str1) return "";
+//   let s = "";
+//   let str = "";
+//   const length = Math.min(str1.length, str2.length)
+//   for(let i = 0; i < length; i++){
+//       s += str1[i]
+//       if(str1.length % s.length === 0 && str2.length % s.length === 0){
+//           str = s;
+//       } else {
+//           continue
+//       }
+//   }
+//   return str;
+// };
+
+// var kidsWithCandies = function (candies, extraCandies) {
+//   let curMin = 0;
+//   let res = [];
+
+//   for (let i = 0; candies.length; i++) {
+//     if (i === 0) {
+//       res[i] = true;
+//       curMin = candies[i] + extraCandies;
+//       continue;
+//     }
+//     if (candies[i] + extraCandies > curMin) {
+//       res[i] = true;
+//     } else {
+//       res[i] = false;
+//       if (candies[i] + extraCandies < curMin)
+//         curMin = candies[i] + extraCandies;
+//     }
+//   }
+
+//   return res;
+// };
+// console.log(kidsWithCandies([2, 3, 5, 1, 3], 3));
+
+// var reverseVowels = function (s) {
+//   let obj = {
+//     a: true,
+//     e: true,
+//     i: true,
+//     o: true,
+//     u: true,
+//   };
+
+//   //left = 0
+//   let right = s.length - 1;
+
+//   for (let i = 0; i < s.length; i++) {
+//     if (s[i] in obj) {
+//       while (right >= 0) {
+//         if (s[right] in obj) {
+//           let temp = s[i];
+//           s[i] = s[right];
+//           s[right] = temp;
+//         } else {
+//           right -= 1;
+//         }
+//       }
+//     }
+//   }
+//   return s;
+// };
+// console.log(reverseVowels("leetcode"));
+
+// var reverseWords = function (s) {
+//   // s = s.split(" ")
+//   // s = s.reverse()
+//   // s = s.filter(char => char !== "").join(" ")
+
+//   let res = "";
+//   let left = s.length - 1;
+//   let right = s.length - 1;
+
+//   while (right >= 0) {
+//     while (s[right] === " ") {
+//       left--;
+//       right--;
+//     }
+
+//     while (left >= 0 && s[left] !== " ") {
+//       left--;
+//     }
+
+//     let i = left + 1;
+//     while (i <= right) {
+//       if (left + 1 === i && res !== "") {
+//         res += " ";
+//       }
+//       res += s[i];
+//       i++;
+//     }
+
+//     right = left;
+//   }
+//   return res;
+// };
+
+// var productExceptSelf = function(nums) {
+
+//   let preFix = 1
+//   let postFix = 1
+//   let res = []
+
+//   for(let i=0; i<nums.length; i++){
+//       res[i] = preFix
+//       preFix *= nums[i]
+//   }
+
+//   for(let i=nums.length-2; i>=0; i--){
+//       postFix *= nums[i+1]
+//       res[i] = postFix * res[i]
+//   }
+//    return res
+
+// }
+
+// var compress = function(chars) {
+//   let i = 0;
+//   let j = 0;
+//   while (j < chars.length) {
+//       let count = 0;
+//       let curr = chars[j];
+//       while (j < chars.length && chars[j] === curr) {
+//           j++;
+//           count++;
+//       }
+//       chars[i] = curr;
+//       i++
+//       if (count > 1) {
+//           for (let digit of count.toString()) {
+//               chars[i] = digit;
+//               i++
+//           }
+//       }
+//   }
+//   return i;
+// };
+
+// var maxOperations = function(nums, k) {
+//   let obj={};
+//   for(let num of nums){
+//       obj[num] = obj[num] ? obj[num] + 1 : 1
+//   }
+//   let count=0;
+//   for(let num of nums){
+//       if(obj[num] > 0){
+//           obj[num]--
+//           if(obj[k-num]){
+//               obj[k-num]--
+//               count++
+//           }
+//       }
+
+//   }
+//   return count
+// }
+
+// function maxVowels(s, k){
+//   const vowels = new Set(['a', 'e', 'i', 'o', 'u'])
+
+//   let max = 0 // Max number of vowels in any window
+//   let current = 0 // Number of vowels in the current window
+
+//   // Count the total number of vowels from the first window
+//   for (let i = 0; i < k; i++) {
+//     if (vowels.has(s[i])) max++
+//   }
+
+//   if (max === k) return max // Return if the `k` is hit
+
+//   current = max // Set the current to the max
+
+//   // Sliding window technique
+//   for (let i = 1; i <= s.length - k; i++) {
+//     if (vowels.has(s[i - 1])) current-- // Remove the left-most vowel
+//     if (vowels.has(s[i + k - 1])) current++ // Add the right-most vowel
+
+//     if (current === k) return current // Return if the `k` is hit
+//     if (current > max) max = current // Set `max` to the `current` value, if greater
+//   }
+
+//   return max
+// }
+
+// var findDifference = function(nums1, nums2) {
+
+//   nums1 = new Set(nums1)
+//   nums2 = new Set(nums2)
+
+//   for (let item of nums1){
+//       if (nums2.has(item)) {
+//           nums1.delete(item)
+//           nums2.delete(item)
+//       }
+//   }
+//   return [[...nums1], [...nums2]]
+
+// };
+
+// function predictPartyVictory(senate) {
+//   // Initialize two arrays to keep track of the indices of the senators from each party.
+//   let radiant = [];
+//   let dire = [];
+//   const n = senate.length;
+
+//   // Loop through each senator in the given order.
+//   for (let i = 0; i < n; i++) {
+//     // If the senator is from the Radiant party, add their index to the radiant array
+//     // with an offset of n, representing their vote in the next round.
+//     if (senate[i] === "R") {
+//       radiant.push(i + n);
+//     } else {
+//       // If the senator is from the Dire party, add their index to the dire array
+//       // with an offset of n, representing their vote in the next round.
+//       dire.push(i + n);
+//     }
+//   }
+
+//   // Loop through each round until one party has all the votes.
+//   while (radiant.length > 0 && dire.length > 0) {
+//     // Compare the indices of the first senator from each party.
+//     if (radiant[0] < dire[0]) {
+//       // If the Radiant senator's index is less than the Dire senator's index,
+//       // add their index to the end of the radiant array with an offset of n,
+//       // representing their vote in the next round.
+//       radiant.push(radiant[0] + n);
+//     } else {
+//       // If the Dire senator's index is less than or equal to the Radiant senator's index,
+//       // add their index to the end of the dire array with an offset of n,
+//       // representing their vote in the next round.
+//       dire.push(dire[0] + n);
+//     }
+//     // Remove the first senator from each party's array, since they have voted in this round.
+//     radiant.shift();
+//     dire.shift();
+//   }
+
+//   // Return the winner of the voting procedure based on which party has remaining votes.
+//   return radiant.length > 0 ? "Radiant" : "Dire";
+// }
+
+// finding length of linked list with recursion:
+// function findLen(node) {
+//   if(!node) return 0;
+//   return findLen(node.next) + 1;
+// }
+
+// var oddEvenList = function (head) {
+//   if (head === null) return head;
+//   let odd = head;
+//   let even = head.next;
+//   while (odd.next && odd.next.next) {
+//     let tempEven = odd.next;
+//     odd.next = odd.next.next;
+//     odd = odd.next;
+//     tempEven.next = tempEven.next.next;
+//   }
+//   odd.next = even;
+//   return head;
+// };
+
+// var goodNodes = function(root) {
+
+//dfs recursive
+//    const dfs = (node, max) => {
+//        if(node === null) return
+
+//        if(node.val >= max){
+//            count++
+//        }
+//       max = Math.max(max, node.val)
+//       dfs(node.left, max)
+//       dfs(node.right, max)
+//    }
+
+//    let count = 0
+//    dfs(root, -Infinity)
+//    return count
+
+// bfs iterative
+
+//     const bfs = (queue) => {
+
+//         let count = 0
+//         while(queue.length){
+
+//             for(let i=0; i<queue.length; i++){
+//                 let [node, max] = queue.shift()
+//                 if(node.val >= max){
+//                     count++
+//                 }
+//                 max = Math.max(max, node.val)
+//                 if(node.left)  queue.push([node.left, max])
+//                 if(node.right) queue.push([node.right, max])
+//             }
+
+//         }
+
+//             return count
+//     }
+
+//     return bfs([ [root, -Infinity] ])
+
+// }
+
+// var lowestCommonAncestor = function (root, p, q) {
+//   const dfs = (node) => {
+//     if (node === null || node.val === p.val || node.val === q.val) return node;
+
+//     let left = dfs(node.left);
+//     let right = dfs(node.right);
+
+//     if (left !== null && right !== null) return node;
+//     if (left !== null) return left;
+//     if (right !== null) return right;
+//     return null;
+//   };
+
+//   return dfs(root);
+// };
+
+// var rightSideView = function(root) {
+
+//   if(root === null) return []
+
+//   let res = []
+//   res.push(root.val)
+//   let stack = [root]
+//   while(stack.length > 0){
+
+//     let next = []
+//     for(let node of stack){
+//       if(node.left) next.push(node.left)
+//       if(node.right) next.push(node.right)
+//     }
+
+//     if(next.length) res.push(next[next.length-1].val)
+//     stack = next
+
+//   }
+//    return res
+
+//   // const dfs = (node, l) => {
+//   //   if(node === null) return
+
+//   //   res[l] = node.val
+//   //   dfs(node.left, l+1)
+//   //   dfs(node.right, l+1)
+//   // }
+
+//   // let res = []
+//   // dfs(root, 0)
+//   // return res
+
+// }
+
+// var maxLevelSum = function(root) {
+//   if(root === null) return root
+
+//    const levels = []
+//    let queue = [root]
+//    while(queue.length){
+
+//        const level = []
+//        let size = queue.length
+//        for(let i=0; i<size; i++){
+//            const node = queue.shift()
+//            level.push(node.val)
+//            if(node.left){
+//                queue.push(node.left)
+//            }
+//            if(node.right){
+//                queue.push(node.right)
+//            }
+//        }
+
+//        levels.push(level.reduce((acc, curr) => acc + curr))
+//    }
+
+//     return levels.indexOf(Math.max(...levels))+1
+
+//    let maxSum = -Infinity
+//    let maxLevel = 0
+//    let currentLevel = 0
+//    const q = [root]
+//    while(q.length){
+//        currentLevel += 1
+//        let currentLevelSum = 0
+//        let levelSize = q.length
+//        for(let i=0; i<levelSize; i++){
+//            const currNode = q.shift()
+//            currentLevelSum += currNode.val
+//            if(currNode.left) q.push(currNode.left)
+//            if(currNode.right) q.push(currNode.right)
+//        }
+
+//        if(currentLevelSum > maxSum){
+//            maxSum = currentLevelSum
+//            maxLevel = currentLevel
+//        }
+
+//    }
+
+//        return maxLevel
+// }
+
+// var deleteNode = function(root, key) {
+
+//   function callDFS(node) {
+//       if(!node) return null;
+//       if(node.val === key) {
+//           if(node.left === null) return node.right;
+//           if(node.right === null) return node.left;
+//           let curr = node.right;
+//           while(curr.left){
+//               curr = curr.left;
+//             }
+//           curr.left = node.left;
+//           return node.right;
+//       }
+//       if(key > node.val) node.right = callDFS(node.right);
+//       else node.left = callDFS(node.left);
+//       return node;
+//   }
+//   return callDFS(root)
+// };
+
+// var findCircleNum = function (isConnected) {
+//   const dfs = (src) => {
+//     visited.add(src);
+//     for (let dst = 0; dst < isConnected.length; dst++) {
+//       if (!visited.has(dst) && isConnected[src][dst]) {
+//         dfs(dst);
+//       }
+//     }
+//   };
+
+//   const visited = new Set();
+//   let res = 0;
+
+//   for (let i = 0; i < isConnected.length; i++) {
+//     if (!visited.has(i)) {
+//       res += 1;
+//       dfs(i);
+//     }
+//   }
+
+//   return res;
+// };
+
+// const nearestExit = (maze, entrance) => {
+//   let dirs = [
+//     [-1, 0],
+//     [1, 0],
+//     [0, 1],
+//     [0, -1],
+//   ];
+//   const row = entrance[0];
+//   const col = entrance[1];
+//   maze[row][col] = "*";
+//   const queue = [[row, col, 0]];
+
+//   while (queue.length) {
+//     let [row, col, step] = queue.shift();
+//     for (let dir of dirs) {
+//       let [r, c] = dir;
+//       let nR = row + r;
+//       let nC = col + c;
+//       if (!maze[nR] || !maze[nR][nC]) {
+//         if (step) return step;
+//       } else if (maze[nR][nC] === ".") {
+//         queue.push([nR, nC, step + 1]);
+//         maze[nR][nC] = "*";
+//       }
+//     }
+//   }
+
+//   return -1;
+// };
+
+// var minEatingSpeed = function(piles, h) {
+
+//   const getTotHrs = (k) => {
+//       let totHrs = 0
+//       for(let pile of piles){
+//           totHrs += Math.ceil(pile / mid)
+//       }
+//        return totHrs
+//   }
+
+//   let left = 1
+//   let right = Math.max(...piles)
+//   let mid
+//   while(left < right){
+//       mid = Math.floor((left + right)/2)
+//       let totHrs = getTotHrs(mid)
+//       if(totHrs > h){
+//           left = mid+1
+//       } else {
+//           right = mid
+//       }
+//   }
+//       return right
+// }
+
+// var combinationSum3 = function (k, n) {
+//   const permute = (arr, sum, start) => {
+//     if (sum > n) return;
+//     if (arr.length === k) {
+//       if (sum === n) {
+//         res.push(arr);
+//         return;
+//       }
+//       return;
+//     }
+
+//     for (let i = start; i < 10; i++) {
+//       permute([...arr, i], sum + i, i + 1);
+//     }
+//   };
+
+//   const res = [];
+//   permute([], 0, 1);
+//   return res;
+// };
+// console.log(combinationSum3(3, 7));
