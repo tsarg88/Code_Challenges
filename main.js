@@ -19462,3 +19462,437 @@ Result = [24, 12, 8, 6]
 //   return res;
 // };
 // console.log(combinationSum3(3, 7));
+
+// var numTilings = function (n) {
+//   const mod = Math.pow(10, 9) + 7;
+//   let dp = {};
+//   dp[1] = 1;
+//   dp[2] = 2;
+//   dp[3] = 5;
+//   for (let i = 4; i <= n; i++) {
+//     dp[i] = 2 * dp[i - 1] + dp[i - 3];
+//   }
+//   return dp[n];
+// };
+// console.log(numTilings(4));
+
+// var longestCommonSubsequence = function(text1, text2) {
+
+//   let dp = Array(text1.length+1).fill().map(() => Array(text2.length+1).fill(0))
+
+//   for(let row=1; row<=text1.length; row++){
+//       for(let col=1; col<=text2.length; col++){
+//           if(text1[row-1] === text2[col-1]){
+//               dp[row][col] = dp[row-1][col-1]+1
+//           } else {
+//               dp[row][col] = Math.max(dp[row-1][col], dp[row][col-1])
+//           }
+//       }
+//   }
+//       return dp[text1.length][text2.length]
+// }
+
+// "abade", "ace"
+
+// var maxProfit = function (P, F) {
+//   let len = P.length,
+//     buying = 0,
+//     selling = -P[0];
+//   for (let i = 1; i < len; i++) {
+//     buying = Math.max(buying, selling + P[i] - F);
+//     //selling = Math.max(selling, buying - P[i]);
+//   }
+//   return buying;
+// };
+// console.log(maxProfit([1, 3, 2, 8, 4, 9], 2));
+
+// var countBits = function (n) {
+//   dp = [0];
+//   let offset = 1;
+//   for (let i = 1; i <= n; i++) {
+//     if (i === offset * 2) {
+//       offset *= 2;
+//     }
+//     dp[i] = dp[i - offset] + 1;
+//   }
+
+//   return dp;
+// };
+
+// var minFlips = function (a, b, c) {
+//   let flips = 0;
+
+//   // Iterate through each bit position
+//   for (let i = 0; i < 32; i++) {
+//     const bitA = (a >> i) & 1; // Get the i-th bit of a
+//     const bitB = (b >> i) & 1; // Get the i-th bit of b
+//     const bitC = (c >> i) & 1; // Get the i-th bit of c
+
+//     // If the i-th bit of c is 1
+//     if (bitC === 1) {
+//       // If both bits of a and b are 0, we need to flip one of them to 1
+//       if (bitA === 0 && bitB === 0) {
+//         flips += 1;
+//       }
+//     } else {
+//       // If the i-th bit of c is 0
+//       // If at least one of the bits of a or b is 1, we need to flip one of them to 0
+//       if (bitA === 1) {
+//         flips += 1;
+//       }
+//       if (bitB === 1) {
+//         flips += 1;
+//       }
+//     }
+//   }
+
+//   return flips;
+// };
+
+// class Trie{
+//   constructor(){
+//       this.root = {}
+//   }
+
+//   insert(word){
+//     let curr = this.root
+//       for(let l of word){
+//           if(curr[l] !== undefined){
+//               curr = curr[l]
+//           } else {
+//               curr[l] = {}
+//               curr = curr[l]
+//           }
+//       }
+//       if(curr["isEnd"] === undefined){
+//           curr["isEnd"] = true
+//       }
+//   }
+
+//  search(word){
+//      let curr = this.root
+//      for(let c of word){
+//          if(curr[c] === undefined){
+//              return false
+//          } else {
+//              curr = curr[c]
+//          }
+//      }
+//      if(curr["isEnd"] === undefined){
+//          return false
+//      } else {
+//          return true
+//      }
+//  }
+
+//  startsWith(prefix){
+//      let curr = this.root
+//      for(let c of prefix){
+//          if(curr[c] === undefined){
+//              return false
+//          } else {
+//              curr = curr[c]
+//          }
+//      }
+//       return true
+//  }
+
+// }
+
+// var eraseOverlapIntervals = function(intervals) {
+//   //Time O(N * logN) | Space O(1)
+//   intervals.sort((a, b) => a[1] - b[1]);
+//   console.log(intervals)
+//   let counter = 0
+//   let prev = intervals[0]
+//   for(let cur=1; cur<intervals.length; cur++){
+//       let curStart = intervals[cur][0]
+//       let prevEnd = prev[1]
+//       if(curStart < prevEnd) counter++
+//       else  prev = intervals[cur]
+//   }
+//     return counter
+// }
+
+// var dailyTemperatures = function (t) {
+//   let res = new Array(t.length).fill(0);
+//   let stack = [];
+//   for (let i = 0; i < t.length; i++) {
+//     let top = stack[stack.length - 1];
+//     while (stack.length && t[top] < t[i]) {
+//       let idx = stack.pop();
+//       res[idx] = i - idx;
+//       top = stack[stack.length - 1];
+//     }
+//     stack.push(i);
+//   }
+//   return res;
+// };
+// var orangesRotting = function(grid) {
+
+//   let freshOranges = 0
+//   let res = 0
+//   let queue = []
+//   let dirs = [[-1,0],[1,0],[0,1],[0,-1]]
+
+//    for(let row=0; row<grid.length; row++){
+//        for(let col=0; col<grid[0].length; col++){
+//            if(grid[row][col] === 2) queue.push([row,col])
+//            else if(grid[row][col] === 1) freshOranges++
+//        }
+//    }
+
+//    while(queue.length > 0){
+//        let size = queue.length
+//        for(let i=0; i<size; i++){
+//            let [row, col] = queue.shift()
+//            for(let dir of dirs){
+//                let [r, c] = dir
+//                let newRow = r + row
+//                let newCol = c + col
+//                if(newRow >= 0 && newRow <= grid.length-1 && newCol >= 0 && newCol <= grid[0].length-1
+//                && grid[newRow][newCol] === 1
+//                ){
+//                    freshOranges--
+//                    grid[newRow][newCol] = 2
+//                    queue.push([newRow,newCol])
+//                }
+//            }
+//        }
+//        if(queue.length > 0) res++
+//    }
+//      return freshOranges === 0 ? res : -1
+
+//  }
+
+// function getMaxAdditionalDinersCount(N, K, M, S) {
+
+//   const increment = K + 1;
+//   let available = 0;
+//   S.sort((a, b) => a - b);
+
+//   // Calculate available to the left of the leftmost diner
+//   available += Math.floor( (S[0] - 1) / increment);
+
+//   // Calculate available to the right of the rightmost diner
+//   available += Math.floor((N - S[S.length - 1]) / increment);
+
+//   // For each pair of current diners, calculate how many diners
+//   // we can fit between them
+//   for (let i = 1; i < S.length; i++) {
+//       // We know the difference between S[i] and S[i - 1] is at least
+//       // increment as otherwise the social distance rules would be violated.
+//       // If there are C increments between S[i] and S[i - 1], then we can
+//       // fit C - 1 diners between them.
+//       available += Math.floor((S[i] - S[i - 1]) / increment) - 1;
+//   }
+
+//   return available;
+
+// }
+
+// function minDiscsToDeflate(N, R) {
+//   // Create a table to store the minimum number of discs to be deflated to make the stack stable, starting from the bottom disc.
+//   const dp = new Array(N + 1).fill(Infinity);
+
+//   // Initialize the table.
+//   dp[N] = 0;
+
+//   // Iterate over the discs from the bottom up.
+//   for (let i = N - 1; i >= 0; i--) {
+//     // If the current disc is not deflated and its radius is larger than or equal to the radius of the disc below it, then the stack is unstable.
+//     if (R[i] >= R[i + 1]) {
+//       // Find the minimum number of discs to be deflated to make the rest of the stack stable, starting from the next disc.
+//       const deflatedCount = dp[i + 1] + 1;
+
+//       // Update the table.
+//       dp[i] = Math.min(dp[i], deflatedCount);
+//     }
+
+//     // If the current disc is deflated and its radius is smaller than the radius of the disc below it, then the stack is stable.
+//     else if (R[i] < R[i + 1]) {
+//       dp[i] = dp[i + 1];
+//     }
+
+//     // If the current disc is deflated and its radius is larger than or equal to the radius of the disc below it, then the stack is stable if the first two discs are deflated.
+//     else if (i === 2 && R[i] >= R[i + 1]) {
+//       dp[i] = 2;
+//     }
+//   }
+
+//   // Return the minimum number of discs to be deflated to make the stack stable.
+//   return dp[0];
+// }
+
+// console.log(minDiscsToDeflate(5, [2, 5, 3, 6, 5]));
+
+// function countSubarrays(arr) {
+//   const ans = new Array(arr.length).fill(1);
+
+//   for (let i = 0; i < arr.length; i++) {
+//     let j = i + 1;
+//     while (j < arr.length && arr[j] > arr[j - 1]) {
+//       ans[i]++;
+//       j++;
+//     }
+//   }
+
+//   for (let i = arr.length - 1; i >= 0; i--) {
+//     let j = i - 1;
+//     while (j >= 0 && arr[j] > arr[j + 1]) {
+//       ans[i]++;
+//       j--;
+//     }
+//   }
+
+//   return ans;
+// }
+// console.log(countSubarrays([3, 4, 1, 6, 2]));
+// var groupAnagrams = function (words) {
+//   const getPositions = (char, positions) => {
+//     let charPos = char.charCodeAt() - "a".charCodeAt();
+//     positions[charPos] += 1;
+//   };
+
+//   const getAnagramHelper = (word) => {
+//     let positions = new Array(26).fill(0);
+
+//     for (let char of word) {
+//       getPositions(char, positions);
+//     }
+
+//     return positions.join();
+//   };
+
+//   const getAnagram = () => {
+//     for (let word of words) {
+//       let wordPosition = getAnagramHelper(word);
+//       let values = map.get(wordPosition) || [];
+//       values.push(word);
+//       map.set(wordPosition, values);
+//     }
+//   };
+
+//   let map = new Map();
+//   getAnagram();
+//   return [...map.values()];
+// };
+
+// var search = function(nums, target) {
+
+//     let left = 0
+//     let right = nums.length-1
+//     while(left <= right){
+//         let mid = Math.floor((left+right)/2)
+//         if(nums[mid] === target){
+//             return mid
+//         } else if(nums[left] <= nums[mid]){
+//             if(target <= nums[mid] && target >= nums[left]){
+//                 right = mid-1
+//             } else {
+//                 left = mid+1
+//             }
+//         } else {
+//             if(target >= nums[mid] && target <= nums[right]){
+//                 left = mid +1
+//             } else {
+//                 right = mid-1
+//             }
+//         }
+//     }
+//      return -1
+
+// }
+
+// var findMin = function(nums) {
+
+//   let left = 0
+//   let right = nums.length-1
+//   while(left < right){
+//       let mid = Math.floor((left + right) / 2)
+//       if(nums[left] < nums[right]) return nums[left]
+//       if(nums[left] <= nums[mid]){
+//           left = mid+1
+//       } else {
+//           right = mid
+//       }
+//   }
+//    return nums[left]
+
+// }
+
+// var search = function(nums, target) {
+
+//   let left = 0
+//   let right = nums.length-1
+//   while(left <= right){
+//       let mid = Math.floor((left+right) / 2)
+//       if(nums[mid] === target) return mid
+//       if(nums[left] <= nums[mid]){
+//           if(target <= nums[mid] && target >= nums[left]){
+//               right = mid-1
+//           } else {
+//               left = mid+1
+//           }
+//       } else {
+//           if(target >= nums[mid] && target <= nums[right]){
+//               left = mid+1
+//           } else {
+//               right = mid-1
+//           }
+//       }
+//   }
+//     return -1
+// }
+
+// var invertTree = function(root) {
+
+// const dfs = (node) => {
+//     if(node === null) return
+//     let left = node.right
+//     let right = node.left
+//     node.left = left
+//     node.right = right
+//     dfs(node.left)
+//     dfs(node.right)
+// }
+
+//  let tempRoot = root
+//  dfs(tempRoot)
+//  return root
+
+//  let tempRoot = root
+//  let queue = [tempRoot]
+//  while(queue.length){
+//    let currNode = queue.shift()
+//    if(currNode === null) continue
+//    let left = currNode.right
+//    let right = currNode.left
+//    currNode.left = left
+//    currNode.right = right
+//    if(currNode.left) queue.push(currNode.left)
+//    if(currNode.right) queue.push(currNode.right)
+//  }
+
+//  return root
+
+// function quickSort(arr) {
+//   if (arr.length <= 1) return arr;
+
+//   let pivotIndex = Math.floor(Math.random() * arr.length);
+//   let pivot = arr[pivotIndex];
+//   let left = [];
+//   let right = [];
+
+//   for (let i = 0; i < arr.length; i++) {
+//     if (i === pivotIndex) continue;
+
+//     if (arr[i] < pivot) {
+//       left.push(arr[i]);
+//     } else {
+//       right.push(arr[i]);
+//     }
+//   }
+
+//   return [...quickSort(left), pivot, ...quickSort(right)];
+// }
