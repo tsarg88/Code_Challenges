@@ -18261,41 +18261,41 @@ Result = [24, 12, 8, 6]
 
 // console.log(leastInterval(["A","A","A","B"], 3))
 
-// var findMinHeightTrees = function(n, edges) {
-//   if (n === 1) return [0]; // Special case: Only one node, so the root is the only MHT
+var findMinHeightTrees = function (n, edges) {
+  if (n === 1) return [0]; // Special case: Only one node, so the root is the only MHT
 
-//   const adjacencyList = new Array(n).fill(0).map(() => []); // Adjacency list representation of the tree
+  const adjacencyList = new Array(n).fill(0).map(() => []); // Adjacency list representation of the tree
 
-//   for (const [node1, node2] of edges) {
-//     adjacencyList[node1].push(node2);
-//     adjacencyList[node2].push(node1);
-//   }
+  for (const [node1, node2] of edges) {
+    adjacencyList[node1].push(node2);
+    adjacencyList[node2].push(node1);
+  }
 
-//   let leaves = [];
-//   for (let i = 0; i < n; i++) {
-//     if (adjacencyList[i].length === 1) {
-//       leaves.push(i); // Initial leaf nodes (nodes with only one neighbor)
-//     }
-//   }
+  let leaves = [];
+  for (let i = 0; i < n; i++) {
+    if (adjacencyList[i].length === 1) {
+      leaves.push(i); // Initial leaf nodes (nodes with only one neighbor)
+    }
+  }
 
-//   while (n > 2) {
-//     const newLeaves = [];
+  while (n > 2) {
+    const newLeaves = [];
 
-//     for (const leaf of leaves) {
-//       const neighbor = adjacencyList[leaf].pop(); // Remove the leaf node from its neighbor's list
-//       adjacencyList[neighbor].splice(adjacencyList[neighbor].indexOf(leaf), 1); // Remove the neighbor from the leaf node's list
+    for (const leaf of leaves) {
+      const neighbor = adjacencyList[leaf].pop(); // Remove the leaf node from its neighbor's list
+      adjacencyList[neighbor].splice(adjacencyList[neighbor].indexOf(leaf), 1); // Remove the neighbor from the leaf node's list
 
-//       if (adjacencyList[neighbor].length === 1) {
-//         newLeaves.push(neighbor); // Check if the neighbor becomes a new leaf node
-//       }
-//     }
+      if (adjacencyList[neighbor].length === 1) {
+        newLeaves.push(neighbor); // Check if the neighbor becomes a new leaf node
+      }
+    }
 
-//     n -= leaves.length;
-//     leaves = newLeaves;
-//   }
+    n -= leaves.length;
+    leaves = newLeaves;
+  }
 
-//   return leaves;
-// }
+  return leaves;
+};
 
 // var ladderLength = function (beginWord, endWord, wordList) {
 //   const wordSet = new Set(wordList);
@@ -19628,10 +19628,11 @@ Result = [24, 12, 8, 6]
 //   }
 //   return res;
 // };
+
 // var orangesRotting = function(grid) {
 
 //   let freshOranges = 0
-//   let res = 0
+//   let mins = 0
 //   let queue = []
 //   let dirs = [[-1,0],[1,0],[0,1],[0,-1]]
 
@@ -19659,9 +19660,9 @@ Result = [24, 12, 8, 6]
 //                }
 //            }
 //        }
-//        if(queue.length > 0) res++
+//        if(queue.length > 0) mins++
 //    }
-//      return freshOranges === 0 ? res : -1
+//      return freshOranges === 0 ? mins : -1
 
 //  }
 
@@ -19896,3 +19897,505 @@ Result = [24, 12, 8, 6]
 
 //   return [...quickSort(left), pivot, ...quickSort(right)];
 // }
+
+// var merge = function (intervals) {
+//   //intervals.sort((a,b) => a[0] - b[0])
+//   const merged = [];
+//   let [prevStart, prevEnd] = intervals[0];
+//   for (let i = 1; i < intervals.length; i++) {
+//     let [currStart, currEnd] = intervals[i];
+//     if (prevEnd >= currStart) {
+//       prevEnd = Math.max(prevEnd, currEnd);
+//     } else {
+//       merged.push([prevStart, prevEnd]);
+//       [prevStart, prevEnd] = [currStart, currEnd];
+//     }
+//   }
+//   merged.push([prevStart, prevEnd]);
+//   return merged;
+// };
+// console.log(
+//   merge([
+//     [1, 3],
+//     [2, 6],
+//     [8, 10],
+//     [15, 18],
+//   ])
+// );
+
+// var mergeTwoLists = function(list1, list2) {
+
+//   let newHead = new ListNode()
+//   let curr = newHead
+//   while(list1 && list2){
+//       if(list1.val <= list2.val){
+//           curr.next = list1
+//           list1 = list1.next
+//       } else {
+//           curr.next = list2
+//           list2 = list2.next
+//       }
+//       curr = curr.next
+//   }
+//   curr.next = list1 ? list1 : list2
+
+// return newHead.next
+
+// }
+
+// var maxProfit = function(prices) {
+
+//   let maxProfit = 0
+//   let currMin = prices[0]
+//   for(let i=1; i<prices.length; i++){
+//       if(currMin < prices[i]){
+//           maxProfit = Math.max(maxProfit, prices[i] - currMin)
+//       } else {
+//           currMin = prices[i]
+//       }
+//   }
+//    return maxProfit
+
+// }
+
+// var isPalindrome = function(s) {
+
+//   s = s.replace(/[^a-z0-9]/gi, "").toLowerCase()
+//   let left = 0
+//   let right = s.length-1
+//   while(left < right){
+//       if(s[left] === s[right]){
+//           left++
+//           right--
+//           continue
+//       } else {
+//           return false
+//       }
+//   }
+//    return true
+
+//  }
+
+// var floodFill = function(image, sr, sc, color) {
+
+//   const dfs = (sr, sc, oldColor) => {
+//       image[sr][sc] = color
+//       for(let dir of dirs){
+//           let [xRow, yCol] = dir
+//           let nRow = sr + xRow
+//           let nCol = sc + yCol
+//           if(nRow < 0 || nRow >= image.length || nCol < 0 || nCol >= image[0].length) continue
+//           if(oldColor !== image[nRow][nCol]) continue
+//           dfs(nRow, nCol, oldColor)
+//       }
+
+//   }
+
+//   if(image[sr][sc] === color) return image
+//   let dirs = [[-1,0], [1,0], [0,1], [0, -1]]
+//   dfs(sr, sc, image[sr][sc])
+//   return image
+
+// }
+
+// var updateMatrix = function(mat) {
+
+//   let numRows = mat.length
+//   let numCols = mat[0].length
+//   let maxDist = numRows + numCols
+
+//   let queue = []
+//   for(let row=0; row<numRows; row++){
+//       for(let col=0; col<numCols; col++){
+//           if(mat[row][col] === 0){
+//               queue.push([row,col])
+//           } else {
+//               mat[row][col] = maxDist
+//           }
+//       }
+//   }
+
+//   let dir = [[-1,0], [1,0], [0,-1], [0,1]]
+//   while(queue.length > 0){
+//       let [row,col] = queue.shift()
+//       for(let i=0; i<dir.length; i++){
+//           let [newRow, newCol] = dir[i]
+//           let trRow = row + newRow
+//           let trCol = col + newCol
+//           if(
+//               trRow < 0 ||
+//               trRow >= numRows ||
+//               trCol < 0 ||
+//               trCol >= numCols ||
+//               mat[trRow][trCol] < mat[row][col]+1
+//           ){
+//               continue
+//           }
+//           mat[trRow][trCol] = mat[row][col]+1
+//           queue.push([trRow,trCol])
+//       }
+//   }
+//    return mat
+// }
+
+// var updateMatrix = function (mat) {
+//   let dirs = [
+//     [1, 0],
+//     [-1, 0],
+//     [0, 1],
+//     [0, -1],
+//   ];
+//   let queue = [];
+//   for (let row = 0; row < mat.length; row++) {
+//     for (let col = 0; col < mat[0].length; col++) {
+//       if (mat[row][col] === 0) queue.push([row, col]);
+//       else mat[row][col] = mat.length + mat[0].length;
+//     }
+//   }
+
+//   while (queue.length > 0) {
+//     let [row, col] = queue.shift();
+//     for (let dir of dirs) {
+//       let [xRow, yCol] = dir;
+//       let nRow = row + xRow;
+//       let nCol = col + yCol;
+//       if (
+//         nRow < 0 ||
+//         nRow >= mat.length ||
+//         nCol < 0 ||
+//         nCol > mat[0].length ||
+//         mat[nRow][nCol] < mat[row][col] + 1
+//       ) {
+//         continue;
+//       }
+
+//       mat[nRow][nCol] = mat[row][col] + 1;
+//       queue.push([nRow, nCol]);
+//     }
+//   }
+
+//   return mat;
+// };
+// console.log(
+//   updateMatrix([
+//     [0, 0, 0],
+//     [0, 1, 0],
+//     [1, 1, 1],
+//   ])
+// );
+
+// function insertionSort(nums){
+
+//   for(let i=1; i<nums.length; i++){
+//       while(i>0 && nums[i-1] < nums[i]){
+//           [ nums[i-1], nums[i] ] = [ nums[i], nums[i-1] ]
+
+//           //i =-1
+//         }
+//     }
+
+//     return nums
+
+// }
+// console.log(insertionSort([1,4,5,3,2]))
+
+// var permute = function(nums) {
+
+//   const dfs = (curr, res) => {
+//       if(res.length === 0){
+//           out.push(curr)
+//           return
+//       }
+
+//       for(let i=0; i<res.length; i++){
+//           dfs([ ...curr, res[i] ], [ ...res.slice(0,i),  ...res.slice(i+1) ])
+//       }
+
+//   }
+
+//   let out = []
+//   dfs([], nums)
+//   return out
+// }
+
+// class TimeMap{
+//   constructor(){
+//       this.map = {}
+//   }
+
+//   set(key, val, TimeStamp){
+//       let bucket = this.map[key] || []
+//       this.map[key] = bucket
+//       bucket.push([val, TimeStamp])
+//   }
+
+//   get(key, TimeStamp){
+//       let val = ""
+//       let bucket = this.map[key]
+//       if(bucket === undefined) return ""
+//       let [left, right] = [0, bucket.length-1]
+//       while(left <= right){
+//           let mid = Math.floor((left+right)/2)
+//           let [guessVal, guessTime] = bucket[mid]
+//           if(guessTime <= TimeStamp){
+//               val = guessVal
+//               left = mid+1
+//           } else {
+//               right = mid-1
+//           }
+//       }
+//        return val
+//   }
+
+// }
+
+// var minWindow = function (s, t) {
+//   let freqMap = {};
+//   let counter = 0;
+//   let end = 0;
+//   let left = 0;
+//   let right = 0;
+//   let start = 0;
+//   for (let l of t) {
+//     if (freqMap[l]) {
+//       freqMap[l]++;
+//     } else {
+//       freqMap[l] = 1;
+//       counter++;
+//     }
+//   }
+//   while (right < s.length) {
+//     if (freqMap[s[right]] !== undefined) {
+//       freqMap[s[right]]--;
+//       freqMap[s[right]] === 0 ? counter-- : freqMap[s[right]];
+//     }
+//     while (counter === 0) {
+//       if (end === 0 || right - left < end) {
+//         start = left;
+//         end = right - left + 1;
+//       }
+//       while (freqMap[s[left]] !== undefined) {
+//         if (freqMap[s[left]] === 0) counter++;
+//         freqMap[s[left]]++;
+//       }
+//       left++;
+//     }
+
+//     right++;
+//   }
+
+//   return s.slice(start, start + end);
+// };
+// console.log(minWindow("ADOBECODEBANC", "ABC"));
+
+// var ladderLength = function(beginWord, endWord, wordList) {
+//   let steps = 1
+//   let wordSet = new Set(wordList)
+//   if(!wordSet.has(endWord)) return 0
+//   let queue = [beginWord]
+
+//   while(queue.length){
+//       let next = []
+//       for(let word of queue){
+//           if(word === endWord) return steps
+//           for(let i=0; i<word.length; i++){
+//               for(let j=0; j<26; j++){
+//                   let newWord = word.slice(0, i) + String.fromCharCode(j + 97) + word.slice(i+1)
+//                   if(wordSet.has(newWord)){
+//                       next.push(newWord)
+//                       wordSet.delete(newWord)
+//                   }
+//               }
+
+//           }
+//       }
+//       queue = next
+//       steps++
+//   }
+//    return 0
+
+// }
+
+// var jobScheduling = function(startTime, endTime, profit) {
+
+//   let jobs = []
+//   for(let i=0; i<startTime.length; i++){
+//     jobs[i] = [startTime[i], endTime[i], profit[i]]
+//   }
+//    jobs.sort((a,b) => a[1]-b[1])
+
+//   let dp = new Array(startTime.length).fill(0)
+
+//   const binarySearch = (i, start) => {
+//      let left = 0
+//      let right = i-1
+//      let resIdx = -1
+//      while(left <= right){
+//        let mid = Math.floor((left + right) / 2)
+//        if(start >= jobs[mid][1]){
+//          resIdx = mid
+//          left = mid+1
+//        } else {
+//          right = mid-1
+//        }
+//      }
+//       return resIdx
+//   }
+
+//   for(let i=0; i<startTime.length; i++){
+//     let [start, end, currProf] = jobs[i]
+//     let maxProf = currProf
+//      lastComJob = binarySearch(i, start)
+//      if(lastComJob !== -1){
+//        let prevProf = dp[lastComJob]
+//        maxProf = maxProf + prevProf
+//      }
+
+//      dp[i] =  i < 1 ? maxProf : Math.max(dp[i-1], maxProf)
+//   }
+
+//    return dp[endTime.length-1]
+
+// }
+
+// var exist = function(board, word) {
+
+//   const search = (row, col, wIdx) => {
+//       if(wIdx === word.length) return true
+
+//       if(row < 0 || row > board.length-1 || col < 0 || col > board[0].length-1) return
+//       let char = board[row][col]
+//       board[row][col] = "#"
+//       for(let [fRow, fCol] of dir){
+//           let nRow = row + fRow
+//           let nCol = col + fCol
+//           if(nRow < 0 || nRow > board.length-1 || nCol < 0 || nCol > board[0].length-1) continue
+//           if(board[nRow][nCol] === word[wIdx]){
+//               if(search(nRow, nCol, wIdx+1)) return true
+//           }
+//       }
+//       board[row][col] = char
+
+//   }
+
+//   let dir = [[-1,0], [1,0], [0,1], [0,-1]]
+
+//   for(let row=0; row<board.length; row++){
+//       for(let col=0; col<board[0].length; col++){
+//           if(board[row][col] === word[0]){
+//               if(search(row, col, 1) ) return true
+//           }
+//       }
+//   }
+//    return false
+
+// }
+
+// var isValidBST = function (root) {
+//   const dfs = (node, max, min) => {
+//     if (node === null) return true;
+
+//     return (
+//       node.val < max &&
+//       node.val > min &&
+//       dfs(node.left, node.val, min) &&
+//       dfs(node.right, max, node.val)
+//     );
+//   };
+
+//   if (root === null) return root;
+//   return dfs(root, Infinity, -Infinity);
+// };
+
+// var mergeAlternately = function(word1, word2) {
+
+//   let p1 = 0
+//   let p2 = 0
+//   let res = ""
+
+//   while(p1 < word1.length || p2 < word2.length){
+//       if(word1[p1] !== undefined){
+//           res += word1[p1]
+//       }
+//       p1++
+//       if(word2[p2] !== undefined){
+//           res += word2[p2]
+//       }
+//       p2++
+
+//   }
+
+//    return res
+
+// }
+
+// var canPlaceFlowers = function(flowerbed, n) {
+//   if(n === 0) return true
+//   let counter = n
+//    for(let i=0; i<flowerbed.length; i++){
+//        let left = i - 1
+//        let right = i + 1
+
+//        if(flowerbed[i] === 0){
+//            if(flowerbed[left] !== 1 && flowerbed[right] !== 1){
+//                flowerbed[i] = 1
+//                counter--
+//                if(counter === 0) return true
+//            }
+//        }
+//    }
+//     return false
+
+// }
+
+// var uniqueOccurrences = function(arr) {
+
+//   let obj = {}
+//   let objSize = 0
+//   let set = new Set
+//   for(let num of arr){
+//       obj[num] = obj[num] ? obj[num] + 1 : 1
+//       if(obj[num] === 1) objSize += 1
+//   }
+
+//   for(let key in obj){
+//       set.add(obj[key])
+//   }
+
+//   return set.size === objSize ? true : false
+
+// }
+
+function getSortedItems(word) {
+  const group = {};
+
+  for (let c of word) {
+    group[c] = (group[c] || 0) + 1;
+  }
+
+  return {
+    keys: Object.keys(group).sort(),
+    counts: Object.values(group).sort((a, b) => a - b),
+  };
+}
+
+var closeStrings = function (word1, word2) {
+  if (word1.length !== word2.length) {
+    return false;
+  }
+
+  const group1 = getSortedItems(word1);
+  const group2 = getSortedItems(word2);
+
+  for (let i = 0; i < group1.keys.length; i++) {
+    if (
+      group1.keys[i] !== group2.keys[i] ||
+      group1.counts[i] !== group2.counts[i]
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+};
+console.log(closeStrings("abbzzca", "babzzcz"));
