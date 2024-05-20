@@ -20366,36 +20366,996 @@ var findMinHeightTrees = function (n, edges) {
 
 // }
 
-function getSortedItems(word) {
-  const group = {};
+// function getSortedItems(word) {
+//   const group = {};
 
-  for (let c of word) {
-    group[c] = (group[c] || 0) + 1;
+//   for (let c of word) {
+//     group[c] = (group[c] || 0) + 1;
+//   }
+
+//   return {
+//     keys: Object.keys(group).sort(),
+//     counts: Object.values(group).sort((a, b) => a - b),
+//   };
+// }
+
+// var closeStrings = function (word1, word2) {
+//   if (word1.length !== word2.length) {
+//     return false;
+//   }
+
+//   const group1 = getSortedItems(word1);
+//   const group2 = getSortedItems(word2);
+
+//   for (let i = 0; i < group1.keys.length; i++) {
+//     if (
+//       group1.keys[i] !== group2.keys[i] ||
+//       group1.counts[i] !== group2.counts[i]
+//     ) {
+//       return false;
+//     }
+//   }
+
+//   return true;
+// };
+// console.log(closeStrings("abbzzca", "babzzcz"));
+// var leafSimilar = function(root1, root2) {
+
+//   let res1 = []
+//   let res2 = []
+//   const dfs = (node, res) => {
+//       console.log(res)
+//       if(node === null) return
+//       if(node.left === null && node.right === null) res.push(node.val)
+//       dfs(node.left, res)
+//       dfs(node.right, res)
+//   }
+
+//   dfs(root1, res1)
+//   dfs(root2, res2)
+
+//   if(res1.length !== res2.length) return false
+//   return res1.toString() === res2.toString()
+// //    for(let i=0; i<res1.length; i++){
+// //        console.log('stegh')
+// //        if(res1[i] !== res2[i]) return false
+// //    }
+
+//   //return true
+
+// }
+
+// var pathSum = function(root, targetSum) {
+
+//   if(root === null) return 0
+
+//    const dfs = (node, pathSum) => {
+
+//        pathSum += node.val
+//        if(pathSum === targetSum) count++
+//        if(obj[pathSum - targetSum]) count += obj[pathSum - targetSum]
+//        obj[pathSum] = obj[pathSum] ? obj[pathSum] + 1 : 1
+//        if(node.left) dfs(node.left, pathSum)
+//        if(node.right) dfs(node.right, pathSum)
+//        obj[pathSum]--;
+//    }
+
+//   let obj = {}
+//   let count = 0
+//   dfs(root, 0)
+//   return count
+
+// }
+
+// var maxLevelSum = function(root) {
+//   if(root === null) return root
+
+//    const levels = []
+//    let queue = [root]
+//    while(queue.length){
+
+//        const level = []
+//        let size = queue.length
+//        for(let i=0; i<size; i++){
+//            const node = queue.shift()
+//            level.push(node.val)
+//            if(node.left){
+//                queue.push(node.left)
+//            }
+//            if(node.right){
+//                queue.push(node.right)
+//            }
+//        }
+
+//        levels.push(level.reduce((acc, curr) => acc + curr))
+//    }
+
+//     return levels.indexOf(Math.max(...levels))+1
+
+// var minReorder = function(n, connections) {
+
+//   const createGraph = () => {
+//       let graph = new Array(n).fill().map(() => [])
+//       for(let edge of connections){
+//           let [src, dst] = edge
+//           graph[src].push(dst)
+//           graph[dst].push(src)
+//           set.add(`${src}-${dst}`)
+//       }
+//        return graph
+//   }
+
+//   const dfs = (node, parent) => {
+//       if(set.has(`${parent}-${node}`)) count++
+//       for( let c of graph[node] ){
+//           if(c === parent) continue
+//           dfs(c, node)
+//       }
+//   }
+
+//  let set = new Set()
+//  let graph = createGraph()
+//  let count = 0
+//  dfs(0, -1)
+//  return count
+
+// }
+// findKthLargest manual heap approach!
+// class MinHeap {
+//   constructor() {
+//       this.heap = [];
+//   }
+//   push(val) {
+//       this.heap.push(val);
+//       this.bubbleUp();
+//   }
+//   pop() {
+//       const max = this.heap[0];
+//       const end = this.heap.pop();
+//       if (this.heap.length > 0) {
+//           this.heap[0] = end;
+//           this.bubbleDown();
+//       }
+//       return max;
+//   }
+//   peek() {
+//       return this.heap[0];
+//   }
+//   bubbleUp() {
+//       let idx = this.heap.length - 1;
+//       const element = this.heap[idx];
+//       while (idx > 0) {
+//           let parentIdx = Math.floor((idx - 1) / 2);
+//           let parent = this.heap[parentIdx];
+//           if (element >= parent) break;
+//           this.heap[parentIdx] = element;
+//           this.heap[idx] = parent;
+//           idx = parentIdx;
+//       }
+//   }
+//   bubbleDown() {
+//       let idx = 0;
+//       const length = this.heap.length;
+//       const element = this.heap[0];
+//       while (true) {
+//           let leftChildIdx = 2 * idx + 1;
+//           let rightChildIdx = 2 * idx + 2;
+//           let leftChild, rightChild;
+//           let swap = null;
+//           if (leftChildIdx < length) {
+//               leftChild = this.heap[leftChildIdx];
+//               if (leftChild < element) {
+//                   swap = leftChildIdx;
+//               }
+//           }
+//           if (rightChildIdx < length) {
+//               rightChild = this.heap[rightChildIdx];
+//               if (
+//                   (swap === null && rightChild < element) ||
+//                   (swap !== null && rightChild < leftChild)
+//               ) {
+//                   swap = rightChildIdx;
+//               }
+//           }
+//           if (swap === null) break;
+//           this.heap[idx] = this.heap[swap];
+//           this.heap[swap] = element;
+//           idx = swap;
+//       }
+//   }
+// }
+// var findKthLargest = function(nums, k) {
+//   let heap = new MinHeap();
+//   for (let i = 0; i < k; i++) {
+//       heap.push(nums[i]);
+//   }
+//   for (let i = k; i < nums.length; i++) {
+//       if (nums[i] > heap.peek()) {
+//           heap.pop();
+//           heap.push(nums[i]);
+//       }
+//   }
+//   return heap.peek();
+// };
+
+// var guessNumber = function(n) {
+//   let left = 0
+//   let right = n
+//   while(left <= right){
+//       let mid = Math.floor((left+right)/2)
+//       if(guess(mid) === 0){
+//           return mid
+//       } else if(guess(mid) === 1){
+//           left = mid+1
+//       } else {
+//           right = mid-1
+//       }
+//   }
+// }
+
+// var leastInterval = function(tasks, n) {
+//   let freqMap = {}
+//   let maxChar = ""
+//   let maxCharCount = 0
+//   for(let char of tasks){
+//       freqMap[char] = freqMap[char] ? freqMap[char] + 1 : 1
+//       if(freqMap[char] > maxCharCount){
+//           maxCharCount = freqMap[char]
+//           maxChar = char
+//       }
+//   }
+//   let idleCount = (maxCharCount - 1) * n
+//   for(let key in freqMap){
+//       if(key === maxChar) continue
+//       if(freqMap[key] === maxCharCount){
+//           idleCount -= freqMap[key]-1
+//       } else {
+//            idleCount -= freqMap[key]
+//       }
+//   }
+//   return idleCount <= 0 ? tasks.length : idleCount + tasks.length
+// }
+
+// var successfulPairs = function(spells, potions, success) {
+//   potions.sort((a,b) => a-b)
+//   const binarySearch = (num) => {
+//       let tempRes = 0
+//       let left = 0
+//       let right = potions.length-1
+//       while(left <= right){
+//           let mid = Math.floor((left+right)/2)
+//           if(potions[mid] * num >= success){
+//               let diff = (right - mid) + 1
+//               tempRes += diff
+//               right = mid-1
+//           } else {
+//               left = mid+1
+//           }
+//       }
+//       res.push(tempRes)
+//   }
+//   let res = []
+//   for(let num of spells){
+//       binarySearch(num)
+//   }
+//    return res
+// }
+
+// var combinationSum3 = function (k, n) {
+//   const permute = (arr, sum, start) => {
+//     if (sum > n) return;
+//     if (arr.length === k) {
+//       if (sum === n) {
+//         res.push(arr);
+//         return;
+//       }
+//       return;
+//     }
+
+//     for (let i = 1; i < 10; i++) {
+//       permute([...arr, i], sum + i, i + 1);
+//     }
+//   };
+
+//   const res = [];
+//   permute([], 0, 1);
+//   return res;
+// };
+// console.log(combinationSum3(3, 7));
+
+// var suggestedProducts = function(products, searchWord) {
+//   products.sort();
+//   // const res = []
+//   // for(let i=0; i<searchWord.length; i++){
+//   //     products = products.filter((p) => p[i] === searchWord[i])
+//   //     res.push(products.slice(0,3))
+//   // }
+//   //  return res
+
+//   let trie = {}
+//   for(let word of products){
+//       let curr = trie
+//       for(let char of word){
+//           if(!curr[char]){
+//               curr[char] = {"sug" : []}
+//           }
+//           if(curr[char]["sug"].length < 3){
+//               curr[char]["sug"].push(word)
+//           }
+//           curr = curr[char]
+//       }
+//   }
+
+//   let res = []
+//   let curr = trie
+//   for(let char of searchWord){
+//       if(curr) curr = curr[char]
+//       res.push(curr ? curr["sug"] : [])
+//   }
+
+//   return res
+
+// }
+
+// function favGeners(userSongs, songGenres){
+//   let songMap = {}
+
+//   for (let key of Object.keys(songGenres)) {
+//       for (let song of songGenres[key]) {
+//           songMap[song] = key
+//       }}
+//   let ht = {}
+//   for (let user in userSongs) {
+//       let max = 0
+//       let genres = {}
+//       let favorite = []
+//       for (let song of userSongs[user]) {
+//           let genre = songMap[song]
+//           genres[genre] = genres[genre] + 1 || 1
+//           if (genre == undefined) continue //handle case song doesnt have a genre
+//           if (genres[genre] > max) {
+//               max = genres[genre]
+//               favorite = [genre]}
+//           else if (genres[genre] == max) favorite.push(genre)
+//           }
+//   ht[user] = favorite
+//   }
+//   return ht
+// }
+
+// function getUserFavoriteGenres(users, geners) {
+//   let res = {};
+//   let songMap = {};
+//   for (let key in geners) {
+//     for (let song of geners[key]) {
+//       songMap[song] = key;
+//     }
+//   }
+//   for (let key in users) {
+//     let max = 0;
+//     fav = [];
+//     genreFreq = {};
+//     for (let song of users[key]) {
+//       let genre = songMap[song];
+//       genreFreq[genre] = genreFreq[genre] ? genreFreq[genre] + 1 : 1;
+//       if (genreFreq[genre] > max) {
+//         fav = [genre, genreFreq[genre]];
+//         max = genreFreq[genre];
+//       } else if (genreFreq[genre] === max) fav.push(genre);
+//     }
+//     res[key] = fav;
+//   }
+//   return res;
+// }
+
+// let userSongs = {
+//   David: [
+//     "song101",
+//     "song1",
+//     "song2",
+//     "song3",
+//     "song4",
+//     "song8",
+//     "song11",
+//     "song12",
+//     "song99",
+//     "song100",
+//   ],
+//   Emma: ["song5", "song6", "song7"],
+// };
+// let songGenres = {
+//   Rock: ["song1", "song3", "song11", "song12"],
+//   Dubstep: ["song7"],
+//   Techno: ["song2", "song4", "song99", "song100", "song101"],
+//   Pop: ["song5", "song6"],
+//   Jazz: ["song8", "song9"],
+// };
+// console.log(getUserFavoriteGenres(userSongs, songGenres));
+
+// var isValidSudoku = function(board) {
+
+//   for(let row=0; row<board.length; row++){
+
+//       let rowSet = new Set()
+//       let colSet = new Set()
+//       let boxSet = new Set()
+
+//       for(let col=0; col<board.length; col++){
+
+//           let _row = board[row][col]
+//           let _col = board[col][row]
+
+//           let _box = board[ 3 * Math.floor(row / 3) + Math.floor(col / 3) ] [ 3 * (row % 3) + (col % 3)  ]
+
+//           if(_row !== "."){
+//               if(rowSet.has(_row)) return false
+//               rowSet.add(_row)
+//           }
+
+//           if(_col !== "."){
+//               if(colSet.has(_col)) return false
+//               colSet.add(_col)
+//           }
+
+//           if(_box !== "."){
+//               if(boxSet.has(_box)) return false
+//               boxSet.add(_box)
+//           }
+
+//       }
+//   }
+//      return true
+//  }
+
+// var zigzagLevelOrder = function(root) {
+//   let res = [];
+
+//   const traverse = (node, l) => {
+
+//       if(!node) return
+
+//       if(res[l] == null){
+//           res.push([])
+//       }
+//       //console.log(res)
+
+//       if(l % 2 == 0){
+//           res[l].push(node.val)
+//       } else {
+//           res[l].unshift(node.val)
+//       }
+
+//       traverse(node.left, l+1)
+//       traverse(node.right, l+1)
+//   }
+
+//   traverse(root, 0)
+//   return res
+
+// }
+
+// function getChattyUser(logs) {
+//   let userWordCountMap = new Map();
+
+//   for (let log of logs) {
+//       let startIndex = log.indexOf('<') + 1;
+//       let endIndex = log.indexOf('>', startIndex);
+//       let user = log.slice(startIndex, endIndex);
+
+//       let message = log.substring(endIndex + 1).trim() // Extracting message and trimming whitespace
+//       let wordCount = message.split(/\s+/).length; // Splitting message into words and counting them
+
+//       let currentUserWordCount = userWordCountMap.get(user) || 0;
+//       userWordCountMap.set(user, currentUserWordCount + wordCount);
+//   }
+
+//   // Search for user with the most words in their message
+//   let maxWordCount = 0;
+//   let mostChattyUser = "";
+//   for (let [user, wordCount] of userWordCountMap) {
+//       if (wordCount > maxWordCount) {
+//           maxWordCount = wordCount;
+//           mostChattyUser = user;
+//       }
+//   }
+
+//   return mostChattyUser;
+// }
+
+// // Example usage
+// let logs = [
+//   "12abc456 <alice> Hello World",
+//   "c4137223 <alice> Fix deployment issue",
+//   "c4137223 <bob> Add docs to a b c"
+// ];
+
+// console.log(getChattyUser(logs))
+
+// class Graph {
+//   constructor() {
+//     this.adjacencyList = new Map();
+//   }
+
+//   addNode(node) {
+//     if (!this.adjacencyList.has(node)) {
+//       this.adjacencyList.set(node, []);
+//     }
+//   }
+
+//   deleteNode(node) {
+//     if (!this.adjacencyList.has(node)) {
+//       return;
+//     }
+
+//     // Remove node from all adjacency lists
+//     for (let [key, value] of this.adjacencyList) {
+//       let index = value.indexOf(node);
+//       if (index !== -1) {
+//         value.splice(index, 1);
+//       }
+//     }
+
+//     // Delete the node itself
+//     this.adjacencyList.delete(node);
+//   }
+
+//   hasConnection(nodeU, nodeV) {
+//     let visited = new Set();
+
+//     const dfs = (node) => {
+//       visited.add(node);
+//       for (let neighbor of this.adjacencyList.get(node)) {
+//         if (!visited.has(neighbor)) {
+//           if (neighbor === nodeV) {
+//             return true;
+//           }
+//           if (dfs(neighbor)) {
+//             return true;
+//           }
+//         }
+//       }
+//       return false;
+//     };
+
+//     return dfs(nodeU);
+//   }
+
+//   shortestDistanceBetween(nodeU, nodeV) {
+//     let visited = new Set();
+//     let queue = [[nodeU, 0]];
+
+//     while (queue.length) {
+//       let [node, distance] = queue.shift();
+//       visited.add(node);
+
+//       for (let neighbor of this.adjacencyList.get(node)) {
+//         if (!visited.has(neighbor)) {
+//           if (neighbor === nodeV) {
+//             return distance + 1;
+//           }
+//           queue.push([neighbor, distance + 1]);
+//         }
+//       }
+//     }
+
+//     return -1; // No connection found
+//   }
+// }
+
+// // Example usage
+// let graph = new Graph();
+// graph.addNode("A");
+// graph.addNode("B");
+// graph.addNode("C");
+// graph.addNode("D");
+// graph.addNode("E");
+
+// graph.adjacencyList.set("A", ["B", "C"]);
+// graph.adjacencyList.set("B", ["A", "D", "E"]);
+// graph.adjacencyList.set("C", ["A", "D"]);
+// graph.adjacencyList.set("D", ["B", "C", "E"]);
+// graph.adjacencyList.set("E", ["B", "D"]);
+
+// console.log(graph.hasConnection("A", "D")); // Output: true
+// console.log(graph.shortestDistanceBetween("A", "D")); // Output: 1
+
+// var lowestCommonAncestor = function(root, p, q) {
+//   const dfs = (node) => {
+//       if(node === null || node === p || node === q) return node
+//       let left = dfs(node.left)
+//       let right = dfs(node.right)
+//       if(left && right) return node
+//       if(left) return left
+//       if(right) return right
+//   }
+//   return dfs(root)
+// }
+
+// function computeArea(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2) {
+//   const areaOfA = (ay2 - ay1) * (ax2 - ax1);
+//   const areaOfB = (by2 - by1) * (bx2 - bx1);
+
+//   // calculate x overlap
+//   const left = Math.max(ax1, bx1);
+//   const right = Math.min(ax2, bx2);
+//   const xOverlap = right - left;
+
+//   // calculate y overlap
+//   const top = Math.min(ay2, by2);
+//   const bottom = Math.max(ay1, by1);
+//   const yOverlap = top - bottom;
+  
+//   let areaOfOverlap = 0;
+//   // if the rectangles overlap each other, then calculate
+//   // the area of the overlap
+//   if (xOverlap > 0 && yOverlap > 0) {
+//       areaOfOverlap = xOverlap * yOverlap;
+//   }
+
+//   // areaOfOverlap is counted twice when in the summation of
+//   // areaOfA and areaOfB, so we need to subtract it from the
+//   // total, to get the toal area covered by both the rectangles
+//   const totalArea = areaOfA + areaOfB - areaOfOverlap;
+
+//   return totalArea;
+// };
+
+// var maxRepOpt1 = function(text) {
+//   let uniqueCharCount = 0;
+//   let freqMap = {};
+//   for(let l of text){
+//     freqMap[l] = freqMap[l] ? freqMap[l]+1 : 1    
+//   }
+//   if(uniqueCharCount === text.length){                                         // if only unique chars
+//     return 1;
+//   }
+//   let right = 0;
+//   let left = 0;
+//   let switchVal = true;
+//   let longestStr = 0;
+//   while(right < text.length) {
+//     if(text[right] !== text[left] || freqMap[text[left]] <= 0){                
+//       if(switchVal && freqMap[text[left]] >= 1){                               
+//         switchVal = false;
+//         freqMap[text[left]]--;
+//       } 
+//       else {                                                           
+//         if(switchVal === false){
+//           freqMap[text[left]] += (right-left) - 1;
+//         }
+//         switchVal = true;
+//         left++;
+//         right = left -1;                                                 
+//       }
+//     } 
+//     else {                                                                 
+//       if(right !== left){                                                   
+//         freqMap[text[left]]--;
+//       } 
+//       if(right === left && text[right] === text[right + 1]){                
+//         freqMap[text[left]]--;
+//       }      
+//     }
+//     longestStr = Math.max(longestStr, right - left + 1);
+//     right++;
+//     if(right === text.length && freqMap[text[left]] > 0 && switchVal === true){ 
+//       longestStr = Math.max(longestStr, right - left + 1);
+//     }
+//   }
+//   if(longestStr === text.length && switchVal === false){                           
+//     return longestStr - 1;   
+//   }
+//   return longestStr;    
+// }
+
+
+// var maxRepOpt1 = function(text) {
+//   let r = 0
+//   let l = 0
+//   let max = 0;
+//   let maxCharCount = 0;
+//   let maxChar = text[0];
+//   const totalFreq = new Map();
+//   let freq = new Map();
+//   for (let char of text) {
+//     totalFreq.set(char, (totalFreq.get(char) || 0) + 1);
+//   }
+//   while (r < text.length) {
+//     const rC = text[r];
+//     freq.set(rC, (freq.get(rC) || 0) + 1);
+//     if (maxCharCount < freq.get(rC)) {
+//       maxChar = rC;
+//       maxCharCount = freq.get(rC);
+//     }
+//     // Shirnk window when we don't have enough characters to swap
+//     if(
+//       totalFreq.get(maxChar) === freq.get(maxChar) &&
+//       r - l + 1 - maxCharCount === 1
+//     ) {
+//       l = r;
+//       freq = new Map();
+//       freq.set(text[l], 1);
+//       maxChar = text[l];
+//       maxCharCount = freq.get(maxChar) || 0;
+//     }
+//     // Shrink window when we have more than 1 character to swap
+//     while (r - l + 1 - maxCharCount > 1) {
+//       const lC = text[l];
+//       freq.set(lC, freq.get(lC) - 1);
+//       l++;
+//     }
+//     max = Math.max(max, r - l + 1);
+//     r++;
+//   }
+//   return max;
+// };
+
+// function knightDialer(n) {
+//   const jumps = [
+//       [4, 6],
+//       [6, 8],
+//       [7, 9],
+//       [4, 8],
+//       [3, 9, 0],
+//       [],
+//       [1, 7, 0],
+//       [2, 6],
+//       [1, 3],
+//       [2, 4]
+//   ];
+
+//   const MOD = Number(1e9 + 7);
+//   let dp = new Array(10).fill(0);
+//   let prevDp = new Array(10).fill(Number(1));
+
+//   for (let remain = 1; remain < n; remain++) {
+//       dp = new Array(10).fill(0);
+//       for (let square = 0; square < 10; square++) {
+//           let ans = Number(0);
+//           for (let nextSquare of jumps[square]) {
+//               ans = (ans + prevDp[nextSquare]) % MOD;
+//           }
+
+//           dp[square] = ans;
+//       }
+
+//       prevDp = dp.slice();
+//   }
+
+//   let ans = Number(0);
+//   for (let square = 0; square < 10; square++) {
+//       ans = (ans + prevDp[square]) % MOD;
+//   }
+
+//   return ans;
+// }
+
+// class LRUCache{
+//   constructor(capacity){
+//       this.map = new Map()
+//       this.size = capacity
+//   }
+
+//     get(key){
+//         if(this.map.has(key)){
+//             let val = this.map.get(key)
+//             this.map.delete(key)
+//             this.map.set(key, val)
+//             return this.map.get(key)
+//         } else {
+//             return -1
+//         }
+//     }
+
+//     put(key, val){
+//         if(this.map.has(key)) this.map.delete(key)
+//         this.map.set(key,val)
+//         if(this.map.size > this.size) this.map.delete(this.map.keys().next().value)
+//     }
+// }
+
+/**
+ * This is the interface for the expression tree Node.
+ * You should not remove it, and you can define some classes to implement it.
+ */
+
+// var Node = function () {
+//   if (this.constructor === Node) {
+//     throw new Error('Cannot instanciate abstract class');
+//   }
+// };
+
+// Node.prototype.evaluate = function () {
+//   throw new Error('Cannot call abstract method')
+// };
+
+// /**
+//  * This is the TreeBuilder class.
+//  * You can treat it as the driver code that takes the postinfix input 
+//  * and returns the expression tree representing it as a Node.
+//  */
+
+// class TreeBuilder {
+//     /**
+//      * @param {string[]} s
+//      * @return {Node}
+//      */
+//     buildTree(postfix) {
+//         const stack = [];
+
+//         for (const token of postfix) {
+//             if (!isNaN(token)) { // Check if token is a number
+//                 stack.push(new TreeNode(token));
+//             } else { // Token is an operator
+//                 const right = stack.pop();
+//                 const left = stack.pop();
+//                 const newNode = new TreeNode(token);
+//                 newNode.left = left;
+//                 newNode.right = right;
+//                 stack.push(newNode);
+//             }
+//         }
+
+//         return stack.pop();
+//     }
+// }
+
+// // Define TreeNode class
+// class TreeNode extends Node {
+//     constructor(val) {
+//         super();
+//         this.val = val;
+//         this.left = null;
+//         this.right = null;
+//     }
+
+//     evaluate() {
+//         if (!isNaN(this.val)) {
+//             return parseInt(this.val);
+//         } else {
+//             const leftVal = this.left.evaluate();
+//             const rightVal = this.right.evaluate();
+//             switch (this.val) {
+//                 case '+':
+//                     return leftVal + rightVal;
+//                 case '-':
+//                     return leftVal - rightVal;
+//                 case '*':
+//                     return leftVal * rightVal;
+//                 case '/':
+//                     return leftVal / rightVal;
+//                 default:
+//                     throw new Error('Invalid operator');
+//             }
+//         }
+//     }
+// }
+
+
+/**
+ * Your TreeBuilder object will be instantiated and called as such:
+ * var obj = new TreeBuilder();
+ * var expTree = obj.buildTree(postfix);
+ * var ans = expTree.evaluate();
+ */
+
+
+// var insertIntoBST = function(root, val) {
+//   if(root === null) return new BST(val)
+//   if(val > root.val) root.right = insertIntoBST(root.right, val)
+//   else root.left = insertIntoBST(root.left, val)
+//   return root
+// };
+
+
+// var strStr = function(haystack, needle) {
+    
+  //     let len = needle.length
+      
+  //     for(let i=0; i<needle.length; i++){
+  //         for(let j=0; j<haystack.length; j++){
+  //             if(needle[i] === haystack[j]){
+  //                let isMatch = haystack.substring(j, len+j)
+  //                if(isMatch === needle){
+  //                    return j
+  //                } else {
+  //                    continue
+  //                }
+  //             } else {
+  //                 continue
+  //             }
+  //         }
+  //     } return -1
+        
+      // for(let i=0; i<haystack.length; i++){
+      //     let right = i
+      //     let nIdx = 0
+      //     while(haystack[right] === needle[nIdx] && nIdx < needle.length){
+      //         right++
+      //         nIdx++
+      //     }
+      //     if(nIdx === needle.length) return i
+      // }
+      // return -1
+      
+      
+      
+      // Time Complexity: O(m*n)
+      // Space Complexity: O(1)
+      
+  // }
+  
+  // "mississippi"
+  // "issip" --> 4
+
+
+//   const findWords = (board, words) => {
+//     const buildTrie = () => {
+//         let root = {}
+//         for(let w of words){
+//             set.add(w[0])
+//             let node = root
+//             for(let c of w){
+//                 if(node[c] === undefined) node[c] = {}
+//                 node = node[c]
+//             }
+//             node["word"] = w
+//         }
+        
+//         return root          
+//     }
+//     const searchDfs = (row, col, node) => {
+//         if(node["word"]){
+//             res.push(node["word"])
+//             node["word"] = null
+//         }
+//         let c = board[row][col]
+//         board[row][col] = "v"
+//         for(let dir of dirs){
+//             let [x, y] = dir
+//             let nRow = row + x
+//             let nCol = col + y
+//             if(nRow < 0 || nRow >= board.length || nCol < 0 || nCol >= board[0].length || node[ board[nRow][nCol] ] === undefined) continue 
+//             searchDfs(nRow, nCol, node[ board[nRow][nCol] ])
+//         }
+//         board[row][col] = c
+//     }
+//     let res = []
+//     let set = new Set()
+//     let root = buildTrie()
+//     const dirs = [[-1, 0], [0, 1], [1, 0], [0, -1]]
+//     console.log(root)
+//     for(let row=0; row<board.length; row++){
+//         for(let col=0; col<board[0].length; col++){
+//             if(set.has(board[row][col])){
+//                 searchDfs(row, col, root)
+//             }
+//         }
+//     }
+//     return res
+// }
+
+function largestPalindromic (num) {
+  let freqArr = new Array(10).fill(0)
+  let arr = []
+  let res = ""
+  for(let n of num){
+    freqArr[parseInt(n)]++
   }
-
-  return {
-    keys: Object.keys(group).sort(),
-    counts: Object.values(group).sort((a, b) => a - b),
-  };
-}
-
-var closeStrings = function (word1, word2) {
-  if (word1.length !== word2.length) {
-    return false;
-  }
-
-  const group1 = getSortedItems(word1);
-  const group2 = getSortedItems(word2);
-
-  for (let i = 0; i < group1.keys.length; i++) {
-    if (
-      group1.keys[i] !== group2.keys[i] ||
-      group1.counts[i] !== group2.counts[i]
-    ) {
-      return false;
+  for(let i=9; i>=0; i--){
+    if(freqArr[i] % 2 !== 0){
+        res = Math.max(res, i)
+    }
+    while(freqArr[i] >= 2){
+        arr.push(i)
+        freqArr[i]-=2
     }
   }
 
-  return true;
-};
-console.log(closeStrings("abbzzca", "babzzcz"));
+  res = res.toString()
+  if(arr.length === 0 || arr[0] === 0) return res || "0"
+  for(let i=arr.length-1; i>=0; i--){
+    res = arr[i] + res + arr[i]
+  }
+  return res
+}
